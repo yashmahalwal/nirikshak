@@ -4,7 +4,16 @@
     "description": "Test your REST APIs",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "commit": "git-cz",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "bootstrap": "lerna clean -y && lerna bootstrap --hoist",
+        "lint:cli": "eslint packages/cli/src/*.ts",
+        "format:cli": "prettier --write packages/cli/src/*.ts",
+        "build:cli": "rm -rf packages/cli/lib && tsc -p packages/cli",
+        "format": "lerna run format --parallel",
+        "build": "lerna run build --parallel",
+        "lint": "lerna run build --parallel",
+        "prepare:master": "npm run lint && npm run format && npm run build"
     },
     "repository": {
         "type": "git",
@@ -14,7 +23,8 @@
         "REST",
         "Testing",
         "QA",
-        "API"
+        "API",
+        "nirikshak"
     ],
     "author": "Yash Mahalwal <yashmahalwal@gmail.com>",
     "license": "MIT",
@@ -30,8 +40,21 @@
     "devDependencies": {
         "@commitlint/cli": "^8.3.5",
         "@commitlint/config-conventional": "^8.3.4",
+        "@typescript-eslint/eslint-plugin": "^2.29.0",
+        "@typescript-eslint/parser": "^2.29.0",
+        "commitizen": "^4.0.4",
+        "cz-conventional-changelog": "^3.1.0",
+        "eslint": "^6.8.0",
+        "eslint-plugin-import": "^2.20.2",
         "husky": "^4.2.5",
         "lerna": "^3.20.2",
-        "prettier": "^2.0.5"
+        "prettier": "^2.0.5",
+        "typescript": "^3.8.3"
+    },
+    "dependencies": {},
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
     }
 }
