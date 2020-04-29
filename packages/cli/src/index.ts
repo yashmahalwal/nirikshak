@@ -3,8 +3,7 @@ import figlet from "./utils/figletWrapper";
 import chalk from "chalk";
 import yargs from "yargs";
 import * as Init from "./init";
-import { Configuration, parseConfig } from "./configuration";
-import { CliArgs } from "./utils/additionalTypes";
+import { parseConfig } from "./configuration";
 /* Main file to route the commands to appropriate functions */
 
 (async function () {
@@ -24,9 +23,8 @@ import { CliArgs } from "./utils/additionalTypes";
         .command(Init)
         .usage("Usage: $0 [command] [options]")
         // Option: config
+        .config("config", parseConfig)
         .alias("config", "c")
-        .nargs("config", 1)
-        .normalize("config")
         .default("config", "nirikshak.json")
         .describe("config", "path to the configuration file")
         // Examples
@@ -48,6 +46,4 @@ import { CliArgs } from "./utils/additionalTypes";
         // Alias version
         .version("version")
         .alias("version", "v");
-
-    await parseConfig(((argv as unknown) as CliArgs).config);
 })();

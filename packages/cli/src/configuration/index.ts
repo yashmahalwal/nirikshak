@@ -1,23 +1,23 @@
 import fs from "fs-extra";
+import signale from "signale";
+import schema from "./schema.json";
+import Ajv from "ajv";
 
 export interface Configuration {
-    dir?: string;
+    dir: string;
+    resources: Array<string | { name: string; dir: string }>;
 }
 
-export const DefaultConfig: Configuration = {
-    dir: "nirikshak",
-};
+export function parseConfig(configFile: string) {
+    try {
+        const data = fs.readJSONSync(configFile);
+        const ajv = new Ajv();
+        if (!ajv.validate(schema, data)) throw ajv.errors;
 
-export async function configFileExists(configFile: string): Promise<boolean> {
-    return fs.pathExists(configFile);
-}
-
-export async function validateConfig(configFile: string): Promise<boolean> {
-    // TODO: validate with a json schema
-    if (!configFileExists(configFile)) return false;
-    return true;
-}
-
-export async function parseConfig(configFile: string) {
-    return validateConfig(configFile);
+        console.log(data);
+        return { configuration: data };
+    } catch (e) {
+        signale.fatal(e);
+        process.exit();
+    }
 }
