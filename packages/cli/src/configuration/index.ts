@@ -8,13 +8,17 @@ export interface Configuration {
     resources: Array<string | { name: string; dir: string }>;
 }
 
+export interface JestConfig {
+    displayName: string;
+    projects?: string[];
+}
+
 export function parseConfig(configFile: string) {
     try {
         const data = fs.readJSONSync(configFile);
         const ajv = new Ajv();
         if (!ajv.validate(schema, data)) throw ajv.errors;
 
-        console.log(data);
         return { configuration: data };
     } catch (e) {
         signale.fatal(e);
