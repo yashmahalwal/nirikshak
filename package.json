@@ -6,12 +6,12 @@
     "scripts": {
         "test": "jest",
         "test:cli": "jest --projects packages/cli",
-        "watch:cli": "tsc --watch -p packages/cli",
+        "watch:cli": "rm -rf packages/cli/lib && tsc --watch -p packages/cli/tsconfig.watch.json ",
         "commit": "git-cz",
         "bootstrap": "lerna clean -y && lerna bootstrap --hoist",
         "lint:cli": "eslint packages/cli/src/*.ts",
         "format:cli": "prettier --write packages/cli/src/*.ts",
-        "build:cli": "rm -rf packages/cli/lib && tsc -p packages/cli",
+        "build:cli": "rm -rf packages/cli/lib && tsc -p packages/cli/tsconfig.build.json ",
         "format": "lerna run format --parallel",
         "build": "lerna run build --parallel",
         "lint": "lerna run build --parallel",
@@ -59,7 +59,9 @@
         "prettier": "^2.0.5",
         "typescript": "^3.8.3"
     },
-    "dependencies": {},
+    "dependencies": {
+        "signale": "^1.4.0"
+    },
     "config": {
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
