@@ -1,3 +1,5 @@
 module.exports = {
-    verbose: true,
+    collectCoverage: true,
+    collectCoverageFrom: ["packages/**/src/**/*.ts", "!**/node_modules/**"],
+    coverageDirectory: "<rootDir>/coverage",
 };

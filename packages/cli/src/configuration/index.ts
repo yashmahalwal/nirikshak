@@ -13,12 +13,16 @@ export interface JestConfig {
     projects?: string[];
 }
 
+export const getConfig = (configFile: string) => fs.readJSONSync(configFile);
+
+export const validateConfig = (data: any) => {
+    const ajv = new Ajv();
+    if (!ajv.validate(schema, data)) throw ajv.errors;
+};
 export function parseConfig(configFile: string) {
     try {
-        const data = fs.readJSONSync(configFile);
-        const ajv = new Ajv();
-        if (!ajv.validate(schema, data)) throw ajv.errors;
-
+        const data = getConfig(configFile);
+        validateConfig(data);
         return { configuration: data };
     } catch (e) {
         signale.fatal(e);

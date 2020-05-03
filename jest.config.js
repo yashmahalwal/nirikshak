@@ -8,7 +8,6 @@ module.exports = {
             testMatch: ["<rootDir>/*.test.*"],
         },
         {
-            displayName: "CLI",
             testMatch: ["<rootDir>/packages/cli/**/*.test.*"],
         },
     ],
