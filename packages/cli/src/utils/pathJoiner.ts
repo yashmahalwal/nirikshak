@@ -6,6 +6,7 @@ export class PathJoiner {
 
   constructor() {
     if (PathJoiner.instance) return PathJoiner.instance;
+    // Add a cleanup util if there is excessive memory usage
   }
 
   join(...paths: [string, string]) {

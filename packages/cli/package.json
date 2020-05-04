@@ -31,7 +31,8 @@
         "test": "cd ../.. && npm run test:cli",
         "watch": "rm -rf lib && tsc --watch -p tsconfig.watch.json",
         "lint": "cd ../.. && npm run lint:cli",
-        "format": "cd ../.. && npm run format:cli"
+        "format": "cd ../.. && npm run format:cli",
+        "commit": "cd ../.. && npm run commit"
     },
     "bin": {
         "nirikshak": "lib/index.js"
