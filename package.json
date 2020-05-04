@@ -6,15 +6,13 @@
     "scripts": {
         "test": "jest",
         "test:cli": "jest --projects packages/cli",
-        "watch:cli": "rm -rf packages/cli/lib && tsc --watch -p packages/cli/tsconfig.watch.json ",
         "commit": "git-cz",
-        "bootstrap": "lerna clean -y && lerna bootstrap --hoist",
-        "lint:cli": "eslint packages/cli/src/*.ts",
-        "format:cli": "prettier --write packages/cli/src/*.ts",
-        "build:cli": "rm -rf packages/cli/lib && tsc -p packages/cli/tsconfig.build.json ",
+        "bootstrap": "lerna bootstrap --hoist",
+        "lint:cli": "eslint packages/cli/src/**/*.ts",
+        "format:cli": "prettier --write \"packages/cli/src/**/*.ts\"",
         "format": "lerna run format --parallel",
         "build": "lerna run build --parallel",
-        "lint": "lerna run build --parallel",
+        "lint": "lerna run lint --parallel",
         "prepare:master": "npm run lint && npm run format && npm run test && npm run build"
     },
     "repository": {

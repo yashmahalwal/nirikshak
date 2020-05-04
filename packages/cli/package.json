@@ -27,11 +27,11 @@
         "url": "git+https://github.com/yashmahalwal/nirikshak.git"
     },
     "scripts": {
-        "build": "cd ../.. && npm run build:cli",
-        "format": "cd ../.. && npm run format:cli",
-        "lint": "cd ../.. && npm run lint:cli",
+        "build": "rm -rf lib && tsc -p tsconfig.build.json",
         "test": "cd ../.. && npm run test:cli",
-        "watch": "cd ../.. && npm run watch:cli"
+        "watch": "rm -rf lib && tsc --watch -p tsconfig.watch.json",
+        "lint": "cd ../.. && npm run lint:cli",
+        "format": "cd ../.. && npm run format:cli"
     },
     "bin": {
         "nirikshak": "lib/index.js"

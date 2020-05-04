@@ -3,8 +3,8 @@ import { ensureDirectories } from "./ensureDirectories";
 import { rootJestConfig } from "./jestConfig";
 
 async function init<T extends CliArgs = CliArgs>({ configuration }: T) {
-    await ensureDirectories(configuration);
-    await rootJestConfig(configuration);
+  await ensureDirectories(configuration);
+  await rootJestConfig(configuration);
 }
 
 export const command = "init";

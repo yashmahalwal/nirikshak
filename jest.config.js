@@ -5,10 +5,11 @@ module.exports = {
     projects: [
         {
             displayName: "Root",
-            testMatch: ["<rootDir>/*.test.*"],
+            testMatch: ["<rootDir>/*.test.ts"],
         },
         {
-            testMatch: ["<rootDir>/packages/cli/**/*.test.*"],
+            displayName: "CLI",
+            testMatch: ["<rootDir>/packages/cli/**/*.test.ts"],
         },
     ],
 };
