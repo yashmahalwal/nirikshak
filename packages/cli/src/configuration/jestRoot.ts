@@ -7,11 +7,14 @@ export function makeRootJestConfiguration(
   const joiner = new PathJoiner();
   return {
     displayName: "all",
-    projects: configuration.resources.map((resource) =>
-      joiner.join(
-        "<rootDir>",
-        typeof resource == "string" ? resource : resource.dir
-      )
-    ),
+    projects: configuration.resources.map((resource) => ({
+      displayName: typeof resource == "string" ? resource : resource.name,
+      testMatch: [
+        joiner.join(
+          "<rootDir>",
+          typeof resource == "string" ? resource : resource.dir
+        ),
+      ],
+    })),
   };
 }

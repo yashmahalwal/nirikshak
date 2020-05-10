@@ -8,9 +8,10 @@ export interface Configuration {
   resources: Array<string | { name: string; dir: string }>;
 }
 
+type ProjectConfig = string | { [key: string]: any; testMatch: string[] };
 export interface JestConfig {
   displayName: string;
-  projects?: string[];
+  projects?: ProjectConfig[];
 }
 
 export const getConfig = (configFile: string) => fs.readJSONSync(configFile);

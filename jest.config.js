@@ -11,5 +11,9 @@ module.exports = {
             displayName: "CLI",
             testMatch: ["<rootDir>/packages/cli/**/*.test.ts"],
         },
+        {
+            displayName: "Core",
+            testMatch: ["<rootDir>/packages/core/**/*.test.ts"],
+        },
     ],
 };
