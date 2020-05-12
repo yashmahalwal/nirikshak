@@ -1,4 +1,4 @@
-type LiteralBase = string | number | null | boolean;
+export type LiteralBase = string | number | null | boolean;
 
 export function isLiteralBase(input: any): input is LiteralBase {
     const c = typeof input;
@@ -12,7 +12,7 @@ export function isLiteralBase(input: any): input is LiteralBase {
     }
 }
 
-type NakedLiteral = LiteralBase | LiteralBase[];
+export type NakedLiteral = LiteralBase | LiteralBase[];
 
 export function isNakedLiteral(input: any): input is NakedLiteral {
     if (Array.isArray(input)) {
@@ -20,11 +20,11 @@ export function isNakedLiteral(input: any): input is NakedLiteral {
     } else return isLiteralBase(input);
 }
 
-interface LiteralObject {
-    literals: Array<LiteralBase | LiteralObject>;
+export interface LiteralObject {
+    literals: LiteralBase | Array<LiteralBase | LiteralObject>;
 }
 
-function isLiteralObject(input: any): input is LiteralObject {
+export function isLiteralObject(input: any): input is LiteralObject {
     if (!input || typeof input !== "object") return false;
 
     if ("literals" in input && Array.isArray(input["literals"])) {
@@ -37,14 +37,14 @@ function isLiteralObject(input: any): input is LiteralObject {
 
 export type Literal = NakedLiteral | LiteralObject;
 
-function isValidLiteral(input: any) {
+export function isLiteral(input: any) {
     return isNakedLiteral(input) || isLiteralObject(input);
 }
 
-function normalizeLiteral(input: Literal): LiteralObject {
+export function normalizeLiteral(input: Literal): LiteralObject {
     if (isLiteralObject(input)) return input;
 
     return {
-        literals: Array.isArray(input) ? input : [input],
+        literals: input,
     };
 }

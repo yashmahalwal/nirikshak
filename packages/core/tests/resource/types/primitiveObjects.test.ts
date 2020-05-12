@@ -1,12 +1,14 @@
-import { isLiteralBase } from "../../../src/resource/types/primitive";
+import {
+    isLiteralBase,
+} from "../../../src/resource/types/primitive";
+import { getValidLiterals } from "./utils";
 
 describe("Primitive Literal type", () => {
-    const ValidInput = [12, "12", false, null];
-    test.each(ValidInput)("Positive %#", (v) => {
+    test.each(getValidLiterals())("Positive %#", (v) => {
         expect(isLiteralBase(v)).toBe(true);
     });
 
-    const InValidInput = [
+    const InValidInput: any[] = [
         Symbol(),
         [],
         [1, 2, 3],

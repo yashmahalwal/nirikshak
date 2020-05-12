@@ -14,7 +14,7 @@ type Field = FieldType | WithModifiers<FieldType>;
 
 type WithOneOf<F extends Field> = {
   oneOf: true;
-  fields: Field[];
+  fields: F[];
 };
 
 interface Resource {
