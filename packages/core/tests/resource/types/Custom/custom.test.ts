@@ -1,10 +1,14 @@
+/*
+    Tests to check the custom types 
+    isFakerObject assumes that isFakerString works correctly
+*/
 import {
     isCustomFunction,
     isCustomFunctionString,
     isCustomFunctionObject,
     CustomFunctionString,
     CustomFunctionObject,
-} from "../../../src/resource/types/custom";
+} from "../../../../src/resource/types/custom";
 
 const ValidCustomStrings: CustomFunctionString[] = [
     "custom:LoremIpsumDolor",

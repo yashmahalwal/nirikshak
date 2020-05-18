@@ -1,110 +1,214 @@
-import { ResourceBase, isResourceBase } from "../../../../src/resource/types";
+import {
+    ResourceBase,
+    isResourceBase,
+    isResource,
+    Resource,
+} from "../../../../src/resource/types";
 import faker from "faker";
 
-const ValidResources: ResourceBase[] = [
+const ValidResourceBases: ResourceBase[] = [
     {
-        [faker.random.word()]: {
-            [faker.random.word()]: [12, 13, 15, 15, 18, "stringify"],
-        },
-        [faker.random.word()]: {
-            type: null,
-            nullable: true,
-            optional: true,
-        },
+        name: 15,
+        class: "faker:random.number",
+        branch: { function: "faker:random.words", args: [1] },
+        address: "faker.random.zipCode",
     },
     {
-        [faker.random.word()]: {
-            [faker.random.word()]: {
-                [faker.random.word()]: {
-                    type: { literals: [{ literals: [{ literals: 13 }] }] },
-                },
+        name: 15,
+        class: "faker:random.number",
+        branch: { function: "faker:random.words", args: [1] },
+        address: "faker.random.zipCode",
+    },
+    {
+        root: {
+            f2: {
+                type: [1, 2, 3, 4, "stirng", false, "faker:random.address"],
+                nullable: true,
+                plural: true,
             },
-        },
-        [faker.random.word()]: "faker:random.number",
-        [faker.random.word()]: {
-            function: "custom:My Function",
-            args: ["str", false, null],
-        },
-    },
-    {
-        [faker.random.words()]: {
-            oneof: false,
-        },
-    },
-    {
-        [faker.random.word()]: {
             field: {
-                [faker.random.word()]: "faker:random.name",
-            },
-            nullable: false,
-            plural: true,
-            optional: true,
-        },
-    },
-    {
-        [faker.random.words()]: {
-            oneof: true,
-        },
-    },
-    {
-        [faker.random.word()]: {
-            fields: [
-                { [faker.random.word()]: false },
-                {
-                    [faker.random.word()]: {
-                        type: {
-                            function: "faker:random.number",
-                            args: [1, 3, "str"],
+                f1: {
+                    fields: [
+                        {
+                            branch: {
+                                types: ["CSE", "ECE", "Mechanical"],
+                                plural: false,
+                                nullable: false,
+                                optional: true,
+                            },
+                            section: {
+                                function: "custom:getSection",
+                                args: ["CSE", "ECE", "Mechanical"],
+                            },
                         },
-                        plural: true,
-                        optional: true,
-                    },
-                },
-                {
-                    [faker.random.word()]: {
-                        types: [
-                            "faker:random.number",
-                            "custom:myFunctor",
-                            true,
-                            23,
-                            {
-                                type: "faker:random.words",
-                                nullable: true,
+                        {
+                            addresses: {
+                                field: {
+                                    city: {
+                                        types: [
+                                            "faker:random.words",
+                                            "faker:address.city",
+                                        ],
+                                    },
+                                    street: {
+                                        fields: [
+                                            {
+                                                streetName:
+                                                    "faker:address.streetName",
+                                            },
+                                            {
+                                                streetAddress:
+                                                    "faker:address.streetAddress",
+                                            },
+                                        ],
+                                        types: ["faker:address.zipCode"],
+                                    },
+                                },
                                 plural: true,
                             },
-                            { literals: [true, 15, 17, { literals: "any" }] },
-                        ],
-                        oneof: true,
-                    },
+                        },
+                    ],
+                    types: [
+                        {
+                            type: {
+                                function: "custom:random.callers",
+                                args: [1, false, null, [true, true, [false]]],
+                            },
+                            plural: true,
+                            optional: true,
+                            nullable: false,
+                        },
+                        null,
+                        "faker:random.number",
+                        {
+                            function: "faker:lorem.lines",
+                        },
+                        17.885,
+                        false,
+                        true,
+                    ],
                 },
-            ],
-            oneof: true,
-        },
-    },
-];
-
-const InvalidResources: any[] = [
-    12,
-    undefined,
-    { [faker.random.word()]: undefined },
-    {
-        [faker.random.word()]: "faker:name.firstName",
-        [faker.random.words()]: {
-            [faker.random.words()]: {
-                literals: [1, 3, true, true, false, ["StringifyMe"]],
+                optional: true,
             },
         },
     },
 ];
 
-describe("Resource base with nested resource bases", () => {
-    ValidResources.forEach((resource, index) =>
+const InvalidResourceBases: any[] = [
+    true,
+    undefined,
+    [true, false, [undefined], false, "stringify"],
+    {
+        age: 19,
+        class: 23,
+        branch: { types: ["CSE", "ECE", "Mechanical"] },
+        address: undefined,
+    },
+    {
+        root: {
+            f2: {
+                type: [1, 2, 3, 4, "stirng", false, "faker:random.address"],
+                nullable: true,
+                plural: true,
+            },
+            field: {
+                f1: {
+                    fields: [
+                        {
+                            branch: {
+                                types: ["CSE", "ECE", "Mechanical"],
+                                plural: false,
+                                nullable: false,
+                                optional: true,
+                            },
+                            section: {
+                                function: "custom:getSection",
+                                args: ["CSE", "ECE", "Mechanical"],
+                            },
+                        },
+                        {
+                            addresses: {
+                                field: {
+                                    city: {
+                                        types: [
+                                            "faker:random.words",
+                                            "faker:address.city",
+                                        ],
+                                    },
+                                    street: {
+                                        fields: [
+                                            {
+                                                streetName:
+                                                    "faker:address.streetName",
+                                            },
+                                            {
+                                                streetAddress:
+                                                    "faker:address.streetAddress",
+                                            },
+                                        ],
+                                        types: ["faker:address.zipCode"],
+                                    },
+                                },
+                                plural: true,
+                            },
+                        },
+                    ],
+                    types: [
+                        {
+                            type: {
+                                function: "custom:random.callers",
+                                args: [1, false, null, [true, true, [false]]],
+                            },
+                            plural: true,
+                            optional: true,
+                            nullable: false,
+                        },
+                        null,
+                        "faker:random.number",
+                        {
+                            function: "faker:lorem.lines",
+                        },
+                        17.885,
+                        false,
+                        true,
+                        undefined,
+                    ],
+                },
+                optional: true,
+            },
+        },
+    },
+];
+
+describe("Resource base type", () => {
+    ValidResourceBases.forEach((resource, index) =>
         test(`Valid resource base ${index}`, () =>
             expect(isResourceBase(resource)).toBe(true))
     );
 
-    InvalidResources.forEach((resource, index) =>
+    InvalidResourceBases.forEach((resource, index) =>
         test(`Invalid resource base ${index}`, () =>
             expect(isResourceBase(resource)).toBe(false))
+    );
+});
+
+describe("Resource type", () => {
+    ValidResourceBases.forEach((resource, index) =>
+        test(`Valid resource base ${index}`, () => {
+            expect(isResource(resource)).toBe(false);
+            const o: Resource = Object.create(resource);
+            o.identifier = faker.random.uuid();
+            expect(isResource(o)).toBe(true);
+        })
+    );
+
+    InvalidResourceBases.forEach((resource, index) =>
+        test(`Invalid resource base ${index}`, () => {
+            if (typeof resource === "object") {
+                const o = Object.create(resource);
+                o.id = faker.random.uuid();
+                expect(isResource(o)).toBe(false);
+            } else expect(isResource(resource)).toBe(false);
+        })
     );
 });

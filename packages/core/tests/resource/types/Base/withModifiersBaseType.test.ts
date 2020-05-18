@@ -1,104 +1,17 @@
+/* 
+    Test to validate WithModifiers<BaseType> functionality
+*/
 import {
     WithModifiers,
     BaseType,
     isWithModifiersBaseType,
     isWithModifiers,
-    isBase,
+    isBaseType,
 } from "../../../../src/resource/types";
+import { ValidModifiers, InvalidModifiers } from "../utils";
 
-// Mods:
-const InvalidModifiers: { [key: string]: any } = [
-    {
-        nullable: 12,
-    },
 
-    {
-        nullable: false,
-        plural: [["Plurals"]],
-    },
-    {
-        nullable: null,
-        plural: true,
-        optional: true,
-    },
-    {
-        nullable: 4213312,
-        plural: true,
-        optional: undefined,
-    },
-    {
-        nullable: [],
-        plural: [[]],
-    },
-];
-
-const ValidModifiers: Omit<WithModifiers<any>, "type">[] = [
-    {},
-    {
-        nullable: true,
-    },
-
-    {
-        nullable: true,
-        plural: true,
-    },
-    {
-        nullable: true,
-        plural: true,
-        optional: true,
-    },
-    {
-        nullable: true,
-        plural: true,
-        optional: false,
-    },
-    {
-        nullable: true,
-        plural: false,
-    },
-    {
-        nullable: true,
-        plural: false,
-        optional: true,
-    },
-    {
-        nullable: true,
-        plural: false,
-        optional: false,
-    },
-    {
-        nullable: false,
-    },
-    {
-        nullable: false,
-        plural: true,
-    },
-    {
-        nullable: false,
-        plural: true,
-        optional: true,
-    },
-    {
-        nullable: false,
-        plural: true,
-        optional: false,
-    },
-    {
-        nullable: false,
-        plural: false,
-    },
-    {
-        nullable: false,
-        plural: false,
-        optional: true,
-    },
-    {
-        nullable: false,
-        plural: false,
-        optional: false,
-    },
-];
-
+// Valid bases
 const ValidBaseTypes: BaseType[] = [
     "custom:loremFunction",
     "12",
@@ -112,23 +25,18 @@ const ValidBaseTypes: BaseType[] = [
         function: "custom:random.number",
         args: [{ min: 0, max: 1, precision: 0.1 }],
     },
-    {
-        literals: null,
-    },
-    {
-        literals: [
-            12,
-            13,
-            "faker:random.number",
-            {
-                literals: [],
-            },
-        ],
-    },
+    [
+        true,
+        false,
+        true,
+        "faker:lorem.lines",
+        ["faker:invalid.treatedAsString", [null, 12.75, 8.85, [0]]],
+    ],
 ];
-
+// Valid with modifiers entries
 const ValidWithModifiers: WithModifiers<BaseType>[] = [];
 
+// Valid Bases x Valid modifiers = Valid with modifiers entries
 ValidBaseTypes.forEach((baseType) =>
     ValidModifiers.forEach((mod) => {
         const o: WithModifiers<BaseType> = Object.create(mod);
@@ -137,17 +45,28 @@ ValidBaseTypes.forEach((baseType) =>
     })
 );
 
-const InvalidBaseTypes = [
+// Invalid bases
+const InvalidBaseTypes: any[] = [
     undefined,
-    [12, [true]],
+    [12, [true], undefined],
     [undefined],
-    { laterals: "customString" },
-    { literals: [12, 13, [false]] },
-    { literals: { literals: undefined } },
+    [
+        "false",
+        true,
+        true,
+        null,
+        18.85,
+        19.356,
+        2,
+        false,
+        [0, 0, [123.45, 67.89, [undefined], "false", "true"]],
+    ],
 ];
 
+// Invalid with modifiers entries
 const InvalidWithModifiers: any[] = [];
 
+// Invalid modifiers x (Valid bases, Invalid bases) = Invalid with modifiers entries
 InvalidModifiers.forEach((mods) => {
     ValidBaseTypes.forEach((base) => {
         const o = Object.create(mods);
@@ -162,6 +81,7 @@ InvalidModifiers.forEach((mods) => {
     });
 });
 
+// Valid Bases x Invalid Modifiers Invalid Bases = Invalid with modifiers entries
 ValidModifiers.forEach((mods) =>
     InvalidBaseTypes.forEach((base) => {
         const o = Object.create(mods);
@@ -175,7 +95,7 @@ describe("With modifiers: Base Type", () => {
         test(`Valid base type with modifiers ${index}`, () => {
             expect(isWithModifiersBaseType(entry)).toBe(true);
             expect(isWithModifiers(entry)).toBe(true);
-            expect(isBase(entry)).toBe(true);
+            expect(isBaseType(entry.type)).toBe(true);
         })
     );
 
@@ -183,7 +103,6 @@ describe("With modifiers: Base Type", () => {
         test(`Invalid base type with modifiers ${index}`, () => {
             expect(isWithModifiersBaseType(entry)).toBe(false);
             expect(isWithModifiers(entry)).toBe(false);
-            expect(isBase(entry)).toBe(false);
         })
     );
 });

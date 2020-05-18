@@ -1,13 +1,27 @@
-import { FakerType, isValidFaker } from "./fakerTypes";
-import { Literal, isLiteral } from "./primitive";
-import { Custom, isCustomFunction } from "./custom";
+import { FakerType, isFakerType } from "./fakerTypes";
+import { Literal, isLiteral } from "./literals";
+import { CustomFunctionType, isCustomFunction } from "./custom";
 
-export type BaseType = FakerType | Custom | Literal;
+// Base type: Simple literals that a resource field can have
+export type BaseType =
+    | FakerType
+    | CustomFunctionType
+    | Literal
+    | Array<BaseType>;
 
+// Validation for the same
 export function isBaseType(input: any): input is BaseType {
-    return isValidFaker(input) || isCustomFunction(input) || isLiteral(input);
+    if (Array.isArray(input)) return input.every((entry) => isBaseType(entry));
+
+    // Ordering is important
+    return isFakerType(input) || isCustomFunction(input) || isLiteral(input);
 }
 
+// Higher order type: Adding modifiers to a resource field entry
+// A resource base field can be: Base Type or another Resource base
+// You can add nullable, plural or optional here
+// Ex: {type: "faker:random.words", nullable: true}
+// Ex: {field: {name: "custom:myName"}, plural: true}
 export type WithModifiers<
     T extends BaseType | ResourceBase
 > = (T extends BaseType
@@ -18,6 +32,7 @@ export type WithModifiers<
           field: ResourceBase;
       }) & { plural?: boolean; nullable?: boolean; optional?: boolean };
 
+// Checking the validity of the modifier fields of the HOT
 function checkModifiers(
     input: WithModifiers<ResourceBase | BaseType>
 ): boolean {
@@ -38,6 +53,7 @@ function checkModifiers(
     return value;
 }
 
+// type guard: WithModifiers<ResourceBase>
 export function isWithModifiersResource(
     input: any
 ): input is WithModifiers<ResourceBase> {
@@ -51,6 +67,7 @@ export function isWithModifiersResource(
     return false;
 }
 
+// type guard: WithModifies<BaseType>
 export function isWithModifiersBaseType(
     input: any
 ): input is WithModifiers<BaseType> {
@@ -64,74 +81,93 @@ export function isWithModifiersBaseType(
     return false;
 }
 
+// type guard: WithModifiers<BaseType> or WithModifiers<ResourceBase>
+// Infers from input
 export function isWithModifiers<T extends any = any>(
     input: T
 ): input is T extends WithModifiers<infer U> ? U : T {
     return isWithModifiersBaseType(input) || isWithModifiersResource(input);
 }
 
-export type Base = BaseType | WithModifiers<BaseType>;
-
-export function isBase(input: any): input is Base {
-    return isBaseType(input) || isWithModifiersBaseType(input);
-}
-
-export type WithOneof<
-    T extends Base | ResourceBase | WithModifiers<ResourceBase>
-> = (T extends Base
-    ? {
-          types: Base[];
+// Selecting one from multiple choices
+export type OneOfEntries =
+    | {
+          fields?: Array<ResourceBase | WithModifiers<ResourceBase>>;
+          types: Array<BaseType | WithModifiers<BaseType>>;
       }
-    : { fields: T[] }) & { oneof: true };
+    | {
+          fields: Array<ResourceBase | WithModifiers<ResourceBase>>;
+          types?: Array<BaseType | WithModifiers<BaseType>>;
+      }
+    | {
+          fields: Array<ResourceBase | WithModifiers<ResourceBase>>;
+          types: Array<BaseType | WithModifiers<BaseType>>;
+      };
 
-export function isWithOneof<T extends any = any>(
-    input: any
-): input is T extends WithOneof<infer U> ? U : T {
-    if (!input || typeof input != "object" || input["oneof"] !== true)
+//   type guard: OneOfEntries
+export function isOneOfEntries(input: any): input is OneOfEntries {
+    if (!input || typeof input !== "object") return false;
+    if (!Array.isArray(input["fields"]) && !Array.isArray(input["types"]))
         return false;
 
-    if (Array.isArray(input["types"])) {
-        return input["types"].every((entry) => isBase(entry));
-    }
+    let value = true;
+    value =
+        value &&
+        (Array.isArray(input["types"])
+            ? input["types"].every(
+                  (entry) => isBaseType(entry) || isWithModifiersBaseType(entry)
+              )
+            : true);
 
-    if (Array.isArray(input["fields"])) {
-        return input["fields"].every(
-            (entry) => isWithModifiersResource(input) || isResourceBase(entry)
-        );
-    }
+    value =
+        value &&
+        (Array.isArray(input["fields"])
+            ? input["fields"].every(
+                  (entry) =>
+                      isResourceBase(entry) || isWithModifiersResource(entry)
+              )
+            : true);
 
-    return false;
+    return value;
 }
 
+// type guard: ResourceBase
 export function isResourceBase(input: any): input is ResourceBase {
     if (!input || typeof input != "object" || Array.isArray(input))
         return false;
-    return Object.values(input).every(
-        (entry) =>
-            isBase(entry) ||
-            isWithModifiersResource(entry) ||
-            isWithOneof(entry) ||
-            isResourceBase(entry)
+    return Object.keys(input).every(
+        (key) =>
+            isBaseType(input[key]) ||
+            isWithModifiersBaseType(input[key]) ||
+            isWithModifiersResource(input[key]) ||
+            isOneOfEntries(input[key]) ||
+            isResourceBase(input[key])
     );
 }
 
+// A basic key value pair
 export interface ResourceBase {
     [key: string]:
-        | Base
+        | BaseType
+        | WithModifiers<BaseType>
         | WithModifiers<ResourceBase>
-        | WithOneof<Base | ResourceBase | WithModifiers<ResourceBase>>
+        | OneOfEntries
+        // Check for resource base at last as it matches any key
         | ResourceBase;
 }
 
+// A resource schema is a resource base along with an identifier field
 export interface Resource extends ResourceBase {
-    identifier: string;
+    identifier: string | number;
 }
 
+// type guard: isResource
 export function isResource(input: any): input is Resource {
     if (!input || typeof input !== "object") return false;
 
     return (
-        typeof input["identifier"] === "string" &&
+        (typeof input["identifier"] === "string" ||
+            typeof input["identifier"] === "number") &&
         isResourceBase(input)
     );
 }

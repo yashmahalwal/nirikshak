@@ -1,18 +1,28 @@
 import { BaseType } from ".";
 
+// Structuring similar to faker types
+// Custom function string is path to a helper function kept in the working directory
+
+// Custom function string, starts with custom:
+// Ex: custom:random.name
 export type CustomFunctionString = string;
+
+// Object format of the custom function
+// Ex: {function: "custom:random.name"}
 export type CustomFunctionObject = {
     function: CustomFunctionString;
     args?: any[];
 };
 
-export type Custom = CustomFunctionString | CustomFunctionObject;
-
+// A custom function that user provides
 // User needs to guarantee the validity at runtime
 export interface CustomFunction {
-    (...args: any[]): Exclude<BaseType, Custom>;
+    (...args: any[]): BaseType;
 }
+// Custom type
+export type CustomFunctionType = CustomFunctionString | CustomFunctionObject;
 
+// type guard: CustomFunctionString
 export function isCustomFunctionString(
     input: any
 ): input is CustomFunctionString {
@@ -21,6 +31,7 @@ export function isCustomFunctionString(
     return input.startsWith("custom:");
 }
 
+// type guard: CustomFunctinObject
 export function isCustomFunctionObject(
     input: any
 ): input is CustomFunctionObject {
@@ -33,6 +44,25 @@ export function isCustomFunctionObject(
     );
 }
 
-export function isCustomFunction(input: any): input is Custom {
+// type guard: CustomFunction
+export function isCustomFunction(input: any): input is CustomFunctionType {
     return isCustomFunctionString(input) || isCustomFunctionObject(input);
+}
+
+// Normalized form of custom functions
+// Same as CustomFunctionObject but optional fields made compulsort
+// Ex: {function : "custom:random.name", args: []}
+export type NormalizedCustomFunction = {
+    [K in keyof CustomFunctionObject]-?: CustomFunctionObject[K];
+};
+
+// Function to normalize custom functions
+export function normalizeCustomFunction(
+    input: CustomFunctionType
+): NormalizedCustomFunction {
+    if (isCustomFunctionObject(input)) return { args: [], ...input };
+    return {
+        function: input,
+        args: [],
+    };
 }
