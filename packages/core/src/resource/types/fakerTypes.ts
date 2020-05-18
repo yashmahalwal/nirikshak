@@ -36,10 +36,10 @@ export function isValidFaker(input: any): input is FakerType {
     return isValidFakerString(input) || isValidFakerObject(input);
 }
 
-export function normalizeFaker(input: FakerType): FakerObject {
-    if (isValidFakerObject(input)) return { args: [], ...input };
-    return {
-        function: input,
-        args: [],
-    };
-}
+// export function normalizeFaker(input: FakerType): FakerObject {
+//     if (isValidFakerObject(input)) return { args: [], ...input };
+//     return {
+//         function: input,
+//         args: [],
+//     };
+// }

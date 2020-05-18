@@ -27,11 +27,14 @@ export interface LiteralObject {
 export function isLiteralObject(input: any): input is LiteralObject {
     if (!input || typeof input !== "object") return false;
 
-    if ("literals" in input && Array.isArray(input["literals"])) {
-        return input["literals"].every(
-            (val) => isNakedLiteral(val) || isLiteralObject(val)
-        );
-    }
+    if ("literals" in input)
+        if (Array.isArray(input["literals"])) {
+            return input["literals"].every(
+                (val) => isLiteralBase(val) || isLiteralObject(val)
+            );
+        } else {
+            return isLiteralBase(input["literals"]);
+        }
     return false;
 }
 
@@ -41,10 +44,10 @@ export function isLiteral(input: any) {
     return isNakedLiteral(input) || isLiteralObject(input);
 }
 
-export function normalizeLiteral(input: Literal): LiteralObject {
-    if (isLiteralObject(input)) return input;
+// export function normalizeLiteral(input: Literal): LiteralObject {
+//     if (isLiteralObject(input)) return input;
 
-    return {
-        literals: input,
-    };
-}
+//     return {
+//         literals: input,
+//     };
+// }
