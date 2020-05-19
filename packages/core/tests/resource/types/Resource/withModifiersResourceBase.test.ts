@@ -10,7 +10,7 @@ import {
     isWithModifiers,
     isResourceBase,
 } from "../../../../src/resource/types";
-import { ValidModifiers, InvalidModifiers } from "../utils";
+import { ValidModifiers, InvalidModifiers } from "../../utils";
 
 // Valid resource bases
 const ValidResourceBaseTypes: ResourceBase[] = [

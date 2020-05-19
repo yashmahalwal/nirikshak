@@ -1,7 +1,6 @@
 import { FakerType, isFakerType } from "./fakerTypes";
 import { Literal, isLiteral } from "./literals";
 import { CustomFunctionType, isCustomFunction } from "./custom";
-
 // Base type: Simple literals that a resource field can have
 export type BaseType =
     | FakerType
@@ -83,21 +82,19 @@ export function isWithModifiersBaseType(
 
 // type guard: WithModifiers<BaseType> or WithModifiers<ResourceBase>
 // Infers from input
-export function isWithModifiers<T extends any = any>(
-    input: T
-): input is T extends WithModifiers<infer U> ? U : T {
+export function isWithModifiers(
+    input: any
+): input is WithModifiers<BaseType> | WithModifiers<ResourceBase> {
     return isWithModifiersBaseType(input) || isWithModifiersResource(input);
 }
 
 // Selecting one from multiple choices
 export type OneOfEntries =
     | {
-          fields?: Array<ResourceBase | WithModifiers<ResourceBase>>;
           types: Array<BaseType | WithModifiers<BaseType>>;
       }
     | {
           fields: Array<ResourceBase | WithModifiers<ResourceBase>>;
-          types?: Array<BaseType | WithModifiers<BaseType>>;
       }
     | {
           fields: Array<ResourceBase | WithModifiers<ResourceBase>>;
@@ -109,6 +106,9 @@ export function isOneOfEntries(input: any): input is OneOfEntries {
     if (!input || typeof input !== "object") return false;
     if (!Array.isArray(input["fields"]) && !Array.isArray(input["types"]))
         return false;
+
+    if (Array.isArray(input["fields"]) && !input["fields"].length) return false;
+    if (Array.isArray(input["types"]) && !input["types"].length) return false;
 
     let value = true;
     value =
@@ -158,7 +158,7 @@ export interface ResourceBase {
 
 // A resource schema is a resource base along with an identifier field
 export interface Resource extends ResourceBase {
-    identifier: string | number;
+    identifier: Exclude<BaseType, Array<any> | null | boolean>;
 }
 
 // type guard: isResource
@@ -166,8 +166,8 @@ export function isResource(input: any): input is Resource {
     if (!input || typeof input !== "object") return false;
 
     return (
-        (typeof input["identifier"] === "string" ||
-            typeof input["identifier"] === "number") &&
+        !Array.isArray(input["identifier"]) &&
+        isBaseType(input.identifier) &&
         isResourceBase(input)
     );
 }

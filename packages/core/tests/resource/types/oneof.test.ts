@@ -95,11 +95,30 @@ const ValidOneOfEntries: OneOfEntries[] = [
             true,
         ],
     },
-    { fields: [], types: [] },
 ];
 
 const InvalidOneOfEntries: any[] = [
     undefined,
+    { fields: [], types: [] },
+    {
+        types: [["string", 12, 13, { function: "faker:lorem.lines" }]],
+        fields: [],
+    },
+    {
+        fields: [
+            { name: "Name", surName: "Surname" },
+            {
+                age: {
+                    type: {
+                        function: "faker:random.number",
+                        args: [{ min: 1, max: 100, precision: 0.1 }],
+                    },
+                    nullable: true,
+                },
+            },
+        ],
+        types: [],
+    },
     true,
     null,
     [true, null],

@@ -1,4 +1,4 @@
-import { BaseType } from ".";
+import { Primitives } from "./helper";
 
 // Structuring similar to faker types
 // Custom function string is path to a helper function kept in the working directory
@@ -17,7 +17,9 @@ export type CustomFunctionObject = {
 // A custom function that user provides
 // User needs to guarantee the validity at runtime
 export interface CustomFunction {
-    (...args: any[]): BaseType;
+    // Primitive is simply a literal or an array of nested arrays of literals
+    // Ex: 1, [1,7], [false, [true, [7,8,false, [null]]]]
+    (...args: any[]): Primitives;
 }
 // Custom type
 export type CustomFunctionType = CustomFunctionString | CustomFunctionObject;

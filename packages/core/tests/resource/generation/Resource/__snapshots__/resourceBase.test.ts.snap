@@ -1,0 +1,689 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Resource base type resource base: 0, iteration: 0 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "port",
+  "class": 69646,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 0, iteration: 1 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "initiative",
+  "class": 30254,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 0, iteration: 2 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Open-architected",
+  "class": 98555,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 0, iteration: 3 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Sleek",
+  "class": 21229,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 0, iteration: 4 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Money Market Account",
+  "class": 47704,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 0, iteration: 5 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Boliviano Mvdol",
+  "class": 76383,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 0, iteration: 6 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Wyoming",
+  "class": 70495,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 0, iteration: 7 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Gloves",
+  "class": 87505,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 0, iteration: 8 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Baby",
+  "class": 51312,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 0, iteration: 9 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Prairie",
+  "class": 32198,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 1, iteration: 0 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Quality-focused",
+  "class": 42847,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 1, iteration: 1 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Vatu",
+  "class": 41482,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 1, iteration: 2 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Auto Loan Account",
+  "class": 43686,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 1, iteration: 3 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Tuna",
+  "class": 88532,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 1, iteration: 4 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Avon",
+  "class": 55678,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 1, iteration: 5 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Buckinghamshire",
+  "class": 31876,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 1, iteration: 6 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "turn-key",
+  "class": 413,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 1, iteration: 7 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "compress",
+  "class": 39887,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 1, iteration: 8 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Gorgeous",
+  "class": 55204,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 1, iteration: 9 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "compressing",
+  "class": 19317,
+  "name": 15,
+}
+`;
+
+exports[`Resource base type resource base: 2, iteration: 0 1`] = `
+Object {
+  "root": Object {
+    "f1": Object {
+      "addresses": Array [
+        Object {
+          "city": "Administrator Metical Crossing",
+          "street": "67342",
+        },
+        Object {
+          "city": "engage alarm Table",
+          "street": "75462-8477",
+        },
+        Object {
+          "city": "Lake Haylee",
+          "street": "32229",
+        },
+        Object {
+          "city": "Boscomouth",
+          "street": "14140",
+        },
+        Object {
+          "city": "deliverables International Optimization",
+          "street": Object {
+            "streetName": "Bettie Plaza",
+          },
+        },
+      ],
+    },
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource base type resource base: 2, iteration: 1 1`] = `
+Object {
+  "root": Object {
+    "f1": Object {
+      "branch": "CSE",
+      "section": "JaylonKunde",
+    },
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource base type resource base: 2, iteration: 2 1`] = `
+Object {
+  "root": Object {
+    "f1": "Id veniam perspiciatis et nisi aut corporis laboriosam esse.
+Soluta accusamus officiis ut excepturi blanditiis libero ut.
+Quo fuga enim tempore non voluptas quia.
+Ipsam voluptas necessitatibus.
+Dolor adipisci dolores sunt.",
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource base type resource base: 2, iteration: 3 1`] = `
+Object {
+  "root": Object {
+    "f1": Object {
+      "addresses": Array [],
+    },
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource base type resource base: 2, iteration: 4 1`] = `
+Object {
+  "root": Object {
+    "f1": null,
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource base type resource base: 2, iteration: 5 1`] = `
+Object {
+  "root": Object {
+    "f1": Object {
+      "addresses": Object {
+        "city": "Internal calculating",
+        "street": "23335",
+      },
+    },
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource base type resource base: 2, iteration: 6 1`] = `
+Object {
+  "root": Object {
+    "f1": Object {
+      "branch": "ECE",
+      "section": "AlphonsoPollich",
+    },
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource base type resource base: 2, iteration: 7 1`] = `
+Object {
+  "root": Object {
+    "f1": 87350,
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource base type resource base: 2, iteration: 8 1`] = `
+Object {
+  "root": Object {
+    "f1": true,
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource base type resource base: 2, iteration: 9 1`] = `
+Object {
+  "root": Object {
+    "f1": Object {
+      "addresses": Array [
+        Object {
+          "city": "protocol user-centric Table",
+          "street": Object {
+            "streetName": "Lubowitz Hills",
+          },
+        },
+        Object {
+          "city": "Kraigport",
+          "street": "96932-5245",
+        },
+        Object {
+          "city": "zero defect Illinois hard drive",
+          "street": Object {
+            "streetAddress": "3678 Miller Divide",
+          },
+        },
+        Object {
+          "city": "Heidenreichshire",
+          "street": Object {
+            "streetName": "Abshire Centers",
+          },
+        },
+        Object {
+          "city": "Unions Congo Small",
+          "street": "25040-7475",
+        },
+        Object {
+          "city": "port navigating",
+          "street": "82639-6411",
+        },
+      ],
+    },
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource type resource base 0, iteration: 0 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "eyeballs",
+  "class": 28613,
+  "identifier": "Rufiyaa",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 0, iteration: 1 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Balanced",
+  "class": 43857,
+  "identifier": "Yen",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 0, iteration: 2 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "system",
+  "class": 35772,
+  "identifier": "monitoring",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 0, iteration: 3 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "District",
+  "class": 31226,
+  "identifier": "reboot",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 0, iteration: 4 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "impactful",
+  "class": 87545,
+  "identifier": "Radial",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 0, iteration: 5 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Hawaii",
+  "class": 49431,
+  "identifier": "Sleek",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 0, iteration: 6 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Wyoming",
+  "class": 70495,
+  "identifier": "Garden",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 0, iteration: 7 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Baby",
+  "class": 51312,
+  "identifier": "Bolivia",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 0, iteration: 8 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "deploy",
+  "class": 69631,
+  "identifier": "Table",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 0, iteration: 9 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "out-of-the-box",
+  "class": 57406,
+  "identifier": "markets",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 1, iteration: 0 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "users",
+  "class": 49111,
+  "identifier": "Administrator",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 1, iteration: 1 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Table",
+  "class": 63179,
+  "identifier": "Computer",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 1, iteration: 2 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Focused",
+  "class": 22826,
+  "identifier": "Orchestrator",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 1, iteration: 3 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Berkshire",
+  "class": 51176,
+  "identifier": "Home Loan Account",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 1, iteration: 4 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Money Market Account",
+  "class": 83705,
+  "identifier": "Tugrik",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 1, iteration: 5 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "International",
+  "class": 62724,
+  "identifier": "Supervisor",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 1, iteration: 6 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Checking Account",
+  "class": 5764,
+  "identifier": "Tala",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 1, iteration: 7 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "hub",
+  "class": 88480,
+  "identifier": "deposit",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 1, iteration: 8 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "Refined",
+  "class": 26591,
+  "identifier": "New Jersey",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 1, iteration: 9 1`] = `
+Object {
+  "address": "faker.random.zipCode",
+  "branch": "generating",
+  "class": 20587,
+  "identifier": "Chief",
+  "name": 15,
+}
+`;
+
+exports[`Resource type resource base 2, iteration: 0 1`] = `
+Object {
+  "identifier": "extensible",
+  "root": Object {
+    "f1": 3.4000000000000004,
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource type resource base 2, iteration: 1 1`] = `
+Object {
+  "identifier": "Buckinghamshire",
+  "root": Object {
+    "f1": Object {
+      "branch": "ECE",
+      "section": "ElianStanton",
+    },
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource type resource base 2, iteration: 2 1`] = `
+Object {
+  "identifier": "Avon",
+  "root": Object {
+    "f1": Object {
+      "branch": "CSE",
+      "section": "HipolitoDaniel",
+    },
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource type resource base 2, iteration: 3 1`] = `
+Object {
+  "identifier": "infomediaries",
+  "root": Object {
+    "f1": "Et sint magnam aut atque dolores maiores incidunt.
+Iusto laborum facere quia deleniti dolorem quibusdam.
+Veniam perspiciatis et nisi aut corporis laboriosam.",
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource type resource base 2, iteration: 4 1`] = `
+Object {
+  "identifier": "Future",
+  "root": Object {
+    "f1": 76368,
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource type resource base 2, iteration: 5 1`] = `
+Object {
+  "identifier": "Intelligent Plastic Shirt",
+  "root": Object {
+    "f1": "Minima sequi voluptas optio.
+Voluptatem excepturi eligendi.
+Iste eius iure commodi molestiae at voluptas quo ex reprehenderit.",
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource type resource base 2, iteration: 6 1`] = `
+Object {
+  "identifier": "Horizontal",
+  "root": Object {
+    "f1": false,
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource type resource base 2, iteration: 7 1`] = `
+Object {
+  "identifier": "withdrawal",
+  "root": Object {
+    "f1": Object {
+      "addresses": Array [
+        Object {
+          "city": "protocol user-centric Table",
+          "street": Object {
+            "streetName": "Lubowitz Hills",
+          },
+        },
+        Object {
+          "city": "Kraigport",
+          "street": "96932-5245",
+        },
+        Object {
+          "city": "zero defect Illinois hard drive",
+          "street": Object {
+            "streetAddress": "3678 Miller Divide",
+          },
+        },
+        Object {
+          "city": "Heidenreichshire",
+          "street": Object {
+            "streetName": "Abshire Centers",
+          },
+        },
+        Object {
+          "city": "Unions Congo Small",
+          "street": "25040-7475",
+        },
+        Object {
+          "city": "port navigating",
+          "street": "82639-6411",
+        },
+      ],
+    },
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource type resource base 2, iteration: 8 1`] = `
+Object {
+  "identifier": "Brand",
+  "root": Object {
+    "f1": null,
+    "optional": true,
+  },
+}
+`;
+
+exports[`Resource type resource base 2, iteration: 9 1`] = `
+Object {
+  "identifier": "tan",
+  "root": Object {
+    "f1": "In vitae nihil accusamus natus et quia dolores.",
+    "optional": true,
+  },
+}
+`;

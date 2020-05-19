@@ -8,6 +8,7 @@ module.exports = {
     extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
         "plugin:import/errors",
         "plugin:import/warnings",
         "plugin:import/typescript",
@@ -26,7 +27,11 @@ module.exports = {
     },
     plugins: ["@typescript-eslint"],
     rules: {
-        "no-unused-vars": ["off"],
+        "@typescript-eslint/no-explicit-any": 0,
         "import/no-extraneous-dependencies": ["error"],
+        "@typescript-eslint/no-use-before-define": [
+            "error",
+            { functions: false },
+        ],
     },
 };

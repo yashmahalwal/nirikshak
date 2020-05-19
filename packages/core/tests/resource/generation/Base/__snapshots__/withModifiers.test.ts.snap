@@ -1,0 +1,2861 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Generating base types with modifiers Base type: 0, iteration: 0 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    69646,
+    "My String",
+    7,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 0, iteration: 1 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    28613,
+    "My String",
+    4,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 0, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    22685,
+    "My String",
+    7,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 0, iteration: 3 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    55131,
+    "My String",
+    7,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 0, iteration: 4 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    71946,
+    "My String",
+    5,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 0, iteration: 5 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    42310,
+    "My String",
+    8,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 0, iteration: 6 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    98076,
+    "My String",
+    4,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 0, iteration: 7 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    68482,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 0, iteration: 8 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    48093,
+    "My String",
+    1,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 0, iteration: 9 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    39211,
+    "My String",
+    4,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 1, iteration: 0 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    62731,
+    "My String",
+    8,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 1, iteration: 1 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    43857,
+    "My String",
+    2,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 1, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    69475,
+    "My String",
+    4,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 1, iteration: 3 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 1, iteration: 4 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 1, iteration: 5 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 1, iteration: 6 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    44025,
+    "My String",
+    1,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 1, iteration: 7 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    53155,
+    "My String",
+    7,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 1, iteration: 8 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 1, iteration: 9 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    63440,
+    "My String",
+    3,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 2, iteration: 0 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 2, iteration: 1 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      61102,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      72244,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      32295,
+      "My String",
+      7,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      36178,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      22826,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      29371,
+      "My String",
+      10,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      63097,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      9210,
+      "My String",
+      8,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 2, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    43086,
+    "My String",
+    1,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 2, iteration: 3 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    42583,
+    "My String",
+    0,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 2, iteration: 4 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      75037,
+      "My String",
+      9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      69340,
+      "My String",
+      10,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      51176,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      46426,
+      "My String",
+      6,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 2, iteration: 5 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 2, iteration: 6 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    31728,
+    "My String",
+    5,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 2, iteration: 7 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      91669,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      10892,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      49549,
+      "My String",
+      10,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      23283,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      43686,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      75154,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      48089,
+      "My String",
+      9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      79772,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      28270,
+      "My String",
+      5,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 2, iteration: 8 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    975,
+    "My String",
+    3,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 2, iteration: 9 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    68927,
+    "My String",
+    7,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 0 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 1 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 2 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      66931,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      58593,
+      "My String",
+      9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      62490,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      67468,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      84234,
+      "My String",
+      1,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 3 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    76368,
+    "My String",
+    9,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 4 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    19422,
+    "My String",
+    5,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 5 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 6 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    52087,
+    "My String",
+    9,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 7 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      72341,
+      "My String",
+      10,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      1612,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      59443,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      55678,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      15895,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      15307,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      69552,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      31876,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      69197,
+      "My String",
+      10,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      55438,
+      "My String",
+      2,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 8 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    92513,
+    "My String",
+    9,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 9 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 4, iteration: 0 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 4, iteration: 1 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    4359,
+    "My String",
+    2,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 4, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    39818,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 4, iteration: 3 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 4, iteration: 4 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 4, iteration: 5 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 4, iteration: 6 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    63802,
+    "My String",
+    8,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 4, iteration: 7 1`] = `Array []`;
+
+exports[`Generating base types with modifiers Base type: 4, iteration: 8 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 4, iteration: 9 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 0 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    29258,
+    "My String",
+    4,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 1 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    36786,
+    "My String",
+    3,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 3 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 4 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 5 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    66662,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 6 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    24024,
+    "My String",
+    1,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 7 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 8 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    46023,
+    "My String",
+    7,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 9 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    84650,
+    "My String",
+    3,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 6, iteration: 0 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 6, iteration: 1 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 6, iteration: 2 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 6, iteration: 3 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 6, iteration: 4 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    67792,
+    "My String",
+    3,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 6, iteration: 5 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 6, iteration: 6 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    86857,
+    "My String",
+    1,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 6, iteration: 7 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    82911,
+    "My String",
+    0,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 6, iteration: 8 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    47845,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 6, iteration: 9 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 7, iteration: 0 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 7, iteration: 1 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 7, iteration: 2 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 7, iteration: 3 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    268,
+    "My String",
+    10,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 7, iteration: 4 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 7, iteration: 5 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 7, iteration: 6 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 7, iteration: 7 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    20763,
+    "My String",
+    5,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 7, iteration: 8 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    44905,
+    "My String",
+    5,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 7, iteration: 9 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    90191,
+    "My String",
+    3,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 8, iteration: 0 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    98363,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 8, iteration: 1 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    25754,
+    "My String",
+    7,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 8, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    56435,
+    "My String",
+    5,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 8, iteration: 3 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    80696,
+    "My String",
+    3,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 8, iteration: 4 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    39437,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 8, iteration: 5 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    73107,
+    "My String",
+    9,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 8, iteration: 6 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    16106,
+    "My String",
+    1,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 8, iteration: 7 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    60069,
+    "My String",
+    10,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 8, iteration: 8 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    86586,
+    "My String",
+    3,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 8, iteration: 9 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    98352,
+    "My String",
+    9,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 9, iteration: 0 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    6546,
+    "My String",
+    4,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 9, iteration: 1 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    20454,
+    "My String",
+    9,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 9, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    91131,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 9, iteration: 3 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    9332,
+    "My String",
+    0,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 9, iteration: 4 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    81733,
+    "My String",
+    10,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 9, iteration: 5 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    56900,
+    "My String",
+    0,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 9, iteration: 6 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    6756,
+    "My String",
+    8,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 9, iteration: 7 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    74186,
+    "My String",
+    5,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 9, iteration: 8 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    41679,
+    "My String",
+    7,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 9, iteration: 9 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    83924,
+    "My String",
+    4,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 10, iteration: 0 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    80738,
+    "My String",
+    8,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 10, iteration: 1 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      68618,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      99261,
+      "My String",
+      7,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      40518,
+      "My String",
+      1,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 10, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    66487,
+    "My String",
+    5,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 10, iteration: 3 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      69631,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      44032,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      43821,
+      "My String",
+      0,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      76509,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      56564,
+      "My String",
+      2,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 10, iteration: 4 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    88134,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 10, iteration: 5 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      47746,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      17151,
+      "My String",
+      10,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      5661,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      15703,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      33861,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      44064,
+      "My String",
+      0,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      68384,
+      "My String",
+      9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      20587,
+      "My String",
+      9,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 10, iteration: 6 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      92447,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      7962,
+      "My String",
+      0,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      48539,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      69856,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      8156,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      86910,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      43310,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      49433,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      49574,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      37072,
+      "My String",
+      5,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 10, iteration: 7 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      84127,
+      "My String",
+      0,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      65552,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      46268,
+      "My String",
+      10,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      56501,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      42391,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      28821,
+      "My String",
+      7,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      26398,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      69073,
+      "My String",
+      7,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 10, iteration: 8 1`] = `Array []`;
+
+exports[`Generating base types with modifiers Base type: 10, iteration: 9 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      46652,
+      "My String",
+      0,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      67365,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      39147,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      70210,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      96569,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      9050,
+      "My String",
+      0,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 11, iteration: 0 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    65336,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 11, iteration: 1 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      76939,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      57377,
+      "My String",
+      10,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      10263,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      69983,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      66116,
+      "My String",
+      10,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      4909,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      79229,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      51871,
+      "My String",
+      3,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 11, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    34411,
+    "My String",
+    8,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 11, iteration: 3 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      5381,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      80660,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      60295,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      65521,
+      "My String",
+      9,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 11, iteration: 4 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      53562,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      10915,
+      "My String",
+      10,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 11, iteration: 5 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    23659,
+    "My String",
+    1,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 11, iteration: 6 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      91839,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      9129,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      46365,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      50221,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      31366,
+      "My String",
+      9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      4733,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      24168,
+      "My String",
+      1,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 11, iteration: 7 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    44621,
+    "My String",
+    2,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 11, iteration: 8 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    80779,
+    "My String",
+    3,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 11, iteration: 9 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      4322,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      30194,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      98058,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      53950,
+      "My String",
+      5,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 12, iteration: 0 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    62630,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 12, iteration: 1 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    554,
+    "My String",
+    1,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 12, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    48490,
+    "My String",
+    8,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 12, iteration: 3 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    98832,
+    "My String",
+    4,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 12, iteration: 4 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    37518,
+    "My String",
+    0,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 12, iteration: 5 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    9703,
+    "My String",
+    1,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 12, iteration: 6 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    46190,
+    "My String",
+    5,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 12, iteration: 7 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    96300,
+    "My String",
+    5,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 12, iteration: 8 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    34183,
+    "My String",
+    3,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 12, iteration: 9 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    79892,
+    "My String",
+    1,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 13, iteration: 0 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    79884,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 13, iteration: 1 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    20824,
+    "My String",
+    2,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 13, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    44336,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 13, iteration: 3 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    71560,
+    "My String",
+    3,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 13, iteration: 4 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    41051,
+    "My String",
+    9,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 13, iteration: 5 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    19100,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 13, iteration: 6 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    96749,
+    "My String",
+    7,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 13, iteration: 7 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    65075,
+    "My String",
+    7,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 13, iteration: 8 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    86545,
+    "My String",
+    10,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 13, iteration: 9 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    2524,
+    "My String",
+    10,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 14, iteration: 0 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    26690,
+    "My String",
+    0,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 14, iteration: 1 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    50207,
+    "My String",
+    4,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 14, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    6744,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 14, iteration: 3 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    99303,
+    "My String",
+    1,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 14, iteration: 4 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    23646,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 14, iteration: 5 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    37429,
+    "My String",
+    3,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 14, iteration: 6 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    21401,
+    "My String",
+    10,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 14, iteration: 7 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    10544,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 14, iteration: 8 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    23247,
+    "My String",
+    6,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 14, iteration: 9 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    30061,
+    "My String",
+    4,
+  ],
+]
+`;

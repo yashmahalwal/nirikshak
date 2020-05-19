@@ -8,8 +8,7 @@ import {
     isWithModifiers,
     isBaseType,
 } from "../../../../src/resource/types";
-import { ValidModifiers, InvalidModifiers } from "../utils";
-
+import { ValidModifiers, InvalidModifiers } from "../../utils";
 
 // Valid bases
 const ValidBaseTypes: BaseType[] = [

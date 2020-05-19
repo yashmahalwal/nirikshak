@@ -1,10 +1,14 @@
+/* 
+    Tests to validate resource base and resource type functionality
+    Assumes other functions to be working correctly
+    except the circular deps : with fine except this part
+*/
 import {
     ResourceBase,
     isResourceBase,
     isResource,
     Resource,
 } from "../../../../src/resource/types";
-import faker from "faker";
 
 const ValidResourceBases: ResourceBase[] = [
     {
@@ -197,7 +201,7 @@ describe("Resource type", () => {
         test(`Valid resource base ${index}`, () => {
             expect(isResource(resource)).toBe(false);
             const o: Resource = Object.create(resource);
-            o.identifier = faker.random.uuid();
+            o.identifier = "faker:random.uuid";
             expect(isResource(o)).toBe(true);
         })
     );
@@ -206,7 +210,7 @@ describe("Resource type", () => {
         test(`Invalid resource base ${index}`, () => {
             if (typeof resource === "object") {
                 const o = Object.create(resource);
-                o.id = faker.random.uuid();
+                o.id = "faker:random.uuid";
                 expect(isResource(o)).toBe(false);
             } else expect(isResource(resource)).toBe(false);
         })
