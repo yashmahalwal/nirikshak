@@ -1,5 +1,6 @@
 /* 
     Test to validate resource generation
+    Not testing in depth as other functions are assumed to be working correctly
 */
 import { ResourceBase, Resource } from "../../../../src/resource/types";
 import { RANDOMNESS_ITERATIONS } from "../../../../src/resource/Env";
@@ -102,6 +103,55 @@ const ValidResourceBases: ResourceBase[] = [
                 },
                 optional: true,
             },
+        },
+    },
+    {
+        f1: {
+            types: [
+                1,
+                2,
+                3,
+                ["stringify", 19, 30, 19.542],
+                "faker:random.number",
+                [[[[["custom.username"]]]]],
+            ],
+        },
+        f2: {
+            fields: [
+                { branch: "CSE" },
+                {
+                    age: 12,
+                    name: 14,
+                    address: {
+                        types: [
+                            12.4353,
+                            "faker:random.number",
+                            { type: true, nullable: true },
+                            [12, 13, 14, null, false, "myString"],
+                        ],
+                    },
+                },
+            ],
+        },
+        f3: {
+            fields: [
+                { branch: 3 },
+                {
+                    age: {
+                        type: {
+                            function: "faker:random.number",
+                            args: [{ min: 1, max: 100, precision: 0.1 }],
+                        },
+                        nullable: true,
+                    },
+                },
+            ],
+            types: [12, 14, true, true, false, ["SIMP"]],
+        },
+        f4: {
+            fields: [
+                { field: { name: "Name", surName: "Surname" }, plural: true },
+            ],
         },
     },
 ];
