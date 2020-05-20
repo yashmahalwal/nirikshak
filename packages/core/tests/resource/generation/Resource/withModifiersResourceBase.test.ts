@@ -11,8 +11,8 @@ import { RANDOMNESS_ITERATIONS } from "../../../../src/resource/Env";
 import { generateWithModifiers } from "../../../../src/resource/generation/withModifiersGen";
 // Helpers for the resource
 const Helpers: ResourceHelpers = {
-    username: () => faker.name.firstName() + faker.name.lastName(),
-    number: (min: number, max: number, step: number) =>
+    username: async () => faker.name.firstName() + faker.name.lastName(),
+    number: async (min: number, max: number, step: number) =>
         // Use faker.random.number instead of Math.random
         // For universal randomness seed
         faker.random.number({ min, max, precision: step }),
@@ -123,8 +123,10 @@ describe("Generating resource bases with modifiers", () => {
 
     for (let i = 0; i < RANDOMNESS_ITERATIONS; i++)
         ValidWithModifiers.forEach((entry, index) =>
-            test(`Valid base type with modifiers: ${index}, iteration: ${i}`, () => {
-                expect(generateWithModifiers(entry, Helpers)).toMatchSnapshot();
+            test(`Valid base type with modifiers: ${index}, iteration: ${i}`, async () => {
+                expect(
+                    await generateWithModifiers(entry, Helpers)
+                ).toMatchSnapshot();
             })
         );
 });

@@ -14,7 +14,10 @@ export type Primitives = Literal | Array<Primitives>;
 // An instance is of the following type
 export interface ResourceInstance {
     identifier: Exclude<Primitives, Array<any> | null | boolean>;
-    [key: string]: Primitives | Omit<ResourceInstance, "identifier">;
+    [key: string]:
+        | Primitives
+        | Omit<ResourceInstance, "identifier">
+        | Array<Omit<ResourceInstance, "identifier">>;
 }
 
 export function isPrimitives(input: any): input is Primitives {

@@ -11,8 +11,8 @@ import faker from "faker";
 import { ResourceHelpers } from "../../../../src/resource/types/helper";
 // Helpers for the resource
 const Helpers: ResourceHelpers = {
-    username: () => faker.name.firstName() + faker.name.lastName(),
-    number: (min: number, max: number, step: number) =>
+    username: async () => faker.name.firstName() + faker.name.lastName(),
+    number: async (min: number, max: number, step: number) =>
         // Use faker.random.number instead of Math.random
         // For universal randomness seed
         faker.random.number({ min, max, precision: step }),
@@ -113,9 +113,9 @@ describe(`Resource base type`, () => {
     // Account for randomness
     for (let i = 0; i < RANDOMNESS_ITERATIONS; i++)
         ValidResourceBases.forEach((resource, index) =>
-            test(`resource base: ${index}, iteration: ${i}`, () =>
+            test(`resource base: ${index}, iteration: ${i}`, async () =>
                 expect(
-                    generateResourceBase(resource, Helpers)
+                    await generateResourceBase(resource, Helpers)
                 ).toMatchSnapshot())
         );
 });
@@ -126,10 +126,10 @@ describe(`Resource type`, () => {
     // Account for randomness
     for (let i = 0; i < RANDOMNESS_ITERATIONS; i++)
         ValidResourceBases.forEach((resource, index) =>
-            test(`resource base ${index}, iteration: ${i}`, () => {
+            test(`resource base ${index}, iteration: ${i}`, async () => {
                 const o: Resource = Object.create(resource);
                 o.identifier = "faker:random.word";
-                expect(generateResource(o, Helpers)).toMatchSnapshot();
+                expect(await generateResource(o, Helpers)).toMatchSnapshot();
             })
         );
 });

@@ -14,10 +14,10 @@ type ValueAndArray<T> = T | Array<T>;
 //  Nullable and Plural arguments override the input attributes
 
 // To generate data for BaseType with modifiers
-function generateWithModifiersBaseType(
+async function generateWithModifiersBaseType(
     input: WithModifiers<BaseType>,
     Helpers: ResourceHelpers
-): null | ValueAndArray<Primitives> {
+): Promise<null | ValueAndArray<Primitives>> {
     // If optional attribute was considered, this function is not invoked
     // So the entry is skipped. Refer generateResourceBase to check
     if (input.nullable && faker.random.boolean()) return null;
@@ -34,18 +34,18 @@ function generateWithModifiersBaseType(
         });
 
         for (let i = 0; i < length; i++)
-            arr.push(generateBaseType(input.type, Helpers));
+            arr.push(await generateBaseType(input.type, Helpers));
 
         return arr;
     }
-    return generateBaseType(input.type, Helpers);
+    return await generateBaseType(input.type, Helpers);
 }
 
 // To generate data for BaseType with modifiers
-function generateWithModifiersResourceBase(
+async function generateWithModifiersResourceBase(
     input: WithModifiers<ResourceBase>,
     Helpers: ResourceHelpers
-): null | ValueAndArray<Omit<ResourceInstance, "identifier">> {
+): Promise<null | ValueAndArray<Omit<ResourceInstance, "identifier">>> {
     // If optional attribute was considered, this function is not invoked
     // So the entry is skipped. Refer generateResourceBase to check
     if (input.nullable && faker.random.boolean()) return null;
@@ -60,35 +60,36 @@ function generateWithModifiersResourceBase(
         });
 
         for (let i = 0; i < length; i++)
-            arr.push(generateResourceBase(input.field, Helpers));
+            arr.push(await generateResourceBase(input.field, Helpers));
 
         return arr;
     }
-    return generateResourceBase(input.field, Helpers);
+    return await generateResourceBase(input.field, Helpers);
 }
 
 // To generate data with modifiers
-export function generateWithModifiers<T extends BaseType | ResourceBase>(
+export async function generateWithModifiers<T extends BaseType | ResourceBase>(
     input: WithModifiers<T>,
     Helpers: ResourceHelpers
-):
+): Promise<
     | null
     | (T extends BaseType
           ? ValueAndArray<Primitives>
-          : ValueAndArray<Omit<ResourceInstance, "identifier">>) {
+          : ValueAndArray<Omit<ResourceInstance, "identifier">>)
+> {
     // If optional attribute is invoked, this function won't be called at all
     // Only account for nullable and plural options
 
     if (isWithModifiersBaseType(input))
         // Need to use any case because conditional inference does not include internal typeguards
         // For now,ts cannot imply that T extends BaseType in this branch
-        return generateWithModifiersBaseType(
+        return (await generateWithModifiersBaseType(
             input as WithModifiers<BaseType>,
             Helpers
-        ) as any;
+        )) as any;
 
-    return generateWithModifiersResourceBase(
+    return (await generateWithModifiersResourceBase(
         input as WithModifiers<ResourceBase>,
         Helpers
-    ) as any;
+    )) as any;
 }

@@ -7,17 +7,21 @@ import { generateCustom } from "./customGen";
 import { ResourceHelpers, Primitives } from "../types/helper";
 
 // Generating base type entry
-export function generateBaseType(
+export async function generateBaseType(
     input: BaseType,
     Helpers: ResourceHelpers
-): Primitives {
-    if (Array.isArray(input))
-        return (input as (Literal | BaseType)[]).map((entry) =>
-            generateBaseType(entry, Helpers)
-        );
+): Promise<Primitives> {
+    if (Array.isArray(input)) {
+        const arr: Primitives = [];
+        (input as (Literal | BaseType)[]).forEach(async (entry) => {
+            arr.push(await generateBaseType(entry, Helpers));
+        });
+
+        return arr;
+    }
 
     if (isFakerType(input)) return generateFaker(input);
-    if (isCustomFunction(input)) return generateCustom(input, Helpers);
+    if (isCustomFunction(input)) return await generateCustom(input, Helpers);
 
     return input;
 }

@@ -12,8 +12,8 @@ import { RANDOMNESS_ITERATIONS } from "../../../../src/resource/Env";
 
 // Helpers for the resource
 const Helpers: ResourceHelpers = {
-    username: () => faker.name.firstName() + faker.name.lastName(),
-    number: (min: number, max: number, step: number) =>
+    username: async () => faker.name.firstName() + faker.name.lastName(),
+    number: async (min: number, max: number, step: number) =>
         // Use faker.random.number instead of Math.random
         // For universal randomness seed
         faker.random.number({ min, max, precision: step }),
@@ -33,8 +33,8 @@ describe("Base type generation", () => {
     beforeAll(() => faker.seed(123));
 
     SimpleBases.forEach((base, index) =>
-        test(`Simple base: ${index}`, () => {
-            const o = generateBaseType(base, Helpers);
+        test(`Simple base: ${index}`, async () => {
+            const o = await generateBaseType(base, Helpers);
             expect(o).toEqual(base);
             expect(isPrimitives(o)).toBe(true);
         })
@@ -42,8 +42,8 @@ describe("Base type generation", () => {
 
     // Account for variation due to randomness of faker
     for (let i = 0; i < RANDOMNESS_ITERATIONS; i++)
-        test(`ComplexBase iteration: ${i}`, () => {
-            const o = generateBaseType(ComplexBase, Helpers);
+        test(`ComplexBase iteration: ${i}`, async () => {
+            const o = await generateBaseType(ComplexBase, Helpers);
             expect(o).toMatchSnapshot();
             expect(isPrimitives(o)).toBe(true);
         });

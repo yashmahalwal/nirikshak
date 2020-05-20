@@ -10,8 +10,8 @@ import { generateWithModifiers } from "../../../../src/resource/generation/withM
 
 // Helpers for the resource
 const Helpers: ResourceHelpers = {
-    username: () => faker.name.firstName() + faker.name.lastName(),
-    number: (min: number, max: number, step: number) =>
+    username: async () => faker.name.firstName() + faker.name.lastName(),
+    number: async (min: number, max: number, step: number) =>
         // Use faker.random.number instead of Math.random
         // For universal randomness seed
         faker.random.number({ min, max, precision: step }),
@@ -46,8 +46,8 @@ describe("Generating base types with modifiers", () => {
 
     inputs.forEach((input, index) => {
         for (let i = 0; i < RANDOMNESS_ITERATIONS; i++) {
-            test(`Base type: ${index}, iteration: ${i}`, () => {
-                const o = generateWithModifiers(input, Helpers);
+            test(`Base type: ${index}, iteration: ${i}`, async () => {
+                const o = await generateWithModifiers(input, Helpers);
 
                 expect(o).toMatchSnapshot();
                 expect(isPrimitives(o)).toBe(true);

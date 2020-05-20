@@ -19,7 +19,7 @@ export type CustomFunctionObject = {
 export interface CustomFunction {
     // Primitive is simply a literal or an array of nested arrays of literals
     // Ex: 1, [1,7], [false, [true, [7,8,false, [null]]]]
-    (...args: any[]): Primitives;
+    (...args: any[]): Promise<Primitives>;
 }
 // Custom type
 export type CustomFunctionType = CustomFunctionString | CustomFunctionObject;
