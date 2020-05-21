@@ -249,16 +249,16 @@ describe("Resource type", () => {
     ValidResourceBases.forEach((resource, index) =>
         test(`Valid resource base ${index}`, () => {
             expect(isResource(resource)).toBe(false);
-            const o: Resource = Object.create(resource);
-            o.identifier = "faker:random.uuid";
+            const o = Object.assign({}, resource) as Resource;
+            o.id = "faker:random.uuid";
             expect(isResource(o)).toBe(true);
         })
     );
 
     InvalidResourceBases.forEach((resource, index) =>
         test(`Invalid resource base ${index}`, () => {
-            if (typeof resource === "object") {
-                const o = Object.create(resource);
+            if (typeof resource === "object" && !Array.isArray(resource)) {
+                const o = Object.assign({}, resource);
                 o.id = "faker:random.uuid";
                 expect(isResource(o)).toBe(false);
             } else expect(isResource(resource)).toBe(false);

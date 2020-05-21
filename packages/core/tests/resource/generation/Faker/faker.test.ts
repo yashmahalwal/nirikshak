@@ -1,7 +1,7 @@
 /* 
     Tests to validate faker data generation validation
 */
-import { FakerType } from "../../../../src/resource/types/fakerTypes";
+import { FakerType } from "../../../../src/common/types/fakerTypes";
 import faker from "faker";
 import { generateFaker } from "../../../../src/resource/generation/fakerGen";
 const ValidFakers: FakerType[] = [

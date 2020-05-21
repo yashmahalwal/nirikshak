@@ -2,10 +2,10 @@
     Test to check base type generation
 */
 import faker from "faker";
-import { BaseType } from "../../../../src/resource/types";
 import {
     ResourceHelpers,
     isPrimitives,
+    BaseType
 } from "../../../../src/resource/types/helper";
 import { generateBaseType } from "../../../../src/resource/generation/baseGen";
 import { RANDOMNESS_ITERATIONS } from "../../../../src/resource/Env";

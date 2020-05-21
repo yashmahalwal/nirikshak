@@ -3,14 +3,13 @@
     Circular dependecy with ResourceBase, OneOfEntries
     Assumes circular dependencies to be working correctly, except this part
 */
+import { ResourceBase, isResourceBase } from "../../../../src/resource/types";
+import { ValidModifiers, InvalidModifiers } from "../../utils";
 import {
-    ResourceBase,
     WithModifiers,
     isWithModifiersResource,
     isWithModifiers,
-    isResourceBase,
-} from "../../../../src/resource/types";
-import { ValidModifiers, InvalidModifiers } from "../../utils";
+} from "../../../../src/resource/types/helper";
 
 // Valid resource bases
 const ValidResourceBaseTypes: ResourceBase[] = [
@@ -101,7 +100,7 @@ const ValidWithModifiers: WithModifiers<ResourceBase>[] = [];
 // Valid ResourceBase x Valid modifiers = Valid with modifiers entries
 ValidResourceBaseTypes.forEach((baseType) =>
     ValidModifiers.forEach((mod) => {
-        const o: WithModifiers<ResourceBase> = Object.create(mod);
+        const o = Object.assign({}, mod) as WithModifiers<ResourceBase>;
         o.field = baseType;
         ValidWithModifiers.push(o);
     })
@@ -162,13 +161,13 @@ const InvalidWithModifiers: any[] = [];
 // Invalid modifiers x (Valid bases, Invalid bases) = Invalid with modifiers entries
 InvalidModifiers.forEach((mods) => {
     ValidResourceBaseTypes.forEach((base) => {
-        const o = Object.create(mods);
+        const o = Object.assign({}, mods);
         o.field = base;
         InvalidWithModifiers.push(o);
     });
 
     InvalidBaseTypes.forEach((base) => {
-        const o = Object.create(mods);
+        const o = Object.assign({}, mods);
         o.field = base;
         InvalidWithModifiers.push(o);
     });
@@ -177,7 +176,7 @@ InvalidModifiers.forEach((mods) => {
 // Valid Bases x Invalid Modifiers Invalid Bases = Invalid with modifiers entries
 ValidModifiers.forEach((mods) =>
     InvalidBaseTypes.forEach((base) => {
-        const o = Object.create(mods);
+        const o = Object.assign({}, mods);
         o.field = base;
         InvalidWithModifiers.push(o);
     })

@@ -1,12 +1,14 @@
-import {
-    WithModifiers,
-    BaseType,
-    ResourceBase,
-    isWithModifiersBaseType,
-} from "../types";
+import { ResourceBase } from "../types";
 import faker from "faker";
 import { generateBaseType } from "./baseGen";
-import { ResourceHelpers, Primitives, ResourceInstance } from "../types/helper";
+import {
+    ResourceHelpers,
+    Primitives,
+    ResourceInstance,
+    WithModifiers,
+    BaseType,
+    isWithModifiersBaseType,
+} from "../types/helper";
 import { MIN_PLURAL_ENTRIES, MAX_PLURAL_ENTRIES } from "../Env";
 import { generateResourceBase } from "./resourceGen";
 type ValueAndArray<T> = T | Array<T>;
@@ -45,13 +47,13 @@ async function generateWithModifiersBaseType(
 async function generateWithModifiersResourceBase(
     input: WithModifiers<ResourceBase>,
     Helpers: ResourceHelpers
-): Promise<null | ValueAndArray<Omit<ResourceInstance, "identifier">>> {
+): Promise<null | ValueAndArray<Omit<ResourceInstance, "id">>> {
     // If optional attribute was considered, this function is not invoked
     // So the entry is skipped. Refer generateResourceBase to check
     if (input.nullable && faker.random.boolean()) return null;
 
     if (input.plural && faker.random.boolean()) {
-        const arr: Omit<ResourceInstance, "identifier">[] = [];
+        const arr: Omit<ResourceInstance, "id">[] = [];
 
         const length = faker.random.number({
             min: MIN_PLURAL_ENTRIES,
@@ -75,7 +77,7 @@ export async function generateWithModifiers<T extends BaseType | ResourceBase>(
     | null
     | (T extends BaseType
           ? ValueAndArray<Primitives>
-          : ValueAndArray<Omit<ResourceInstance, "identifier">>)
+          : ValueAndArray<Omit<ResourceInstance, "id">>)
 > {
     // If optional attribute is invoked, this function won't be called at all
     // Only account for nullable and plural options

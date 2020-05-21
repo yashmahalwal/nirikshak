@@ -1,7 +1,8 @@
 /* 
     test to validate base type functionality 
 */
-import { BaseType, isBaseType } from "../../../../src/resource/types";
+
+import { BaseType, isBaseType } from "../../../../src/resource/types/helper";
 
 const ValidBaseTypes: BaseType[] = [
     // Faker

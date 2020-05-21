@@ -1,4 +1,4 @@
-import { Primitives } from "./helper";
+import { Primitives } from "../../resource/types/helper";
 
 // Structuring similar to faker types
 // Custom function string is path to a helper function kept in the working directory

@@ -1,4 +1,4 @@
-import { CustomFunctionType } from "../../../../src/resource/types/custom";
+import { CustomFunctionType } from "../../../../src/common/types/custom";
 import { ResourceHelpers } from "../../../../src/resource/types/helper";
 import faker from "faker";
 import { generateCustom } from "../../../../src/resource/generation/customGen";

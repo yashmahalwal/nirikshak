@@ -2,13 +2,13 @@
     Tests to check the faker types 
     isFakerObject assumes that isFakerString works correctly
 */
-import { FakerString } from "../../../../src/resource/types/fakerStrings";
+import { FakerString } from "../../../../src/common/types/fakerStrings";
 import {
     isFakerString,
     isFakerType,
     FakerObject,
     isFakerObject,
-} from "../../../../src/resource/types/fakerTypes";
+} from "../../../../src/common/types/fakerTypes";
 
 const ValidFakerStrings: FakerString[] = [
     "faker:address.zipCode",

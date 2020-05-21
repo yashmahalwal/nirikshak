@@ -1,6 +1,6 @@
 /* Tests to validate literal type functionality */
 
-import { Literal, isLiteral } from "../../../src/resource/types/literals";
+import { Literal, isLiteral } from "../../../src/common/types/literals";
 
 describe("Literal Base", () => {
     const ValidBases: Literal[] = [

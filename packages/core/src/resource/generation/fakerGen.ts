@@ -1,4 +1,4 @@
-import { FakerType, normalizeFaker } from "../types/fakerTypes";
+import { FakerType, normalizeFaker } from "../../common/types/fakerTypes";
 import faker from "faker";
 import _ from "lodash";
 import { Primitives } from "../types/helper";

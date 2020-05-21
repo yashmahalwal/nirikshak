@@ -6,7 +6,7 @@ import {
     NormalizedCustomFunction,
     CustomFunctionType,
     normalizeCustomFunction,
-} from "../../../../src/resource/types/custom";
+} from "../../../../src/common/types/custom";
 
 const ValidFaker: {
     input: CustomFunctionType;

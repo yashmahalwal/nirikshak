@@ -7,7 +7,7 @@ import {
     FakerType,
     normalizeFaker,
     NormalizedFaker,
-} from "../../../../src/resource/types/fakerTypes";
+} from "../../../../src/common/types/fakerTypes";
 
 const ValidFaker: { input: FakerType; output: NormalizedFaker }[] = [
     {

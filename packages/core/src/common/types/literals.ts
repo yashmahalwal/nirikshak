@@ -2,7 +2,7 @@
 
 // Basic literal type
 // Ex: 1, false, null, "myString"
-export type Literal = string | number | null | boolean | Array<Literal>;
+export type Literal = string | number | null | boolean;
 
 // type guard: Literal
 export function isLiteral(input: any): input is Literal {

@@ -1,4 +1,4 @@
-import { OneOfEntries } from "../../../src/resource/types";
+import { OneOfEntries } from "../../../src/resource/types/helper";
 import faker from "faker";
 import { RANDOMNESS_ITERATIONS } from "../../../src/resource/Env";
 import { generateOneOfEntries } from "../../../src/resource/generation/oneOfEntries";

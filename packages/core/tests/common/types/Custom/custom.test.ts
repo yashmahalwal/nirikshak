@@ -8,7 +8,7 @@ import {
     isCustomFunctionObject,
     CustomFunctionString,
     CustomFunctionObject,
-} from "../../../../src/resource/types/custom";
+} from "../../../../src/common/types/custom";
 
 const ValidCustomStrings: CustomFunctionString[] = [
     "custom:LoremIpsumDolor",

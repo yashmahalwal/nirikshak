@@ -3,12 +3,15 @@
     Circular dependecy with ResourceBase, OneOfEntries
     Assumes circular dependencies to be working correctly, except this part
 */
-import { ResourceBase, WithModifiers } from "../../../../src/resource/types";
 import { ValidModifiers } from "../../utils";
-import { ResourceHelpers } from "../../../../src/resource/types/helper";
+import {
+    ResourceHelpers,
+    WithModifiers,
+} from "../../../../src/resource/types/helper";
 import faker from "faker";
 import { RANDOMNESS_ITERATIONS } from "../../../../src/resource/Env";
 import { generateWithModifiers } from "../../../../src/resource/generation/withModifiersGen";
+import { ResourceBase } from "../../../../src/resource/types";
 // Helpers for the resource
 const Helpers: ResourceHelpers = {
     username: async () => faker.name.firstName() + faker.name.lastName(),
@@ -111,7 +114,7 @@ const ValidWithModifiers: WithModifiers<ResourceBase>[] = [];
 // Valid ResourceBase x Valid modifiers = Valid with modifiers entries
 ValidResourceBaseTypes.forEach((baseType) =>
     ValidModifiers.forEach((mod) => {
-        const o: WithModifiers<ResourceBase> = Object.create(mod);
+        const o = Object.assign({}, mod) as WithModifiers<ResourceBase>;
         o.field = baseType;
         ValidWithModifiers.push(o);
     })

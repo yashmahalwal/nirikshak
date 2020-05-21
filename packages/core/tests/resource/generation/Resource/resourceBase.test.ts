@@ -38,6 +38,7 @@ const ValidResourceBases: ResourceBase[] = [
                 type: [1, 2, 3, 4, "stirng", false, "faker:random.address"],
                 nullable: true,
                 plural: true,
+                optional: true,
             },
             field: {
                 f1: {
@@ -78,6 +79,8 @@ const ValidResourceBases: ResourceBase[] = [
                                     },
                                 },
                                 plural: true,
+                                optional: true,
+                                nullable: false,
                             },
                         },
                     ],
@@ -177,8 +180,8 @@ describe(`Resource type`, () => {
     for (let i = 0; i < RANDOMNESS_ITERATIONS; i++)
         ValidResourceBases.forEach((resource, index) =>
             test(`resource base ${index}, iteration: ${i}`, async () => {
-                const o: Resource = Object.create(resource);
-                o.identifier = "faker:random.word";
+                const o = Object.assign({}, resource) as Resource;
+                o.id = "faker:random.word";
                 expect(await generateResource(o, Helpers)).toMatchSnapshot();
             })
         );

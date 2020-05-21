@@ -1,6 +1,7 @@
 // Utility entities
 
-import { WithModifiers } from "../../src/resource/types/helper";
+import { WithModifiers } from "../../src/endpoints/types/helpers";
+
 
 // Modifiers for WithModifiers HOT
 export const ValidModifiers: Omit<WithModifiers<any>, "type">[] = [

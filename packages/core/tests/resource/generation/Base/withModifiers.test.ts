@@ -1,12 +1,13 @@
-import { BaseType, WithModifiers } from "../../../../src/resource/types";
 import faker from "faker";
 import {
     ResourceHelpers,
+    BaseType,
+    WithModifiers,
     isPrimitives,
 } from "../../../../src/resource/types/helper";
-import { ValidModifiers } from "../../utils";
 import { RANDOMNESS_ITERATIONS } from "../../../../src/resource/Env";
 import { generateWithModifiers } from "../../../../src/resource/generation/withModifiersGen";
+import { ValidModifiers } from "../../utils";
 
 // Helpers for the resource
 const Helpers: ResourceHelpers = {
@@ -35,7 +36,7 @@ const entries: BaseType[] = [
 const inputs: WithModifiers<BaseType>[] = [];
 entries.forEach((entry) =>
     ValidModifiers.forEach((modifiers) => {
-        const o: WithModifiers<BaseType> = Object.create(modifiers);
+        const o = Object.assign({}, modifiers) as WithModifiers<BaseType>;
         o.type = entry;
         inputs.push(o);
     })

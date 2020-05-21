@@ -5,7 +5,8 @@
     Assumes isBaseType to be working correctly
 */
 
-import { OneOfEntries, isOneOfEntries } from "../../../src/resource/types";
+import { OneOfEntries, isOneOfEntries } from "../../../src/resource/types/helper";
+
 
 const ValidOneOfEntries: OneOfEntries[] = [
     { types: ["string"] },

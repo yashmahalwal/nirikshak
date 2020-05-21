@@ -1,10 +1,9 @@
-import { BaseType } from "../types";
-import { Literal } from "../types/literals";
-import { isFakerType } from "../types/fakerTypes";
+import { Literal } from "../../common/types/literals";
+import { isFakerType } from "../../common/types/fakerTypes";
 import { generateFaker } from "./fakerGen";
-import { isCustomFunction } from "../types/custom";
+import { isCustomFunction } from "../../common/types/custom";
 import { generateCustom } from "./customGen";
-import { ResourceHelpers, Primitives } from "../types/helper";
+import { ResourceHelpers, Primitives, BaseType } from "../types/helper";
 
 // Generating base type entry
 export async function generateBaseType(

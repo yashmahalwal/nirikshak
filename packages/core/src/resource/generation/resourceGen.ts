@@ -1,13 +1,8 @@
 import {
     ResourceBase,
     Resource,
-    isBaseType,
-    isWithModifiersBaseType,
-    isWithModifiersResource,
-    isOneOfEntries,
-    isWithModifiers,
 } from "../types";
-import { ResourceInstance, ResourceHelpers } from "../types/helper";
+import { ResourceInstance, ResourceHelpers, isBaseType, isWithModifiers, isOneOfEntries, isWithModifiersBaseType, isWithModifiersResource } from "../types/helper";
 import { generateBaseType } from "./baseGen";
 import faker from "faker";
 import { generateWithModifiers } from "./withModifiersGen";
@@ -16,8 +11,8 @@ import { generateOneOfEntries } from "./oneOfEntries";
 export async function generateResourceBase(
     input: ResourceBase,
     Helpers: ResourceHelpers
-): Promise<Omit<ResourceInstance, "identifier">> {
-    const o: Omit<ResourceInstance, "identifier"> = {};
+): Promise<Omit<ResourceInstance, "id">> {
+    const o: Omit<ResourceInstance, "id"> = {};
     for (const key in input) {
         // For each key value pair of resource base description
         const entry = input[key];
@@ -80,11 +75,9 @@ export async function generateResource(
     Helpers: ResourceHelpers
 ): Promise<ResourceInstance> {
     return {
-        // Generate resource base. This also includes identifier
+        // Generate resource base. This also includes id
         ...(await generateResourceBase(input, Helpers)),
-        // Overriding any other identifier defs with the main one
-        identifier: (await generateBaseType(input.identifier, Helpers)) as
-            | string
-            | number,
+        // Overriding any other id defs with the main one
+        id: (await generateBaseType(input.id, Helpers)) as string | number,
     };
 }

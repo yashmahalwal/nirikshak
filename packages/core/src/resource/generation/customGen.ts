@@ -1,4 +1,4 @@
-import { CustomFunctionType, normalizeCustomFunction } from "../types/custom";
+import { CustomFunctionType, normalizeCustomFunction } from "../../common/types/custom";
 import { ResourceHelpers, Primitives } from "../types/helper";
 import _ from "lodash";
 
