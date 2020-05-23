@@ -2,15 +2,16 @@ import {
     ResourceBase,
     Resource,
 } from "../types";
-import { ResourceInstance, ResourceHelpers, isBaseType, isWithModifiers, isOneOfEntries, isWithModifiersBaseType, isWithModifiersResource } from "../types/helper";
+import { ResourceInstance,  isBaseType, isWithModifiers, isOneOfEntries, isWithModifiersBaseType, isWithModifiersResource } from "../types/helper";
 import { generateBaseType } from "./baseGen";
 import faker from "faker";
 import { generateWithModifiers } from "./withModifiersGen";
 import { generateOneOfEntries } from "./oneOfEntries";
+import { SchemaHelpers } from "../../common/types/helpers";
 
 export async function generateResourceBase(
     input: ResourceBase,
-    Helpers: ResourceHelpers
+    Helpers: SchemaHelpers
 ): Promise<Omit<ResourceInstance, "id">> {
     const o: Omit<ResourceInstance, "id"> = {};
     for (const key in input) {
@@ -72,7 +73,7 @@ export async function generateResourceBase(
 
 export async function generateResource(
     input: Resource,
-    Helpers: ResourceHelpers
+    Helpers: SchemaHelpers
 ): Promise<ResourceInstance> {
     return {
         // Generate resource base. This also includes id

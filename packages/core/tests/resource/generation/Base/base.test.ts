@@ -3,15 +3,16 @@
 */
 import faker from "faker";
 import {
-    ResourceHelpers,
     isPrimitives,
-    BaseType
+    BaseType,
+    Primitives,
 } from "../../../../src/resource/types/helper";
 import { generateBaseType } from "../../../../src/resource/generation/baseGen";
 import { RANDOMNESS_ITERATIONS } from "../../../../src/resource/Env";
+import { SchemaHelpers } from "../../../../src/common/types/helpers";
 
 // Helpers for the resource
-const Helpers: ResourceHelpers = {
+const Helpers: SchemaHelpers = {
     username: async () => faker.name.firstName() + faker.name.lastName(),
     number: async (min: number, max: number, step: number) =>
         // Use faker.random.number instead of Math.random
@@ -20,14 +21,26 @@ const Helpers: ResourceHelpers = {
 };
 
 const SimpleBases: BaseType[] = [1, false, null, [1, 2, 3, 4, ["string"]]];
-const ComplexBase: BaseType = [
-    7,
-    4,
-    3,
-    2,
-    5,
-    ["faker:random.number", [{ function: "custom:username", args: [] }]],
-];
+const ComplexBase: { input: BaseType; output: () => Promise<Primitives> } = {
+    input: [
+        7,
+        4,
+        3,
+        2,
+        5,
+        ["faker:random.number", [{ function: "custom:username", args: [] }]],
+        "custom:username",
+    ],
+    output: async () => [
+        7,
+        4,
+        3,
+        2,
+        5,
+        [faker.random.number(), [await Helpers.username()]],
+        await Helpers.username(),
+    ],
+};
 
 describe("Base type generation", () => {
     beforeAll(() => faker.seed(123));
@@ -43,8 +56,11 @@ describe("Base type generation", () => {
     // Account for variation due to randomness of faker
     for (let i = 0; i < RANDOMNESS_ITERATIONS; i++)
         test(`ComplexBase iteration: ${i}`, async () => {
-            const o = await generateBaseType(ComplexBase, Helpers);
-            expect(o).toMatchSnapshot();
+            faker.seed(i + 123);
+            const o = await generateBaseType(ComplexBase.input, Helpers);
+            faker.seed(i + 123);
+            const expected = await ComplexBase.output();
+            expect(o).toEqual(expected);
             expect(isPrimitives(o)).toBe(true);
         });
 });

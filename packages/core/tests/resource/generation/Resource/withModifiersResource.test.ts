@@ -4,16 +4,14 @@
     Assumes circular dependencies to be working correctly, except this part
 */
 import { ValidModifiers } from "../../utils";
-import {
-    ResourceHelpers,
-    WithModifiers,
-} from "../../../../src/resource/types/helper";
+import { WithModifiers } from "../../../../src/resource/types/helper";
 import faker from "faker";
 import { RANDOMNESS_ITERATIONS } from "../../../../src/resource/Env";
 import { generateWithModifiers } from "../../../../src/resource/generation/withModifiersGen";
 import { ResourceBase } from "../../../../src/resource/types";
+import { SchemaHelpers } from "../../../../src/common/types/helpers";
 // Helpers for the resource
-const Helpers: ResourceHelpers = {
+const Helpers: SchemaHelpers = {
     username: async () => faker.name.firstName() + faker.name.lastName(),
     number: async (min: number, max: number, step: number) =>
         // Use faker.random.number instead of Math.random
@@ -121,15 +119,18 @@ ValidResourceBaseTypes.forEach((baseType) =>
 );
 
 describe("Generating resource bases with modifiers", () => {
-    // Setting the randomness seed
-    beforeAll(() => faker.seed(123));
-
     for (let i = 0; i < RANDOMNESS_ITERATIONS; i++)
         ValidWithModifiers.forEach((entry, index) =>
             test(`Valid base type with modifiers: ${index}, iteration: ${i}`, async () => {
-                expect(
-                    await generateWithModifiers(entry, Helpers)
-                ).toMatchSnapshot();
+                faker.seed(index * i + 123);
+                const o = await generateWithModifiers(entry, Helpers);
+                expect(o).toMatchSnapshot();
+                faker.seed(index * i + 123);
+                expect(o === null).toBe(
+                    !!(entry.nullable && faker.random.boolean())
+                );
+                if (entry.plural && !entry.nullable)
+                    expect(Array.isArray(o)).toBe(true);
             })
         );
 });

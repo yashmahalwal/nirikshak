@@ -1,7 +1,7 @@
-import { Primitives } from "../../resource/types/helper";
-
 // Structuring similar to faker types
 // Custom function string is path to a helper function kept in the working directory
+
+import { Literal } from "./literals";
 
 // Custom function string, starts with custom:
 // Ex: custom:random.name
@@ -19,7 +19,7 @@ export type CustomFunctionObject = {
 export interface CustomFunction {
     // Primitive is simply a literal or an array of nested arrays of literals
     // Ex: 1, [1,7], [false, [true, [7,8,false, [null]]]]
-    (...args: any[]): Promise<Primitives>;
+    (...args: any[]): Promise<Literal>;
 }
 // Custom type
 export type CustomFunctionType = CustomFunctionString | CustomFunctionObject;

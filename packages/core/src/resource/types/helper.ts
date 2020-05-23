@@ -1,12 +1,10 @@
-import { CustomFunction, CustomFunctionType, isCustomFunction } from "../../common/types/custom";
+import {
+    CustomFunctionType,
+    isCustomFunction,
+} from "../../common/types/custom";
 import { Literal, isLiteral } from "../../common/types/literals";
 import { FakerType, isFakerType } from "../../common/types/fakerTypes";
 import { ResourceBase, isResourceBase } from ".";
-
-// Helpers for resources
-export interface ResourceHelpers {
-    [key: string]: CustomFunction;
-}
 
 // Ultimately, a resource fields ends in Primitive type
 // Ex: {age: 23}
@@ -33,6 +31,7 @@ export type BaseType =
     | CustomFunctionType
     | Literal
     | Array<BaseType>;
+
 
 // Validation for the same
 export function isBaseType(input: any): input is BaseType {
@@ -156,4 +155,3 @@ export function isOneOfEntries(input: any): input is OneOfEntries {
 
     return value;
 }
-

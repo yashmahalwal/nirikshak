@@ -2,7 +2,6 @@ import { ResourceBase } from "../types";
 import faker from "faker";
 import { generateBaseType } from "./baseGen";
 import {
-    ResourceHelpers,
     Primitives,
     ResourceInstance,
     WithModifiers,
@@ -11,6 +10,7 @@ import {
 } from "../types/helper";
 import { MIN_PLURAL_ENTRIES, MAX_PLURAL_ENTRIES } from "../Env";
 import { generateResourceBase } from "./resourceGen";
+import { SchemaHelpers } from "../../common/types/helpers";
 type ValueAndArray<T> = T | Array<T>;
 
 //  Nullable and Plural arguments override the input attributes
@@ -18,13 +18,13 @@ type ValueAndArray<T> = T | Array<T>;
 // To generate data for BaseType with modifiers
 async function generateWithModifiersBaseType(
     input: WithModifiers<BaseType>,
-    Helpers: ResourceHelpers
-): Promise<null | ValueAndArray<Primitives>> {
+    Helpers: SchemaHelpers
+): Promise<Primitives> {
     // If optional attribute was considered, this function is not invoked
     // So the entry is skipped. Refer generateResourceBase to check
     if (input.nullable && faker.random.boolean()) return null;
 
-    if (input.plural && faker.random.boolean()) {
+    if (input.plural) {
         const arr: Primitives[] = [];
 
         // Use faker.random.number over Math.random
@@ -46,13 +46,13 @@ async function generateWithModifiersBaseType(
 // To generate data for BaseType with modifiers
 async function generateWithModifiersResourceBase(
     input: WithModifiers<ResourceBase>,
-    Helpers: ResourceHelpers
+    Helpers: SchemaHelpers
 ): Promise<null | ValueAndArray<Omit<ResourceInstance, "id">>> {
     // If optional attribute was considered, this function is not invoked
     // So the entry is skipped. Refer generateResourceBase to check
     if (input.nullable && faker.random.boolean()) return null;
 
-    if (input.plural && faker.random.boolean()) {
+    if (input.plural) {
         const arr: Omit<ResourceInstance, "id">[] = [];
 
         const length = faker.random.number({
@@ -66,17 +66,17 @@ async function generateWithModifiersResourceBase(
 
         return arr;
     }
-    return await generateResourceBase(input.field, Helpers);
+    return generateResourceBase(input.field, Helpers);
 }
 
 // To generate data with modifiers
 export async function generateWithModifiers<T extends BaseType | ResourceBase>(
     input: WithModifiers<T>,
-    Helpers: ResourceHelpers
+    Helpers: SchemaHelpers
 ): Promise<
     | null
     | (T extends BaseType
-          ? ValueAndArray<Primitives>
+          ? Primitives
           : ValueAndArray<Omit<ResourceInstance, "id">>)
 > {
     // If optional attribute is invoked, this function won't be called at all

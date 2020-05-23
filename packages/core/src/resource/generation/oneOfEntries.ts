@@ -3,9 +3,11 @@ import { BaseType, WithModifiers, OneOfEntries } from "../types/helper";
 import { ResourceBase } from "../types";
 
 // Return type with discriminated union
-type SelectedType<T extends BaseType | ResourceBase> = {
+export type SelectedType<T extends BaseType | ResourceBase> = {
     type: T extends BaseType ? "base type" : "resource base";
-    selection: WithModifiers<T> | T;
+    selection: T extends BaseType
+        ? BaseType | WithModifiers<BaseType>
+        : ResourceBase | WithModifiers<ResourceBase>;
 };
 
 // Function simply selects one of the types / fields
@@ -49,28 +51,27 @@ export function generateOneOfEntries(
         };
 
     // Select either type or field
-    if (faker.random.boolean()) {
-        return {
-            type: "resource base",
-            selection:
-                input.fields[
-                    faker.random.number({
-                        min: 0,
-                        max: input.fields.length - 1,
-                        precision: 1,
-                    })
-                ],
-        };
-    }
-    return {
-        type: "base type",
-        selection:
-            input.types[
-                faker.random.number({
-                    min: 0,
-                    max: input.types.length - 1,
-                    precision: 1,
-                })
-            ],
-    };
+    return faker.random.boolean()
+        ? {
+              type: "resource base",
+              selection:
+                  input.fields[
+                      faker.random.number({
+                          min: 0,
+                          max: input.fields.length - 1,
+                          precision: 1,
+                      })
+                  ],
+          }
+        : {
+              type: "base type",
+              selection:
+                  input.types[
+                      faker.random.number({
+                          min: 0,
+                          max: input.types.length - 1,
+                          precision: 1,
+                      })
+                  ],
+          };
 }

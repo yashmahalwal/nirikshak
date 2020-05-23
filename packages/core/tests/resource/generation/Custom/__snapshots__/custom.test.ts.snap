@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Custom literal generation Valid custom: 0 1`] = `"MaurineRath"`;
-
-exports[`Custom literal generation Valid custom: 1 1`] = `NaN`;
-
-exports[`Custom literal generation Valid custom: 2 1`] = `"eyeballs"`;

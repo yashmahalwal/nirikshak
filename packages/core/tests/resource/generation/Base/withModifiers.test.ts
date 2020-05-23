@@ -1,6 +1,5 @@
 import faker from "faker";
 import {
-    ResourceHelpers,
     BaseType,
     WithModifiers,
     isPrimitives,
@@ -8,9 +7,10 @@ import {
 import { RANDOMNESS_ITERATIONS } from "../../../../src/resource/Env";
 import { generateWithModifiers } from "../../../../src/resource/generation/withModifiersGen";
 import { ValidModifiers } from "../../utils";
+import { SchemaHelpers } from "../../../../src/common/types/helpers";
 
 // Helpers for the resource
-const Helpers: ResourceHelpers = {
+const Helpers: SchemaHelpers = {
     username: async () => faker.name.firstName() + faker.name.lastName(),
     number: async (min: number, max: number, step: number) =>
         // Use faker.random.number instead of Math.random
@@ -43,17 +43,18 @@ entries.forEach((entry) =>
 );
 
 describe("Generating base types with modifiers", () => {
-    beforeAll(() => faker.seed(123));
-
     inputs.forEach((input, index) => {
         for (let i = 0; i < RANDOMNESS_ITERATIONS; i++) {
             test(`Base type: ${index}, iteration: ${i}`, async () => {
+                faker.seed(index * i + 123);
                 const o = await generateWithModifiers(input, Helpers);
-
                 expect(o).toMatchSnapshot();
                 expect(isPrimitives(o)).toBe(true);
-
-                if (input.plural && !input.nullable && !input.optional)
+                faker.seed(index * i + 123);
+                expect(o === null).toBe(
+                    !!(input.nullable && faker.random.boolean())
+                );
+                if (input.plural && !input.nullable)
                     expect(Array.isArray(o)).toBe(true);
             });
         }
