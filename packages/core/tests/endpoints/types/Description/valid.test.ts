@@ -2,7 +2,8 @@ import { Inputs } from "../../../../src/endpoints/types/input";
 import { Outputs } from "../../../../src/endpoints/types/output";
 import { MethodType, Cases } from "../../../../src/endpoints/types/helpers";
 import { isDescription, Description } from "../../../../src/endpoints/types";
-
+import { URLString } from "../../../../src/endpoints/types/urlString";
+import faker from "faker";
 const ValidInputs: Inputs = {
     DELETE: {
         semantics: {
@@ -69,6 +70,14 @@ const ValidInputs: Inputs = {
         },
     },
 };
+
+const urls: URLString[] = [
+    "/Students",
+    "Professors/{resource:id}",
+    "/{resource:id}/name/{faker:random.uuid}",
+    "{custom:urlSlug}/students",
+    "{faker:address.city}",
+];
 
 const ValidOutputs: Outputs = {
     DELETE: {
@@ -191,67 +200,222 @@ const ValidOutputs: Outputs = {
 const ComplexCases: Description[] = [
     {},
     {
-        GET: {
-            input: ValidInputs["GET"],
-            output: {},
-        },
-        POST: {
-            input: ValidInputs["POST"],
-            output: {},
-        },
+        GET: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["GET"],
+                output: {},
+            },
+        ],
+        POST: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["POST"],
+                output: {},
+            },
+        ],
     },
     {
-        GET: {
-            input: ValidInputs["GET"],
-            output: {
-                NEGATIVE: ValidOutputs["GET"]["NEGATIVE"],
+        GET: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["GET"],
+                output: {
+                    NEGATIVE: ValidOutputs["GET"]["NEGATIVE"],
+                },
             },
-        },
-        POST: {
-            input: ValidInputs["POST"],
-            output: {
-                DESTRUCTIVE: ValidOutputs["POST"]["DESTRUCTIVE"],
-                POSITIVE: ValidOutputs["POST"]["POSITIVE"],
+        ],
+        POST: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["POST"],
+                output: {
+                    DESTRUCTIVE: ValidOutputs["POST"]["DESTRUCTIVE"],
+                    POSITIVE: ValidOutputs["POST"]["POSITIVE"],
+                },
             },
-        },
+        ],
     },
     {
-        DELETE: {
-            input: ValidInputs["DELETE"],
-            output: {
-                POSITIVE: ValidOutputs["DELETE"]["POSITIVE"],
+        DELETE: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["DELETE"],
+                output: {
+                    POSITIVE: ValidOutputs["DELETE"]["POSITIVE"],
+                },
             },
-        },
-        POST: {
-            input: ValidInputs["POST"],
-            output: { NEGATIVE: ValidOutputs["POST"]["NEGATIVE"] },
-        },
-        PATCH: {
-            input: ValidInputs["PATCH"],
-            output: { DESTRUCTIVE: ValidOutputs["PATCH"]["DESTRUCTIVE"] },
-        },
+        ],
+        POST: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["POST"],
+                output: { NEGATIVE: ValidOutputs["POST"]["NEGATIVE"] },
+            },
+        ],
+        PATCH: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["PATCH"],
+                output: { DESTRUCTIVE: ValidOutputs["PATCH"]["DESTRUCTIVE"] },
+            },
+        ],
     },
     {
-        GET: {
-            input: ValidInputs["GET"],
-            output: ValidOutputs["GET"],
-        },
-        DELETE: {
-            input: ValidInputs["DELETE"],
-            output: ValidOutputs["DELETE"],
-        },
-        POST: {
-            input: ValidInputs["POST"],
-            output: ValidOutputs["POST"],
-        },
-        PATCH: {
-            input: ValidInputs["PATCH"],
-            output: ValidOutputs["PATCH"],
-        },
-        PUT: {
-            input: ValidInputs["PUT"],
-            output: ValidOutputs["PUT"],
-        },
+        GET: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["GET"],
+                output: ValidOutputs["GET"],
+            },
+        ],
+        DELETE: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["DELETE"],
+                output: ValidOutputs["DELETE"],
+            },
+        ],
+        POST: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["POST"],
+                output: ValidOutputs["POST"],
+            },
+        ],
+        PATCH: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["PATCH"],
+                output: ValidOutputs["PATCH"],
+            },
+        ],
+        PUT: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["PUT"],
+                output: ValidOutputs["PUT"],
+            },
+        ],
+    },
+    {
+        GET: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["GET"],
+                output: {},
+            },
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["GET"],
+                output: {
+                    NEGATIVE: ValidOutputs["GET"]["NEGATIVE"],
+                },
+            },
+        ],
+        POST: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["POST"],
+                output: {},
+            },
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["POST"],
+                output: {
+                    DESTRUCTIVE: ValidOutputs["POST"]["DESTRUCTIVE"],
+                    POSITIVE: ValidOutputs["POST"]["POSITIVE"],
+                },
+            },
+        ],
+        DELETE: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["DELETE"],
+                output: {
+                    POSITIVE: ValidOutputs["DELETE"]["POSITIVE"],
+                },
+            },
+        ],
+    },
+    {
+        GET: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["GET"],
+                output: {},
+            },
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["GET"],
+                output: {
+                    NEGATIVE: ValidOutputs["GET"]["NEGATIVE"],
+                },
+            },
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["GET"],
+                output: ValidOutputs["GET"],
+            },
+        ],
+        POST: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["POST"],
+                output: {},
+            },
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["POST"],
+                output: {
+                    DESTRUCTIVE: ValidOutputs["POST"]["DESTRUCTIVE"],
+                    POSITIVE: ValidOutputs["POST"]["POSITIVE"],
+                },
+            },
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["POST"],
+                output: { NEGATIVE: ValidOutputs["POST"]["NEGATIVE"] },
+            },
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["POST"],
+                output: ValidOutputs["POST"],
+            },
+        ],
+        DELETE: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["DELETE"],
+                output: {
+                    POSITIVE: ValidOutputs["DELETE"]["POSITIVE"],
+                },
+            },
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["DELETE"],
+                output: ValidOutputs["DELETE"],
+            },
+        ],
+        PATCH: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["PATCH"],
+                output: { DESTRUCTIVE: ValidOutputs["PATCH"]["DESTRUCTIVE"] },
+            },
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["PATCH"],
+                output: ValidOutputs["PATCH"],
+            },
+        ],
+        PUT: [
+            {
+                url: faker.random.arrayElement(urls),
+                input: ValidInputs["PUT"],
+                output: ValidOutputs["PUT"],
+            },
+        ],
     },
 ];
 
@@ -282,10 +446,13 @@ describe("Valid descriptions", () => {
             test(`Basic entry: ${method}: ${combination.join(", ")}`, () => {
                 expect(
                     isDescription({
-                        [method]: {
-                            input: ValidInputs[method],
-                            output: outputs,
-                        },
+                        [method]: [
+                            {
+                                url: faker.random.arrayElement(urls),
+                                input: ValidInputs[method],
+                                output: outputs,
+                            },
+                        ],
                     })
                 ).toBe(true);
             });

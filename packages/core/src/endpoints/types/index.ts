@@ -1,36 +1,47 @@
 import { Inputs, inputValidationFunctions } from "./input";
 import { Outputs, outputValidationFunctions } from "./output";
 import { MethodType, isMethodType } from "./helpers";
+import { URLString, isURLString } from "./urlString";
 
 export type Description = {
     [K in MethodType]?: {
+        url: URLString;
         input: Inputs[K];
         output: {
             [P in keyof Outputs[K]]?: Outputs[K][P];
         };
-    };
+    }[];
 };
 
 export function isDescription(arg: any): arg is Description {
     if (!arg || typeof arg !== "object") return false;
 
     return Object.keys(arg).every((key) => {
-        if (!isMethodType(key)) return false;
-        if (
-            !("input" in arg[key]) ||
-            !("output" in arg[key]) ||
-            !arg[key]["output"] ||
-            typeof arg[key]["output"] !== "object"
-        )
-            return false;
+        if (!isMethodType(key) || !Array.isArray(arg[key])) return false;
 
-        return (
-            inputValidationFunctions[key](arg[key]["input"]) &&
-            Object.keys(arg[key]["output"]).every((caseValue) =>
-                outputValidationFunctions[key][caseValue](
-                    arg[key]["output"][caseValue]
-                )
+        let value = true;
+        for (const entry of arg[key]) {
+            if (
+                !value ||
+                !("url" in entry) ||
+                !isURLString(entry.url) ||
+                !("input" in entry) ||
+                !("output" in entry) ||
+                !entry["output"] ||
+                typeof entry["output"] !== "object"
             )
-        );
+                return false;
+
+            value =
+                value &&
+                inputValidationFunctions[key](entry["input"]) &&
+                Object.keys(entry["output"]).every((caseValue) =>
+                outputValidationFunctions[key][caseValue] && outputValidationFunctions[key][caseValue](
+                        entry["output"][caseValue]
+                    )
+                );
+        }
+
+        return value;
     });
 }

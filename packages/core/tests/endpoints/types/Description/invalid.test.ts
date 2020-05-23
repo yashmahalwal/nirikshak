@@ -1,370 +1,78 @@
 import { isDescription } from "../../../../src/endpoints/types";
+import { URLString } from "../../../../src/endpoints/types/urlString";
+import faker from "faker";
+const ValidUrls: URLString[] = [
+    "/Students",
+    "Professors/{resource:id}",
+    "/{resource:id}/name/{faker:random.uuid}",
+    "{custom:urlSlug}/students",
+    "{faker:address.city}",
+];
+
+const InvalidUrls: any[] = [
+    undefined,
+    12,
+    "str/{resource.id}",
+    "/str/{faker.random.number}",
+    "str/{faker:random.number}/{faker:random.name}",
+    "/str/{custom.username}",
+];
 
 const InvalidDescriptions: any[] = [
+    // arg is falsy
+    undefined,
     null,
-    "string",
-    [false, true, "absorption", "alaska"],
+    // arg is not an object
+    "stringles",
+    // arg with non method keys
+    [1, 2, 34],
+    // Completely valid desc but invalid key: Non method
     {
-        purple: {
-            input: {
-                semantics: {
-                    headers: {
-                        applicationContent: true,
-                    },
-                    query: {
-                        sample: 15,
-                    },
-                },
-            },
-            output: {
-                DESTRUCTIVE: [
-                    { semantics: { status: 501 } },
-                    {
-                        semantics: {
-                            status: 500,
-                            headers: { application: "chrome" },
+        purple: [
+            {
+                url: faker.random.arrayElement(ValidUrls),
+                input: {
+                    semantics: {
+                        headers: {
+                            applicationContent: true,
+                        },
+                        query: {
+                            sample: 15,
                         },
                     },
-                ],
-                NEGATIVE: {
-                    semantics: {
-                        status: 404,
-                    },
                 },
-                POSITIVE: {
-                    semantics: {
-                        status: 200,
-                    },
-                    body: {
-                        name: "resource:name",
-                        age: "resource:age",
-                    },
-                },
-            },
-        },
-    },
-    {
-        GET: {
-            output: {
-                DESTRUCTIVE: [
-                    { semantics: { status: 501 } },
-                    {
-                        semantics: {
-                            status: 500,
-                            headers: { application: "chrome" },
+                output: {
+                    DESTRUCTIVE: [
+                        { semantics: { status: 501 } },
+                        {
+                            semantics: {
+                                status: 500,
+                                headers: { application: "chrome" },
+                            },
                         },
-                    },
-                ],
-                NEGATIVE: {
-                    semantics: {
-                        status: 404,
-                    },
-                },
-                POSITIVE: {
-                    semantics: {
-                        status: 200,
-                    },
-                    body: {
-                        name: "resource:name",
-                        age: "resource:age",
-                    },
-                },
-            },
-        },
-    },
-    {
-        GET: {
-            input: {
-                semantics: {
-                    headers: {
-                        applicationContent: true,
-                    },
-                    query: {
-                        sample: 15,
-                    },
-                },
-            },
-        },
-    },
-    {
-        DELETE: {
-            input: {
-                semantics: {
-                    headers: {
-                        applicationContent: [true],
-                    },
-                    query: {
-                        sample: 15,
-                    },
-                },
-            },
-            output: {
-                DESTRUCTIVE: [
-                    { semantics: { status: 501 } },
-                    {
-                        semantics: {
-                            status: 500,
-                            headers: { application: "chrome" },
-                        },
-                    },
-                ],
-                NEGATIVE: {
-                    semantics: {
-                        status: 404,
-                    },
-                },
-                POSITIVE: {
-                    semantics: {
-                        status: 200,
-                    },
-                    body: {
-                        name: "resource:name",
-                        age: "resource:age",
-                    },
-                },
-            },
-        },
-    },
-    {
-        GET: {
-            input: {
-                semantics: {
-                    headers: {
-                        applicationContent: [true],
-                    },
-                    query: {
-                        sample: 15,
-                    },
-                },
-            },
-            output: {
-                DESTRUCTIVE: [
-                    { semantics: { status: "false" } },
-                    {
-                        semantics: {
-                            status: 500,
-                            headers: { application: "chrome" },
-                        },
-                    },
-                ],
-                NEGATIVE: {
-                    semantics: {
-                        status: 404,
-                    },
-                },
-                POSITIVE: {
-                    semantics: {
-                        status: 200,
-                    },
-                    body: {
-                        name: "resource:name",
-                        age: "resource:age",
-                    },
-                },
-            },
-        },
-    },
-    {
-        DELETE: {
-            input: {
-                semantics: {
-                    headers: {
-                        applicationContent: true,
-                    },
-                    query: {
-                        sample: 15,
-                    },
-                },
-            },
-            output: {
-                NEGATIVE: {
-                    semantics: {
-                        status: 200,
-                    },
-                },
-                POSITIVE: [
-                    {
+                    ],
+                    NEGATIVE: {
                         semantics: {
                             status: 404,
-                            headers: {
-                                message: "not found value",
-                            },
                         },
                     },
-                    {
-                        semantics: {
-                            status: 400,
-                        },
-                    },
-                ],
-            },
-        },
-        GET: {
-            input: {
-                semantics: {
-                    query: {
-                        names: ["faker:random.name", "faker:random.name"],
-                    },
-                },
-            },
-            output: {
-                POSITIVE: [
-                    {
-                        semantics: {
-                            status: 200,
-                            headers: {
-                                "content-type": `Application/JSON`,
-                            },
-                        },
-                    },
-                    {
-                        semantics: {
-                            status: 201,
-                        },
-                    },
-                ],
-                NEGATIVE: {
-                    semantics: {
-                        status: 404,
-                    },
-                },
-            },
-        },
-        PUT: {
-            input: {
-                semantics: {
-                    headers: {
-                        Authorization: "Bearer 123123123432",
-                    },
-                },
-                body: {
-                    id: "resource:id",
-                    name: "faker:random.name",
-                    age: {
-                        types: [
-                            "faker:random.number",
-                            { function: "custom:age" },
-                        ],
-                    },
-                },
-            },
-            output: {
-                DESTRUCTIVE: {
-                    semantics: {
-                        status: 500,
-                        headers: {
-                            messsage: "Invalid fields value",
-                        },
-                    },
-                },
-                POSITIVE: [
-                    {
-                        body: {
-                            id: "resource:id",
-                            name: "resource:name",
-                            classes: "resource.classes",
-                        },
+                    POSITIVE: {
                         semantics: {
                             status: 200,
                         },
-                    },
-                    {
                         body: {
-                            id: "resource:id",
                             name: "resource:name",
-                            classes: "resource.classes",
-                        },
-                        semantics: {
-                            status: 201,
+                            age: "resource:age",
                         },
                     },
-                ],
-            },
-        },
-        PATCH: {
-            input: {
-                semantics: {
-                    headers: {
-                        "x-poweredBy": "google",
-                        version: "v1.0.0",
-                    },
-                    query: {
-                        version: 1,
-                        useful: false,
-                    },
-                },
-                body: {
-                    id: "resource:id",
-                    name: {
-                        type: "resource.name",
-                        optional: true,
-                    },
-                    age: {
-                        type: "resource.age",
-                        optional: true,
-                    },
                 },
             },
-            output: {
-                DESTRUCTIVE: [
-                    { semantics: { status: 501 } },
-                    {
-                        semantics: {
-                            status: 500,
-                            headers: { application: "chrome" },
-                        },
-                    },
-                ],
-                NEGATIVE: {
-                    semantics: {
-                        status: 404,
-                    },
-                },
-                POSITIVE: {
-                    semantics: {
-                        status: 200,
-                    },
-                    body: {
-                        name: "resource:name",
-                        age: "resource:age",
-                    },
-                },
-            },
-        },
-        POST: {
-            input: {
-                semantics: {},
-                body: {
-                    class: "resource.class",
-                    ages: {
-                        type: "custom:age",
-                        plural: true,
-                    },
-                },
-            },
-            output: {
-                DESTRUCTIVE: {
-                    semantics: {
-                        status: 500,
-                    },
-                },
-                NEGATIVE: {
-                    semantics: {
-                        status: 404,
-                    },
-                },
-                POSITIVE: {
-                    semantics: { status: null },
-                    body: {
-                        name: "resource:name",
-                        generationID: "custom:getGenerationID",
-                    },
-                },
-            },
-        },
+        ],
     },
+    // Key is valid but entry is not an array
     {
-        DELETE: {
+        GET: {
+            url: faker.random.arrayElement(ValidUrls),
             input: {
                 semantics: {
                     headers: {
@@ -378,141 +86,6 @@ const InvalidDescriptions: any[] = [
             output: {
                 NEGATIVE: {
                     semantics: {
-                        status: 200,
-                    },
-                },
-                POSITIVE: [
-                    {
-                        semantics: {
-                            status: 404,
-                            headers: {
-                                message: "not found value",
-                            },
-                        },
-                    },
-                    {
-                        semantics: {
-                            status: 400,
-                        },
-                    },
-                ],
-            },
-        },
-        GET: {
-            input: {
-                semantics: {
-                    query: {
-                        names: ["faker:random.name", "faker:random.name"],
-                    },
-                },
-            },
-            output: {
-                POSITIVE: [
-                    {
-                        semantics: {
-                            status: 200,
-                            headers: {
-                                "content-type": `Application/JSON`,
-                            },
-                        },
-                    },
-                    {
-                        semantics: {
-                            status: 201,
-                        },
-                    },
-                ],
-                NEGATIVE: {
-                    semantics: {
-                        status: 404,
-                    },
-                },
-            },
-        },
-        PUT: {
-            input: {
-                semantics: {
-                    headers: {
-                        Authorization: "Bearer 123123123432",
-                    },
-                },
-                body: {
-                    id: "resource:id",
-                    name: "faker:random.name",
-                    age: {
-                        types: [
-                            "faker:random.number",
-                            { function: "custom:age" },
-                        ],
-                    },
-                },
-            },
-            output: {
-                DESTRUCTIVE: {
-                    semantics: {
-                        status: 500,
-                        headers: {
-                            messsage: "Invalid fields value",
-                        },
-                    },
-                },
-                POSITIVE: [
-                    {
-                        body: {
-                            id: "resource:id",
-                            name: "resource:name",
-                            classes: "resource.classes",
-                        },
-                        semantics: {
-                            status: 200,
-                        },
-                    },
-                    {
-                        body: {
-                            id: "resource:id",
-                            name: "resource:name",
-                            classes: "resource.classes",
-                        },
-                        semantics: {
-                            status: 201,
-                        },
-                    },
-                ],
-            },
-        },
-        PATCH: {
-            input: {
-                semantics: {
-                    headers: {
-                        "x-poweredBy": "google",
-                        version: "v1.0.0",
-                    },
-                    query: {
-                        version: 1,
-                        useful: false,
-                    },
-                },
-                body: {
-                    id: "resource:id",
-                    age: { function: undefined },
-                    name: {
-                        type: "resource.name",
-                        optional: true,
-                    },
-                },
-            },
-            output: {
-                DESTRUCTIVE: [
-                    { semantics: { status: 501 } },
-                    {
-                        semantics: {
-                            status: 500,
-                            headers: { application: "chrome" },
-                        },
-                    },
-                ],
-                NEGATIVE: {
-                    semantics: {
                         status: 404,
                     },
                 },
@@ -527,37 +100,460 @@ const InvalidDescriptions: any[] = [
                 },
             },
         },
-        POST: {
-            input: {
-                semantics: {},
-                body: {
-                    class: "resource.class",
-                    ages: {
-                        type: "custom:age",
-                        plural: true,
+    },
+    // Missing URL
+    {
+        GET: [
+            {
+                input: {
+                    semantics: {
+                        headers: {
+                            applicationContent: true,
+                        },
+                        query: {
+                            sample: 15,
+                        },
+                    },
+                },
+                output: {
+                    NEGATIVE: {
+                        semantics: {
+                            status: 404,
+                        },
+                    },
+                    POSITIVE: {
+                        semantics: {
+                            status: 200,
+                        },
+                        body: {
+                            name: "resource:name",
+                            age: "resource:age",
+                        },
                     },
                 },
             },
-            output: {
-                DESTRUCTIVE: {
+        ],
+    },
+    // Invalid url
+    {
+        GET: [
+            {
+                url: faker.random.arrayElement(InvalidUrls),
+                input: {
                     semantics: {
-                        status: 500,
+                        headers: {
+                            applicationContent: true,
+                        },
+                        query: {
+                            sample: 15,
+                        },
                     },
                 },
-                NEGATIVE: {
-                    semantics: {
-                        status: 404,
+                output: {
+                    NEGATIVE: {
+                        semantics: {
+                            status: 404,
+                        },
+                    },
+                    POSITIVE: {
+                        semantics: {
+                            status: 200,
+                        },
+                        body: {
+                            name: "resource:name",
+                            age: "resource:age",
+                        },
                     },
                 },
-                POSITIVE: {
-                    semantics: { status: 200 },
+            },
+        ],
+    },
+    // Input missing
+    {
+        GET: [
+            {
+                url: faker.random.arrayElement(ValidUrls),
+                output: {
+                    NEGATIVE: {
+                        semantics: {
+                            status: 404,
+                        },
+                    },
+                    POSITIVE: {
+                        semantics: {
+                            status: 200,
+                        },
+                        body: {
+                            name: "resource:name",
+                            age: "resource:age",
+                        },
+                    },
+                },
+            },
+        ],
+    },
+    // Output missing
+    {
+        GET: [
+            {
+                url: faker.random.arrayElement(ValidUrls),
+                input: {
+                    semantics: {
+                        headers: {
+                            applicationContent: true,
+                        },
+                        query: {
+                            sample: 15,
+                        },
+                    },
+                },
+            },
+        ],
+    },
+    // Falsy output
+    {
+        GET: [
+            {
+                url: faker.random.arrayElement(ValidUrls),
+                input: {
+                    semantics: {
+                        headers: {
+                            applicationContent: true,
+                        },
+                        query: {
+                            sample: 15,
+                        },
+                    },
+                },
+                output: null,
+            },
+        ],
+    },
+    // Non object output
+    {
+        GET: [
+            {
+                url: faker.random.arrayElement(ValidUrls),
+                input: {
+                    semantics: {
+                        headers: {
+                            applicationContent: true,
+                        },
+                        query: {
+                            sample: 15,
+                        },
+                    },
+                },
+                output: "outputs",
+            },
+        ],
+    },
+    // Invalid Input
+    {
+        GET: [
+            {
+                url: faker.random.arrayElement(ValidUrls),
+                input: {
+                    semantics: {
+                        headers: {
+                            applicationContent: [true],
+                        },
+                        query: {
+                            sample: 15,
+                        },
+                    },
+                },
+                output: {
+                    NEGATIVE: [
+                        { semantics: { status: 501 } },
+                        {
+                            semantics: {
+                                status: 500,
+                                headers: { application: "chrome" },
+                            },
+                        },
+                    ],
+                    POSITIVE: {
+                        semantics: {
+                            status: 200,
+                        },
+                        body: {
+                            name: "resource:name",
+                            age: "resource:age",
+                        },
+                    },
+                },
+            },
+        ],
+    },
+    // Invalid output
+    {
+        GET: [
+            {
+                url: faker.random.arrayElement(ValidUrls),
+                input: {
+                    semantics: {
+                        headers: {
+                            applicationContent: true,
+                        },
+                        query: {
+                            sample: 15,
+                        },
+                    },
+                },
+                output: {
+                    NEGATIVE: {
+                        semantics: {
+                            status: false,
+                        },
+                    },
+                    POSITIVE: {
+                        semantics: {
+                            status: 200,
+                        },
+                        body: {
+                            name: "resource:name",
+                            age: "resource:age",
+                        },
+                    },
+                },
+            },
+        ],
+    },
+    // Invalid output key
+    {
+        GET: [
+            {
+                url: faker.random.arrayElement(ValidUrls),
+                input: {
+                    semantics: {
+                        headers: {
+                            applicationContent: true,
+                        },
+                        query: {
+                            sample: 15,
+                        },
+                    },
+                },
+                output: {
+                    DESTRUCTIVE: [
+                        { semantics: { status: 501 } },
+                        {
+                            semantics: {
+                                status: 500,
+                                headers: { application: "chrome" },
+                            },
+                        },
+                    ],
+                    NEGATIVE: {
+                        semantics: {
+                            status: 404,
+                        },
+                    },
+                    POSITIVE: {
+                        semantics: {
+                            status: 200,
+                        },
+                        body: {
+                            name: "resource:name",
+                            age: "resource:age",
+                        },
+                    },
+                },
+            },
+        ],
+    },
+    // Mixture of valid and invalid entries
+    {
+        POST: [
+            {
+                url: faker.random.arrayElement(InvalidUrls),
+                input: {
+                    semantics: {
+                        headers: {
+                            applicationContent: true,
+                        },
+                        query: {
+                            sample: 15,
+                        },
+                    },
                     body: {
                         name: "resource:name",
-                        generationID: "custom:getGenerationID",
+                        age: "resource:age",
+                    },
+                },
+                output: {
+                    DESTRUCTIVE: [
+                        { semantics: { status: 501 } },
+                        {
+                            semantics: {
+                                status: 500,
+                                headers: { application: "chrome" },
+                            },
+                        },
+                    ],
+                    NEGATIVE: {
+                        semantics: {
+                            status: 404,
+                        },
+                    },
+                    POSITIVE: {
+                        semantics: {
+                            status: 200,
+                        },
+                        body: {
+                            name: "resource:name",
+                            age: "resource:age",
+                        },
                     },
                 },
             },
-        },
+        ],
+        GET: [
+            {
+                url: faker.random.arrayElement(InvalidUrls),
+                input: {
+                    semantics: {
+                        headers: {
+                            applicationContent: true,
+                        },
+                        query: {
+                            sample: 15,
+                        },
+                    },
+                },
+                output: {
+                    NEGATIVE: {
+                        semantics: {
+                            status: 404,
+                        },
+                    },
+                    POSITIVE: {
+                        semantics: {
+                            status: 200,
+                        },
+                        body: {
+                            name: "resource:name",
+                            age: "resource:age",
+                        },
+                    },
+                },
+            },
+        ],
+    },
+    {
+        PATCH: [
+            {
+                url: faker.random.arrayElement(InvalidUrls),
+                input: {
+                    semantics: {
+                        headers: {
+                            applicationContent: true,
+                        },
+                        query: {
+                            sample: 15,
+                        },
+                    },
+                    body: {
+                        name: "resource:name",
+                        age: "resource:age",
+                    },
+                },
+                output: {
+                    DESTRUCTIVE: [
+                        { semantics: { status: 501 } },
+                        {
+                            semantics: {
+                                status: 500,
+                                headers: { application: "chrome" },
+                            },
+                        },
+                    ],
+                    NEGATIVE: {
+                        semantics: {
+                            status: 404,
+                        },
+                    },
+                    POSITIVE: {
+                        semantics: {
+                            status: 200,
+                        },
+                        body: {
+                            name: "resource:name",
+                            age: "resource:age",
+                        },
+                    },
+                },
+            },
+        ],
+        DELETE: [
+            {
+                url: faker.random.arrayElement(ValidUrls),
+                input: {
+                    semantics: {
+                        headers: {
+                            applicationContent: true,
+                        },
+                        query: {
+                            sample: 15,
+                        },
+                    },
+                },
+                output: {
+                    NEGATIVE: [
+                        {
+                            semantics: {
+                                status: 404,
+                            },
+                        },
+                        {
+                            semantics: {
+                                status: 400,
+                            },
+                        },
+                        {
+                            semantics: {
+                                status: 409,
+                            },
+                        },
+                        {
+                            semantics: {
+                                status: 200,
+                            },
+                        },
+                        {
+                            semantics: {
+                                status: 500,
+                            },
+                        },
+                        {
+                            semantics: {
+                                status: 201,
+                            },
+                        },
+                        {
+                            semantics: {
+                                status: null,
+                            },
+                        },
+                        {
+                            semantics: {
+                                status: 501,
+                            },
+                        },
+                    ],
+                    POSITIVE: {
+                        semantics: {
+                            status: 200,
+                        },
+                        body: {
+                            name: "resource:name",
+                            age: "resource:age",
+                        },
+                    },
+                },
+            },
+        ],
     },
 ];
 
