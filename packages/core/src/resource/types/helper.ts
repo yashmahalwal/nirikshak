@@ -5,11 +5,8 @@ import {
 import { Literal, isLiteral } from "../../common/types/literals";
 import { FakerType, isFakerType } from "../../common/types/fakerTypes";
 import { ResourceBase, isResourceBase } from ".";
+import { Primitives } from "../../common/types/helpers";
 
-// Ultimately, a resource fields ends in Primitive type
-// Ex: {age: 23}
-// Ex: {address: [{zipCode: "370445"}, {zipCode: "121342"}], classes: [1,2,3,4,5]}
-export type Primitives = Literal | Array<Primitives>;
 
 // An instance is of the following type
 export interface ResourceInstance {
@@ -18,11 +15,6 @@ export interface ResourceInstance {
         | Primitives
         | Omit<ResourceInstance, "id">
         | Array<Omit<ResourceInstance, "id">>;
-}
-
-export function isPrimitives(input: any): input is Primitives {
-    if (Array.isArray(input)) return input.every((i) => isPrimitives(i));
-    return isLiteral(input);
 }
 
 // Base type: Simple literals that a resource field can have

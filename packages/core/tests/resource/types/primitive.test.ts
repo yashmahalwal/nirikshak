@@ -2,7 +2,8 @@
     Test to check functionality of the primitive type
 */
 
-import { Primitives, isPrimitives } from "../../../src/resource/types/helper";
+import { Primitives, isPrimitives } from "../../../src/common/types/helpers";
+
 
 const ValidInputs: Primitives[] = [
     1,

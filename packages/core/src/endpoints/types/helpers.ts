@@ -5,6 +5,7 @@ import {
     isCustomFunction,
 } from "../../common/types/custom";
 import { Literal, isLiteral } from "../../common/types/literals";
+import { Primitives } from "../../common/types/helpers";
 
 export type MethodType = "DELETE" | "GET" | "PUT" | "POST" | "PATCH";
 export function isMethodType(key: any): key is MethodType {
@@ -163,6 +164,10 @@ export interface BodyType {
         | WithModifiers<BodyType>
         | OneOfEntries
         | BodyType;
+}
+
+export interface BodyInstance {
+    [key: string]: Primitives | BodyInstance | BodyInstance[];
 }
 
 export function isBodyType(input: any): input is BodyType {

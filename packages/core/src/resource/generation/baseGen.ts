@@ -2,9 +2,9 @@ import { Literal } from "../../common/types/literals";
 import { isFakerType } from "../../common/types/fakerTypes";
 import { isCustomFunction } from "../../common/types/custom";
 import { generateCustom } from "../../common/generation/customGen";
-import { Primitives, BaseType } from "../types/helper";
+import { BaseType } from "../types/helper";
 import { generateFaker } from "../../common/generation/fakerGen";
-import { SchemaHelpers } from "../../common/types/helpers";
+import { SchemaHelpers, Primitives } from "../../common/types/helpers";
 
 // Generating base type entry
 export async function generateBaseType(
@@ -12,11 +12,11 @@ export async function generateBaseType(
     Helpers: SchemaHelpers
 ): Promise<Primitives> {
     if (Array.isArray(input)) {
-        const arr: Primitives = [];
-        for (const entry of input as (Literal | BaseType)[])
-            arr.push(await generateBaseType(entry, Helpers));
-
-        return arr;
+        return Promise.all(
+            (input as (Literal | BaseType)[]).map((entry) =>
+                generateBaseType(entry, Helpers)
+            )
+        );
     }
 
     if (isFakerType(input)) return generateFaker(input);

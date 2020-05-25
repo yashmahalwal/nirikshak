@@ -3,13 +3,11 @@
 */
 import faker from "faker";
 import {
-    isPrimitives,
     BaseType,
-    Primitives,
 } from "../../../../src/resource/types/helper";
 import { generateBaseType } from "../../../../src/resource/generation/baseGen";
-import { RANDOMNESS_ITERATIONS } from "../../../../src/resource/Env";
-import { SchemaHelpers } from "../../../../src/common/types/helpers";
+import { RANDOMNESS_ITERATIONS } from "../../../../src/common/Env";
+import { SchemaHelpers, Primitives, isPrimitives } from "../../../../src/common/types/helpers";
 
 // Helpers for the resource
 const Helpers: SchemaHelpers = {
@@ -18,6 +16,9 @@ const Helpers: SchemaHelpers = {
         // Use faker.random.number instead of Math.random
         // For universal randomness seed
         faker.random.number({ min, max, precision: step }),
+    async invalidHelper() {
+        return { age: 10 } as any;
+    },
 };
 
 const SimpleBases: BaseType[] = [1, false, null, [1, 2, 3, 4, ["string"]]];
@@ -42,6 +43,13 @@ const ComplexBase: { input: BaseType; output: () => Promise<Primitives> } = {
     ],
 };
 
+const InvalidBases: any[] = [
+    [[1, [2, [3]]], ["custom:stringer"]],
+    {
+        function: "custom:invalidHelper",
+    },
+];
+
 describe("Base type generation", () => {
     beforeAll(() => faker.seed(123));
 
@@ -54,7 +62,7 @@ describe("Base type generation", () => {
     );
 
     // Account for variation due to randomness of faker
-    for (let i = 0; i < RANDOMNESS_ITERATIONS; i++)
+    for (let i = 1; i <= RANDOMNESS_ITERATIONS; i++)
         test(`ComplexBase iteration: ${i}`, async () => {
             faker.seed(i + 123);
             const o = await generateBaseType(ComplexBase.input, Helpers);
@@ -63,4 +71,10 @@ describe("Base type generation", () => {
             expect(o).toEqual(expected);
             expect(isPrimitives(o)).toBe(true);
         });
+
+    test.each(InvalidBases)(`Invalid base: %#`, (entry) =>
+        expect(
+            generateBaseType(entry as BaseType, Helpers)
+        ).rejects.toMatchSnapshot()
+    );
 });

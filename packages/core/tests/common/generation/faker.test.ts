@@ -5,6 +5,7 @@ import { FakerType } from "../../../src/common/types/fakerTypes";
 import faker from "faker";
 import { generateFaker } from "../../../src/common/generation/fakerGen";
 import { Literal } from "../../../src/common/types/literals";
+import { RANDOMNESS_ITERATIONS } from "../../../src/common/Env";
 const ValidFakers: { input: FakerType; output: () => Literal }[] = [
     {
         output: (): string => faker.address.zipCode('"#####-###"'),
@@ -128,17 +129,18 @@ const ValidFakers: { input: FakerType; output: () => Literal }[] = [
 ];
 
 describe("Faker literal generation", () => {
-    ValidFakers.forEach((entry, index) =>
-        test(`Valid faker: ${index}`, () => {
-            // Setting randomness seed
-            // Does not work with random.uuid and Date.*
-            // So avoid them during testing
+    for (let i = 1; i <= RANDOMNESS_ITERATIONS; i++)
+        ValidFakers.forEach((entry, index) =>
+            test(`Valid faker: ${index}, iteration: ${i}`, () => {
+                // Setting randomness seed
+                // Does not work with random.uuid and Date.*
+                // So avoid them during testing
 
-            faker.seed(index + 100);
-            const input = generateFaker(entry.input);
-            faker.seed(index + 100);
-            const output = entry.output();
-            expect(input).toEqual(output);
-        })
-    );
+                faker.seed(index + 100 * i);
+                const input = generateFaker(entry.input);
+                faker.seed(index + 100 * i);
+                const output = entry.output();
+                expect(input).toEqual(output);
+            })
+        );
 });

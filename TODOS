@@ -3,5 +3,3 @@
 2. Testing in pipeline to master
 3. Dependency managment in master pipeline
 4. Readme badges
-5. Extraneous imports
-6. Do not build tests

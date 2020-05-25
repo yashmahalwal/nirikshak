@@ -3,6 +3,7 @@ import faker from "faker";
 import { generateCustom } from "../../../src/common/generation/customGen";
 import { SchemaHelpers } from "../../../src/common/types/helpers";
 import { Literal } from "../../../src/common/types/literals";
+import { RANDOMNESS_ITERATIONS } from "../../../src/common/Env";
 
 const RandomFakerPromise = (): Promise<string> =>
     new Promise((resolve) => {
@@ -10,7 +11,7 @@ const RandomFakerPromise = (): Promise<string> =>
         setTimeout(
             () => resolve(val),
             // Don't need determinism here
-            2000
+            5
         );
     });
 
@@ -22,6 +23,7 @@ const Helpers: SchemaHelpers = {
         // For universal randomness seed
         faker.random.number({ min, max, precision: step }),
     color: () => RandomFakerPromise(),
+    invalidHelper: async () => ({ age: 12 } as any),
 };
 
 // Valid custom function types
@@ -47,17 +49,18 @@ const ValidCustoms: {
 ];
 
 describe("Custom literal generation", () => {
-    ValidCustoms.forEach((entry, index) =>
-        test(`Valid custom: ${index}`, async () => {
-            // Settings randomness seed
-            // Does not work with faker.random.uuid and faker.date.*
-            faker.seed(index + 100);
-            const original = await generateCustom(entry.input, Helpers);
-            faker.seed(index + 100);
-            const expected = await entry.output();
-            expect(original).toEqual(expected);
-        })
-    );
+    for (let i = 1; i <= RANDOMNESS_ITERATIONS; i++)
+        ValidCustoms.forEach((entry, index) =>
+            test(`Valid custom: ${index}, iteration : ${i}`, async () => {
+                // Settings randomness seed
+                // Does not work with faker.random.uuid and faker.date.*
+                faker.seed(index + i * 100);
+                const original = await generateCustom(entry.input, Helpers);
+                faker.seed(index + i * 100);
+                const expected = await entry.output();
+                expect(original).toEqual(expected);
+            })
+        );
 
     // Checking that the function throws an error if no valid helper found at runtime
     test("Invalid custom literal: No helper found", () =>
@@ -65,5 +68,12 @@ describe("Custom literal generation", () => {
             generateCustom("custom:lipsum", Helpers)
         ).rejects.toMatchInlineSnapshot(
             `[Error: function: custom:lipsum, args: ]`
+        ));
+
+    test("Invalid custom literal: Non literal helper", () =>
+        expect(
+            generateCustom("custom:invalidHelper", Helpers)
+        ).rejects.toMatchInlineSnapshot(
+            `[Error: Non literal type value from custom:invalidHelper]`
         ));
 });

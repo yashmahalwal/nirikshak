@@ -2,15 +2,14 @@ import { ResourceBase } from "../types";
 import faker from "faker";
 import { generateBaseType } from "./baseGen";
 import {
-    Primitives,
     ResourceInstance,
     WithModifiers,
     BaseType,
     isWithModifiersBaseType,
 } from "../types/helper";
-import { MIN_PLURAL_ENTRIES, MAX_PLURAL_ENTRIES } from "../Env";
+import { MIN_PLURAL_ENTRIES, MAX_PLURAL_ENTRIES } from "../../common/Env";
 import { generateResourceBase } from "./resourceGen";
-import { SchemaHelpers } from "../../common/types/helpers";
+import { SchemaHelpers, Primitives } from "../../common/types/helpers";
 type ValueAndArray<T> = T | Array<T>;
 
 //  Nullable and Plural arguments override the input attributes
@@ -25,7 +24,7 @@ async function generateWithModifiersBaseType(
     if (input.nullable && faker.random.boolean()) return null;
 
     if (input.plural) {
-        const arr: Primitives[] = [];
+        const arr: Promise<Primitives>[] = [];
 
         // Use faker.random.number over Math.random
         // So as to have a universal randomness seed
@@ -36,11 +35,11 @@ async function generateWithModifiersBaseType(
         });
 
         for (let i = 0; i < length; i++)
-            arr.push(await generateBaseType(input.type, Helpers));
+            arr.push(generateBaseType(input.type, Helpers));
 
-        return arr;
+        return Promise.all(arr);
     }
-    return await generateBaseType(input.type, Helpers);
+    return generateBaseType(input.type, Helpers);
 }
 
 // To generate data for BaseType with modifiers
@@ -53,7 +52,7 @@ async function generateWithModifiersResourceBase(
     if (input.nullable && faker.random.boolean()) return null;
 
     if (input.plural) {
-        const arr: Omit<ResourceInstance, "id">[] = [];
+        const arr: Promise<Omit<ResourceInstance, "id">>[] = [];
 
         const length = faker.random.number({
             min: MIN_PLURAL_ENTRIES,
@@ -62,9 +61,9 @@ async function generateWithModifiersResourceBase(
         });
 
         for (let i = 0; i < length; i++)
-            arr.push(await generateResourceBase(input.field, Helpers));
+            arr.push(generateResourceBase(input.field, Helpers));
 
-        return arr;
+        return Promise.all(arr);
     }
     return generateResourceBase(input.field, Helpers);
 }
@@ -85,13 +84,13 @@ export async function generateWithModifiers<T extends BaseType | ResourceBase>(
     if (isWithModifiersBaseType(input))
         // Need to use any case because conditional inference does not include internal typeguards
         // For now,ts cannot imply that T extends BaseType in this branch
-        return (await generateWithModifiersBaseType(
+        return generateWithModifiersBaseType(
             input as WithModifiers<BaseType>,
             Helpers
-        )) as any;
+        ) as any;
 
-    return (await generateWithModifiersResourceBase(
+    return generateWithModifiersResourceBase(
         input as WithModifiers<ResourceBase>,
         Helpers
-    )) as any;
+    ) as any;
 }

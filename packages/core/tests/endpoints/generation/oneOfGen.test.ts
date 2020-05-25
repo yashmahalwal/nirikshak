@@ -1,16 +1,18 @@
-import { OneOfEntries } from "../../../src/resource/types/helper";
-import faker from "faker";
-import { RANDOMNESS_ITERATIONS } from "../../../src/common/Env";
 import {
-    generateOneOfEntries,
+    OneOfEntries,
+    BodyType,
+    Base,
+} from "../../../src/endpoints/types/helpers";
+import {
     SelectedType,
-} from "../../../src/resource/generation/oneOfEntries";
-import { BaseType } from "../../../src/endpoints/types/helpers";
-import { ResourceBase } from "../../../src/resource/types";
+    generateOneOfEntries,
+} from "../../../src/endpoints/generation/oneOfGen";
+import { RANDOMNESS_ITERATIONS } from "../../../src/common/Env";
+import faker from "faker";
 
 const entries: {
     input: OneOfEntries;
-    output: () => SelectedType<BaseType | ResourceBase>;
+    output: () => SelectedType<Base | BodyType>;
 }[] = [
     {
         input: {
@@ -18,16 +20,18 @@ const entries: {
                 1,
                 2,
                 3,
+                "resouce:id",
+                "resource:addresses[0].city[0].zipCodes[4].code",
                 ["stringify", 19, 30, 19.542],
                 "faker:random.number",
                 [[[[["custom.username"]]]]],
             ],
         },
         output: function (this: {
-            input: { types: BaseType[] };
-        }): SelectedType<BaseType> {
+            input: { types: Base[] };
+        }): SelectedType<Base> {
             return {
-                type: "base type",
+                type: "base",
                 selection: this.input.types[
                     faker.random.number({
                         min: 0,
@@ -41,13 +45,18 @@ const entries: {
     {
         input: {
             fields: [
-                { branch: "CSE" },
+                {
+                    branch: "CSE",
+                    classes: "resource:classes.count",
+                    absurdity: "plain",
+                },
                 {
                     age: 12,
                     name: 14,
                     address: {
                         types: [
                             12.4353,
+                            "custom:word",
                             "faker:random.number",
                             { type: true, nullable: true },
                             [12, 13, 14, null, false, "myString"],
@@ -57,10 +66,10 @@ const entries: {
             ],
         },
         output: function (this: {
-            input: { fields: ResourceBase[] };
-        }): SelectedType<ResourceBase> {
+            input: { fields: BodyType[] };
+        }): SelectedType<BodyType> {
             return {
-                type: "resource base",
+                type: "body type",
                 selection: this.input.fields[
                     faker.random.number({
                         min: 0,
@@ -76,6 +85,7 @@ const entries: {
             fields: [
                 { name: "Name", surName: "Surname" },
                 {
+                    purple: "resource:purple",
                     age: {
                         type: {
                             function: "faker:random.number",
@@ -85,17 +95,17 @@ const entries: {
                     },
                 },
             ],
-            types: [12, 14, true, true, false, ["SIMP"]],
+            types: [12, 14, true, true, "custom:sample", false, ["SIMP"]],
         },
         output: function (this: {
             input: {
-                fields: ResourceBase[];
-                types: BaseType[];
+                fields: Base[];
+                types: BodyType[];
             };
-        }): SelectedType<BaseType | ResourceBase> {
+        }): SelectedType<Base | BodyType> {
             return faker.random.boolean()
                 ? {
-                      type: "resource base",
+                      type: "body type",
                       selection: this.input.fields[
                           faker.random.number({
                               min: 0,
@@ -105,7 +115,7 @@ const entries: {
                       ],
                   }
                 : {
-                      type: "base type",
+                      type: "base",
                       selection: this.input.types[
                           faker.random.number({
                               min: 0,

@@ -1,20 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Generating base types with modifiers Base type: 0, iteration: 0 1`] = `
-Array [
-  1,
-  2,
-  34,
-  7,
-  9,
-  Array [
-    69646,
-    "My String",
-    7,
-  ],
-]
-`;
-
 exports[`Generating base types with modifiers Base type: 0, iteration: 1 1`] = `
 Array [
   1,
@@ -38,9 +23,9 @@ Array [
   7,
   9,
   Array [
-    69646,
+    47964,
     "My String",
-    7,
+    8,
   ],
 ]
 `;
@@ -53,9 +38,9 @@ Array [
   7,
   9,
   Array [
-    69646,
+    64999,
     "My String",
-    7,
+    0,
   ],
 ]
 `;
@@ -68,9 +53,9 @@ Array [
   7,
   9,
   Array [
-    69646,
+    45259,
     "My String",
-    7,
+    4,
   ],
 ]
 `;
@@ -83,9 +68,9 @@ Array [
   7,
   9,
   Array [
-    69646,
+    95286,
     "My String",
-    7,
+    9,
   ],
 ]
 `;
@@ -98,9 +83,9 @@ Array [
   7,
   9,
   Array [
-    69646,
+    34377,
     "My String",
-    7,
+    6,
   ],
 ]
 `;
@@ -113,9 +98,9 @@ Array [
   7,
   9,
   Array [
-    69646,
+    74451,
     "My String",
-    7,
+    10,
   ],
 ]
 `;
@@ -128,7 +113,7 @@ Array [
   7,
   9,
   Array [
-    69646,
+    22540,
     "My String",
     7,
   ],
@@ -143,14 +128,27 @@ Array [
   7,
   9,
   Array [
-    69646,
+    38147,
     "My String",
-    7,
+    8,
   ],
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 1, iteration: 0 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 0, iteration: 10 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    27702,
+    "My String",
+    9,
+  ],
+]
+`;
 
 exports[`Generating base types with modifiers Base type: 1, iteration: 1 1`] = `
 Array [
@@ -167,7 +165,20 @@ Array [
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 1, iteration: 2 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 1, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    20765,
+    "My String",
+    9,
+  ],
+]
+`;
 
 exports[`Generating base types with modifiers Base type: 1, iteration: 3 1`] = `
 Array [
@@ -177,9 +188,9 @@ Array [
   7,
   9,
   Array [
-    96408,
+    76674,
     "My String",
-    1,
+    3,
   ],
 ]
 `;
@@ -190,7 +201,9 @@ exports[`Generating base types with modifiers Base type: 1, iteration: 5 1`] = `
 
 exports[`Generating base types with modifiers Base type: 1, iteration: 6 1`] = `null`;
 
-exports[`Generating base types with modifiers Base type: 1, iteration: 7 1`] = `
+exports[`Generating base types with modifiers Base type: 1, iteration: 7 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 1, iteration: 8 1`] = `
 Array [
   1,
   2,
@@ -198,18 +211,29 @@ Array [
   7,
   9,
   Array [
-    93150,
+    44301,
     "My String",
-    3,
+    1,
   ],
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 1, iteration: 8 1`] = `null`;
-
 exports[`Generating base types with modifiers Base type: 1, iteration: 9 1`] = `null`;
 
-exports[`Generating base types with modifiers Base type: 2, iteration: 0 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 1, iteration: 10 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    92503,
+    "My String",
+    10,
+  ],
+]
+`;
 
 exports[`Generating base types with modifiers Base type: 2, iteration: 1 1`] = `null`;
 
@@ -217,9 +241,7 @@ exports[`Generating base types with modifiers Base type: 2, iteration: 2 1`] = `
 
 exports[`Generating base types with modifiers Base type: 2, iteration: 3 1`] = `null`;
 
-exports[`Generating base types with modifiers Base type: 2, iteration: 4 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 2, iteration: 5 1`] = `
+exports[`Generating base types with modifiers Base type: 2, iteration: 4 1`] = `
 Array [
   Array [
     1,
@@ -228,9 +250,9 @@ Array [
     7,
     9,
     Array [
-      12966,
+      2794,
       "My String",
-      10,
+      6,
     ],
   ],
   Array [
@@ -240,62 +262,25 @@ Array [
     7,
     9,
     Array [
-      10955,
+      70066,
       "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      14224,
-      "My String",
-      4,
+      2,
     ],
   ],
 ]
 `;
+
+exports[`Generating base types with modifiers Base type: 2, iteration: 5 1`] = `null`;
 
 exports[`Generating base types with modifiers Base type: 2, iteration: 6 1`] = `null`;
 
 exports[`Generating base types with modifiers Base type: 2, iteration: 7 1`] = `null`;
 
-exports[`Generating base types with modifiers Base type: 2, iteration: 8 1`] = `
-Array [
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      75324,
-      "My String",
-      1,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      93422,
-      "My String",
-      4,
-    ],
-  ],
-]
-`;
+exports[`Generating base types with modifiers Base type: 2, iteration: 8 1`] = `null`;
 
 exports[`Generating base types with modifiers Base type: 2, iteration: 9 1`] = `null`;
 
-exports[`Generating base types with modifiers Base type: 3, iteration: 0 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 2, iteration: 10 1`] = `null`;
 
 exports[`Generating base types with modifiers Base type: 3, iteration: 1 1`] = `
 Array [
@@ -424,15 +409,7 @@ Array [
 
 exports[`Generating base types with modifiers Base type: 3, iteration: 2 1`] = `null`;
 
-exports[`Generating base types with modifiers Base type: 3, iteration: 3 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 3, iteration: 4 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 3, iteration: 5 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 3, iteration: 6 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 3, iteration: 7 1`] = `
+exports[`Generating base types with modifiers Base type: 3, iteration: 3 1`] = `
 Array [
   Array [
     1,
@@ -441,9 +418,9 @@ Array [
     7,
     9,
     Array [
-      89094,
+      14810,
       "My String",
-      0,
+      3,
     ],
   ],
   Array [
@@ -453,9 +430,9 @@ Array [
     7,
     9,
     Array [
-      47673,
+      63880,
       "My String",
-      0,
+      4,
     ],
   ],
   Array [
@@ -465,25 +442,135 @@ Array [
     7,
     9,
     Array [
-      17352,
+      14415,
       "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      71110,
-      "My String",
-      6,
+      7,
     ],
   ],
 ]
 `;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 4 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      98149,
+      "My String",
+      3,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 5 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      18018,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      64119,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      81383,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      72370,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      14500,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      93887,
+      "My String",
+      0,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      63169,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      87247,
+      "My String",
+      3,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 6 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 7 1`] = `null`;
 
 exports[`Generating base types with modifiers Base type: 3, iteration: 8 1`] = `
 Array [
@@ -494,7 +581,55 @@ Array [
     7,
     9,
     Array [
-      63298,
+      39223,
+      "My String",
+      9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      87886,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      45912,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      84891,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      91923,
       "My String",
       10,
     ],
@@ -506,7 +641,48 @@ Array [
     7,
     9,
     Array [
-      3083,
+      91220,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      96287,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      3004,
+      "My String",
+      0,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 3, iteration: 9 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      54681,
       "My String",
       7,
     ],
@@ -514,13 +690,62 @@ Array [
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 3, iteration: 9 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 4, iteration: 0 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 3, iteration: 10 1`] = `null`;
 
 exports[`Generating base types with modifiers Base type: 4, iteration: 1 1`] = `null`;
 
-exports[`Generating base types with modifiers Base type: 4, iteration: 2 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 4, iteration: 2 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      27266,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      35733,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      61862,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      64134,
+      "My String",
+      10,
+    ],
+  ],
+]
+`;
 
 exports[`Generating base types with modifiers Base type: 4, iteration: 3 1`] = `null`;
 
@@ -533,9 +758,9 @@ Array [
     7,
     9,
     Array [
-      75324,
+      45150,
       "My String",
-      1,
+      6,
     ],
   ],
   Array [
@@ -545,17 +770,15 @@ Array [
     7,
     9,
     Array [
-      93422,
+      76772,
       "My String",
-      4,
+      10,
     ],
   ],
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 4, iteration: 5 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 4, iteration: 6 1`] = `
+exports[`Generating base types with modifiers Base type: 4, iteration: 5 1`] = `
 Array [
   Array [
     1,
@@ -564,7 +787,31 @@ Array [
     7,
     9,
     Array [
-      63298,
+      63629,
+      "My String",
+      9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      22208,
+      "My String",
+      0,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      25448,
       "My String",
       10,
     ],
@@ -576,46 +823,293 @@ Array [
     7,
     9,
     Array [
-      3083,
+      69065,
       "My String",
-      7,
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      69482,
+      "My String",
+      4,
     ],
   ],
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 4, iteration: 7 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 4, iteration: 8 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 4, iteration: 9 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 5, iteration: 0 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 5, iteration: 1 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 5, iteration: 2 1`] = `
+exports[`Generating base types with modifiers Base type: 4, iteration: 6 1`] = `
 Array [
-  1,
-  2,
-  34,
-  7,
-  9,
   Array [
-    36274,
-    "My String",
     1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      19119,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      44967,
+      "My String",
+      9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      30555,
+      "My String",
+      10,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      75087,
+      "My String",
+      2,
+    ],
   ],
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 5, iteration: 3 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 4, iteration: 7 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      62547,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      57449,
+      "My String",
+      7,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      67499,
+      "My String",
+      7,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      69567,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      56271,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      30464,
+      "My String",
+      0,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      16718,
+      "My String",
+      5,
+    ],
+  ],
+]
+`;
 
-exports[`Generating base types with modifiers Base type: 5, iteration: 4 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 4, iteration: 8 1`] = `Array []`;
 
-exports[`Generating base types with modifiers Base type: 5, iteration: 5 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 4, iteration: 9 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      92500,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      34357,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      31047,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      200,
+      "My String",
+      1,
+    ],
+  ],
+]
+`;
 
-exports[`Generating base types with modifiers Base type: 5, iteration: 6 1`] = `
+exports[`Generating base types with modifiers Base type: 4, iteration: 10 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      62210,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      43772,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      78535,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      77997,
+      "My String",
+      9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      27259,
+      "My String",
+      1,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 1 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 2 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 3 1`] = `
 Array [
   1,
   2,
@@ -623,14 +1117,24 @@ Array [
   7,
   9,
   Array [
-    68488,
+    25946,
     "My String",
     5,
   ],
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 5, iteration: 7 1`] = `
+exports[`Generating base types with modifiers Base type: 5, iteration: 4 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 5 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 6 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 7 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 8 1`] = `null`;
+
+exports[`Generating base types with modifiers Base type: 5, iteration: 9 1`] = `
 Array [
   1,
   2,
@@ -638,24 +1142,46 @@ Array [
   7,
   9,
   Array [
-    20228,
+    23625,
     "My String",
-    1,
+    2,
   ],
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 5, iteration: 8 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 5, iteration: 9 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 6, iteration: 0 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 5, iteration: 10 1`] = `null`;
 
 exports[`Generating base types with modifiers Base type: 6, iteration: 1 1`] = `null`;
 
-exports[`Generating base types with modifiers Base type: 6, iteration: 2 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 6, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    85456,
+    "My String",
+    4,
+  ],
+]
+`;
 
-exports[`Generating base types with modifiers Base type: 6, iteration: 3 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 6, iteration: 3 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    83770,
+    "My String",
+    0,
+  ],
+]
+`;
 
 exports[`Generating base types with modifiers Base type: 6, iteration: 4 1`] = `
 Array [
@@ -665,9 +1191,9 @@ Array [
   7,
   9,
   Array [
-    19223,
+    75500,
     "My String",
-    6,
+    0,
   ],
 ]
 `;
@@ -680,22 +1206,61 @@ Array [
   7,
   9,
   Array [
-    68488,
+    70865,
     "My String",
-    5,
+    3,
   ],
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 6, iteration: 6 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 6, iteration: 6 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    6561,
+    "My String",
+    0,
+  ],
+]
+`;
 
-exports[`Generating base types with modifiers Base type: 6, iteration: 7 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 6, iteration: 7 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    70869,
+    "My String",
+    4,
+  ],
+]
+`;
 
 exports[`Generating base types with modifiers Base type: 6, iteration: 8 1`] = `null`;
 
 exports[`Generating base types with modifiers Base type: 6, iteration: 9 1`] = `null`;
 
-exports[`Generating base types with modifiers Base type: 7, iteration: 0 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 6, iteration: 10 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    53968,
+    "My String",
+    5,
+  ],
+]
+`;
 
 exports[`Generating base types with modifiers Base type: 7, iteration: 1 1`] = `
 Array [
@@ -712,7 +1277,20 @@ Array [
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 7, iteration: 2 1`] = `null`;
+exports[`Generating base types with modifiers Base type: 7, iteration: 2 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    51771,
+    "My String",
+    7,
+  ],
+]
+`;
 
 exports[`Generating base types with modifiers Base type: 7, iteration: 3 1`] = `
 Array [
@@ -722,29 +1300,16 @@ Array [
   7,
   9,
   Array [
-    38437,
+    31653,
     "My String",
-    9,
+    8,
   ],
 ]
 `;
 
 exports[`Generating base types with modifiers Base type: 7, iteration: 4 1`] = `null`;
 
-exports[`Generating base types with modifiers Base type: 7, iteration: 5 1`] = `
-Array [
-  1,
-  2,
-  34,
-  7,
-  9,
-  Array [
-    20228,
-    "My String",
-    1,
-  ],
-]
-`;
+exports[`Generating base types with modifiers Base type: 7, iteration: 5 1`] = `null`;
 
 exports[`Generating base types with modifiers Base type: 7, iteration: 6 1`] = `null`;
 
@@ -756,18 +1321,14 @@ Array [
   7,
   9,
   Array [
-    12190,
+    50538,
     "My String",
-    1,
+    3,
   ],
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 7, iteration: 8 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 7, iteration: 9 1`] = `null`;
-
-exports[`Generating base types with modifiers Base type: 8, iteration: 0 1`] = `
+exports[`Generating base types with modifiers Base type: 7, iteration: 8 1`] = `
 Array [
   1,
   2,
@@ -775,12 +1336,29 @@ Array [
   7,
   9,
   Array [
-    69646,
+    2317,
     "My String",
-    7,
+    2,
   ],
 ]
 `;
+
+exports[`Generating base types with modifiers Base type: 7, iteration: 9 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    53081,
+    "My String",
+    1,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 7, iteration: 10 1`] = `null`;
 
 exports[`Generating base types with modifiers Base type: 8, iteration: 1 1`] = `
 Array [
@@ -805,9 +1383,9 @@ Array [
   7,
   9,
   Array [
-    49096,
+    51206,
     "My String",
-    2,
+    6,
   ],
 ]
 `;
@@ -820,9 +1398,9 @@ Array [
   7,
   9,
   Array [
-    36669,
+    11848,
     "My String",
-    2,
+    3,
   ],
 ]
 `;
@@ -835,9 +1413,9 @@ Array [
   7,
   9,
   Array [
-    65232,
+    69367,
     "My String",
-    3,
+    0,
   ],
 ]
 `;
@@ -850,9 +1428,9 @@ Array [
   7,
   9,
   Array [
-    68896,
+    70373,
     "My String",
-    3,
+    6,
   ],
 ]
 `;
@@ -865,9 +1443,9 @@ Array [
   7,
   9,
   Array [
-    65774,
+    83587,
     "My String",
-    7,
+    6,
   ],
 ]
 `;
@@ -880,9 +1458,9 @@ Array [
   7,
   9,
   Array [
-    95045,
+    13482,
     "My String",
-    9,
+    5,
   ],
 ]
 `;
@@ -895,7 +1473,7 @@ Array [
   7,
   9,
   Array [
-    42004,
+    6042,
     "My String",
     6,
   ],
@@ -910,98 +1488,24 @@ Array [
   7,
   9,
   Array [
-    88732,
+    40178,
     "My String",
-    8,
+    3,
   ],
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 9, iteration: 0 1`] = `
+exports[`Generating base types with modifiers Base type: 8, iteration: 10 1`] = `
 Array [
+  1,
+  2,
+  34,
+  7,
+  9,
   Array [
+    92755,
+    "My String",
     1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      71295,
-      "My String",
-      3,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      42847,
-      "My String",
-      2,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      69088,
-      "My String",
-      6,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      71915,
-      "My String",
-      7,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      49111,
-      "My String",
-      4,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      78002,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      41092,
-      "My String",
-      7,
-    ],
   ],
 ]
 `;
@@ -1116,9 +1620,9 @@ Array [
     7,
     9,
     Array [
-      35617,
+      34004,
       "My String",
-      5,
+      2,
     ],
   ],
   Array [
@@ -1128,7 +1632,19 @@ Array [
     7,
     9,
     Array [
-      27944,
+      46846,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      97926,
       "My String",
       0,
     ],
@@ -1140,9 +1656,9 @@ Array [
     7,
     9,
     Array [
-      49115,
+      97339,
       "My String",
-      4,
+      8,
     ],
   ],
   Array [
@@ -1152,81 +1668,9 @@ Array [
     7,
     9,
     Array [
-      87101,
+      45616,
       "My String",
-      7,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      55353,
-      "My String",
-      1,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      79775,
-      "My String",
-      0,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      41286,
-      "My String",
-      7,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      83931,
-      "My String",
-      9,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      84260,
-      "My String",
-      1,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      57367,
-      "My String",
-      0,
+      2,
     ],
   ],
 ]
@@ -1241,91 +1685,7 @@ Array [
     7,
     9,
     Array [
-      93181,
-      "My String",
-      2,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      58039,
-      "My String",
-      9,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      43902,
-      "My String",
-      8,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      34908,
-      "My String",
-      7,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      55680,
-      "My String",
-      5,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      64561,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      32748,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      63181,
+      48580,
       "My String",
       0,
     ],
@@ -1337,9 +1697,57 @@ Array [
     7,
     9,
     Array [
-      88295,
+      77933,
+      "My String",
+      0,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      84039,
       "My String",
       8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      23229,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      76891,
+      "My String",
+      0,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      17331,
+      "My String",
+      0,
     ],
   ],
 ]
@@ -1354,31 +1762,7 @@ Array [
     7,
     9,
     Array [
-      21812,
-      "My String",
-      2,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      24845,
-      "My String",
-      1,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      17502,
+      4351,
       "My String",
       5,
     ],
@@ -1390,57 +1774,9 @@ Array [
     7,
     9,
     Array [
-      81293,
+      68339,
       "My String",
-      3,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      2876,
-      "My String",
-      7,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      64218,
-      "My String",
-      1,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      82679,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      57319,
-      "My String",
-      8,
+      0,
     ],
   ],
 ]
@@ -1455,69 +1791,9 @@ Array [
     7,
     9,
     Array [
-      9258,
-      "My String",
-      5,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      7357,
-      "My String",
-      2,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      65241,
-      "My String",
-      3,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      17499,
+      1432,
       "My String",
       9,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      15320,
-      "My String",
-      7,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      29475,
-      "My String",
-      8,
     ],
   ],
 ]
@@ -1532,43 +1808,7 @@ Array [
     7,
     9,
     Array [
-      78708,
-      "My String",
-      8,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      17269,
-      "My String",
-      4,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      54762,
-      "My String",
-      2,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      65583,
+      1041,
       "My String",
       3,
     ],
@@ -1580,7 +1820,31 @@ Array [
     7,
     9,
     Array [
-      58908,
+      26371,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      10765,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      78830,
       "My String",
       6,
     ],
@@ -1597,7 +1861,7 @@ Array [
     7,
     9,
     Array [
-      5093,
+      39524,
       "My String",
       7,
     ],
@@ -1609,9 +1873,9 @@ Array [
     7,
     9,
     Array [
-      20068,
+      10513,
       "My String",
-      5,
+      1,
     ],
   ],
   Array [
@@ -1621,19 +1885,7 @@ Array [
     7,
     9,
     Array [
-      20009,
-      "My String",
-      9,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      1069,
+      16026,
       "My String",
       7,
     ],
@@ -1645,9 +1897,21 @@ Array [
     7,
     9,
     Array [
-      19447,
+      61673,
       "My String",
-      7,
+      0,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      60903,
+      "My String",
+      2,
     ],
   ],
 ]
@@ -1662,7 +1926,7 @@ Array [
     7,
     9,
     Array [
-      74977,
+      98444,
       "My String",
       1,
     ],
@@ -1674,93 +1938,9 @@ Array [
     7,
     9,
     Array [
-      15882,
+      70488,
       "My String",
-      3,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      50632,
-      "My String",
-      6,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      42768,
-      "My String",
-      6,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      87895,
-      "My String",
-      2,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      13405,
-      "My String",
-      4,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      9006,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      68224,
-      "My String",
-      0,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      39201,
-      "My String",
-      1,
+      5,
     ],
   ],
 ]
@@ -1775,9 +1955,9 @@ Array [
     7,
     9,
     Array [
-      65533,
+      71022,
       "My String",
-      4,
+      1,
     ],
   ],
   Array [
@@ -1787,67 +1967,7 @@ Array [
     7,
     9,
     Array [
-      80821,
-      "My String",
-      7,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      60817,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      92298,
-      "My String",
-      9,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      32287,
-      "My String",
-      8,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      62041,
-      "My String",
-      4,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      13795,
+      27216,
       "My String",
       6,
     ],
@@ -1859,19 +1979,7 @@ Array [
     7,
     9,
     Array [
-      40886,
-      "My String",
-      2,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      9873,
+      78938,
       "My String",
       5,
     ],
@@ -1883,26 +1991,9 @@ Array [
     7,
     9,
     Array [
-      49849,
+      52375,
       "My String",
-      2,
-    ],
-  ],
-]
-`;
-
-exports[`Generating base types with modifiers Base type: 10, iteration: 0 1`] = `
-Array [
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      71295,
-      "My String",
-      3,
+      1,
     ],
   ],
   Array [
@@ -1912,43 +2003,7 @@ Array [
     7,
     9,
     Array [
-      42847,
-      "My String",
-      2,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      69088,
-      "My String",
-      6,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      71915,
-      "My String",
-      7,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      49111,
+      13139,
       "My String",
       4,
     ],
@@ -1960,9 +2015,9 @@ Array [
     7,
     9,
     Array [
-      78002,
+      30682,
       "My String",
-      10,
+      0,
     ],
   ],
   Array [
@@ -1972,9 +2027,86 @@ Array [
     7,
     9,
     Array [
-      41092,
+      51164,
       "My String",
-      7,
+      0,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      85574,
+      "My String",
+      0,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 9, iteration: 10 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      12873,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      55264,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      21691,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      39795,
+      "My String",
+      9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      22473,
+      "My String",
+      9,
     ],
   ],
 ]
@@ -2033,106 +2165,7 @@ Array [
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 10, iteration: 2 1`] = `
-Array [
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      77347,
-      "My String",
-      3,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      91597,
-      "My String",
-      5,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      83851,
-      "My String",
-      4,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      27230,
-      "My String",
-      6,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      33946,
-      "My String",
-      9,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      51251,
-      "My String",
-      0,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      45463,
-      "My String",
-      0,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      68742,
-      "My String",
-      2,
-    ],
-  ],
-]
-`;
+exports[`Generating base types with modifiers Base type: 10, iteration: 2 1`] = `Array []`;
 
 exports[`Generating base types with modifiers Base type: 10, iteration: 3 1`] = `
 Array [
@@ -2143,16 +2176,47 @@ Array [
     7,
     9,
     Array [
-      68488,
+      29812,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      36415,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      26458,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      70683,
       "My String",
       5,
     ],
   ],
-]
-`;
-
-exports[`Generating base types with modifiers Base type: 10, iteration: 4 1`] = `
-Array [
   Array [
     1,
     2,
@@ -2160,9 +2224,9 @@ Array [
     7,
     9,
     Array [
-      27351,
+      13292,
       "My String",
-      5,
+      7,
     ],
   ],
   Array [
@@ -2172,43 +2236,7 @@ Array [
     7,
     9,
     Array [
-      17621,
-      "My String",
-      4,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      1391,
-      "My String",
-      3,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      86501,
-      "My String",
-      8,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      27298,
+      49924,
       "My String",
       0,
     ],
@@ -2220,7 +2248,7 @@ Array [
     7,
     9,
     Array [
-      66285,
+      35505,
       "My String",
       8,
     ],
@@ -2232,13 +2260,15 @@ Array [
     7,
     9,
     Array [
-      66774,
+      3067,
       "My String",
-      6,
+      5,
     ],
   ],
 ]
 `;
+
+exports[`Generating base types with modifiers Base type: 10, iteration: 4 1`] = `Array []`;
 
 exports[`Generating base types with modifiers Base type: 10, iteration: 5 1`] = `
 Array [
@@ -2249,9 +2279,21 @@ Array [
     7,
     9,
     Array [
-      2455,
+      69446,
       "My String",
-      7,
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      28571,
+      "My String",
+      0,
     ],
   ],
 ]
@@ -2266,31 +2308,7 @@ Array [
     7,
     9,
     Array [
-      70420,
-      "My String",
-      9,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      26673,
-      "My String",
-      9,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      13845,
+      33779,
       "My String",
       5,
     ],
@@ -2302,7 +2320,31 @@ Array [
     7,
     9,
     Array [
-      56546,
+      91491,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      8765,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      96522,
       "My String",
       1,
     ],
@@ -2314,9 +2356,9 @@ Array [
     7,
     9,
     Array [
-      57350,
+      96598,
       "My String",
-      6,
+      10,
     ],
   ],
   Array [
@@ -2326,9 +2368,9 @@ Array [
     7,
     9,
     Array [
-      6205,
+      96196,
       "My String",
-      2,
+      3,
     ],
   ],
   Array [
@@ -2338,7 +2380,7 @@ Array [
     7,
     9,
     Array [
-      86488,
+      70010,
       "My String",
       7,
     ],
@@ -2350,9 +2392,9 @@ Array [
     7,
     9,
     Array [
-      22374,
+      57655,
       "My String",
-      2,
+      9,
     ],
   ],
   Array [
@@ -2362,9 +2404,21 @@ Array [
     7,
     9,
     Array [
-      7899,
+      5925,
       "My String",
-      8,
+      10,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      78646,
+      "My String",
+      5,
     ],
   ],
 ]
@@ -2379,31 +2433,7 @@ Array [
     7,
     9,
     Array [
-      28466,
-      "My String",
-      7,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      33008,
-      "My String",
-      4,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      59824,
+      86134,
       "My String",
       1,
     ],
@@ -2415,9 +2445,69 @@ Array [
     7,
     9,
     Array [
-      70315,
+      47129,
       "My String",
       9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      57711,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      60084,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      15708,
+      "My String",
+      10,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      7251,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      30548,
+      "My String",
+      5,
     ],
   ],
 ]
@@ -2432,9 +2522,9 @@ Array [
     7,
     9,
     Array [
-      66722,
+      62669,
       "My String",
-      2,
+      7,
     ],
   ],
   Array [
@@ -2444,9 +2534,9 @@ Array [
     7,
     9,
     Array [
-      71589,
+      6969,
       "My String",
-      4,
+      3,
     ],
   ],
   Array [
@@ -2456,9 +2546,9 @@ Array [
     7,
     9,
     Array [
-      7903,
+      96329,
       "My String",
-      6,
+      9,
     ],
   ],
   Array [
@@ -2468,67 +2558,7 @@ Array [
     7,
     9,
     Array [
-      97236,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      85877,
-      "My String",
-      2,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      68844,
-      "My String",
-      6,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      19462,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      53468,
-      "My String",
-      2,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      77322,
+      9679,
       "My String",
       8,
     ],
@@ -2545,7 +2575,7 @@ Array [
     7,
     9,
     Array [
-      58372,
+      16448,
       "My String",
       10,
     ],
@@ -2557,15 +2587,15 @@ Array [
     7,
     9,
     Array [
-      53254,
+      63914,
       "My String",
-      10,
+      7,
     ],
   ],
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 11, iteration: 0 1`] = `
+exports[`Generating base types with modifiers Base type: 10, iteration: 10 1`] = `
 Array [
   Array [
     1,
@@ -2574,9 +2604,9 @@ Array [
     7,
     9,
     Array [
-      71295,
+      90169,
       "My String",
-      3,
+      1,
     ],
   ],
   Array [
@@ -2586,7 +2616,7 @@ Array [
     7,
     9,
     Array [
-      42847,
+      76403,
       "My String",
       2,
     ],
@@ -2598,7 +2628,43 @@ Array [
     7,
     9,
     Array [
-      69088,
+      16999,
+      "My String",
+      9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      87444,
+      "My String",
+      7,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      27612,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      89695,
       "My String",
       6,
     ],
@@ -2610,7 +2676,7 @@ Array [
     7,
     9,
     Array [
-      71915,
+      5230,
       "My String",
       7,
     ],
@@ -2622,33 +2688,9 @@ Array [
     7,
     9,
     Array [
-      49111,
-      "My String",
-      4,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      78002,
+      62818,
       "My String",
       10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      41092,
-      "My String",
-      7,
     ],
   ],
 ]
@@ -2764,9 +2806,9 @@ Array [
     7,
     9,
     Array [
-      14449,
+      11393,
       "My String",
-      0,
+      8,
     ],
   ],
   Array [
@@ -2776,7 +2818,79 @@ Array [
     7,
     9,
     Array [
-      8872,
+      72906,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      52667,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      21771,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      55483,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      39671,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      42084,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      30953,
       "My String",
       5,
     ],
@@ -2788,9 +2902,21 @@ Array [
     7,
     9,
     Array [
-      79487,
+      68299,
       "My String",
-      0,
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      80752,
+      "My String",
+      1,
     ],
   ],
 ]
@@ -2805,173 +2931,7 @@ Array [
     7,
     9,
     Array [
-      90116,
-      "My String",
-      6,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      41917,
-      "My String",
-      2,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      11943,
-      "My String",
-      2,
-    ],
-  ],
-]
-`;
-
-exports[`Generating base types with modifiers Base type: 11, iteration: 4 1`] = `
-Array [
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      76910,
-      "My String",
-      1,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      11006,
-      "My String",
-      3,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      38024,
-      "My String",
-      3,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      96103,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      57017,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      96627,
-      "My String",
-      5,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      40554,
-      "My String",
-      9,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      39047,
-      "My String",
-      9,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      22181,
-      "My String",
-      7,
-    ],
-  ],
-]
-`;
-
-exports[`Generating base types with modifiers Base type: 11, iteration: 5 1`] = `
-Array [
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      14941,
-      "My String",
-      0,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      24014,
+      40826,
       "My String",
       8,
     ],
@@ -2983,37 +2943,17 @@ Array [
     7,
     9,
     Array [
-      47562,
-      "My String",
-      8,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      52133,
+      67567,
       "My String",
       9,
     ],
   ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      86078,
-      "My String",
-      10,
-    ],
-  ],
 ]
 `;
+
+exports[`Generating base types with modifiers Base type: 11, iteration: 4 1`] = `Array []`;
+
+exports[`Generating base types with modifiers Base type: 11, iteration: 5 1`] = `Array []`;
 
 exports[`Generating base types with modifiers Base type: 11, iteration: 6 1`] = `
 Array [
@@ -3024,7 +2964,7 @@ Array [
     7,
     9,
     Array [
-      22672,
+      20170,
       "My String",
       4,
     ],
@@ -3036,9 +2976,9 @@ Array [
     7,
     9,
     Array [
-      64218,
+      95278,
       "My String",
-      9,
+      3,
     ],
   ],
   Array [
@@ -3048,9 +2988,9 @@ Array [
     7,
     9,
     Array [
-      93254,
+      15954,
       "My String",
-      5,
+      1,
     ],
   ],
   Array [
@@ -3060,9 +3000,57 @@ Array [
     7,
     9,
     Array [
-      87938,
+      25512,
       "My String",
       6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      77993,
+      "My String",
+      4,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      77028,
+      "My String",
+      0,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      93657,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      64291,
+      "My String",
+      1,
     ],
   ],
 ]
@@ -3077,9 +3065,9 @@ Array [
     7,
     9,
     Array [
-      49414,
+      65433,
       "My String",
-      2,
+      1,
     ],
   ],
   Array [
@@ -3089,105 +3077,9 @@ Array [
     7,
     9,
     Array [
-      14855,
+      57120,
       "My String",
       6,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      25760,
-      "My String",
-      4,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      57393,
-      "My String",
-      8,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      82162,
-      "My String",
-      0,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      11615,
-      "My String",
-      3,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      43578,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      72702,
-      "My String",
-      5,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      65220,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      96747,
-      "My String",
-      9,
     ],
   ],
 ]
@@ -3202,19 +3094,7 @@ Array [
     7,
     9,
     Array [
-      13110,
-      "My String",
-      7,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      56255,
+      94254,
       "My String",
       10,
     ],
@@ -3226,69 +3106,21 @@ Array [
     7,
     9,
     Array [
-      92206,
+      2511,
+      "My String",
+      9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      47761,
       "My String",
       0,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      91814,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      56421,
-      "My String",
-      3,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      95455,
-      "My String",
-      10,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      71565,
-      "My String",
-      8,
-    ],
-  ],
-  Array [
-    1,
-    2,
-    34,
-    7,
-    9,
-    Array [
-      17431,
-      "My String",
-      7,
     ],
   ],
 ]
@@ -3303,9 +3135,9 @@ Array [
     7,
     9,
     Array [
-      21243,
+      31944,
       "My String",
-      7,
+      1,
     ],
   ],
   Array [
@@ -3315,7 +3147,19 @@ Array [
     7,
     9,
     Array [
-      54128,
+      88367,
+      "My String",
+      6,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      67759,
       "My String",
       9,
     ],
@@ -3327,7 +3171,144 @@ Array [
     7,
     9,
     Array [
-      89646,
+      33024,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      89915,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      71608,
+      "My String",
+      9,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      49424,
+      "My String",
+      3,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      94345,
+      "My String",
+      5,
+    ],
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Base type: 11, iteration: 10 1`] = `
+Array [
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      16413,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      34236,
+      "My String",
+      1,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      31350,
+      "My String",
+      2,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      66718,
+      "My String",
+      8,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      93648,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      72310,
+      "My String",
+      5,
+    ],
+  ],
+  Array [
+    1,
+    2,
+    34,
+    7,
+    9,
+    Array [
+      32628,
       "My String",
       7,
     ],
@@ -3339,9 +3320,9 @@ Array [
     7,
     9,
     Array [
-      73732,
+      46214,
       "My String",
-      0,
+      5,
     ],
   ],
   Array [
@@ -3351,25 +3332,22 @@ Array [
     7,
     9,
     Array [
-      67925,
+      9796,
       "My String",
-      1,
+      10,
     ],
   ],
-]
-`;
-
-exports[`Generating base types with modifiers Base type: 12, iteration: 0 1`] = `
-Array [
-  1,
-  2,
-  34,
-  7,
-  9,
   Array [
-    69646,
-    "My String",
+    1,
+    2,
+    34,
     7,
+    9,
+    Array [
+      45956,
+      "My String",
+      9,
+    ],
   ],
 ]
 `;
@@ -3397,9 +3375,9 @@ Array [
   7,
   9,
   Array [
-    36669,
+    8462,
     "My String",
-    2,
+    0,
   ],
 ]
 `;
@@ -3412,9 +3390,9 @@ Array [
   7,
   9,
   Array [
-    78884,
+    58530,
     "My String",
-    2,
+    4,
   ],
 ]
 `;
@@ -3427,9 +3405,9 @@ Array [
   7,
   9,
   Array [
-    65774,
+    81124,
     "My String",
-    7,
+    5,
   ],
 ]
 `;
@@ -3442,9 +3420,9 @@ Array [
   7,
   9,
   Array [
-    82335,
+    21268,
     "My String",
-    7,
+    5,
   ],
 ]
 `;
@@ -3457,9 +3435,9 @@ Array [
   7,
   9,
   Array [
-    88732,
+    95841,
     "My String",
-    8,
+    1,
   ],
 ]
 `;
@@ -3472,9 +3450,9 @@ Array [
   7,
   9,
   Array [
-    50296,
+    29382,
     "My String",
-    9,
+    5,
   ],
 ]
 `;
@@ -3487,9 +3465,9 @@ Array [
   7,
   9,
   Array [
-    1349,
+    19776,
     "My String",
-    1,
+    5,
   ],
 ]
 `;
@@ -3502,14 +3480,14 @@ Array [
   7,
   9,
   Array [
-    78149,
+    14887,
     "My String",
-    6,
+    3,
   ],
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 13, iteration: 0 1`] = `
+exports[`Generating base types with modifiers Base type: 12, iteration: 10 1`] = `
 Array [
   1,
   2,
@@ -3517,9 +3495,9 @@ Array [
   7,
   9,
   Array [
-    69646,
+    85131,
     "My String",
-    7,
+    5,
   ],
 ]
 `;
@@ -3547,9 +3525,9 @@ Array [
   7,
   9,
   Array [
-    88130,
+    69021,
     "My String",
-    1,
+    9,
   ],
 ]
 `;
@@ -3562,9 +3540,9 @@ Array [
   7,
   9,
   Array [
-    32100,
+    75397,
     "My String",
-    8,
+    5,
   ],
 ]
 `;
@@ -3577,9 +3555,9 @@ Array [
   7,
   9,
   Array [
-    80208,
+    85061,
     "My String",
-    4,
+    9,
   ],
 ]
 `;
@@ -3592,7 +3570,7 @@ Array [
   7,
   9,
   Array [
-    51197,
+    7599,
     "My String",
     6,
   ],
@@ -3607,9 +3585,9 @@ Array [
   7,
   9,
   Array [
-    11390,
+    33806,
     "My String",
-    5,
+    1,
   ],
 ]
 `;
@@ -3622,9 +3600,9 @@ Array [
   7,
   9,
   Array [
-    4824,
+    93075,
     "My String",
-    9,
+    6,
   ],
 ]
 `;
@@ -3637,9 +3615,9 @@ Array [
   7,
   9,
   Array [
-    12747,
+    44560,
     "My String",
-    1,
+    4,
   ],
 ]
 `;
@@ -3652,14 +3630,14 @@ Array [
   7,
   9,
   Array [
-    29350,
+    72082,
     "My String",
-    10,
+    9,
   ],
 ]
 `;
 
-exports[`Generating base types with modifiers Base type: 14, iteration: 0 1`] = `
+exports[`Generating base types with modifiers Base type: 13, iteration: 10 1`] = `
 Array [
   1,
   2,
@@ -3667,7 +3645,7 @@ Array [
   7,
   9,
   Array [
-    69646,
+    99000,
     "My String",
     7,
   ],
@@ -3697,9 +3675,9 @@ Array [
   7,
   9,
   Array [
-    76979,
+    9661,
     "My String",
-    1,
+    0,
   ],
 ]
 `;
@@ -3712,9 +3690,9 @@ Array [
   7,
   9,
   Array [
-    82622,
+    43991,
     "My String",
-    10,
+    6,
   ],
 ]
 `;
@@ -3727,9 +3705,9 @@ Array [
   7,
   9,
   Array [
-    95045,
+    84788,
     "My String",
-    9,
+    4,
   ],
 ]
 `;
@@ -3742,9 +3720,9 @@ Array [
   7,
   9,
   Array [
-    40198,
+    94894,
     "My String",
-    3,
+    8,
   ],
 ]
 `;
@@ -3757,9 +3735,9 @@ Array [
   7,
   9,
   Array [
-    50296,
+    1914,
     "My String",
-    9,
+    7,
   ],
 ]
 `;
@@ -3772,9 +3750,9 @@ Array [
   7,
   9,
   Array [
-    54657,
+    53505,
     "My String",
-    1,
+    6,
   ],
 ]
 `;
@@ -3787,9 +3765,9 @@ Array [
   7,
   9,
   Array [
-    93058,
+    95656,
     "My String",
-    10,
+    6,
   ],
 ]
 `;
@@ -3802,9 +3780,28 @@ Array [
   7,
   9,
   Array [
-    51693,
+    47144,
     "My String",
-    0,
+    10,
   ],
 ]
 `;
+
+exports[`Generating base types with modifiers Base type: 14, iteration: 10 1`] = `
+Array [
+  1,
+  2,
+  34,
+  7,
+  9,
+  Array [
+    66840,
+    "My String",
+    7,
+  ],
+]
+`;
+
+exports[`Generating base types with modifiers Invalid base type with modifiers: 0 1`] = `[Error: function: custom:args, args: ]`;
+
+exports[`Generating base types with modifiers Invalid base type with modifiers: 1 1`] = `[Error: Non literal type value from custom:invalidHelper]`;

@@ -1,13 +1,12 @@
 import faker from "faker";
-import {
-    BaseType,
-    WithModifiers,
-    isPrimitives,
-} from "../../../../src/resource/types/helper";
-import { RANDOMNESS_ITERATIONS } from "../../../../src/resource/Env";
+import { BaseType, WithModifiers } from "../../../../src/resource/types/helper";
+import { RANDOMNESS_ITERATIONS } from "../../../../src/common/Env";
 import { generateWithModifiers } from "../../../../src/resource/generation/withModifiersGen";
 import { ValidModifiers } from "../../utils";
-import { SchemaHelpers } from "../../../../src/common/types/helpers";
+import {
+    SchemaHelpers,
+    isPrimitives,
+} from "../../../../src/common/types/helpers";
 
 // Helpers for the resource
 const Helpers: SchemaHelpers = {
@@ -16,6 +15,9 @@ const Helpers: SchemaHelpers = {
         // Use faker.random.number instead of Math.random
         // For universal randomness seed
         faker.random.number({ min, max, precision: step }),
+    async invalidHelper() {
+        return { age: 10 } as any;
+    },
 };
 
 const entries: BaseType[] = [
@@ -42,21 +44,38 @@ entries.forEach((entry) =>
     })
 );
 
+const InvalidWithModifiers = [
+    {
+        type: [1, 2, [3, ["custom:args"]]],
+    },
+    {
+        type: [1, 2, [3, ["custom:invalidHelper"]]],
+        optional: true,
+    },
+];
+
 describe("Generating base types with modifiers", () => {
     inputs.forEach((input, index) => {
-        for (let i = 0; i < RANDOMNESS_ITERATIONS; i++) {
+        for (let i = 1; i <= RANDOMNESS_ITERATIONS; i++) {
             test(`Base type: ${index}, iteration: ${i}`, async () => {
-                faker.seed(index * i + 123);
+                faker.seed(index + i * 123);
                 const o = await generateWithModifiers(input, Helpers);
                 expect(o).toMatchSnapshot();
                 expect(isPrimitives(o)).toBe(true);
-                faker.seed(index * i + 123);
-                expect(o === null).toBe(
-                    !!(input.nullable && faker.random.boolean())
-                );
-                if (input.plural && !input.nullable)
+                faker.seed(index + i * 123);
+                const isNull = !!(input.nullable && faker.random.boolean());
+
+                expect(o === null).toBe(isNull);
+                if (input.plural && !isNull)
                     expect(Array.isArray(o)).toBe(true);
             });
         }
     });
+    test.each(InvalidWithModifiers)(
+        `Invalid base type with modifiers: %#`,
+        (entry) =>
+            expect(
+                generateWithModifiers(entry, Helpers)
+            ).rejects.toMatchSnapshot()
+    );
 });

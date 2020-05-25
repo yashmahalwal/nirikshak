@@ -3,7 +3,7 @@
     Not testing in depth as other functions are assumed to be working correctly
 */
 import { ResourceBase, Resource } from "../../../../src/resource/types";
-import { RANDOMNESS_ITERATIONS } from "../../../../src/resource/Env";
+import { RANDOMNESS_ITERATIONS } from "../../../../src/common/Env";
 import {
     generateResourceBase,
     generateResource,
@@ -32,6 +32,9 @@ const Helpers: SchemaHelpers = {
         // Use faker.random.number instead of Math.random
         // For universal randomness seed
         faker.random.number({ min, max, precision: step }),
+    async invalidHelper() {
+        return { age: 12 } as any;
+    },
 };
 
 const ValidResourceBases: {
@@ -321,6 +324,14 @@ const ValidResourceBases: {
     },
 ];
 
+const InvalidResourceBases = [
+    {
+        name: "faker:name.firstName",
+        age: "custom:age",
+    },
+    { name: "faker:name.lastName", age: "custom:invalidHelper" },
+];
+
 describe(`Resource base type`, () => {
     // Account for randomness
     for (let i = 0; i < RANDOMNESS_ITERATIONS; i++)
@@ -346,4 +357,10 @@ describe(`Resource type`, () => {
                 expect(await generateResource(o, Helpers)).toMatchSnapshot();
             })
         );
+
+    test.each(InvalidResourceBases)(`Invalid resource base: %#`, (entry) =>
+        expect(
+            generateResourceBase(entry as ResourceBase, Helpers)
+        ).rejects.toMatchSnapshot()
+    );
 });

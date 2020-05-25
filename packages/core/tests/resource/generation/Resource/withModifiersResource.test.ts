@@ -6,7 +6,7 @@
 import { ValidModifiers } from "../../utils";
 import { WithModifiers } from "../../../../src/resource/types/helper";
 import faker from "faker";
-import { RANDOMNESS_ITERATIONS } from "../../../../src/resource/Env";
+import { RANDOMNESS_ITERATIONS } from "../../../../src/common/Env";
 import { generateWithModifiers } from "../../../../src/resource/generation/withModifiersGen";
 import { ResourceBase } from "../../../../src/resource/types";
 import { SchemaHelpers } from "../../../../src/common/types/helpers";
@@ -17,6 +17,9 @@ const Helpers: SchemaHelpers = {
         // Use faker.random.number instead of Math.random
         // For universal randomness seed
         faker.random.number({ min, max, precision: step }),
+    async invalidHelper() {
+        return { age: 12 } as any;
+    },
 };
 
 // Valid resource bases
@@ -118,14 +121,18 @@ ValidResourceBaseTypes.forEach((baseType) =>
     })
 );
 
+const InvalidWithModifiers = [
+    { field: { class: "custom:ages" }, plural: false },
+];
+
 describe("Generating resource bases with modifiers", () => {
-    for (let i = 0; i < RANDOMNESS_ITERATIONS; i++)
+    for (let i = 1; i <= RANDOMNESS_ITERATIONS; i++)
         ValidWithModifiers.forEach((entry, index) =>
             test(`Valid base type with modifiers: ${index}, iteration: ${i}`, async () => {
-                faker.seed(index * i + 123);
+                faker.seed(index + i * 123);
                 const o = await generateWithModifiers(entry, Helpers);
                 expect(o).toMatchSnapshot();
-                faker.seed(index * i + 123);
+                faker.seed(index + i * 123);
                 expect(o === null).toBe(
                     !!(entry.nullable && faker.random.boolean())
                 );
@@ -133,4 +140,10 @@ describe("Generating resource bases with modifiers", () => {
                     expect(Array.isArray(o)).toBe(true);
             })
         );
+
+    test.each(InvalidWithModifiers)(`Invalid resource base: %#`, (entry) =>
+        expect(
+            generateWithModifiers(entry as WithModifiers<ResourceBase>, Helpers)
+        ).rejects.toMatchSnapshot()
+    );
 });
