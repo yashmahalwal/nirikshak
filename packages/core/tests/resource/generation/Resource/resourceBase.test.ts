@@ -2,7 +2,7 @@
     Test to validate resource generation
     Not testing in depth as other functions are assumed to be working correctly
 */
-import { ResourceBase, Resource } from "../../../../src/resource/types";
+import { ResourceBase, Resource } from "../../../../src/resource/types/resource";
 import { RANDOMNESS_ITERATIONS } from "../../../../src/common/Env";
 import {
     generateResourceBase,

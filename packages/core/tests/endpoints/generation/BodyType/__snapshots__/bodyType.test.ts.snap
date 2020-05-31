@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Body generation Invalid body generation: 0 1`] = `[Error: Invalid resource instance path: lorem.ipsum]`;
+
+exports[`Body generation Invalid body generation: 1 1`] = `[Error: function: custom:lorem.ipsum, args: ]`;
+
+exports[`Body generation Invalid body generation: 2 1`] = `[Error: Non literal type value from custom:invalidHelper]`;

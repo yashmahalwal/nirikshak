@@ -1,0 +1,26 @@
+{
+    "GET": {
+        "url": "/Student/{resource:id}",
+        "input": {
+            "semantics": {}
+        },
+        "output": {
+            "POSITIVE": [
+                {
+                    "semantics": {
+                        "status": 200
+                    },
+                    "body": {
+                        "id": "resource:id",
+                        "branch": "resource:branch",
+                        "grade": "resource:grade",
+                        "possibleGrade": "custom:grade",
+                        "addresses": "resource:addresses",
+                        "schooling": "resource:schooling",
+                        "collegeGPA": "resource:collegeGPA"
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -1,7 +1,7 @@
 import {
     ResourceBase,
     Resource,
-} from "../types";
+} from "../types/resource";
 import { ResourceInstance,  isBaseType, isWithModifiers, isOneOfEntries, isWithModifiersBaseType, isWithModifiersResource } from "../types/helper";
 import { generateBaseType } from "./baseGen";
 import faker from "faker";

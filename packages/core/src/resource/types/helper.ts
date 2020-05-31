@@ -4,7 +4,7 @@ import {
 } from "../../common/types/custom";
 import { Literal, isLiteral } from "../../common/types/literals";
 import { FakerType, isFakerType } from "../../common/types/fakerTypes";
-import { ResourceBase, isResourceBase } from ".";
+import { ResourceBase, isResourceBase } from "./resource";
 import { Primitives } from "../../common/types/helpers";
 
 

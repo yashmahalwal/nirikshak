@@ -1,7 +1,7 @@
 import { Inputs } from "../../../../src/endpoints/types/input";
 import { Outputs } from "../../../../src/endpoints/types/output";
 import { MethodType, Cases } from "../../../../src/endpoints/types/helpers";
-import { isDescription, Description } from "../../../../src/endpoints/types";
+import { isDescription, Description } from "../../../../src/endpoints/types/description";
 import { URLString } from "../../../../src/endpoints/types/urlString";
 import faker from "faker";
 const ValidInputs: Inputs = {
@@ -94,10 +94,21 @@ const ValidOutputs: Outputs = {
                         message: "not found value",
                     },
                 },
+                body: {
+                    name: "resource:name",
+                    age: {
+                        types: [1, 2, 3, 4, "free", "butter free"],
+                    },
+                },
             },
             {
                 semantics: {
                     status: 400,
+                },
+                body: {
+                    id: "resource:id",
+                    addresses: "resource:addresses",
+                    age: { class: "faker:random.number" },
                 },
             },
         ],
@@ -111,10 +122,27 @@ const ValidOutputs: Outputs = {
                         "content-type": `Application/JSON`,
                     },
                 },
+                body: {
+                    id: "resource:id",
+                    addresses: "resource:addresses",
+                    age: { class: "faker:random.number" },
+                    pieces: "custom:word",
+                    parts: {
+                        plump: {
+                            type: { function: "faker:lorem.lines", args: [3] },
+                            nullable: true,
+                            optional: true,
+                            plural: true,
+                        },
+                    },
+                },
             },
             {
                 semantics: {
                     status: 201,
+                },
+                body: {
+                    id: "resource:id",
                 },
             },
         ],
@@ -200,13 +228,12 @@ const ValidOutputs: Outputs = {
 const ComplexCases: Description[] = [
     {},
     {
-        GET: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["GET"],
-                output: {},
-            },
-        ],
+        GET: {
+            url: faker.random.arrayElement(urls),
+            input: ValidInputs["GET"],
+            output: {},
+        },
+
         POST: [
             {
                 url: faker.random.arrayElement(urls),
@@ -225,16 +252,14 @@ const ComplexCases: Description[] = [
                 },
             },
         ],
-        POST: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["POST"],
-                output: {
-                    DESTRUCTIVE: ValidOutputs["POST"]["DESTRUCTIVE"],
-                    POSITIVE: ValidOutputs["POST"]["POSITIVE"],
-                },
+        POST: {
+            url: faker.random.arrayElement(urls),
+            input: ValidInputs["POST"],
+            output: {
+                DESTRUCTIVE: ValidOutputs["POST"]["DESTRUCTIVE"],
+                POSITIVE: ValidOutputs["POST"]["POSITIVE"],
             },
-        ],
+        },
     },
     {
         DELETE: [
@@ -262,13 +287,12 @@ const ComplexCases: Description[] = [
         ],
     },
     {
-        GET: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["GET"],
-                output: ValidOutputs["GET"],
-            },
-        ],
+        GET: {
+            url: faker.random.arrayElement(urls),
+            input: ValidInputs["GET"],
+            output: ValidOutputs["GET"],
+        },
+
         DELETE: [
             {
                 url: faker.random.arrayElement(urls),
@@ -283,13 +307,12 @@ const ComplexCases: Description[] = [
                 output: ValidOutputs["POST"],
             },
         ],
-        PATCH: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["PATCH"],
-                output: ValidOutputs["PATCH"],
-            },
-        ],
+        PATCH: {
+            url: faker.random.arrayElement(urls),
+            input: ValidInputs["PATCH"],
+            output: ValidOutputs["PATCH"],
+        },
+
         PUT: [
             {
                 url: faker.random.arrayElement(urls),
@@ -328,15 +351,13 @@ const ComplexCases: Description[] = [
                 },
             },
         ],
-        DELETE: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["DELETE"],
-                output: {
-                    POSITIVE: ValidOutputs["DELETE"]["POSITIVE"],
-                },
+        DELETE: {
+            url: faker.random.arrayElement(urls),
+            input: ValidInputs["DELETE"],
+            output: {
+                POSITIVE: ValidOutputs["DELETE"]["POSITIVE"],
             },
-        ],
+        },
     },
     {
         GET: [
@@ -453,6 +474,16 @@ describe("Valid descriptions", () => {
                                 output: outputs,
                             },
                         ],
+                    })
+                ).toBe(true);
+
+                expect(
+                    isDescription({
+                        [method]: {
+                            url: faker.random.arrayElement(urls),
+                            input: ValidInputs[method],
+                            output: outputs,
+                        },
                     })
                 ).toBe(true);
             });

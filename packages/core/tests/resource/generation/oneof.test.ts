@@ -6,7 +6,7 @@ import {
     SelectedType,
 } from "../../../src/resource/generation/oneOfEntries";
 import { BaseType } from "../../../src/endpoints/types/helpers";
-import { ResourceBase } from "../../../src/resource/types";
+import { ResourceBase } from "../../../src/resource/types/resource";
 
 const entries: {
     input: OneOfEntries;

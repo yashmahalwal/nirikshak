@@ -1,6 +1,5 @@
 import {
     HeaderMap,
-    BodyType,
     MethodType,
     Cases,
 } from "../../../../../src/endpoints/types/helpers";
@@ -100,85 +99,58 @@ describe("Output validation functions: header and status", () => {
         }
     );
 
-    (["GET", "DELETE"] as MethodType[]).forEach((method) => {
-        ValidHeaderAndStatus.forEach((element, index) => {
-            (["POSITIVE", "NEGATIVE"] as Cases[]).forEach((caseValue) => {
-                test(`Valid header and status - ${method}-${caseValue}: ${index}`, () => {
-                    const o = outputValidationFunctions[method][caseValue];
+    (["GET", "DELETE", "POST", "PUT", "PATCH"] as MethodType[]).forEach(
+        (method) => {
+            ValidHeaderAndStatus.forEach((element, index) => {
+                (["DESTRUCTIVE", "NEGATIVE"] as Cases[]).forEach(
+                    (caseValue) => {
+                        test(`Valid header and status - ${method}-${caseValue}: ${index}`, () => {
+                            const o =
+                                outputValidationFunctions[method][caseValue];
 
-                    expect(o({ semantics: element })).toBe(true);
-                });
+                            o && expect(o({ semantics: element })).toBe(true);
+                        });
+                    }
+                );
             });
-        });
 
-        ValidHeaderAndStatusArrays.forEach((element, index) => {
-            (["POSITIVE", "NEGATIVE"] as Cases[]).forEach((caseValue) => {
-                test(`Valid header and status array - ${method}-${caseValue}: ${index}`, () => {
-                    const o = outputValidationFunctions[method][caseValue];
+            ValidHeaderAndStatusArrays.forEach((element, index) => {
+                (["DESTRUCTIVE", "NEGATIVE"] as Cases[]).forEach(
+                    (caseValue) => {
+                        test(`Valid header and status array - ${method}-${caseValue}: ${index}`, () => {
+                            const o =
+                                outputValidationFunctions[method][caseValue];
 
-                    expect(o(element)).toBe(true);
-                });
+                            o && expect(o(element)).toBe(true);
+                        });
+                    }
+                );
             });
-        });
 
-        InvalidHeaderAndStatus.forEach((element, index) => {
-            (["POSITIVE", "NEGATIVE"] as Cases[]).forEach((caseValue) => {
-                test(`Invalid header and status - ${method}-${caseValue}: ${index}`, () => {
-                    const o = outputValidationFunctions[method][caseValue];
+            InvalidHeaderAndStatus.forEach((element, index) => {
+                (["DESTRUCTIVE", "NEGATIVE"] as Cases[]).forEach(
+                    (caseValue) => {
+                        test(`Invalid header and status - ${method}-${caseValue}: ${index}`, () => {
+                            const o =
+                                outputValidationFunctions[method][caseValue];
 
-                    expect(o({ semantics: element })).toBe(false);
-                });
+                            o && expect(o({ semantics: element })).toBe(false);
+                        });
+                    }
+                );
             });
-        });
-        InvalidHeaderAndStatusArrays.forEach((element, index) => {
-            (["POSITIVE", "NEGATIVE"] as Cases[]).forEach((caseValue) => {
-                test(`Invalid header and status array - ${method}-${caseValue}: ${index}`, () => {
-                    const o = outputValidationFunctions[method][caseValue];
+            InvalidHeaderAndStatusArrays.forEach((element, index) => {
+                (["DESTRUCTIVE", "NEGATIVE"] as Cases[]).forEach(
+                    (caseValue) => {
+                        test(`Invalid header and status array - ${method}-${caseValue}: ${index}`, () => {
+                            const o =
+                                outputValidationFunctions[method][caseValue];
 
-                    expect(o(element)).toBe(false);
-                });
+                            o && expect(o(element)).toBe(false);
+                        });
+                    }
+                );
             });
-        });
-    });
-
-    (["POST", "PUT", "PATCH"] as MethodType[]).forEach((method) => {
-        ValidHeaderAndStatus.forEach((element, index) => {
-            (["DESTRUCTIVE", "NEGATIVE"] as Cases[]).forEach((caseValue) => {
-                test(`Valid header and status - ${method}-${caseValue}: ${index}`, () => {
-                    const o = outputValidationFunctions[method][caseValue];
-
-                    o && expect(o({ semantics: element })).toBe(true);
-                });
-            });
-        });
-
-        ValidHeaderAndStatusArrays.forEach((element, index) => {
-            (["DESTRUCTIVE", "NEGATIVE"] as Cases[]).forEach((caseValue) => {
-                test(`Valid header and status array - ${method}-${caseValue}: ${index}`, () => {
-                    const o = outputValidationFunctions[method][caseValue];
-
-                    o && expect(o(element)).toBe(true);
-                });
-            });
-        });
-
-        InvalidHeaderAndStatus.forEach((element, index) => {
-            (["DESTRUCTIVE", "NEGATIVE"] as Cases[]).forEach((caseValue) => {
-                test(`Invalid header and status - ${method}-${caseValue}: ${index}`, () => {
-                    const o = outputValidationFunctions[method][caseValue];
-
-                    o && expect(o({ semantics: element })).toBe(false);
-                });
-            });
-        });
-        InvalidHeaderAndStatusArrays.forEach((element, index) => {
-            (["DESTRUCTIVE", "NEGATIVE"] as Cases[]).forEach((caseValue) => {
-                test(`Invalid header and status array - ${method}-${caseValue}: ${index}`, () => {
-                    const o = outputValidationFunctions[method][caseValue];
-
-                    o && expect(o(element)).toBe(false);
-                });
-            });
-        });
-    });
+        }
+    );
 });

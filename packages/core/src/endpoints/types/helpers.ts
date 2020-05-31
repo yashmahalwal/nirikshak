@@ -159,7 +159,8 @@ export function isOneOfEntries(input: any): input is OneOfEntries {
 
 export interface BodyType {
     [key: string]:
-        | Base
+        | ResourceString
+        | Exclude<Base, ResourceString>
         | WithModifiers<Base>
         | WithModifiers<BodyType>
         | OneOfEntries
@@ -176,6 +177,7 @@ export function isBodyType(input: any): input is BodyType {
 
     return Object.values(input).every(
         (entry) =>
+            isResourceString(entry) ||
             isBase(entry) ||
             isWithModifiers(entry) ||
             isOneOfEntries(entry) ||

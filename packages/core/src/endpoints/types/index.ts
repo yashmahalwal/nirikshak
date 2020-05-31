@@ -1,47 +1,12 @@
-import { Inputs, inputValidationFunctions } from "./input";
-import { Outputs, outputValidationFunctions } from "./output";
-import { MethodType, isMethodType } from "./helpers";
-import { URLString, isURLString } from "./urlString";
-
-export type Description = {
-    [K in MethodType]?: {
-        url: URLString;
-        input: Inputs[K];
-        output: {
-            [P in keyof Outputs[K]]?: Outputs[K][P];
-        };
-    }[];
-};
-
-export function isDescription(arg: any): arg is Description {
-    if (!arg || typeof arg !== "object") return false;
-
-    return Object.keys(arg).every((key) => {
-        if (!isMethodType(key) || !Array.isArray(arg[key])) return false;
-
-        let value = true;
-        for (const entry of arg[key]) {
-            if (
-                !value ||
-                !("url" in entry) ||
-                !isURLString(entry.url) ||
-                !("input" in entry) ||
-                !("output" in entry) ||
-                !entry["output"] ||
-                typeof entry["output"] !== "object"
-            )
-                return false;
-
-            value =
-                value &&
-                inputValidationFunctions[key](entry["input"]) &&
-                Object.keys(entry["output"]).every((caseValue) =>
-                outputValidationFunctions[key][caseValue] && outputValidationFunctions[key][caseValue](
-                        entry["output"][caseValue]
-                    )
-                );
-        }
-
-        return value;
-    });
-}
+export {
+    MethodType,
+    HeaderMap,
+    Cases,
+    BodyType,
+    BodyInstance,
+} from "./helpers";
+export { isURLString } from "./urlString";
+export { isResourceString } from "./resourceString";
+export { isDescription } from "./description";
+export { HeaderAndQuery, Inputs } from "./input";
+export { HeaderAndStatus, Outputs } from "./output";

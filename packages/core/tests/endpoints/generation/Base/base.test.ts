@@ -4,7 +4,7 @@ import {
     Primitives,
 } from "../../../../src/common/types/helpers";
 import { Base } from "../../../../src/endpoints/types/helpers";
-import { generateBase } from "../../../../src/endpoints/generation/baseGen";
+import { generateBase } from "../../../../src/endpoints/generation/helpers/baseGen";
 import { RANDOMNESS_ITERATIONS } from "../../../../src/common/Env";
 
 const resource = {

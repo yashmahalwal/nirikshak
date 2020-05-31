@@ -6,7 +6,7 @@ import {
 import {
     SelectedType,
     generateOneOfEntries,
-} from "../../../src/endpoints/generation/oneOfGen";
+} from "../../../src/endpoints/generation/helpers/oneOfGen";
 import { RANDOMNESS_ITERATIONS } from "../../../src/common/Env";
 import faker from "faker";
 

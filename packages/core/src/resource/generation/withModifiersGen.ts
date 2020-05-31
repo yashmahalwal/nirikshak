@@ -1,4 +1,4 @@
-import { ResourceBase } from "../types";
+import { ResourceBase } from "../types/resource";
 import faker from "faker";
 import { generateBaseType } from "./baseGen";
 import {

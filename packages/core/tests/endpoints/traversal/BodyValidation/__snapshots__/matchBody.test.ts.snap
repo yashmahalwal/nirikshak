@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Body match Invalid body 0: 1`] = `[Error: Invalid resource instance path: nonExistent]`;
+
+exports[`Body match Invalid body 2: 1`] = `[Error: Non literal type value from custom:invalidHelper]`;
+
+exports[`Body match Invalid body 2: 2`] = `[Error: function: custom:nonExistent, args: ]`;

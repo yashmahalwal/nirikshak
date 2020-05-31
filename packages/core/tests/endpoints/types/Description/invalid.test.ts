@@ -1,4 +1,4 @@
-import { isDescription } from "../../../../src/endpoints/types";
+import { isDescription } from "../../../../src/endpoints/types/description";
 import { URLString } from "../../../../src/endpoints/types/urlString";
 import faker from "faker";
 const ValidUrls: URLString[] = [
@@ -68,38 +68,6 @@ const InvalidDescriptions: any[] = [
                 },
             },
         ],
-    },
-    // Key is valid but entry is not an array
-    {
-        GET: {
-            url: faker.random.arrayElement(ValidUrls),
-            input: {
-                semantics: {
-                    headers: {
-                        applicationContent: true,
-                    },
-                    query: {
-                        sample: 15,
-                    },
-                },
-            },
-            output: {
-                NEGATIVE: {
-                    semantics: {
-                        status: 404,
-                    },
-                },
-                POSITIVE: {
-                    semantics: {
-                        status: 200,
-                    },
-                    body: {
-                        name: "resource:name",
-                        age: "resource:age",
-                    },
-                },
-            },
-        },
     },
     // Missing URL
     {
@@ -212,22 +180,20 @@ const InvalidDescriptions: any[] = [
     },
     // Falsy output
     {
-        GET: [
-            {
-                url: faker.random.arrayElement(ValidUrls),
-                input: {
-                    semantics: {
-                        headers: {
-                            applicationContent: true,
-                        },
-                        query: {
-                            sample: 15,
-                        },
+        GET: {
+            url: faker.random.arrayElement(ValidUrls),
+            input: {
+                semantics: {
+                    headers: {
+                        applicationContent: true,
+                    },
+                    query: {
+                        sample: 15,
                     },
                 },
-                output: null,
             },
-        ],
+            output: null,
+        },
     },
     // Non object output
     {
@@ -250,75 +216,71 @@ const InvalidDescriptions: any[] = [
     },
     // Invalid Input
     {
-        GET: [
-            {
-                url: faker.random.arrayElement(ValidUrls),
-                input: {
-                    semantics: {
-                        headers: {
-                            applicationContent: [true],
-                        },
-                        query: {
-                            sample: 15,
-                        },
+        GET: {
+            url: faker.random.arrayElement(ValidUrls),
+            input: {
+                semantics: {
+                    headers: {
+                        applicationContent: [true],
                     },
-                },
-                output: {
-                    NEGATIVE: [
-                        { semantics: { status: 501 } },
-                        {
-                            semantics: {
-                                status: 500,
-                                headers: { application: "chrome" },
-                            },
-                        },
-                    ],
-                    POSITIVE: {
-                        semantics: {
-                            status: 200,
-                        },
-                        body: {
-                            name: "resource:name",
-                            age: "resource:age",
-                        },
+                    query: {
+                        sample: 15,
                     },
                 },
             },
-        ],
+            output: {
+                NEGATIVE: [
+                    { semantics: { status: 501 } },
+                    {
+                        semantics: {
+                            status: 500,
+                            headers: { application: "chrome" },
+                        },
+                    },
+                ],
+                POSITIVE: {
+                    semantics: {
+                        status: 200,
+                    },
+                    body: {
+                        name: "resource:name",
+                        age: "resource:age",
+                    },
+                },
+            },
+        },
     },
     // Invalid output
     {
-        GET: [
-            {
-                url: faker.random.arrayElement(ValidUrls),
-                input: {
-                    semantics: {
-                        headers: {
-                            applicationContent: true,
-                        },
-                        query: {
-                            sample: 15,
-                        },
+        GET: {
+            url: faker.random.arrayElement(ValidUrls),
+            input: {
+                semantics: {
+                    headers: {
+                        applicationContent: true,
                     },
-                },
-                output: {
-                    NEGATIVE: {
-                        semantics: {
-                            status: false,
-                        },
-                    },
-                    POSITIVE: {
-                        semantics: {
-                            status: 200,
-                        },
-                        body: {
-                            name: "resource:name",
-                            age: "resource:age",
-                        },
+                    query: {
+                        sample: 15,
                     },
                 },
             },
-        ],
+            output: {
+                NEGATIVE: {
+                    semantics: {
+                        status: false,
+                    },
+                },
+                POSITIVE: {
+                    semantics: {
+                        status: 200,
+                    },
+                    body: {
+                        name: "resource:name",
+                        age: "resource:age",
+                    },
+                },
+            },
+        },
     },
     // Invalid output key
     {
@@ -365,50 +327,49 @@ const InvalidDescriptions: any[] = [
     },
     // Mixture of valid and invalid entries
     {
-        POST: [
-            {
-                url: faker.random.arrayElement(InvalidUrls),
-                input: {
+        POST: {
+            url: faker.random.arrayElement(InvalidUrls),
+            input: {
+                semantics: {
+                    headers: {
+                        applicationContent: true,
+                    },
+                    query: {
+                        sample: 15,
+                    },
+                },
+                body: {
+                    name: "resource:name",
+                    age: "resource:age",
+                },
+            },
+            output: {
+                DESTRUCTIVE: [
+                    { semantics: { status: 501 } },
+                    {
+                        semantics: {
+                            status: 500,
+                            headers: { application: "chrome" },
+                        },
+                    },
+                ],
+                NEGATIVE: {
                     semantics: {
-                        headers: {
-                            applicationContent: true,
-                        },
-                        query: {
-                            sample: 15,
-                        },
+                        status: 404,
+                    },
+                },
+                POSITIVE: {
+                    semantics: {
+                        status: 200,
                     },
                     body: {
                         name: "resource:name",
                         age: "resource:age",
                     },
                 },
-                output: {
-                    DESTRUCTIVE: [
-                        { semantics: { status: 501 } },
-                        {
-                            semantics: {
-                                status: 500,
-                                headers: { application: "chrome" },
-                            },
-                        },
-                    ],
-                    NEGATIVE: {
-                        semantics: {
-                            status: 404,
-                        },
-                    },
-                    POSITIVE: {
-                        semantics: {
-                            status: 200,
-                        },
-                        body: {
-                            name: "resource:name",
-                            age: "resource:age",
-                        },
-                    },
-                },
             },
-        ],
+        },
+
         GET: [
             {
                 url: faker.random.arrayElement(InvalidUrls),

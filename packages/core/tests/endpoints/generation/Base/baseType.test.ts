@@ -4,7 +4,7 @@ import {
     SchemaHelpers,
 } from "../../../../src/common/types/helpers";
 import faker from "faker";
-import { generateBaseType } from "../../../../src/endpoints/generation/baseTypeGen";
+import { generateBaseType } from "../../../../src/endpoints/generation/helpers/baseTypeGen";
 import { RANDOMNESS_ITERATIONS } from "../../../../src/common/Env";
 
 const resource = {

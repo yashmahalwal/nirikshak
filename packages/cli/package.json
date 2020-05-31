@@ -29,6 +29,7 @@
     "scripts": {
         "build": "rm -rf lib && tsc -p tsconfig.build.json",
         "test": "cd ../.. && npm run test:cli",
+        "test:update": "cd ../.. && npm run test:cli -- -u",
         "watch": "rm -rf lib && tsc --watch -p tsconfig.watch.json",
         "lint": "cd ../.. && npm run lint:cli",
         "format": "cd ../.. && npm run format:cli",
@@ -54,6 +55,7 @@
         "figlet": "^1.3.0",
         "fs-extra": "^9.0.0",
         "json-schema": "^0.2.5",
+        "ora": "^4.0.4",
         "signale": "^1.4.0",
         "yargs": "^15.3.1"
     }

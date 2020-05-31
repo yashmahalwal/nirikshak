@@ -8,7 +8,7 @@ import { WithModifiers } from "../../../../src/resource/types/helper";
 import faker from "faker";
 import { RANDOMNESS_ITERATIONS } from "../../../../src/common/Env";
 import { generateWithModifiers } from "../../../../src/resource/generation/withModifiersGen";
-import { ResourceBase } from "../../../../src/resource/types";
+import { ResourceBase } from "../../../../src/resource/types/resource";
 import { SchemaHelpers } from "../../../../src/common/types/helpers";
 // Helpers for the resource
 const Helpers: SchemaHelpers = {

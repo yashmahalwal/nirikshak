@@ -8,6 +8,12 @@ import {
     MethodType,
     Cases,
 } from "../../../../../src/endpoints/types/helpers";
+import {
+    CustomFunctionString,
+    CustomFunctionObject,
+    CustomFunction,
+    CustomFunctionType,
+} from "../../../../../src/common/types/custom";
 
 const ValidHeader: HeaderMap = {
     "content-type": "faker:system:mimetype",
@@ -87,6 +93,12 @@ const InvalidBody: any = {
     },
 };
 
+const ValidBodyString: CustomFunctionString = "custom:string";
+const ValidBodyFunction: CustomFunctionObject = {
+    function: "custom:string",
+    args: [1, 3, 4],
+};
+
 const ValidHeaderAndStatus: HeaderAndStatus[] = [
     { status: ValidStatus },
     {
@@ -104,18 +116,33 @@ const InvalidHeaderAndStatus: any[] = [
 ];
 
 const ValidHeaderAndStatusAndBodyArrays: {
-    body: BodyType;
+    body: BodyType | CustomFunctionType;
     semantics: HeaderAndStatus;
 }[][] = [
     [{ body: ValidBody, semantics: ValidHeaderAndStatus[0] }],
+    [{ body: ValidBodyFunction, semantics: ValidHeaderAndStatus[0] }],
+    [{ body: ValidBodyString, semantics: ValidHeaderAndStatus[0] }],
     [
         { body: ValidBody, semantics: ValidHeaderAndStatus[0] },
         { body: ValidBody, semantics: ValidHeaderAndStatus[1] },
     ],
     [
+        { body: ValidBody, semantics: ValidHeaderAndStatus[0] },
+        { body: ValidBodyString, semantics: ValidHeaderAndStatus[1] },
+    ],
+    [
+        { body: ValidBodyString, semantics: ValidHeaderAndStatus[0] },
+        { body: ValidBodyFunction, semantics: ValidHeaderAndStatus[1] },
+    ],
+    [
         { body: ValidBody, semantics: ValidHeaderAndStatus[1] },
         { body: ValidBody, semantics: ValidHeaderAndStatus[1] },
         { body: ValidBody, semantics: ValidHeaderAndStatus[1] },
+    ],
+    [
+        { body: ValidBody, semantics: ValidHeaderAndStatus[1] },
+        { body: ValidBodyString, semantics: ValidHeaderAndStatus[1] },
+        { body: ValidBodyFunction, semantics: ValidHeaderAndStatus[1] },
     ],
 ];
 
@@ -140,56 +167,66 @@ const InvalidHeaderAndStatusAndBodyArrays: {
 ];
 
 describe("Output validation functions: body", () => {
-    (["PUT", "POST", "PATCH"] as MethodType[]).forEach((method) => {
-        ValidHeaderAndStatus.forEach((element, index) => {
-            (["POSITIVE"] as Cases[]).forEach((caseValue) => {
-                test(`Valid body - ${method}-${caseValue}: ${index}`, () => {
-                    const o = outputValidationFunctions[method][caseValue];
+    (["GET", "DELETE", "PUT", "POST", "PATCH"] as MethodType[]).forEach(
+        (method) => {
+            ValidHeaderAndStatus.forEach((element, index) => {
+                (["POSITIVE"] as Cases[]).forEach((caseValue) => {
+                    test(`Valid body - ${method}-${caseValue}: ${index}`, () => {
+                        const o = outputValidationFunctions[method][caseValue];
 
-                    expect(o({ semantics: element, body: ValidBody })).toBe(
-                        true
-                    );
+                        expect(o({ semantics: element, body: ValidBody })).toBe(
+                            true
+                        );
 
-                    expect(o({ semantics: element, body: InvalidBody })).toBe(
-                        false
-                    );
+                        expect(
+                            o({ semantics: element, body: ValidBodyFunction })
+                        ).toBe(true);
+
+                        expect(
+                            o({ semantics: element, body: ValidBodyString })
+                        ).toBe(true);
+
+                        expect(
+                            o({ semantics: element, body: InvalidBody })
+                        ).toBe(false);
+                    });
                 });
             });
-        });
 
-        ValidHeaderAndStatusAndBodyArrays.forEach((element, index) => {
-            (["POSITIVE"] as Cases[]).forEach((caseValue) => {
-                test(`Valid body - ${method}-${caseValue}: ${index}`, () => {
-                    const o = outputValidationFunctions[method][caseValue];
+            ValidHeaderAndStatusAndBodyArrays.forEach((element, index) => {
+                (["POSITIVE"] as Cases[]).forEach((caseValue) => {
+                    test(`Valid body - ${method}-${caseValue}: ${index}`, () => {
+                        const o = outputValidationFunctions[method][caseValue];
 
-                    expect(o(element)).toBe(true);
+                        expect(o(element)).toBe(true);
+                    });
                 });
             });
-        });
 
-        InvalidHeaderAndStatusAndBodyArrays.forEach((element, index) => {
-            (["POSITIVE"] as Cases[]).forEach((caseValue) => {
-                test(`Valid body - ${method}-${caseValue}: ${index}`, () => {
-                    const o = outputValidationFunctions[method][caseValue];
+            InvalidHeaderAndStatusAndBodyArrays.forEach((element, index) => {
+                (["POSITIVE"] as Cases[]).forEach((caseValue) => {
+                    test(`Invalid body - ${method}-${caseValue}: ${index}`, () => {
+                        const o = outputValidationFunctions[method][caseValue];
 
-                    expect(o(element)).toBe(false);
+                        expect(o(element)).toBe(false);
+                    });
                 });
             });
-        });
 
-        InvalidHeaderAndStatus.forEach((element, index) => {
-            (["POSITIVE"] as Cases[]).forEach((caseValue) => {
-                test(`Invalid body - ${method}-${caseValue}: ${index}`, () => {
-                    const o = outputValidationFunctions[method][caseValue];
+            InvalidHeaderAndStatus.forEach((element, index) => {
+                (["POSITIVE"] as Cases[]).forEach((caseValue) => {
+                    test(`Invalid body - ${method}-${caseValue}: ${index}`, () => {
+                        const o = outputValidationFunctions[method][caseValue];
 
-                    expect(o({ semantics: element, body: ValidBody })).toBe(
-                        false
-                    );
-                    expect(o({ semantics: element, body: InvalidBody })).toBe(
-                        false
-                    );
+                        expect(o({ semantics: element, body: ValidBody })).toBe(
+                            false
+                        );
+                        expect(
+                            o({ semantics: element, body: InvalidBody })
+                        ).toBe(false);
+                    });
                 });
             });
-        });
-    });
+        }
+    );
 });

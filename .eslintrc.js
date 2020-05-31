@@ -1,3 +1,4 @@
+const path = require("path");
 module.exports = {
     env: {
         es6: true,
@@ -27,7 +28,10 @@ module.exports = {
     },
     plugins: ["@typescript-eslint"],
     rules: {
+        "import/no-unresolved": ["error", { ignore: ["^@nirikshak"] }],
         "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/no-non-null-assertion": 0,
+        "import/default": 0,
         "import/no-extraneous-dependencies": ["error"],
         "@typescript-eslint/no-use-before-define": [
             "error",

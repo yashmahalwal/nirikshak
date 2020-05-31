@@ -1,5 +1,5 @@
 import _ from "lodash";
-import * as faker from "faker";
+import faker from "faker";
 import { FakerString } from "./fakerStrings";
 
 // Type guard: Faker string

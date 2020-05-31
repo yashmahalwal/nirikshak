@@ -3,7 +3,7 @@ import { SchemaHelpers } from "../../../../src/common/types/helpers";
 import { ResourceInstance } from "../../../../src/resource/types/helper";
 import { Base, WithModifiers } from "../../../../src/endpoints/types/helpers";
 import { ValidModifiers } from "../../utils";
-import { generateWithModifiers } from "../../../../src/endpoints/generation/withModifiersGen";
+import { generateWithModifiers } from "../../../../src/endpoints/generation/helpers/withModifiersGen";
 import { RANDOMNESS_ITERATIONS } from "../../../../src/common/Env";
 
 faker.seed(456);

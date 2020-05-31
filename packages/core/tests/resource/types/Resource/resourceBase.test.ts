@@ -8,7 +8,7 @@ import {
     isResourceBase,
     isResource,
     Resource,
-} from "../../../../src/resource/types";
+} from "../../../../src/resource/types/resource";
 
 const ValidResourceBases: ResourceBase[] = [
     {

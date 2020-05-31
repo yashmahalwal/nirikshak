@@ -1,4 +1,5 @@
 import { BodyType, HeaderMap, isHeaderMap, isBodyType } from "./helpers";
+import { CustomFunction, isCustomFunction } from "../../common/types/custom";
 
 export interface HeaderAndStatus {
     headers?: HeaderMap;
@@ -17,24 +18,36 @@ export function isHeaderAndStatus(input: any): input is HeaderAndStatus {
 export interface Outputs {
     GET: {
         POSITIVE:
-            | { semantics: HeaderAndStatus }
-            | { semantics: HeaderAndStatus }[];
+            | ({ body: BodyType | CustomFunction } & {
+                  semantics: HeaderAndStatus;
+              })
+            | ({ body: BodyType | CustomFunction } & {
+                  semantics: HeaderAndStatus;
+              })[];
         NEGATIVE:
             | { semantics: HeaderAndStatus }
             | { semantics: HeaderAndStatus }[];
     };
     DELETE: {
         POSITIVE:
-            | { semantics: HeaderAndStatus }
-            | { semantics: HeaderAndStatus }[];
+            | ({ body: BodyType | CustomFunction } & {
+                  semantics: HeaderAndStatus;
+              })
+            | ({ body: BodyType | CustomFunction } & {
+                  semantics: HeaderAndStatus;
+              })[];
         NEGATIVE:
             | { semantics: HeaderAndStatus }
             | { semantics: HeaderAndStatus }[];
     };
     POST: {
         POSITIVE:
-            | ({ body: BodyType } & { semantics: HeaderAndStatus })
-            | ({ body: BodyType } & { semantics: HeaderAndStatus })[];
+            | ({ body: BodyType | CustomFunction } & {
+                  semantics: HeaderAndStatus;
+              })
+            | ({ body: BodyType | CustomFunction } & {
+                  semantics: HeaderAndStatus;
+              })[];
         NEGATIVE:
             | { semantics: HeaderAndStatus }
             | { semantics: HeaderAndStatus }[];
@@ -44,16 +57,24 @@ export interface Outputs {
     };
     PUT: {
         POSITIVE:
-            | ({ body: BodyType } & { semantics: HeaderAndStatus })
-            | ({ body: BodyType } & { semantics: HeaderAndStatus })[];
+            | ({ body: BodyType | CustomFunction } & {
+                  semantics: HeaderAndStatus;
+              })
+            | ({ body: BodyType | CustomFunction } & {
+                  semantics: HeaderAndStatus;
+              })[];
         DESTRUCTIVE:
             | { semantics: HeaderAndStatus }
             | { semantics: HeaderAndStatus }[];
     };
     PATCH: {
         POSITIVE:
-            | ({ body: BodyType } & { semantics: HeaderAndStatus })
-            | ({ body: BodyType } & { semantics: HeaderAndStatus })[];
+            | ({ body: BodyType | CustomFunction } & {
+                  semantics: HeaderAndStatus;
+              })
+            | ({ body: BodyType | CustomFunction } & {
+                  semantics: HeaderAndStatus;
+              })[];
         NEGATIVE:
             | { semantics: HeaderAndStatus }
             | { semantics: HeaderAndStatus }[];
@@ -81,12 +102,15 @@ export const outputValidationFunctions: {
         },
         POSITIVE: (input: any): input is Outputs["GET"]["POSITIVE"] => {
             if (!input || typeof input !== "object") return false;
+            if (Array.isArray(input))
+                return input.every((value) =>
+                    outputValidationFunctions["GET"]["POSITIVE"](value)
+                );
 
-            return Array.isArray(input)
-                ? input.every((value) =>
-                      outputValidationFunctions["GET"]["POSITIVE"](value)
-                  )
-                : isHeaderAndStatus(input.semantics);
+            return (
+                (isCustomFunction(input.body) || isBodyType(input.body)) &&
+                isHeaderAndStatus(input.semantics)
+            );
         },
     },
     DELETE: {
@@ -101,12 +125,15 @@ export const outputValidationFunctions: {
         },
         POSITIVE: (input: any): input is Outputs["DELETE"]["POSITIVE"] => {
             if (!input || typeof input !== "object") return false;
+            if (Array.isArray(input))
+                return input.every((value) =>
+                    outputValidationFunctions["DELETE"]["POSITIVE"](value)
+                );
 
-            return Array.isArray(input)
-                ? input.every((value) =>
-                      outputValidationFunctions["DELETE"]["POSITIVE"](value)
-                  )
-                : isHeaderAndStatus(input.semantics);
+            return (
+                (isCustomFunction(input.body) || isBodyType(input.body)) &&
+                isHeaderAndStatus(input.semantics)
+            );
         },
     },
     POST: {
@@ -135,7 +162,10 @@ export const outputValidationFunctions: {
                     outputValidationFunctions["POST"]["POSITIVE"](value)
                 );
 
-            return isBodyType(input.body) && isHeaderAndStatus(input.semantics);
+            return (
+                (isCustomFunction(input.body) || isBodyType(input.body)) &&
+                isHeaderAndStatus(input.semantics)
+            );
         },
     },
     PATCH: {
@@ -165,7 +195,10 @@ export const outputValidationFunctions: {
                     outputValidationFunctions["PATCH"]["POSITIVE"](value)
                 );
 
-            return isBodyType(input.body) && isHeaderAndStatus(input.semantics);
+            return (
+                (isCustomFunction(input.body) || isBodyType(input.body)) &&
+                isHeaderAndStatus(input.semantics)
+            );
         },
     },
     PUT: {
@@ -185,7 +218,10 @@ export const outputValidationFunctions: {
                     outputValidationFunctions["PUT"]["POSITIVE"](value)
                 );
 
-            return isBodyType(input.body) && isHeaderAndStatus(input.semantics);
+            return (
+                (isCustomFunction(input.body) || isBodyType(input.body)) &&
+                isHeaderAndStatus(input.semantics)
+            );
         },
     },
 };

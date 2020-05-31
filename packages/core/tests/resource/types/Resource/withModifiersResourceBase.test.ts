@@ -3,7 +3,7 @@
     Circular dependecy with ResourceBase, OneOfEntries
     Assumes circular dependencies to be working correctly, except this part
 */
-import { ResourceBase, isResourceBase } from "../../../../src/resource/types";
+import { ResourceBase, isResourceBase } from "../../../../src/resource/types/resource";
 import { ValidModifiers, InvalidModifiers } from "../../utils";
 import {
     WithModifiers,

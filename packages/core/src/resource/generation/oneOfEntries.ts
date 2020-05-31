@@ -1,6 +1,6 @@
 import faker from "faker";
 import { BaseType, WithModifiers, OneOfEntries } from "../types/helper";
-import { ResourceBase } from "../types";
+import { ResourceBase } from "../types/resource";
 
 // Return type with discriminated union
 export type SelectedType<T extends BaseType | ResourceBase> = {
