@@ -4,25 +4,27 @@ import {
 } from "../../generation/input/headerAndQuery";
 import { Inputs } from "../../types/input";
 import { SchemaHelpers } from "../../../common/types/helpers";
-import { getRandomNewInstance } from "../collection";
-import { Resource } from "../../../resource/types/resource";
+import { getRandomExistingResource, Collection } from "../collection";
 import { URLString } from "../../types/urlString";
 import { ResourceInstance } from "../../../resource/types/helper";
 import Supertest from "supertest";
 import { generateURL } from "../../generation/urlStringGen";
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
-interface GetNegativeInputInstance {
+import { BodyInstance } from "../../types";
+import { generateBodyType } from "../../generation";
+interface PostNegativeInputInstance {
     semantics: HeaderAndQueryInstance;
     resource: ResourceInstance;
+    body: BodyInstance;
 }
 
 // Generate input from a non existing resource
-export async function generateGetNegativeInput(
-    input: Inputs["GET"],
-    resourceSchema: Resource,
-    helpers: SchemaHelpers
-): Promise<GetNegativeInputInstance> {
-    const resource = await getRandomNewInstance(resourceSchema, helpers);
+export async function generatePostNegativeInput(
+    input: Inputs["POST"],
+    helpers: SchemaHelpers,
+    collection: Collection
+): Promise<PostNegativeInputInstance> {
+    const resource = getRandomExistingResource(collection);
     return {
         semantics: await generateHeaderAndQuery(
             input.semantics,
@@ -30,29 +32,31 @@ export async function generateGetNegativeInput(
             helpers
         ),
         resource,
+        body: await generateBodyType(input.body, resource, helpers),
     };
 }
 
-export async function makeNegativeGetRequest(
+export async function makeNegativePostRequest(
     server: Supertest.SuperTest<Supertest.Test>,
     url: URLString,
-    input: Inputs["GET"],
+    input: Inputs["POST"],
     helpers: SchemaHelpers,
-    resourceSchema: Resource
+    collection: Collection
 ): Promise<{
     status: number;
     headers?: HeadersInstance;
 }> {
-    const { resource, semantics } = await generateGetNegativeInput(
+    const { resource, semantics, body } = await generatePostNegativeInput(
         input,
-        resourceSchema,
-        helpers
+        helpers,
+        collection
     );
     const urlValue = await generateURL(url, resource, helpers);
 
     const { status, header } = await server
-        .get(urlValue)
+        .post(urlValue)
         .query(semantics.query ?? {})
-        .set(semantics.headers ?? {});
+        .set(semantics.headers ?? {})
+        .send(body);
     return { status, headers: header };
 }

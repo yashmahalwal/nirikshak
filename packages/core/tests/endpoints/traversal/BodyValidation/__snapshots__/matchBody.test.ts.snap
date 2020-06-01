@@ -4,4 +4,6 @@ exports[`Body match Invalid body 0: 1`] = `[Error: Invalid resource instance pat
 
 exports[`Body match Invalid body 2: 1`] = `[Error: Non literal type value from custom:invalidHelper]`;
 
-exports[`Body match Invalid body 2: 2`] = `[Error: function: custom:nonExistent, args: ]`;
+exports[`Body match Resource string entry : 0 1`] = `[Error: function: custom:nonExistent, args: ]`;
+
+exports[`Body match Resource string entry : 1 1`] = `[Error: Invalid resource instance path: dummy]`;

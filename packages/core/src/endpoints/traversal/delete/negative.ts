@@ -4,23 +4,25 @@ import {
 } from "../../generation/input/headerAndQuery";
 import { Inputs } from "../../types/input";
 import { SchemaHelpers } from "../../../common/types/helpers";
-import Supertest from "supertest";
-import { ResourceInstance } from "../../../resource/types/helper";
+import { getRandomNewInstance } from "../collection";
+import { Resource } from "../../../resource/types/resource";
 import { URLString } from "../../types/urlString";
+import { ResourceInstance } from "../../../resource/types/helper";
+import Supertest from "supertest";
 import { generateURL } from "../../generation/urlStringGen";
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
-
-interface GetPositiveInputInstance {
+interface GetNegativeInputInstance {
     semantics: HeaderAndQueryInstance;
     resource: ResourceInstance;
 }
 
-// Generate input from an resource
-export async function generateGetPositiveInput(
-    input: Inputs["GET"],
-    resource: ResourceInstance,
+// Generate input from a non existing resource
+export async function generateDeleteNegativeInput(
+    input: Inputs["DELETE"],
+    resourceSchema: Resource,
     helpers: SchemaHelpers
-): Promise<GetPositiveInputInstance> {
+): Promise<GetNegativeInputInstance> {
+    const resource = await getRandomNewInstance(resourceSchema, helpers);
     return {
         semantics: await generateHeaderAndQuery(
             input.semantics,
@@ -31,27 +33,26 @@ export async function generateGetPositiveInput(
     };
 }
 
-export async function makePositiveGetRequest(
+export async function makeNegativeGetRequest(
     server: Supertest.SuperTest<Supertest.Test>,
     url: URLString,
-    input: Inputs["GET"],
+    input: Inputs["DELETE"],
     helpers: SchemaHelpers,
-    resourceInstance: ResourceInstance
+    resourceSchema: Resource
 ): Promise<{
     status: number;
-    headers: HeadersInstance;
-    body: any;
+    headers?: HeadersInstance;
 }> {
-    const { resource, semantics } = await generateGetPositiveInput(
+    const { resource, semantics } = await generateDeleteNegativeInput(
         input,
-        resourceInstance,
+        resourceSchema,
         helpers
     );
     const urlValue = await generateURL(url, resource, helpers);
 
-    const { status, header, body } = await server
-        .get(urlValue)
+    const { status, header } = await server
+        .delete(urlValue)
         .query(semantics.query ?? {})
         .set(semantics.headers ?? {});
-    return { status, headers: header, body };
+    return { status, headers: header };
 }

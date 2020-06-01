@@ -11,7 +11,6 @@ import {
 import {
     CustomFunctionString,
     CustomFunctionObject,
-    CustomFunction,
     CustomFunctionType,
 } from "../../../../../src/common/types/custom";
 

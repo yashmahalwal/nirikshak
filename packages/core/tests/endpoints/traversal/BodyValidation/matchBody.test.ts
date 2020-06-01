@@ -242,6 +242,70 @@ const InvalidInputs: { input: any; body: any }[] = [
     },
 ];
 
+const ResourceStringEdgeCases: {
+    input: BodyInstance;
+    resource: ResourceInstance;
+    schema: BodyType;
+    output: boolean;
+}[] = [
+    {
+        input: {
+            id: ValidResource.id,
+        },
+        schema: {
+            id: "resource:id",
+            dummy: "resource:dummy",
+        },
+        resource: {
+            id: ValidResource.id,
+        },
+        output: true,
+    },
+    {
+        input: {
+            id: ValidResource.id,
+            dummy: 4,
+        },
+        schema: {
+            id: "resource:id",
+            dummy: "resource:dummy",
+        },
+        resource: {
+            id: ValidResource.id,
+            dummy: 4,
+        },
+        output: true,
+    },
+    {
+        input: {
+            id: ValidResource.id,
+        },
+        schema: {
+            id: "resource:id",
+            dummy: "resource:dummy",
+        },
+        resource: {
+            id: ValidResource.id,
+            dummy: 4,
+        },
+        output: false,
+    },
+    {
+        input: {
+            id: ValidResource.id,
+            dummy: 4,
+        },
+        schema: {
+            id: "resource:id",
+            dummy: "resource:dummy",
+        },
+        resource: {
+            id: ValidResource.id,
+        },
+        output: false,
+    },
+];
+
 describe(`Body match`, () => {
     test.each(Entries)(`Valid body type : %#`, async ({ output, input }) =>
         expect(
@@ -259,4 +323,16 @@ describe(`Body match`, () => {
             )
         ).rejects.toMatchSnapshot();
     });
+
+    test.each(ResourceStringEdgeCases.slice(2))(
+        `Resource string entry : %#`,
+        async ({ resource, schema, output, input }) => {
+            try {
+                const val = await matchBody(input, schema, resource, Helpers);
+                expect(val).toBe(output);
+            } catch (e) {
+                expect(e).toMatchSnapshot();
+            }
+        }
+    );
 });

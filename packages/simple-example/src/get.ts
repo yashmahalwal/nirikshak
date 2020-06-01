@@ -8,7 +8,7 @@ router.get("/Student/:id", (req, res) => {
     } = req;
 
     if (studentMap.has(id)) {
-        res.send({ student: studentMap.get(id) });
+        res.send(studentMap.get(id));
     } else {
         res.sendStatus(404);
     }

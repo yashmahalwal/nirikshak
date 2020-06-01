@@ -14,7 +14,6 @@
                         "id": "resource:id",
                         "branch": "resource:branch",
                         "grade": "resource:grade",
-                        "possibleGrade": "custom:grade",
                         "addresses": "resource:addresses",
                         "schooling": "resource:schooling",
                         "collegeGPA": "resource:collegeGPA"

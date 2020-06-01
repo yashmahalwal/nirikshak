@@ -1,6 +1,5 @@
 import {
     BodyType,
-    isBodyType,
     BaseType,
     isBaseType,
     Base,
@@ -18,7 +17,13 @@ import _ from "lodash";
 import { isLiteral } from "../../common/types/literals";
 import { generateBaseType } from "../generation/helpers/baseTypeGen";
 import { isFakerType } from "../../common/types/fakerTypes";
-import { isCustomFunction } from "../../common/types/custom";
+import {
+    isCustomFunction,
+    CustomFunctionType,
+    normalizeCustomFunction,
+} from "../../common/types/custom";
+import { HeaderAndStatus } from "../types";
+import { TraversalHelpers } from "./traversalHelpers";
 
 export function matchResourceString(
     input: any,
@@ -188,42 +193,126 @@ export async function matchBody(
     let value = true;
     for (const key in bodySchema) {
         const entry = bodySchema[key];
-        if (isResourceString(entry))
-            value = value && matchResourceString(body[key], entry, resource);
-        else if (isBase(entry))
-            value =
-                value && (await matchBase(body[key], entry, resource, helpers));
+        if (isResourceString(entry)) {
+            if (body[key] === undefined) {
+                try {
+                    getFromResource(entry, resource);
+                    value = false;
+                } catch {
+                    continue;
+                }
+            }
+            value = matchResourceString(body[key], entry, resource);
+        } else if (isBase(entry))
+            value = await matchBase(body[key], entry, resource, helpers);
         else if (isWithModifiersBase(entry))
             value =
-                value &&
-                (entry.optional && body[key] === undefined
+                entry.optional && body[key] === undefined
                     ? true
                     : await matchWithModifiersBase(
                           body[key],
                           entry,
                           resource,
                           helpers
-                      ));
+                      );
         else if (isWithModifiersBodyType(entry))
             value =
-                value &&
-                (entry.optional && body[key] === undefined
+                entry.optional && body[key] === undefined
                     ? true
                     : await matchWithModifiersBodyType(
                           body[key],
                           entry,
                           resource,
                           helpers
-                      ));
+                      );
         else if (isOneOfEntries(entry))
-            value =
-                value &&
-                (await matchOneOfEntries(body[key], entry, resource, helpers));
-        else
-            value =
-                value && (await matchBody(body[key], entry, resource, helpers));
+            value = await matchOneOfEntries(
+                body[key],
+                entry,
+                resource,
+                helpers
+            );
+        else value = await matchBody(body[key], entry, resource, helpers);
+
         if (!value) return false;
     }
 
     return value;
+}
+
+export function extractBodiesFromOutput(
+    input: { semantics: HeaderAndStatus; body?: BodyType }[]
+): (
+    | { type: "body type"; value: BodyType }
+    | { type: "custom function"; value: CustomFunctionType }
+)[] {
+    const bodyArr: (
+        | { type: "body type"; value: BodyType }
+        | { type: "custom function"; value: CustomFunctionType }
+    )[] = [];
+    input.forEach(
+        (entry) =>
+            "body" in entry &&
+            bodyArr.push(
+                isCustomFunction(entry.body)
+                    ? { type: "custom function", value: entry.body }
+                    : { type: "body type", value: entry.body as BodyType }
+            )
+    );
+    return bodyArr;
+}
+
+export async function validateTraversalHelpers(
+    body: any,
+    input: CustomFunctionType,
+    resource: ResourceInstance,
+    schemaHelpers: SchemaHelpers,
+    traversalHelpers: TraversalHelpers
+): Promise<boolean> {
+    const object = normalizeCustomFunction(input);
+    let value = false;
+    try {
+        value = _.get(traversalHelpers, object.function.slice(7))(
+            input,
+            resource,
+            schemaHelpers,
+            ...object.args
+        );
+    } catch (e) {
+        throw new Error(
+            `function: ${object.function}, args: ${object.args.join(",")}`
+        );
+    }
+
+    return value;
+}
+
+export async function bodyValidation(
+    body: any,
+    bodyArr: (
+        | { type: "body type"; value: BodyType }
+        | { type: "custom function"; value: CustomFunctionType }
+    )[],
+    resource: ResourceInstance,
+    schemaHelpers: SchemaHelpers,
+    traversalHelpers: TraversalHelpers
+): Promise<boolean> {
+    return (
+        !bodyArr.length ||
+        (
+            await Promise.all(
+                bodyArr.map((b) =>
+                    b.type === "body type"
+                        ? matchBody(body, b, resource, schemaHelpers)
+                        : validateTraversalHelpers(
+                              body,
+                              b.value,
+                              resource,
+                              schemaHelpers,
+                              traversalHelpers
+                          )
+                )
+            )
+        ).some((val) => val)
+    );
 }

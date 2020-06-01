@@ -1,5 +1,5 @@
 import { HeaderAndStatus } from "../../../../src/endpoints/types/output";
-import { HeaderMap, BodyType } from "../../../../src/endpoints/types/helpers";
+import { HeaderMap } from "../../../../src/endpoints/types/helpers";
 import { extractHeadersFromSemantics } from "../../../../src/endpoints/traversal/semanticsValidation";
 
 const Entries: {
