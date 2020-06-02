@@ -1,5 +1,5 @@
 import Supertest from "supertest";
-import { MethodType, Inputs, Outputs } from "../types";
+import { MethodType, Inputs, Outputs, Cases } from "../types";
 import { URLString } from "../types/urlString";
 import { ResourceInstance, Resource } from "../../resource";
 import { SchemaHelpers } from "../../common";
@@ -10,6 +10,7 @@ import { makeDeleteRequest } from "./delete";
 import { makePatchRequest } from "./patch";
 import { makePostRequest } from "./post";
 import { makePutRequest } from "./put";
+import { InputSemantics, InputBodies } from "../types/input";
 export { extractBodiesFromOutput, bodyValidation } from "./bodyValidation";
 export { TraversalHelpers, TraversalHelperFunctions } from "./traversalHelpers";
 export {
@@ -26,9 +27,9 @@ export {
 export async function makeRequest(
     url: URLString,
     method: MethodType,
-    caseValue: keyof Outputs[typeof method],
+    caseValue: Cases,
     server: Supertest.SuperTest<Supertest.Test>,
-    input: Inputs[typeof method],
+    input: InputSemantics & Partial<InputBodies>,
     resource: ResourceInstance,
     helpers: SchemaHelpers,
     collection: Collection,
@@ -41,7 +42,7 @@ export async function makeRequest(
     switch (method) {
         case "GET":
             return makeGetRequest(
-                caseValue,
+                caseValue as keyof Outputs["GET"],
                 server,
                 url,
                 input,
@@ -51,7 +52,7 @@ export async function makeRequest(
             );
         case "DELETE":
             return makeDeleteRequest(
-                caseValue,
+                caseValue as keyof Outputs["DELETE"],
                 server,
                 url,
                 input,
@@ -84,7 +85,7 @@ export async function makeRequest(
             );
         case "PUT":
             return makePutRequest(
-                caseValue,
+                caseValue as keyof Outputs["PUT"],
                 server,
                 url,
                 input as Inputs["PUT"],

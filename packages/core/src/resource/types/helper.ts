@@ -7,15 +7,15 @@ import { FakerType, isFakerType } from "../../common/types/fakerTypes";
 import { ResourceBase, isResourceBase } from "./resource";
 import { Primitives } from "../../common/types/helpers";
 
-
 // An instance is of the following type
-export interface ResourceInstance {
-    id: Exclude<Primitives, Array<any> | null | boolean>;
-    [key: string]:
-        | Primitives
-        | Omit<ResourceInstance, "id">
-        | Array<Omit<ResourceInstance, "id">>;
+export interface ResourceInstanceBase {
+    [key: string]: Primitives | ResourceInstanceBase | ResourceInstanceBase[];
 }
+
+export interface ResourceInstance extends ResourceInstanceBase {
+    id: string | number;
+}
+
 
 // Base type: Simple literals that a resource field can have
 export type BaseType =
@@ -23,7 +23,6 @@ export type BaseType =
     | CustomFunctionType
     | Literal
     | Array<BaseType>;
-
 
 // Validation for the same
 export function isBaseType(input: any): input is BaseType {

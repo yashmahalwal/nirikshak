@@ -1,7 +1,7 @@
 import {
     OneOfEntries,
     isOneOfEntries,
-} from "../../src/endpoints/types/helpers";
+} from "../../../src/endpoints/types/helpers";
 
 const ValidOneOfs: OneOfEntries[] = [
     { types: [1] },

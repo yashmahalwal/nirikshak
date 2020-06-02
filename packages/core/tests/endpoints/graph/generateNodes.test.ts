@@ -1,12 +1,14 @@
-import { Inputs } from "../../../../src/endpoints/types/input";
-import { Outputs } from "../../../../src/endpoints/types/output";
-import { MethodType, Cases } from "../../../../src/endpoints/types/helpers";
-import {
-    isDescription,
-    Description,
-} from "../../../../src/endpoints/types/description";
-import { URLString } from "../../../../src/endpoints/types/urlString";
 import faker from "faker";
+import {
+    Inputs,
+    Outputs,
+    Description,
+    MethodType,
+    Cases,
+} from "../../../src";
+import { URLString } from "../../../src/endpoints/types/urlString";
+import { generateNodes } from "../../../src/endpoints/graph/generateNodes";
+import { serializeNodeName } from "../../../src/endpoints/graph/nodeTypes";
 const ValidInputs: Inputs = {
     DELETE: {
         semantics: {
@@ -73,9 +75,13 @@ const ValidInputs: Inputs = {
         },
         destructiveBody: {
             id: "resource:id",
-            name: "faker:random.name",
+            name: {
+                type: "resource.name",
+                optional: true,
+            },
             age: {
-                types: ["faker:random.number", { function: "custom:age" }],
+                type: "resource.age",
+                optional: true,
             },
         },
     },
@@ -235,34 +241,33 @@ const ValidOutputs: Outputs = {
     },
 };
 
-const ComplexCases: Description[] = [
-    {},
-    {
-        GET: {
+const ComplexCase: Description = {
+    GET: [
+        {
             url: faker.random.arrayElement(urls),
             input: ValidInputs["GET"],
             output: {},
         },
-
-        POST: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["POST"],
-                output: {},
+        {
+            url: faker.random.arrayElement(urls),
+            input: ValidInputs["GET"],
+            output: {
+                NEGATIVE: ValidOutputs["GET"]["NEGATIVE"],
             },
-        ],
-    },
-    {
-        GET: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["GET"],
-                output: {
-                    NEGATIVE: ValidOutputs["GET"]["NEGATIVE"],
-                },
-            },
-        ],
-        POST: {
+        },
+        {
+            url: faker.random.arrayElement(urls),
+            input: ValidInputs["GET"],
+            output: ValidOutputs["GET"],
+        },
+    ],
+    POST: [
+        {
+            url: faker.random.arrayElement(urls),
+            input: ValidInputs["POST"],
+            output: {},
+        },
+        {
             url: faker.random.arrayElement(urls),
             input: ValidInputs["POST"],
             output: {
@@ -270,187 +275,53 @@ const ComplexCases: Description[] = [
                 POSITIVE: ValidOutputs["POST"]["POSITIVE"],
             },
         },
-    },
-    {
-        DELETE: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["DELETE"],
-                output: {
-                    POSITIVE: ValidOutputs["DELETE"]["POSITIVE"],
-                },
-            },
-        ],
-        POST: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["POST"],
-                output: { NEGATIVE: ValidOutputs["POST"]["NEGATIVE"] },
-            },
-        ],
-        PATCH: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["PATCH"],
-                output: { DESTRUCTIVE: ValidOutputs["PATCH"]["DESTRUCTIVE"] },
-            },
-        ],
-    },
-    {
-        GET: {
+        {
             url: faker.random.arrayElement(urls),
-            input: ValidInputs["GET"],
-            output: ValidOutputs["GET"],
+            input: ValidInputs["POST"],
+            output: { NEGATIVE: ValidOutputs["POST"]["NEGATIVE"] },
         },
-
-        DELETE: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["DELETE"],
-                output: ValidOutputs["DELETE"],
-            },
-        ],
-        POST: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["POST"],
-                output: ValidOutputs["POST"],
-            },
-        ],
-        PATCH: {
+        {
             url: faker.random.arrayElement(urls),
-            input: ValidInputs["PATCH"],
-            output: ValidOutputs["PATCH"],
+            input: ValidInputs["POST"],
+            output: ValidOutputs["POST"],
         },
-
-        PUT: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["PUT"],
-                output: ValidOutputs["PUT"],
-            },
-        ],
-    },
-    {
-        GET: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["GET"],
-                output: {},
-            },
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["GET"],
-                output: {
-                    NEGATIVE: ValidOutputs["GET"]["NEGATIVE"],
-                },
-            },
-        ],
-        POST: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["POST"],
-                output: {},
-            },
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["POST"],
-                output: {
-                    DESTRUCTIVE: ValidOutputs["POST"]["DESTRUCTIVE"],
-                    POSITIVE: ValidOutputs["POST"]["POSITIVE"],
-                },
-            },
-        ],
-        DELETE: {
+    ],
+    DELETE: [
+        {
             url: faker.random.arrayElement(urls),
             input: ValidInputs["DELETE"],
             output: {
                 POSITIVE: ValidOutputs["DELETE"]["POSITIVE"],
             },
         },
-    },
-    {
-        GET: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["GET"],
-                output: {},
-            },
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["GET"],
-                output: {
-                    NEGATIVE: ValidOutputs["GET"]["NEGATIVE"],
-                },
-            },
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["GET"],
-                output: ValidOutputs["GET"],
-            },
-        ],
-        POST: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["POST"],
-                output: {},
-            },
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["POST"],
-                output: {
-                    DESTRUCTIVE: ValidOutputs["POST"]["DESTRUCTIVE"],
-                    POSITIVE: ValidOutputs["POST"]["POSITIVE"],
-                },
-            },
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["POST"],
-                output: { NEGATIVE: ValidOutputs["POST"]["NEGATIVE"] },
-            },
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["POST"],
-                output: ValidOutputs["POST"],
-            },
-        ],
-        DELETE: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["DELETE"],
-                output: {
-                    POSITIVE: ValidOutputs["DELETE"]["POSITIVE"],
-                },
-            },
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["DELETE"],
-                output: ValidOutputs["DELETE"],
-            },
-        ],
-        PATCH: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["PATCH"],
-                output: { DESTRUCTIVE: ValidOutputs["PATCH"]["DESTRUCTIVE"] },
-            },
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["PATCH"],
-                output: ValidOutputs["PATCH"],
-            },
-        ],
-        PUT: [
-            {
-                url: faker.random.arrayElement(urls),
-                input: ValidInputs["PUT"],
-                output: ValidOutputs["PUT"],
-            },
-        ],
-    },
-];
+        {
+            url: faker.random.arrayElement(urls),
+            input: ValidInputs["DELETE"],
+            output: ValidOutputs["DELETE"],
+        },
+    ],
+    PATCH: [
+        {
+            url: faker.random.arrayElement(urls),
+            input: ValidInputs["PATCH"],
+            output: { DESTRUCTIVE: ValidOutputs["PATCH"]["DESTRUCTIVE"] },
+        },
+        {
+            url: faker.random.arrayElement(urls),
+            input: ValidInputs["PATCH"],
+            output: ValidOutputs["PATCH"],
+        },
+    ],
+    PUT: [
+        {
+            url: faker.random.arrayElement(urls),
+            input: ValidInputs["PUT"],
+            output: ValidOutputs["PUT"],
+        },
+    ],
+};
 
-describe("Valid descriptions", () => {
+describe(`Node map generation`, () => {
     const methods: MethodType[] = ["GET", "PUT", "POST", "PATCH", "DELETE"];
     const casesCombination: Cases[][] = [
         ["DESTRUCTIVE", "NEGATIVE", "POSITIVE"],
@@ -475,23 +346,85 @@ describe("Valid descriptions", () => {
             if (!Object.keys(outputs).length) return;
 
             test(`Basic entry: ${method}: ${combination.join(", ")}`, () => {
-                expect(
-                    isDescription({
-                        [method]: [
-                            {
-                                url: faker.random.arrayElement(urls),
-                                input: ValidInputs[method],
-                                output: outputs,
-                            },
-                        ],
-                    })
-                ).toBe(true);
+                const url = faker.random.arrayElement(urls);
+                const map = generateNodes({
+                    [method]: {
+                        url,
+                        input: ValidInputs[method],
+                        output: outputs,
+                    },
+                });
+
+                let nodes = 0;
+                Object.keys(outputs).forEach(
+                    (key) =>
+                        (nodes += Array.isArray(outputs[key])
+                            ? outputs[key].length
+                            : 1)
+                );
+
+                expect(map.size).toBe(nodes);
+
+                for (const key in outputs) {
+                    const outArr = Array.isArray(outputs[key])
+                        ? outputs[key]
+                        : [outputs[key]];
+
+                    for (let i = 0; i < outArr.length; i++) {
+                        const nodename = serializeNodeName(
+                            method,
+                            0,
+                            url,
+                            key as Cases,
+                            i
+                        );
+                        expect(map.has(nodename)).toBe(true);
+                        expect(map.get(nodename)).toEqual({
+                            url,
+                            input: ValidInputs[method],
+                            output: outArr[i],
+                        });
+                    }
+                }
             });
         })
     );
 
-    ComplexCases.forEach((entry, index) =>
-        test(`Complex case: ${index}`, () =>
-            expect(isDescription(entry)).toBe(true))
-    );
+    test(`Complex case`, () => {
+        const map = generateNodes(ComplexCase);
+
+        for (const method in ComplexCase) {
+            const inputArr: Extract<
+                Description[MethodType],
+                Array<any>
+            > = Array.isArray(ComplexCase[method])
+                ? ComplexCase[method]
+                : [ComplexCase[method]];
+
+            for (let j = 0; j < inputArr.length; j++) {
+                const outputs = inputArr[j].output;
+                for (const key in outputs) {
+                    const outArr = Array.isArray(outputs[key])
+                        ? outputs[key]
+                        : [outputs[key]];
+
+                    for (let i = 0; i < outArr.length; i++) {
+                        const nodename = serializeNodeName(
+                            method as MethodType,
+                            j,
+                            inputArr[j].url,
+                            key as Cases,
+                            i
+                        );
+                        expect(map.has(nodename)).toBe(true);
+                        expect(map.get(nodename)).toEqual({
+                            url: inputArr[j].url,
+                            input: inputArr[j].input,
+                            output: outArr[i],
+                        });
+                    }
+                }
+            }
+        }
+    });
 });

@@ -40,21 +40,21 @@ export function isHeaderAndQuery(input: any): input is HeaderAndQuery {
     return value;
 }
 
+export type InputSemantics = {
+    semantics: HeaderAndQuery;
+};
+
+export type InputBodies = {
+    body: BodyType;
+    destructiveBody?: BodyType;
+};
+
 export interface Inputs {
-    GET: { semantics: HeaderAndQuery };
-    DELETE: { semantics: HeaderAndQuery };
-    POST: { semantics: HeaderAndQuery } & {
-        body: BodyType;
-        desctructiveBody?: BodyType;
-    };
-    PUT: { semantics: HeaderAndQuery } & {
-        body: BodyType;
-        desctructiveBody?: BodyType;
-    };
-    PATCH: { semantics: HeaderAndQuery } & {
-        body: BodyType;
-        desctructiveBody?: BodyType;
-    };
+    GET: InputSemantics;
+    DELETE: InputSemantics;
+    POST: InputSemantics & InputBodies;
+    PUT: InputSemantics & InputBodies;
+    PATCH: InputSemantics & InputBodies;
 }
 
 export const inputValidationFunctions: {
@@ -70,19 +70,19 @@ export const inputValidationFunctions: {
     },
     POST: (input: any): input is Inputs["POST"] => {
         if (!input || typeof input !== "object") return false;
-        if ("destructiveBody" in input && !isBodyType(input.desctructiveBody))
+        if ("destructiveBody" in input && !isBodyType(input.destructiveBody))
             return false;
         return isBodyType(input.body) && isHeaderAndQuery(input.semantics);
     },
     PUT: (input: any): input is Inputs["PUT"] => {
         if (!input || typeof input !== "object") return false;
-        if ("destructiveBody" in input && !isBodyType(input.desctructiveBody))
+        if ("destructiveBody" in input && !isBodyType(input.destructiveBody))
             return false;
         return isBodyType(input.body) && isHeaderAndQuery(input.semantics);
     },
     PATCH: (input: any): input is Inputs["PATCH"] => {
         if (!input || typeof input !== "object") return false;
-        if ("destructiveBody" in input && !isBodyType(input.desctructiveBody))
+        if ("destructiveBody" in input && !isBodyType(input.destructiveBody))
             return false;
         return isBodyType(input.body) && isHeaderAndQuery(input.semantics);
     },

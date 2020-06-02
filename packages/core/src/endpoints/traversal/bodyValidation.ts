@@ -20,10 +20,14 @@ import { isFakerType } from "../../common/types/fakerTypes";
 import {
     isCustomFunction,
     CustomFunctionType,
-    normalizeCustomFunction,
 } from "../../common/types/custom";
 import { HeaderAndStatus } from "../types";
-import { TraversalHelpers } from "./traversalHelpers";
+import {
+    TraversalHelpers,
+    validateWithTraversalHelpers,
+} from "./traversalHelpers";
+import { NodeEntry } from "../graph/nodeTypes";
+import { Collection } from "./collection";
 
 export function matchResourceString(
     input: any,
@@ -203,6 +207,7 @@ export async function matchBody(
                 }
             }
             value = matchResourceString(body[key], entry, resource);
+            void value;
         } else if (isBase(entry))
             value = await matchBase(body[key], entry, resource, helpers);
         else if (isWithModifiersBase(entry))
@@ -241,7 +246,10 @@ export async function matchBody(
 }
 
 export function extractBodiesFromOutput(
-    input: { semantics: HeaderAndStatus; body?: BodyType }[]
+    input: {
+        semantics: HeaderAndStatus;
+        body?: BodyType | CustomFunctionType;
+    }[]
 ): (
     | { type: "body type"; value: BodyType }
     | { type: "custom function"; value: CustomFunctionType }
@@ -262,31 +270,6 @@ export function extractBodiesFromOutput(
     return bodyArr;
 }
 
-export async function validateTraversalHelpers(
-    body: any,
-    input: CustomFunctionType,
-    resource: ResourceInstance,
-    schemaHelpers: SchemaHelpers,
-    traversalHelpers: TraversalHelpers
-): Promise<boolean> {
-    const object = normalizeCustomFunction(input);
-    let value = false;
-    try {
-        value = _.get(traversalHelpers, object.function.slice(7))(
-            input,
-            resource,
-            schemaHelpers,
-            ...object.args
-        );
-    } catch (e) {
-        throw new Error(
-            `function: ${object.function}, args: ${object.args.join(",")}`
-        );
-    }
-
-    return value;
-}
-
 export async function bodyValidation(
     body: any,
     bodyArr: (
@@ -295,24 +278,26 @@ export async function bodyValidation(
     )[],
     resource: ResourceInstance,
     schemaHelpers: SchemaHelpers,
-    traversalHelpers: TraversalHelpers
+    traversalHelpers: TraversalHelpers,
+    nodeEntry: NodeEntry,
+    collection: Collection
 ): Promise<boolean> {
-    return (
-        !bodyArr.length ||
-        (
-            await Promise.all(
-                bodyArr.map((b) =>
-                    b.type === "body type"
-                        ? matchBody(body, b, resource, schemaHelpers)
-                        : validateTraversalHelpers(
-                              body,
-                              b.value,
-                              resource,
-                              schemaHelpers,
-                              traversalHelpers
-                          )
-                )
-            )
-        ).some((val) => val)
+    if (!bodyArr.length) return true;
+    const x = await Promise.all(
+        bodyArr.map((b) =>
+            b.type === "body type"
+                ? matchBody(body, b.value, resource, schemaHelpers)
+                : validateWithTraversalHelpers(
+                      body,
+                      b.value,
+                      resource,
+                      schemaHelpers,
+                      traversalHelpers,
+                      nodeEntry,
+                      collection
+                  )
+        )
     );
+
+    return x.some((val) => val);
 }

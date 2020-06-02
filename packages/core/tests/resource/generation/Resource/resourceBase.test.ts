@@ -2,7 +2,10 @@
     Test to validate resource generation
     Not testing in depth as other functions are assumed to be working correctly
 */
-import { ResourceBase, Resource } from "../../../../src/resource/types/resource";
+import {
+    ResourceBase,
+    Resource,
+} from "../../../../src/resource/types/resource";
 import { RANDOMNESS_ITERATIONS } from "../../../../src/common/Env";
 import {
     generateResourceBase,
@@ -13,6 +16,7 @@ import { SchemaHelpers } from "../../../../src/common/types/helpers";
 import {
     ResourceInstance,
     isWithModifiersResource,
+    ResourceInstanceBase,
 } from "../../../../src/resource/types/helper";
 import { generateWithModifiers } from "../../../../src/resource/generation/withModifiersGen";
 import {
@@ -39,7 +43,7 @@ const Helpers: SchemaHelpers = {
 
 const ValidResourceBases: {
     input: ResourceBase;
-    output: () => Promise<Omit<ResourceInstance, "id">>;
+    output: () => Promise<ResourceInstanceBase>;
 }[] = [
     {
         input: {
@@ -48,7 +52,7 @@ const ValidResourceBases: {
             branch: { function: "faker:random.words", args: [1] },
             address: "faker.random.zipCode",
         },
-        output: async (): Promise<Omit<ResourceInstance, "id">> => {
+        output: async (): Promise<ResourceInstanceBase> => {
             return {
                 name: 15,
                 class: faker.random.number(),
@@ -138,7 +142,7 @@ const ValidResourceBases: {
                 },
             },
         },
-        output: async function (): Promise<Omit<ResourceInstance, "id">> {
+        output: async function (): Promise<ResourceInstanceBase> {
             const o: Record<string, any> = {
                 root: {},
             };
@@ -259,7 +263,7 @@ const ValidResourceBases: {
                 ],
             },
         },
-        output: async function (): Promise<Omit<ResourceInstance, "id">> {
+        output: async function (): Promise<ResourceInstanceBase> {
             const o = {};
 
             for (const key in this.input) {

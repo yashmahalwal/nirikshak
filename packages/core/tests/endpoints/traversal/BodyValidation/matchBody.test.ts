@@ -324,7 +324,7 @@ describe(`Body match`, () => {
         ).rejects.toMatchSnapshot();
     });
 
-    test.each(ResourceStringEdgeCases.slice(2))(
+    test.each(ResourceStringEdgeCases)(
         `Resource string entry : %#`,
         async ({ resource, schema, output, input }) => {
             try {

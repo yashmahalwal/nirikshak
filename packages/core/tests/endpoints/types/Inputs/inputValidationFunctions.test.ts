@@ -118,23 +118,96 @@ const ValidHeaderAndQueriesAndBodies: {
     body: BodyType;
 }[] = ValidHeaderAndQueries.map((vhq) => ({ semantics: vhq, body: ValidBody }));
 
+const ValidHeaderAndQueriesAndBodiesAndDescBodies: {
+    semantics: HeaderAndQuery;
+    body: BodyType;
+    destructiveBody: BodyType;
+}[] = ValidHeaderAndQueries.map((vhq) => ({
+    semantics: vhq,
+    body: ValidBody,
+    destructiveBody: ValidBody,
+}));
+
 const InvalidHeaderAndQueriesAndBodies: {
     semantics: HeaderAndQuery;
     body: BodyType;
 }[] = [];
 
-InvalidHeaderAndQueriesAndBodies.concat(
-    ValidHeaderAndQueries.map((vhq) => ({ semantics: vhq, body: InvalidBody }))
-);
-
-InvalidHeaderAndQueriesAndBodies.concat(
-    InvalidHeaderAndQueries.map((vhq) => ({ semantics: vhq, body: ValidBody }))
-);
-
-InvalidHeaderAndQueriesAndBodies.concat(
-    InvalidHeaderAndQueries.map((vhq) => ({
+InvalidHeaderAndQueriesAndBodies.push(
+   ...ValidHeaderAndQueries.map((vhq) => ({
         semantics: vhq,
         body: InvalidBody,
+    }))
+);
+
+InvalidHeaderAndQueriesAndBodies.push(
+    ...InvalidHeaderAndQueries.map((vhq) => ({ semantics: vhq, body: ValidBody }))
+);
+
+InvalidHeaderAndQueriesAndBodies.push(
+    ...InvalidHeaderAndQueries.map((vhq) => ({
+        semantics: vhq,
+        body: InvalidBody,
+    }))
+);
+
+const InvalidHeaderAndQueriesAndBodiesAndDestructive: {
+    semantics: HeaderAndQuery;
+    body: BodyType;
+    destructiveBody: BodyType;
+}[] = [];
+
+InvalidHeaderAndQueriesAndBodiesAndDestructive.push(
+    ...ValidHeaderAndQueries.map((vhq) => ({
+        semantics: vhq,
+        body: InvalidBody,
+        destructiveBody: ValidBody,
+    }))
+);
+InvalidHeaderAndQueriesAndBodiesAndDestructive.push(
+    ...ValidHeaderAndQueries.map((vhq) => ({
+        semantics: vhq,
+        body: ValidBody,
+        destructiveBody: InvalidBody,
+    }))
+);
+InvalidHeaderAndQueriesAndBodiesAndDestructive.push(
+    ...ValidHeaderAndQueries.map((vhq) => ({
+        semantics: vhq,
+        body: InvalidBody,
+        destructiveBody: InvalidBody,
+    }))
+);
+
+InvalidHeaderAndQueriesAndBodiesAndDestructive.push(
+    ...InvalidHeaderAndQueries.map((vhq) => ({
+        semantics: vhq,
+        body: ValidBody,
+        destructiveBody: ValidBody,
+    }))
+);
+
+InvalidHeaderAndQueriesAndBodiesAndDestructive.concat(
+    InvalidHeaderAndQueries.map((vhq) => ({
+        semantics: vhq,
+        body: ValidBody,
+        destructiveBody: InvalidBody,
+    }))
+);
+
+InvalidHeaderAndQueriesAndBodiesAndDestructive.push(
+    ...InvalidHeaderAndQueries.map((vhq) => ({
+        semantics: vhq,
+        body: InvalidBody,
+        destructiveBody: InvalidBody,
+    }))
+);
+
+InvalidHeaderAndQueriesAndBodiesAndDestructive.push(
+    ...InvalidHeaderAndQueries.map((vhq) => ({
+        semantics: vhq,
+        body: InvalidBody,
+        destructiveBody: ValidBody,
     }))
 );
 
@@ -169,7 +242,6 @@ describe("Input validation", () => {
     });
 
     (["PUT", "PATCH", "POST"] as MethodType[]).forEach((method) => {
-        // No headers
         ValidHeaderAndQueriesAndBodies.forEach((entry, index) =>
             test(`Valid header, body and query - ${method}: ${index}`, () =>
                 expect(inputValidationFunctions[method](entry)).toBe(true))
@@ -177,6 +249,16 @@ describe("Input validation", () => {
 
         InvalidHeaderAndQueriesAndBodies.forEach((entry, index) =>
             test(`Invalid header, body and query - ${method}: ${index}`, () =>
+                expect(inputValidationFunctions[method](entry)).toBe(false))
+        );
+
+        ValidHeaderAndQueriesAndBodiesAndDescBodies.forEach((entry, index) =>
+            test(`Valid header, input and destructive body and query - ${method}: ${index}`, () =>
+                expect(inputValidationFunctions[method](entry)).toBe(true))
+        );
+
+        InvalidHeaderAndQueriesAndBodiesAndDestructive.forEach((entry, index) =>
+            test(`Invalid header, input and destructive body and query - ${method}: ${index}`, () =>
                 expect(inputValidationFunctions[method](entry)).toBe(false))
         );
     });

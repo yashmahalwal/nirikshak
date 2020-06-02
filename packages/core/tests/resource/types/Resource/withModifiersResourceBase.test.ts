@@ -176,7 +176,7 @@ InvalidModifiers.forEach((mods) => {
 // Valid Bases x Invalid Modifiers Invalid Bases = Invalid with modifiers entries
 ValidModifiers.forEach((mods) =>
     InvalidBaseTypes.forEach((base) => {
-        const o = Object.assign({}, mods);
+        const o = Object.assign({}, mods) as any;
         o.field = base;
         InvalidWithModifiers.push(o);
     })

@@ -24,9 +24,9 @@ export async function generatePostDestructiveInput(
     helpers: SchemaHelpers,
     resource: ResourceInstance
 ): Promise<PostDestructiveInputInstance> {
-    if (!input.desctructiveBody)
+    if (!input.destructiveBody)
         throw new Error(
-            `Did not find a desctructive body in input description for post. Cannot make desctructive request`
+            `Did not find a destructive body in input description for post. Cannot make destructive request`
         );
     return {
         semantics: await generateHeaderAndQuery(
@@ -35,11 +35,7 @@ export async function generatePostDestructiveInput(
             helpers
         ),
         resource,
-        body: await generateBodyType(
-            input.desctructiveBody!,
-            resource,
-            helpers
-        ),
+        body: await generateBodyType(input.destructiveBody!, resource, helpers),
     };
 }
 

@@ -1,7 +1,7 @@
 import { NodeMap, NodeName, parseNodeName } from "./nodeTypes";
 import Graph from "graph-data-structure";
 
-function isNeighbour(source: NodeName, target: NodeName): boolean {
+export function isNeighbour(source: NodeName, target: NodeName): boolean {
     const { method: sourceMethod, caseValue: sourceCase } = parseNodeName(
         source
     );
@@ -23,8 +23,6 @@ function isNeighbour(source: NodeName, target: NodeName): boolean {
                         (targetMethod === "PATCH" &&
                             targetCase === "POSITIVE") ||
                         (targetMethod === "PUT" &&
-                            targetCase === "DESTRUCTIVE") ||
-                        (targetMethod === "POST" &&
                             targetCase === "DESTRUCTIVE") ||
                         (targetMethod === "PATCH" &&
                             targetCase === "DESTRUCTIVE")
@@ -48,9 +46,8 @@ function isNeighbour(source: NodeName, target: NodeName): boolean {
                     )
                         return true;
                     return false;
-                default:
-                    return false;
             }
+        // eslint-disable-next-line no-fallthrough
         case "DELETE":
             switch (sourceCase) {
                 case "POSITIVE":
@@ -85,11 +82,10 @@ function isNeighbour(source: NodeName, target: NodeName): boolean {
                         (targetMethod === "POST" &&
                             targetCase === "DESTRUCTIVE")
                     )
-                        return false;
-                    return true;
-                default:
-                    return true;
+                        return true;
+                    return false;
             }
+        // eslint-disable-next-line no-fallthrough
         case "PUT":
             switch (sourceCase) {
                 case "POSITIVE":
@@ -190,8 +186,6 @@ function isNeighbour(source: NodeName, target: NodeName): boolean {
                 default:
                     return false;
             }
-        default:
-            return false;
     }
 }
 
@@ -201,6 +195,8 @@ export function makeGraph(nodeMap: NodeMap): ReturnType<typeof Graph> {
     const keys = nodeMap.keys();
     for (const source of keys) {
         for (const target of keys) {
+            graph.addNode(source);
+            graph.addNode(target);
             if (isNeighbour(source, target)) graph.addEdge(source, target, 1);
         }
     }

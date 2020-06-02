@@ -15,72 +15,43 @@ export function isHeaderAndStatus(input: any): input is HeaderAndStatus {
     );
 }
 
+export type OutputBodies = { body: BodyType | CustomFunction };
+export type OutputSemantics = {
+    semantics: HeaderAndStatus;
+};
+
 export interface Outputs {
     GET: {
         POSITIVE:
-            | ({ body: BodyType | CustomFunction } & {
-                  semantics: HeaderAndStatus;
-              })
-            | ({ body: BodyType | CustomFunction } & {
-                  semantics: HeaderAndStatus;
-              })[];
-        NEGATIVE:
-            | { semantics: HeaderAndStatus }
-            | { semantics: HeaderAndStatus }[];
+            | (OutputBodies & OutputSemantics)
+            | (OutputBodies & OutputSemantics)[];
+        NEGATIVE: OutputSemantics | OutputSemantics[];
     };
     DELETE: {
         POSITIVE:
-            | ({ body: BodyType | CustomFunction } & {
-                  semantics: HeaderAndStatus;
-              })
-            | ({ body: BodyType | CustomFunction } & {
-                  semantics: HeaderAndStatus;
-              })[];
-        NEGATIVE:
-            | { semantics: HeaderAndStatus }
-            | { semantics: HeaderAndStatus }[];
+            | (OutputBodies & OutputSemantics)
+            | (OutputBodies & OutputSemantics)[];
+        NEGATIVE: OutputSemantics | OutputSemantics[];
     };
     POST: {
         POSITIVE:
-            | ({ body: BodyType | CustomFunction } & {
-                  semantics: HeaderAndStatus;
-              })
-            | ({ body: BodyType | CustomFunction } & {
-                  semantics: HeaderAndStatus;
-              })[];
-        NEGATIVE:
-            | { semantics: HeaderAndStatus }
-            | { semantics: HeaderAndStatus }[];
-        DESTRUCTIVE:
-            | { semantics: HeaderAndStatus }
-            | { semantics: HeaderAndStatus }[];
+            | (OutputBodies & OutputSemantics)
+            | (OutputBodies & OutputSemantics)[];
+        NEGATIVE: OutputSemantics | OutputSemantics[];
+        DESTRUCTIVE: OutputSemantics | OutputSemantics[];
     };
     PUT: {
         POSITIVE:
-            | ({ body: BodyType | CustomFunction } & {
-                  semantics: HeaderAndStatus;
-              })
-            | ({ body: BodyType | CustomFunction } & {
-                  semantics: HeaderAndStatus;
-              })[];
-        DESTRUCTIVE:
-            | { semantics: HeaderAndStatus }
-            | { semantics: HeaderAndStatus }[];
+            | (OutputBodies & OutputSemantics)
+            | (OutputBodies & OutputSemantics)[];
+        DESTRUCTIVE: OutputSemantics | OutputSemantics[];
     };
     PATCH: {
         POSITIVE:
-            | ({ body: BodyType | CustomFunction } & {
-                  semantics: HeaderAndStatus;
-              })
-            | ({ body: BodyType | CustomFunction } & {
-                  semantics: HeaderAndStatus;
-              })[];
-        NEGATIVE:
-            | { semantics: HeaderAndStatus }
-            | { semantics: HeaderAndStatus }[];
-        DESTRUCTIVE:
-            | { semantics: HeaderAndStatus }
-            | { semantics: HeaderAndStatus }[];
+            | (OutputBodies & OutputSemantics)
+            | (OutputBodies & OutputSemantics)[];
+        NEGATIVE: OutputSemantics | OutputSemantics[];
+        DESTRUCTIVE: OutputSemantics | OutputSemantics[];
     };
 }
 

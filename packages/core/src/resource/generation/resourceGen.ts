@@ -1,19 +1,24 @@
+import { ResourceBase, Resource } from "../types/resource";
 import {
-    ResourceBase,
-    Resource,
-} from "../types/resource";
-import { ResourceInstance,  isBaseType, isWithModifiers, isOneOfEntries, isWithModifiersBaseType, isWithModifiersResource } from "../types/helper";
+    ResourceInstance,
+    isBaseType,
+    isWithModifiers,
+    isOneOfEntries,
+    isWithModifiersBaseType,
+    isWithModifiersResource,
+    ResourceInstanceBase,
+} from "../types/helper";
 import { generateBaseType } from "./baseGen";
 import faker from "faker";
 import { generateWithModifiers } from "./withModifiersGen";
 import { generateOneOfEntries } from "./oneOfEntries";
-import { SchemaHelpers } from "../../common/types/helpers";
+import { SchemaHelpers, Primitives } from "../../common/types/helpers";
 
 export async function generateResourceBase(
     input: ResourceBase,
     Helpers: SchemaHelpers
-): Promise<Omit<ResourceInstance, "id">> {
-    const o: Omit<ResourceInstance, "id"> = {};
+): Promise<ResourceInstanceBase> {
+    const o: ResourceInstanceBase = {};
     for (const key in input) {
         // For each key value pair of resource base description
         const entry = input[key];

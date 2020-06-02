@@ -38,7 +38,7 @@ const ValidWithModifiers: WithModifiers<BaseType>[] = [];
 // Valid Bases x Valid modifiers = Valid with modifiers entries
 ValidBaseTypes.forEach((baseType) =>
     ValidModifiers.forEach((mod) => {
-        const o = Object.assign({}, mod) as  WithModifiers<BaseType>;
+        const o = Object.assign({}, mod) as WithModifiers<BaseType>;
         o.type = baseType;
         ValidWithModifiers.push(o);
     })
@@ -83,7 +83,7 @@ InvalidModifiers.forEach((mods) => {
 // Valid Bases x Invalid Modifiers Invalid Bases = Invalid with modifiers entries
 ValidModifiers.forEach((mods) =>
     InvalidBaseTypes.forEach((base) => {
-        const o = Object.assign({}, mods);
+        const o = Object.assign({}, mods) as any;
         o.type = base;
         InvalidWithModifiers.push(o);
     })

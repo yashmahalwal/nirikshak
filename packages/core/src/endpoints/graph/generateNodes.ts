@@ -1,7 +1,7 @@
 import { Description, MethodType, Cases } from "../types";
 import { NodeMap, serializeNodeName } from "./nodeTypes";
 
-export function generateNode(description: Description): NodeMap {
+export function generateNodes(description: Description): NodeMap {
     const nodeMap: NodeMap = new Map();
     for (const method in description) {
         const entry = description[method as MethodType];

@@ -1,13 +1,17 @@
+import _ from "lodash";
 import Graph from "graph-data-structure";
 import { NodeName } from "./nodeTypes";
 
-function traverseFromNode(
+const traverseFromNode = _.memoize(
+    traverseFromNodeBase,
+    (graph, ...args: any[]) => [graph, ...args]
+);
+
+function traverseFromNodeBase(
     graph: ReturnType<typeof Graph>,
     steps: number,
     root: NodeName
 ): NodeName[][] {
-    if (!graph.nodes().includes(root))
-        throw new Error(`Invalid node: ${root}. Does not exist in the graph`);
     if (steps < 1)
         throw new Error(`Invalid number of steps for traversal: ${steps}`);
 

@@ -1,26 +1,32 @@
 import { URLString, isURLString } from "../types/urlString";
-import { Inputs, MethodType, Outputs, Cases } from "..";
-import _ from "lodash";
-import { isMethodType, isCaseType } from "../types/helpers";
+import { MethodType, Cases } from "..";
+import { isMethodType, isCaseType, BodyType } from "../types/helpers";
+import { HeaderAndStatus } from "../types";
+import { InputSemantics, InputBodies } from "../types/input";
 
 export type NodeName = string;
 
-export function isNodeName(str: string): str is NodeName {
-    const parts = str.split("-");
+export function isNodeName(str: any): str is NodeName {
+    if (typeof str !== "string") return false;
+
+    const parts = str.split(";;");
     return (
         parts.length === 5 &&
         isMethodType(parts[0]) &&
-        typeof parts[1] === "number" &&
+        !isNaN(parseInt(parts[1])) &&
         isURLString(parts[2]) &&
         isCaseType(parts[3]) &&
-        typeof parts[4] === "number"
+        !isNaN(parseInt(parts[4]))
     );
 }
 
 export interface NodeEntry {
     url: URLString;
-    input: Inputs[MethodType];
-    output: Exclude<Outputs[MethodType][keyof Outputs[MethodType]], Array<any>>;
+    input: InputSemantics & Partial<InputBodies>;
+    output: {
+        semantics: HeaderAndStatus;
+        body?: BodyType;
+    };
 }
 
 export interface ParsedNode {
@@ -31,18 +37,18 @@ export interface ParsedNode {
     caseIndex: number;
 }
 
-function serializeNodeNameBase(
+export function serializeNodeName(
     method: MethodType,
     methodIndex: number,
     url: URLString,
     caseValue: Cases,
     caseIndex: number
 ): NodeName {
-    return `${method}-${methodIndex}-${url}-${caseValue}-${caseIndex}`;
+    return `${method};;${methodIndex};;${url};;${caseValue};;${caseIndex}`;
 }
 
-function parseNodeNameBase(str: NodeName): ParsedNode {
-    const parts = str.split("-");
+export function parseNodeName(str: NodeName): ParsedNode {
+    const parts = str.split(";;");
     return {
         method: parts[0],
         methodIndex: parseInt(parts[1]),
@@ -52,6 +58,4 @@ function parseNodeNameBase(str: NodeName): ParsedNode {
     } as ParsedNode;
 }
 
-export const serializeNodeName = _.memoize(serializeNodeNameBase);
-export const parseNodeName = _.memoize(parseNodeNameBase);
 export type NodeMap = Map<NodeName, NodeEntry>;
