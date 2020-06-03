@@ -16,7 +16,7 @@ import {
     extractBodiesFromOutput,
     bodyValidation,
     statusValidation,
-    getRandomNewInstance,
+    generateResource,
 } from "@nirikshak/core";
 import ResourceJSON from "./resource.json";
 import EndpointsJSON from "./endpoints.json";
@@ -25,6 +25,7 @@ import app from "./app";
 import { Server } from "http";
 import supertest from "supertest";
 import getPort from "get-port";
+import faker from "faker";
 
 // TODO: Move to a previous step in nirikshak preprocessing
 if (!isResource(ResourceJSON)) throw new Error(`Invalid resource schema`);
@@ -40,6 +41,7 @@ describe(`student`, () => {
         describe(`${i + 1}`, () => {
             for (const path of traversal)
                 describe(path.join(";"), () => {
+                    const joined = path.join(";");
                     const collection: Collection = new Map();
                     let instance: ResourceInstance | null = null;
                     let prevPass = true;
@@ -55,13 +57,24 @@ describe(`student`, () => {
                         });
                     });
 
-                    for (const node of path)
+                    for (const node of path) {
                         test(node, async () => {
                             if (!prevPass) return;
                             const parsedNode = parseNodeName(node);
                             if (!instance) {
-                                if (parsedNode.method === "POST")
-                                    instance = await getRandomNewInstance(
+                                if (
+                                    (parsedNode.method === "GET" &&
+                                        parsedNode.caseValue === "NEGATIVE") ||
+                                    (parsedNode.method === "DELETE" &&
+                                        parsedNode.caseValue === "NEGATIVE") ||
+                                    (parsedNode.method === "PATCH" &&
+                                        parsedNode.caseValue === "NEGATIVE") ||
+                                    (parsedNode.method === "POST" &&
+                                        parsedNode.caseValue === "POSITIVE") ||
+                                    (parsedNode.method === "PUT" &&
+                                        faker.random.boolean())
+                                )
+                                    instance = await generateResource(
                                         ResourceJSON,
                                         schemaHelpers
                                     );
@@ -71,6 +84,11 @@ describe(`student`, () => {
                                     );
                             }
 
+                            if (
+                                joined ===
+                                "PATCH;;0;;/Student/{resource:id};;POSITIVE;GET;;0;;/Student/{resource:id};;POSITIVE"
+                            )
+                                console.log(node);
                             const entry = nodeMap.get(node);
 
                             if (!entry)
@@ -86,8 +104,7 @@ describe(`student`, () => {
                                 entry.input,
                                 instance,
                                 schemaHelpers,
-                                collection,
-                                ResourceJSON
+                                collection
                             );
 
                             const statuses = extractStatusFromSemantics(
@@ -105,7 +122,7 @@ describe(`student`, () => {
                                 const result = await headersValidation(
                                     response.headers,
                                     headers,
-                                    response.resource,
+                                    instance,
                                     schemaHelpers
                                 );
                                 prevPass = prevPass && result;
@@ -119,17 +136,17 @@ describe(`student`, () => {
                                 const result = await bodyValidation(
                                     response.body,
                                     bodies,
-                                    response.resource,
+                                    instance,
                                     schemaHelpers,
                                     traversalHelpers,
                                     entry,
                                     collection
                                 );
-                                instance = response.resource;
                                 prevPass = prevPass && result;
                                 expect(result).toMatchBody(true);
                             }
                         });
+                    }
 
                     afterAll(async (done) => {
                         server?.close((err) =>

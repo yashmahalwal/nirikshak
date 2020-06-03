@@ -5,10 +5,11 @@ import {
     TraversalHelpers,
     Collection,
     Resource,
-    ResourceInstance,
     generateResource,
+    ResourceInstance,
 } from "@nirikshak/core";
 import Config from "./config.json";
+import { isValidStudent } from "../../src/student";
 export const schemaHelpers: SchemaHelpers = {
     async grade() {
         return faker.random.arrayElement(["A", "B", "C"]);
@@ -16,8 +17,10 @@ export const schemaHelpers: SchemaHelpers = {
 };
 
 export const traversalHelpers: TraversalHelpers = {
-    bodyMatcher: async (args) => {
-        console.log("Body matching ", args);
+    patchMatcher: async (input: any, resourceInstance: ResourceInstance) => {
+        if (!isValidStudent(input)) return false;
+
+        for (const key in input) resourceInstance[key] = input[key];
         return true;
     },
 };

@@ -1,15 +1,30 @@
 import express from "express";
-import { isValidStudent, studentMap } from "./student";
+import { studentMap } from "./student";
 const router = express.Router();
-router.patch("/Student", express.json(), (req, res) => {
-    const { body } = req;
+router.patch("/Student/:id", express.json(), (req, res) => {
+    const {
+        body,
+        params: { id },
+    } = req;
 
-    if (!isValidStudent(body)) {
-        res.sendStatus(400);
+    if (!studentMap.has(id)) {
+        res.sendStatus(404);
         return;
     }
 
+    const student = studentMap.get(id)!;
+    for (const key in body) {
+        if (!(key in student)) {
+            res.status(400).send(body);
+            return;
+        }
+
+        const value = body[key][key];
+        student[key] = value;
+    }
     studentMap.set(body.id, body);
-    res.status(201).send(body);
+
+    res.status(200);
+    res.send(student);
 });
 export default router;
