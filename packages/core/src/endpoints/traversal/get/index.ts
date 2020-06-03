@@ -1,4 +1,3 @@
-import { Resource } from "../../../resource/types/resource";
 import Supertest from "supertest";
 import { URLString } from "../../types/urlString";
 import { Inputs } from "../../types/input";
@@ -7,37 +6,36 @@ import { Outputs } from "../../types/output";
 import { makePositiveGetRequest } from "./positive";
 import { makeNegativeGetRequest } from "./negative";
 import { ResourceInstance } from "../../../resource";
-import { HeadersInstance } from "../../generation/helpers/headerMapGen";
 
+import { HeadersInstance } from "../../generation/helpers/headerMapGen";
 export async function makeGetRequest(
-    key: keyof Outputs["GET"],
-    server: Supertest.SuperTest<Supertest.Test>,
-    url: URLString,
-    input: Inputs["GET"],
-    resourceInstance: ResourceInstance,
-    helpers: SchemaHelpers,
-    resourceJSON: Resource
+  key: keyof Outputs["GET"],
+  server: Supertest.SuperTest<Supertest.Test>,
+  url: URLString,
+  input: Inputs["GET"],
+  resourceInstance: ResourceInstance,
+  helpers: SchemaHelpers
 ): Promise<{
-    status: number;
-    headers?: HeadersInstance;
-    body?: any;
+  status: number;
+  headers?: HeadersInstance;
+  body?: any;
 }> {
-    switch (key) {
-        case "POSITIVE":
-            return makePositiveGetRequest(
-                server,
-                url,
-                input,
-                helpers,
-                resourceInstance
-            );
-        case "NEGATIVE":
-            return makeNegativeGetRequest(
-                server,
-                url,
-                input,
-                helpers,
-                resourceJSON
-            );
-    }
+  switch (key) {
+    case "POSITIVE":
+      return makePositiveGetRequest(
+        server,
+        url,
+        input,
+        helpers,
+        resourceInstance
+      );
+    case "NEGATIVE":
+      return makeNegativeGetRequest(
+        server,
+        url,
+        input,
+        helpers,
+        resourceInstance
+      );
+  }
 }

@@ -6,13 +6,13 @@ export type Literal = string | number | null | boolean;
 
 // type guard: Literal
 export function isLiteral(input: any): input is Literal {
-    const c = typeof input;
-    switch (c) {
-        case "number":
-        case "string":
-        case "boolean":
-            return true;
-        default:
-            return input === null;
-    }
+  const c = typeof input;
+  switch (c) {
+    case "number":
+    case "string":
+    case "boolean":
+      return true;
+    default:
+      return input === null;
+  }
 }

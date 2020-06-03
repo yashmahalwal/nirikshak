@@ -1,4 +1,3 @@
-import { Resource } from "../../../resource/types/resource";
 import Supertest from "supertest";
 import { URLString } from "../../types/urlString";
 import { Inputs } from "../../types/input";
@@ -11,36 +10,35 @@ import { Collection } from "../collection";
 import { makeDestructivePutRequest } from "./destructive";
 
 export async function makePutRequest(
-    key: keyof Outputs["PUT"],
-    server: Supertest.SuperTest<Supertest.Test>,
-    url: URLString,
-    input: Inputs["PUT"],
-    resourceInstance: ResourceInstance,
-    helpers: SchemaHelpers,
-    resourceJSON: Resource,
-    collection: Collection
+  key: keyof Outputs["PUT"],
+  server: Supertest.SuperTest<Supertest.Test>,
+  url: URLString,
+  input: Inputs["PUT"],
+  resourceInstance: ResourceInstance,
+  helpers: SchemaHelpers,
+  collection: Collection
 ): Promise<{
-    status: number;
-    headers?: HeadersInstance;
-    body?: any;
+  status: number;
+  headers?: HeadersInstance;
+  body?: any;
 }> {
-    switch (key) {
-        case "POSITIVE":
-            return makePositivePutRequest(
-                server,
-                url,
-                input,
-                helpers,
-                resourceInstance,
-                collection
-            );
-        case "DESTRUCTIVE":
-            return makeDestructivePutRequest(
-                server,
-                url,
-                input,
-                helpers,
-                resourceInstance
-            );
-    }
+  switch (key) {
+    case "POSITIVE":
+      return makePositivePutRequest(
+        server,
+        url,
+        input,
+        helpers,
+        resourceInstance,
+        collection
+      );
+    case "DESTRUCTIVE":
+      return makeDestructivePutRequest(
+        server,
+        url,
+        input,
+        helpers,
+        resourceInstance
+      );
+  }
 }

@@ -10,32 +10,27 @@ import { getFromResource } from "./resourceStringGen";
 import { ResourceString } from "../types/resourceString";
 
 export async function generateURL(
-    urlString: URLString,
-    instance: ResourceInstance,
-    helpers: SchemaHelpers
+  urlString: URLString,
+  instance: ResourceInstance,
+  helpers: SchemaHelpers
 ): Promise<string> {
-    const components = normalizeURLString(urlString).split("/");
-    const urlArr: Literal[] = [];
-    for (const component of components) {
-        if (component[0] === "{" && component[component.length - 1] === "}") {
-            // Faker or custom or resource
-            const slice = component.slice(1, component.length - 1);
-            if (isFakerString(slice)) urlArr.push(generateFaker(slice));
-            else if (isCustomFunctionString(slice))
-                urlArr.push(await generateCustom(slice, helpers));
-            else {
-                const entry = getFromResource(
-                    slice as ResourceString,
-                    instance
-                );
-                if (!isLiteral(entry))
-                    throw new Error(
-                        `Invalid resource interpolation for url: ${slice}`
-                    );
-                urlArr.push(entry);
-            }
-        } else urlArr.push(component);
-    }
+  const components = normalizeURLString(urlString).split("/");
+  const urlArr: Literal[] = [];
+  for (const component of components) {
+    if (component[0] === "{" && component[component.length - 1] === "}") {
+      // Faker or custom or resource
+      const slice = component.slice(1, component.length - 1);
+      if (isFakerString(slice)) urlArr.push(generateFaker(slice));
+      else if (isCustomFunctionString(slice))
+        urlArr.push(await generateCustom(slice, helpers));
+      else {
+        const entry = getFromResource(slice as ResourceString, instance);
+        if (!isLiteral(entry))
+          throw new Error(`Invalid resource interpolation for url: ${slice}`);
+        urlArr.push(entry);
+      }
+    } else urlArr.push(component);
+  }
 
-    return urlArr.join("/");
+  return urlArr.join("/");
 }

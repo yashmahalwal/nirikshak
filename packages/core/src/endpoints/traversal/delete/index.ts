@@ -1,4 +1,3 @@
-import { Resource } from "../../../resource/types/resource";
 import Supertest from "supertest";
 import { URLString } from "../../types/urlString";
 import { Inputs } from "../../types/input";
@@ -11,36 +10,35 @@ import { HeadersInstance } from "../../generation/helpers/headerMapGen";
 import { Collection } from "../collection";
 
 export async function makeDeleteRequest(
-    key: keyof Outputs["DELETE"],
-    server: Supertest.SuperTest<Supertest.Test>,
-    url: URLString,
-    input: Inputs["GET"],
-    resourceInstance: ResourceInstance,
-    helpers: SchemaHelpers,
-    resourceJSON: Resource,
-    collection: Collection
+  key: keyof Outputs["DELETE"],
+  server: Supertest.SuperTest<Supertest.Test>,
+  url: URLString,
+  input: Inputs["GET"],
+  resourceInstance: ResourceInstance,
+  helpers: SchemaHelpers,
+  collection: Collection
 ): Promise<{
-    status: number;
-    headers?: HeadersInstance;
-    body?: any;
+  status: number;
+  headers?: HeadersInstance;
+  body?: any;
 }> {
-    switch (key) {
-        case "POSITIVE":
-            return makePositiveDeleteRequest(
-                server,
-                url,
-                input,
-                helpers,
-                resourceInstance,
-                collection
-            );
-        case "NEGATIVE":
-            return makeNegativeGetRequest(
-                server,
-                url,
-                input,
-                helpers,
-                resourceJSON
-            );
-    }
+  switch (key) {
+    case "POSITIVE":
+      return makePositiveDeleteRequest(
+        server,
+        url,
+        input,
+        helpers,
+        resourceInstance,
+        collection
+      );
+    case "NEGATIVE":
+      return makeNegativeGetRequest(
+        server,
+        url,
+        input,
+        helpers,
+        resourceInstance
+      );
+  }
 }

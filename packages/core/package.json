@@ -44,16 +44,17 @@
         "@types/faker": "^4.1.11",
         "@types/lodash": "^4.14.150",
         "@types/supertest": "^2.0.9",
+        "get-port": "^5.1.1",
         "typescript": "^3.8.3"
     },
     "dependencies": {
-        "faker": "^4.1.0",
+        "-": "0.0.1",
+        "D": "^1.0.0",
         "graph-data-structure": "^1.12.0",
-        "lodash": "^4.17.15",
-        "supertest": "^4.0.2"
+        "lodash": "^4.17.15"
     },
     "peerDependencies": {
-        "supertest": "^4.0.2",
-        "faker": "^4.1.0"
+        "faker": "^4.1.0",
+        "supertest": "^4.0.2"
     }
 }

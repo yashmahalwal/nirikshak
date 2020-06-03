@@ -8,12 +8,7 @@ function makeNode(method: MethodType, cases: Cases): NodeName {
         min: 0,
         max: 10,
         precision: 1,
-    })};;${`${faker.random.word()}/${faker.random.word()}/${faker.random.word()}/{resource:id}`};;${cases};;${faker.random.number(
-        {
-            min: 0,
-            max: 10,
-        }
-    )}`;
+    })};;${`${faker.random.word()}/${faker.random.word()}/${faker.random.word()}/{resource:id}`};;${cases}`;
 }
 
 const nodes: {

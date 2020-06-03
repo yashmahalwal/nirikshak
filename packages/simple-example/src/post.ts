@@ -1,11 +1,21 @@
 import express from "express";
-import { studentMap, Student } from "./student";
+import { studentMap, isValidNewStudent, isValidStudent } from "./student";
 const router = express.Router();
-router.use("/Student", express.json(), (req, res) => {
+router.post("/Student", express.json(), (req, res) => {
     const { body } = req;
-    studentMap.set(body.id as string, body as Student);
 
-    res.sendStatus(201);
+    if (!isValidStudent(body)) {
+        res.sendStatus(400);
+        return;
+    }
+
+    if (!isValidNewStudent(body)) {
+        res.sendStatus(409);
+        return;
+    }
+
+    studentMap.set(body.id, body);
+    res.status(201).send(body);
 });
 
 export default router;

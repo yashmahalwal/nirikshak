@@ -3,39 +3,42 @@ import Graph from "graph-data-structure";
 import { NodeName } from "./nodeTypes";
 
 const traverseFromNode = _.memoize(
-    traverseFromNodeBase,
-    (graph, ...args: any[]) => [graph, ...args]
+  traverseFromNodeBase,
+  (graph, ...args: any[]) => [graph, ...args]
 );
 
 function traverseFromNodeBase(
-    graph: ReturnType<typeof Graph>,
-    steps: number,
-    root: NodeName
+  graph: ReturnType<typeof Graph>,
+  steps: number,
+  root: NodeName
 ): NodeName[][] {
-    if (steps < 1)
-        throw new Error(`Invalid number of steps for traversal: ${steps}`);
+  if (steps < 1)
+    throw new Error(`Invalid number of steps for traversal: ${steps}`);
 
-    const neighbours = graph.adjacent(root);
-    if (steps === 1 || !neighbours.length) return [[root]];
+  const neighbours = graph
+    .adjacent(root)
+    .filter((node) => graph.getEdgeWeight(root, node));
 
-    const traversals: NodeName[][] = [];
-    for (const neighbour of neighbours) {
-        traverseFromNode(graph, steps - 1, neighbour).forEach((traversal) =>
-            traversals.push([root, ...traversal])
-        );
-    }
-    return traversals;
+  if (steps === 1 || !neighbours.length) return [[root]];
+
+  const traversals: NodeName[][] = [];
+  for (const neighbour of neighbours) {
+    traverseFromNode(graph, steps - 1, neighbour).forEach((traversal) =>
+      traversals.push([root, ...traversal])
+    );
+  }
+  return traversals;
 }
 
 export function traverseGraph(
-    graph: ReturnType<typeof Graph>,
-    steps: number
+  graph: ReturnType<typeof Graph>,
+  steps: number
 ): NodeName[][] {
-    const traversal: NodeName[][] = [];
+  const traversal: NodeName[][] = [];
 
-    const nodes = graph.nodes();
-    for (const node of nodes)
-        traversal.push(...traverseFromNode(graph, steps, node));
+  const nodes = graph.nodes();
+  for (const node of nodes)
+    traversal.push(...traverseFromNode(graph, steps, node));
 
-    return traversal;
+  return traversal;
 }

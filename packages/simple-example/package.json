@@ -39,9 +39,11 @@
         "typescript": "^3.9.3"
     },
     "dependencies": {
+        "@nirikshak/core": "^0.0.0",
         "@types/supertest": "^2.0.9",
         "express": "^4.17.1",
         "faker": "^4.1.0",
+        "get-port": "^5.1.1",
         "supertest": "^4.0.2"
     }
 }

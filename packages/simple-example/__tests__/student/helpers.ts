@@ -8,7 +8,7 @@ import {
     ResourceInstance,
     generateResource,
 } from "@nirikshak/core";
-
+import Config from "./config.json";
 export const schemaHelpers: SchemaHelpers = {
     async grade() {
         return faker.random.arrayElement(["A", "B", "C"]);
@@ -16,7 +16,7 @@ export const schemaHelpers: SchemaHelpers = {
 };
 
 export const traversalHelpers: TraversalHelpers = {
-    bodyMatcher: (args) => {
+    bodyMatcher: async (args) => {
         console.log("Body matching ", args);
         return true;
     },
@@ -28,15 +28,11 @@ export async function setup(
     resourceJSON: Resource,
     done: (err?: any) => void
 ): Promise<void> {
-    const promiseArr: Promise<ResourceInstance>[] = [];
-    for (let i = 0; i < parseInt(process.env.SETUP_INSTANCES); i++)
-        promiseArr.push(generateResource(resourceJSON, schemaHelpers));
-
-    (await Promise.all(promiseArr)).forEach((p) => collection.set(p.id, p));
-
     try {
-        for (const value of collection.values()) {
-            await server.post("/Student").send(value);
+        for (let i = 0; i < Config.setupInstances; i++) {
+            const student = await generateResource(resourceJSON, schemaHelpers);
+            await server.post("/Student").send(student);
+            collection.set(student.id, student);
         }
     } catch (e) {
         done(e);

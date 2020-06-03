@@ -1,11 +1,5 @@
 import faker from "faker";
-import {
-    Inputs,
-    Outputs,
-    Description,
-    MethodType,
-    Cases,
-} from "../../../src";
+import { Inputs, Outputs, Description, MethodType, Cases } from "../../../src";
 import { URLString } from "../../../src/endpoints/types/urlString";
 import { generateNodes } from "../../../src/endpoints/graph/generateNodes";
 import { serializeNodeName } from "../../../src/endpoints/graph/nodeTypes";
@@ -356,12 +350,7 @@ describe(`Node map generation`, () => {
                 });
 
                 let nodes = 0;
-                Object.keys(outputs).forEach(
-                    (key) =>
-                        (nodes += Array.isArray(outputs[key])
-                            ? outputs[key].length
-                            : 1)
-                );
+                Object.keys(outputs).forEach(() => nodes++);
 
                 expect(map.size).toBe(nodes);
 
@@ -370,21 +359,18 @@ describe(`Node map generation`, () => {
                         ? outputs[key]
                         : [outputs[key]];
 
-                    for (let i = 0; i < outArr.length; i++) {
-                        const nodename = serializeNodeName(
-                            method,
-                            0,
-                            url,
-                            key as Cases,
-                            i
-                        );
-                        expect(map.has(nodename)).toBe(true);
-                        expect(map.get(nodename)).toEqual({
-                            url,
-                            input: ValidInputs[method],
-                            output: outArr[i],
-                        });
-                    }
+                    const nodename = serializeNodeName(
+                        method,
+                        0,
+                        url,
+                        key as Cases
+                    );
+                    expect(map.has(nodename)).toBe(true);
+                    expect(map.get(nodename)).toEqual({
+                        url,
+                        input: ValidInputs[method],
+                        output: outArr,
+                    });
                 }
             });
         })
@@ -408,21 +394,18 @@ describe(`Node map generation`, () => {
                         ? outputs[key]
                         : [outputs[key]];
 
-                    for (let i = 0; i < outArr.length; i++) {
-                        const nodename = serializeNodeName(
-                            method as MethodType,
-                            j,
-                            inputArr[j].url,
-                            key as Cases,
-                            i
-                        );
-                        expect(map.has(nodename)).toBe(true);
-                        expect(map.get(nodename)).toEqual({
-                            url: inputArr[j].url,
-                            input: inputArr[j].input,
-                            output: outArr[i],
-                        });
-                    }
+                    const nodename = serializeNodeName(
+                        method as MethodType,
+                        j,
+                        inputArr[j].url,
+                        key as Cases
+                    );
+                    expect(map.has(nodename)).toBe(true);
+                    expect(map.get(nodename)).toEqual({
+                        url: inputArr[j].url,
+                        input: inputArr[j].input,
+                        output: outArr,
+                    });
                 }
             }
         }

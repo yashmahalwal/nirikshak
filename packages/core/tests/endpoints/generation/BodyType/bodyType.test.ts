@@ -47,6 +47,12 @@ const ValidEntries: {
 }[] = [
     {
         input: {
+            address: "resource:address",
+        },
+        output: async (): Promise<BodyInstance> => ({}),
+    },
+    {
+        input: {
             sampleFirst: [
                 1,
                 2,
@@ -359,7 +365,6 @@ const ValidEntries: {
 ];
 
 const InvalidBodyTypes: any[] = [
-    { entry: "resource:lorem.ipsum" },
     { entry: "custom:lorem.ipsum" },
     { entry: "custom:invalidHelper" },
 ];

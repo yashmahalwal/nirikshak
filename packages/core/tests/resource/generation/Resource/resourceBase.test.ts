@@ -14,7 +14,6 @@ import {
 import faker from "faker";
 import { SchemaHelpers } from "../../../../src/common/types/helpers";
 import {
-    ResourceInstance,
     isWithModifiersResource,
     ResourceInstanceBase,
 } from "../../../../src/resource/types/helper";

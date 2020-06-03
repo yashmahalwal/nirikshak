@@ -23,14 +23,8 @@ describe(`Node name parsing and serializing`, () => {
             });
             const url = `${faker.random.word()}/${faker.random.word()}/${faker.random.word()}/{resource:id}`;
             const caseValue = faker.random.arrayElement(cases);
-            const caseIndex = faker.random.number({
-                min: 0,
-                max: 10,
-                precision: 1,
-            });
 
             const o: ParsedNode = {
-                caseIndex,
                 caseValue,
                 method: methodName,
                 url,
@@ -38,13 +32,7 @@ describe(`Node name parsing and serializing`, () => {
             };
             faker.seed(123 * i);
             expect(
-                serializeNodeName(
-                    o.method,
-                    o.methodIndex,
-                    o.url,
-                    o.caseValue,
-                    o.caseIndex
-                )
+                serializeNodeName(o.method, o.methodIndex, o.url, o.caseValue)
             ).toBe(
                 `${faker.random.arrayElement(method)};;${faker.random.number({
                     min: 0,
@@ -52,11 +40,7 @@ describe(`Node name parsing and serializing`, () => {
                     precision: 1,
                 })};;${`${faker.random.word()}/${faker.random.word()}/${faker.random.word()}/{resource:id}`};;${faker.random.arrayElement(
                     cases
-                )};;${faker.random.number({
-                    min: 0,
-                    max: 10,
-                    precision: 1,
-                })}`
+                )}`
             );
         });
 
@@ -86,14 +70,8 @@ describe(`Node name parsing and serializing`, () => {
             });
             const url = `${faker.random.word()}/${faker.random.word()}/${faker.random.word()}/{resource:id}`;
             const caseValue = faker.random.arrayElement(cases);
-            const caseIndex = faker.random.number({
-                min: 0,
-                max: 10,
-                precision: 1,
-            });
 
             const o: ParsedNode = {
-                caseIndex,
                 caseValue,
                 method: methodName,
                 url,
@@ -102,7 +80,7 @@ describe(`Node name parsing and serializing`, () => {
             expect(parseNodeName(nodeName)).toEqual(o);
         });
 
-        test(`Parse and serialize: Identity with memo - ${i}`, () => {
+        test(`Parse and serialize: Identity - ${i}`, () => {
             const nodeName: NodeName = `${faker.random.arrayElement(
                 method
             )};;${faker.random.number({
@@ -111,19 +89,14 @@ describe(`Node name parsing and serializing`, () => {
                 precision: 1,
             })};;${`${faker.random.word()}/${faker.random.word()}/${faker.random.word()}/{resource:id}`};;${faker.random.arrayElement(
                 cases
-            )};;${faker.random.number({
-                min: 0,
-                max: 10,
-                precision: 1,
-            })}`;
+            )}`;
 
             const o = parseNodeName(nodeName);
             const s = serializeNodeName(
                 o.method,
                 o.methodIndex,
                 o.url,
-                o.caseValue,
-                o.caseIndex
+                o.caseValue
             );
             expect(s).toBe(nodeName);
         });

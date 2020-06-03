@@ -66,12 +66,12 @@ describe(`Traversal helpers`, () => {
                         },
                     },
                     url: `/main/url`,
-                    output: {
+                    output: [{
                         semantics: {
                             status: 200,
                         },
                         body: {},
-                    },
+                    }],
                 },
                 collection
             )
@@ -96,12 +96,12 @@ describe(`Traversal helpers`, () => {
                         },
                     },
                     url: `/main/url`,
-                    output: {
+                    output: [{
                         semantics: {
                             status: 200,
                         },
                         body: {},
-                    },
+                    }],
                 },
                 collection
             )
@@ -127,12 +127,12 @@ describe(`Traversal helpers`, () => {
                         },
                     },
                     url: `/main/url`,
-                    output: {
+                    output: [{
                         semantics: {
                             status: 200,
                         },
                         body: {},
-                    },
+                    }],
                 },
                 collection
             )
@@ -152,12 +152,12 @@ describe(`Traversal helpers`, () => {
                         semantics: {},
                     },
                     url: `/main/url`,
-                    output: {
+                    output: [{
                         semantics: {
                             status: 200,
                         },
                         body: {},
-                    },
+                    }],
                 },
                 collection
             )

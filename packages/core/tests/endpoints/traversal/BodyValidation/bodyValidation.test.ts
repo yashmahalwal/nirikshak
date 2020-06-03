@@ -129,6 +129,33 @@ const InvalidBodies: {
 ];
 
 describe(`Validate body`, () => {
+    test(`Empty array`, () => {
+        expect(
+            bodyValidation(
+                {},
+                [],
+                resource,
+                schemaHelpers,
+                traversalHelpers,
+                {
+                    input: {
+                        semantics: {},
+                    },
+                    url: "/sampleURL",
+                    output: [{
+                        semantics: {
+                            status: 202,
+                        },
+                        body: {
+                            lorem: "p",
+                        },
+                    }],
+                },
+                new Map([[resource.id, resource]])
+            )
+        ).resolves.toBe(true);
+    });
+
     test.each(entries)(`Entry: %#`, (entry) => {
         expect(
             bodyValidation(
@@ -143,14 +170,14 @@ describe(`Validate body`, () => {
                         body: entry.input,
                     },
                     url: "/sampleURL",
-                    output: {
+                    output: [{
                         semantics: {
                             status: 202,
                         },
                         body: {
                             lorem: "p",
                         },
-                    },
+                    }],
                 },
                 new Map([[resource.id, resource]])
             )
@@ -171,14 +198,14 @@ describe(`Validate body`, () => {
                         body: entry.input,
                     },
                     url: "/sampleURL",
-                    output: {
+                    output: [{
                         semantics: {
                             status: 202,
                         },
                         body: {
                             lorem: "p",
                         },
-                    },
+                    }],
                 },
                 new Map([[resource.id, resource]])
             )

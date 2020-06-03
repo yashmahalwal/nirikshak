@@ -3,7 +3,7 @@ export interface Student {
     branch: "CSE" | "ECE" | "MECH" | "ELECTRICAL";
     grade: "A" | "B" | "C" | "D";
     addresses?: Array<{ zipCode: string; streetName: string }>;
-    schooling: { CBSE: number } | { StateBoard: number };
+    schooling: { CBSE: number } | { stateBoard: number };
     collegeGPA: number | null;
 }
 
@@ -64,10 +64,10 @@ function isValidSchooling(schooling: any): schooling is Student["schooling"] {
             typeof schooling["CBSE"] === "number" &&
             schooling["CBSE"] >= 0 &&
             schooling["CBSE"] <= 10) ||
-        ("StateBoard" in schooling &&
-            typeof schooling["StateBoard"] === "number" &&
-            schooling["StateBoard"] >= 0 &&
-            schooling["StateBoard"] <= 100)
+        ("stateBoard" in schooling &&
+            typeof schooling["stateBoard"] === "number" &&
+            schooling["stateBoard"] >= 0 &&
+            schooling["stateBoard"] <= 100)
     );
 }
 
@@ -76,7 +76,7 @@ function isValidCollegeGPA(gpa: any): gpa is Student["collegeGPA"] {
     return typeof gpa === "number" && gpa >= 0 && gpa <= 10;
 }
 
-function isValidStudent(student: any): student is Student {
+export function isValidStudent(student: any): student is Student {
     if (!student || typeof student !== "object") return false;
     return (
         typeof student["id"] === "string" &&
@@ -90,10 +90,10 @@ function isValidStudent(student: any): student is Student {
     );
 }
 
-function isValidNewStudent(student: any): student is Student {
+export function isValidNewStudent(student: any): student is Student {
     return isValidStudent(student) && isValidNewId(student.id);
 }
 
-function isValidOldStudent(student: any): student is Student {
+export function isValidOldStudent(student: any): student is Student {
     return isValidStudent(student) && isValidOldId(student.id);
 }

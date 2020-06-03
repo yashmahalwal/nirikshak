@@ -1,153 +1,141 @@
+import Config from "./config.json";
 import {
     Collection,
     isResource,
     isDescription,
-    MethodType,
-    Outputs,
-    makeRequest,
-    Description,
+    generateNodes,
+    makeGraph,
+    traverseGraph,
+    parseNodeName,
+    ResourceInstance,
     getRandomExistingResource,
+    makeRequest,
     extractStatusFromSemantics,
-    statusValidation,
     extractHeadersFromSemantics,
     headersValidation,
     extractBodiesFromOutput,
     bodyValidation,
+    statusValidation,
+    getRandomNewInstance,
 } from "@nirikshak/core";
 import ResourceJSON from "./resource.json";
 import EndpointsJSON from "./endpoints.json";
-import { setup, cleanup, schemaHelpers } from "./helpers";
+import { setup, cleanup, schemaHelpers, traversalHelpers } from "./helpers";
 import app from "./app";
 import { Server } from "http";
 import supertest from "supertest";
+import getPort from "get-port";
 
 // TODO: Move to a previous step in nirikshak preprocessing
 if (!isResource(ResourceJSON)) throw new Error(`Invalid resource schema`);
 if (!isDescription(EndpointsJSON))
     throw new Error(`Invalid description schema`);
 
-const collection: Collection = new Map();
-let server: Server | null = null;
+describe(`student`, () => {
+    let server: Server | null = null;
+    const nodeMap = generateNodes(EndpointsJSON);
+    const graph = makeGraph(nodeMap);
+    const traversal = traverseGraph(graph, Config.steps);
+    for (let i = 0; i < Config.iterations; i++)
+        describe(`${i + 1}`, () => {
+            for (const path of traversal)
+                describe(path.join(";"), () => {
+                    const collection: Collection = new Map();
+                    let instance: ResourceInstance | null = null;
+                    let prevPass = true;
+                    beforeAll(async (done) => {
+                        server = app.listen(await getPort(), async (err) => {
+                            if (err) done(err);
+                            await setup(
+                                supertest(server),
+                                collection,
+                                ResourceJSON,
+                                done
+                            );
+                        });
+                    });
 
-for (let i = 0; i < parseInt(process.env.ITERATIONS); i++)
-    describe(`${i}`, () => {
-        describe("student", () => {
-            for (const method in EndpointsJSON as Description) {
-                describe(method, () => {
-                    const methodEntry: Extract<
-                        Description[MethodType],
-                        Array<any>
-                    > = Array.isArray(EndpointsJSON[method])
-                        ? EndpointsJSON[method]
-                        : [EndpointsJSON[method]];
+                    for (const node of path)
+                        test(node, async () => {
+                            if (!prevPass) return;
+                            const parsedNode = parseNodeName(node);
+                            if (!instance) {
+                                if (parsedNode.method === "POST")
+                                    instance = await getRandomNewInstance(
+                                        ResourceJSON,
+                                        schemaHelpers
+                                    );
+                                else
+                                    instance = getRandomExistingResource(
+                                        collection
+                                    );
+                            }
 
-                    for (let i = 0; i < methodEntry.length; i++) {
-                        describe(`${i}`, () => {
-                            const url = methodEntry[i].url;
-                            const input = methodEntry[i].input;
-                            const outputs = methodEntry[i].output;
-                            for (const key in outputs) {
-                                const caseArr: Extract<
-                                    Outputs[MethodType][keyof Outputs[MethodType]],
-                                    Array<any>
-                                > = Array.isArray(outputs[key])
-                                    ? outputs[key]
-                                    : [outputs[key]];
-                                describe(url, () => {
-                                    describe(key, () => {
-                                        beforeAll((done) => {
-                                            server = app.listen(
-                                                3000,
-                                                async (err) => {
-                                                    if (err) return done(err);
-                                                    await setup(
-                                                        supertest(server),
-                                                        collection,
-                                                        ResourceJSON,
-                                                        done
-                                                    );
-                                                }
-                                            );
-                                        });
+                            const entry = nodeMap.get(node);
 
-                                        for (
-                                            let i = 0;
-                                            i < caseArr.length;
-                                            i++
-                                        ) {
-                                            test(`${i}`, async () => {
-                                                const RandomResourceEntry = getRandomExistingResource(
-                                                    collection
-                                                ).id;
-                                                const x = await makeRequest(
-                                                    url,
-                                                    method as MethodType,
-                                                    key as keyof Outputs[MethodType],
-                                                    supertest(server),
-                                                    input,
-                                                    collection.get(
-                                                        RandomResourceEntry
-                                                    )!,
-                                                    schemaHelpers,
-                                                    collection,
-                                                    ResourceJSON
-                                                );
+                            if (!entry)
+                                throw new Error(
+                                    `Node map did not have the node : ${node}`
+                                );
 
-                                                const statuses = extractStatusFromSemantics(
-                                                    caseArr
-                                                );
-                                                expect(
-                                                    statusValidation(
-                                                        x.status,
-                                                        statuses
-                                                    )
-                                                ).toBe(true);
+                            const response = await makeRequest(
+                                entry.url,
+                                parsedNode.method,
+                                parsedNode.caseValue,
+                                supertest(server),
+                                entry.input,
+                                instance,
+                                schemaHelpers,
+                                collection,
+                                ResourceJSON
+                            );
 
-                                                if ("headers" in x) {
-                                                    const headers = extractHeadersFromSemantics(
-                                                        caseArr
-                                                    );
-                                                    expect(
-                                                        headersValidation(
-                                                            x.headers,
-                                                            headers,
-                                                            collection.get(
-                                                                RandomResourceEntry
-                                                            )!,
-                                                            schemaHelpers
-                                                        )
-                                                    ).resolves.toBe(true);
-                                                }
+                            const statuses = extractStatusFromSemantics(
+                                entry.output
+                            );
+                            prevPass =
+                                prevPass &&
+                                statusValidation(response.status, statuses);
+                            expect(response.status).toMatchStatus(statuses);
 
-                                                if ("body" in x) {
-                                                    const bodies = extractBodiesFromOutput(
-                                                        caseArr
-                                                    );
-                                                    expect(
-                                                        bodyValidation(
-                                                            x.body,
-                                                            bodies,
-                                                            collection.get(
-                                                                RandomResourceEntry
-                                                            )!,
-                                                            schemaHelpers
-                                                        )
-                                                    ).resolves.toBe(true);
-                                                }
-                                            });
-                                        }
+                            if ("headers" in response) {
+                                const headers = extractHeadersFromSemantics(
+                                    entry.output
+                                );
+                                const result = await headersValidation(
+                                    response.headers,
+                                    headers,
+                                    response.resource,
+                                    schemaHelpers
+                                );
+                                prevPass = prevPass && result;
+                                expect(result).toMatchHeaders(true);
+                            }
 
-                                        afterAll((done) => {
-                                            server?.close((err) =>
-                                                err ? done(err) : cleanup(done)
-                                            );
-                                        });
-                                    });
-                                });
+                            if ("body" in response) {
+                                const bodies = extractBodiesFromOutput(
+                                    entry.output
+                                );
+                                const result = await bodyValidation(
+                                    response.body,
+                                    bodies,
+                                    response.resource,
+                                    schemaHelpers,
+                                    traversalHelpers,
+                                    entry,
+                                    collection
+                                );
+                                instance = response.resource;
+                                prevPass = prevPass && result;
+                                expect(result).toMatchBody(true);
                             }
                         });
-                    }
+
+                    afterAll(async (done) => {
+                        server?.close((err) =>
+                            err ? done(err) : cleanup(done)
+                        );
+                    });
                 });
-            }
         });
-    });
+});

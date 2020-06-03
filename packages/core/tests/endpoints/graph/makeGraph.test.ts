@@ -2,10 +2,7 @@ import faker from "faker";
 import { URLString } from "../../../src/endpoints/types/urlString";
 import { Description, Outputs, Inputs } from "../../../src";
 import { generateNodes } from "../../../src/endpoints/graph/generateNodes";
-import {
-    makeGraph,
-    isNeighbour,
-} from "../../../src/endpoints/graph/makeGraph";
+import { makeGraph, isNeighbour } from "../../../src/endpoints/graph/makeGraph";
 
 const ValidInputs: Inputs = {
     DELETE: {
@@ -321,15 +318,16 @@ test(`Graph generation`, () => {
     const map = generateNodes(ComplexCase);
     const graph = makeGraph(map);
 
-    const nodes = map.keys();
+    const nodes = Array.from(map.keys());
     const expectedNodes = graph.nodes();
 
     expect(Array.from(nodes).length).toBe(expectedNodes.length);
 
     for (const source of nodes)
         for (const target of nodes) {
-            expect(graph.getEdgeWeight(source, target)).toBe(
-                isNeighbour(source, target) ? 1 : 0
-            );
+            const weight = graph.getEdgeWeight(source, target);
+            const expected = isNeighbour(source, target) ? 1 : 0;
+
+            expect(weight).toBe(expected);
         }
 });
