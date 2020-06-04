@@ -39,6 +39,7 @@
         "typescript": "^3.9.3"
     },
     "dependencies": {
+        "@nirikshak/cli": "^0.0.0",
         "@nirikshak/core": "^0.0.0",
         "@types/supertest": "^2.0.9",
         "express": "^4.17.1",
