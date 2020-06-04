@@ -1,21 +1,25 @@
 import {
-  HeaderAndQueryInstance,
-  generateHeaderAndQuery,
+    HeaderAndQueryInstance,
+    generateHeaderAndQuery,
 } from "../../generation/input/headerAndQuery";
 import { Inputs } from "../..";
 import { ResourceInstance, SchemaHelpers } from "../../..";
 
 interface DeleteInput {
-  semantics: HeaderAndQueryInstance;
+    semantics: HeaderAndQueryInstance;
 }
 
 // Generate input from an resource
 export async function generateDeleteInput(
-  input: Inputs["DELETE"],
-  resource: ResourceInstance,
-  helpers: SchemaHelpers
+    input: Inputs["DELETE"],
+    resource: ResourceInstance,
+    helpers: SchemaHelpers
 ): Promise<DeleteInput> {
-  return {
-    semantics: await generateHeaderAndQuery(input.semantics, resource, helpers),
-  };
+    return {
+        semantics: await generateHeaderAndQuery(
+            input.semantics,
+            resource,
+            helpers
+        ),
+    };
 }

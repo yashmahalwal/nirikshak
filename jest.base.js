@@ -1,5 +1,9 @@
 module.exports = {
     collectCoverage: true,
-    collectCoverageFrom: ["packages/**/src/**/*.ts", "!**/node_modules/**"],
+    coverageReporters: ["json-summary", "text", "lcov"],
+    collectCoverageFrom: [
+        "packages/!(*example*)/src/**/*.ts",
+        "!**/node_modules/**",
+    ],
     coverageDirectory: "<rootDir>/coverage",
 };

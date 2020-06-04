@@ -1,0 +1,10 @@
+{
+    "dir": "nirikshak",
+    "resources": [
+        "student",
+        {
+            "dir": "faculty",
+            "name": "useful"
+        }
+    ]
+}

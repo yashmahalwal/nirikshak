@@ -8,27 +8,27 @@ import { HeadersInstance } from "../../generation/helpers/headerMapGen";
 import { generatePutInput } from "./input";
 
 export async function makeDestructivePutRequest(
-  server: Supertest.SuperTest<Supertest.Test>,
-  url: URLString,
-  input: Inputs["PUT"],
-  helpers: SchemaHelpers,
-  resourceInstance: ResourceInstance
+    server: Supertest.SuperTest<Supertest.Test>,
+    url: URLString,
+    input: Inputs["PUT"],
+    helpers: SchemaHelpers,
+    resourceInstance: ResourceInstance
 ): Promise<{
-  status: number;
-  headers?: HeadersInstance;
+    status: number;
+    headers?: HeadersInstance;
 }> {
-  const { semantics, body } = await generatePutInput(
-    "DESTRUCTIVE",
-    input,
-    resourceInstance,
-    helpers
-  );
-  const urlValue = await generateURL(url, resourceInstance, helpers);
+    const { semantics, body } = await generatePutInput(
+        "DESTRUCTIVE",
+        input,
+        resourceInstance,
+        helpers
+    );
+    const urlValue = await generateURL(url, resourceInstance, helpers);
 
-  const { status, header } = await server
-    .put(urlValue)
-    .query(semantics.query ?? {})
-    .set(semantics.headers ?? {})
-    .send(body);
-  return { status, headers: header };
+    const { status, header } = await server
+        .put(urlValue)
+        .query(semantics.query ?? {})
+        .set(semantics.headers ?? {})
+        .send(body);
+    return { status, headers: header };
 }

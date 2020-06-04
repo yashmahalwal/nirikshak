@@ -8,19 +8,19 @@ import { SchemaHelpers, Primitives } from "../../common/types/helpers";
 
 // Generating base type entry
 export async function generateBaseType(
-  input: BaseType,
-  Helpers: SchemaHelpers
+    input: BaseType,
+    Helpers: SchemaHelpers
 ): Promise<Primitives> {
-  if (Array.isArray(input)) {
-    return Promise.all(
-      (input as (Literal | BaseType)[]).map((entry) =>
-        generateBaseType(entry, Helpers)
-      )
-    );
-  }
+    if (Array.isArray(input)) {
+        return Promise.all(
+            (input as (Literal | BaseType)[]).map((entry) =>
+                generateBaseType(entry, Helpers)
+            )
+        );
+    }
 
-  if (isFakerType(input)) return generateFaker(input);
-  if (isCustomFunction(input)) return generateCustom(input, Helpers);
+    if (isFakerType(input)) return generateFaker(input);
+    if (isCustomFunction(input)) return generateCustom(input, Helpers);
 
-  return input;
+    return input;
 }

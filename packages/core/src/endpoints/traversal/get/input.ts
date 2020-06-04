@@ -1,21 +1,25 @@
 import {
-  HeaderAndQueryInstance,
-  generateHeaderAndQuery,
+    HeaderAndQueryInstance,
+    generateHeaderAndQuery,
 } from "../../generation/input/headerAndQuery";
 import { Inputs } from "../..";
 import { ResourceInstance, SchemaHelpers } from "../../..";
 
 interface GetInput {
-  semantics: HeaderAndQueryInstance;
+    semantics: HeaderAndQueryInstance;
 }
 
 // Generate input from an resource
 export async function generateGetInput(
-  input: Inputs["GET"],
-  resource: ResourceInstance,
-  helpers: SchemaHelpers
+    input: Inputs["GET"],
+    resource: ResourceInstance,
+    helpers: SchemaHelpers
 ): Promise<GetInput> {
-  return {
-    semantics: await generateHeaderAndQuery(input.semantics, resource, helpers),
-  };
+    return {
+        semantics: await generateHeaderAndQuery(
+            input.semantics,
+            resource,
+            helpers
+        ),
+    };
 }

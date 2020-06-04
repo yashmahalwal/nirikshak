@@ -6,8 +6,8 @@ import { Literal } from "../types/literals";
 // Function to generate faker literals
 // Should not throw any error for valid faker types
 export function generateFaker(input: FakerType): Literal {
-  const object = normalizeFaker(input);
+    const object = normalizeFaker(input);
 
-  const functionName = object.function.slice(6);
-  return _.get(faker, functionName)(...object.args);
+    const functionName = object.function.slice(6);
+    return _.get(faker, functionName)(...object.args);
 }

@@ -1,20 +1,14 @@
-import { CliArgs } from "../utils/additionalTypes";
+import { Configuration } from "../utils/types";
 import { ensureDirectories } from "./ensureDirectories";
-import { rootJestConfig } from "./jestConfig";
-import ora from "ora";
+import placeJestConfig from "./jest";
 
-const waitPromise = (interval: number) =>
-    new Promise((resolve) => setTimeout(resolve, interval));
-
-async function init<T extends CliArgs = CliArgs>({ configuration }: T) {
-    const spinner = ora({
-        discardStdin: true,
-        interval: 50,
-        text: `Generating directory structure\n`,
-    }).start();
+async function init({
+    configuration,
+}: {
+    configuration: Configuration;
+}): Promise<void> {
     await ensureDirectories(configuration);
-    await rootJestConfig(configuration);
-    spinner.succeed();
+    await placeJestConfig(configuration);
 }
 
 export const command = "init";

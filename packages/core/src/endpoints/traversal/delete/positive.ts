@@ -9,30 +9,30 @@ import { Collection } from "../collection";
 import { generateDeleteInput } from "./input";
 
 export async function makePositiveDeleteRequest(
-  server: Supertest.SuperTest<Supertest.Test>,
-  url: URLString,
-  input: Inputs["DELETE"],
-  helpers: SchemaHelpers,
-  resourceInstance: ResourceInstance,
-  collection: Collection
+    server: Supertest.SuperTest<Supertest.Test>,
+    url: URLString,
+    input: Inputs["DELETE"],
+    helpers: SchemaHelpers,
+    resourceInstance: ResourceInstance,
+    collection: Collection
 ): Promise<{
-  status: number;
-  headers: HeadersInstance;
-  body: any;
+    status: number;
+    headers: HeadersInstance;
+    body: any;
 }> {
-  const { semantics } = await generateDeleteInput(
-    input,
-    resourceInstance,
-    helpers
-  );
-  const urlValue = await generateURL(url, resourceInstance, helpers);
+    const { semantics } = await generateDeleteInput(
+        input,
+        resourceInstance,
+        helpers
+    );
+    const urlValue = await generateURL(url, resourceInstance, helpers);
 
-  const { status, header, body } = await server
-    .delete(urlValue)
-    .query(semantics.query ?? {})
-    .set(semantics.headers ?? {});
-  if (collection.has(resourceInstance.id))
-    collection.delete(resourceInstance.id);
-  else throw new Error(`Cannot delete non existent resource from collection`);
-  return { status, headers: header, body };
+    const { status, header, body } = await server
+        .delete(urlValue)
+        .query(semantics.query ?? {})
+        .set(semantics.headers ?? {});
+    if (collection.has(resourceInstance.id))
+        collection.delete(resourceInstance.id);
+    else throw new Error(`Cannot delete non existent resource from collection`);
+    return { status, headers: header, body };
 }

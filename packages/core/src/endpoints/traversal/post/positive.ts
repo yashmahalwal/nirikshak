@@ -9,33 +9,36 @@ import { Collection } from "../collection";
 import { generatePostInput } from "./input";
 
 export async function makePositivePostRequest(
-  server: Supertest.SuperTest<Supertest.Test>,
-  url: URLString,
-  input: Inputs["POST"],
-  helpers: SchemaHelpers,
-  resourceInstance: ResourceInstance,
-  collection: Collection
+    server: Supertest.SuperTest<Supertest.Test>,
+    url: URLString,
+    input: Inputs["POST"],
+    helpers: SchemaHelpers,
+    resourceInstance: ResourceInstance,
+    collection: Collection
 ): Promise<{
-  status: number;
-  headers: HeadersInstance;
-  body: any;
+    status: number;
+    headers: HeadersInstance;
+    body: any;
 }> {
-  const { semantics, body: b } = await generatePostInput(
-    "POSITIVE",
-    input,
-    resourceInstance,
-    helpers
-  );
-  const urlValue = await generateURL(url, resourceInstance, helpers);
+    const { semantics, body: b } = await generatePostInput(
+        "POSITIVE",
+        input,
+        resourceInstance,
+        helpers
+    );
+    const urlValue = await generateURL(url, resourceInstance, helpers);
 
-  const { status, header, body } = await server
-    .post(urlValue)
-    .query(semantics.query ?? {})
-    .set(semantics.headers ?? {})
-    .send(b);
-  if (!collection.has(resourceInstance.id))
-    collection.set(resourceInstance.id, resourceInstance);
-  else throw new Error(`Cannot create already existing resource in collection`);
+    const { status, header, body } = await server
+        .post(urlValue)
+        .query(semantics.query ?? {})
+        .set(semantics.headers ?? {})
+        .send(b);
+    if (!collection.has(resourceInstance.id))
+        collection.set(resourceInstance.id, resourceInstance);
+    else
+        throw new Error(
+            `Cannot create already existing resource in collection`
+        );
 
-  return { status, headers: header, body };
+    return { status, headers: header, body };
 }

@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Command output --help 1`] = `
+"[97m  _   _   _          _   _            _               _    [39m
+[97m | \\\\ | | (_)  _ __  (_) | | __  ___  | |__     __ _  | | __[39m
+[97m |  \\\\| | | | | '__| | | | |/ / / __| | '_ \\\\   / _\` | | |/ /[39m
+[97m | |\\\\  | | | | |    | | |   <  \\\\__ \\\\ | | | | | (_| | |   < [39m
+[97m |_| \\\\_| |_| |_|    |_| |_|\\\\_\\\\ |___/ |_| |_|  \\\\__,_| |_|\\\\_\\\\[39m
+[97m                                                           [39m
+[4m[1mTest your REST APIs with ease[22m[24m
+
+
+Usage: index.js [command] [options]
+
+Commands:
+  index.js init  Initialise nirikshak in the project
+
+Options:
+  --config, -c   path to the configuration file      [default: \\"nirikshak.json\\"]
+  --help, -h     Show help                                             [boolean]
+  --version, -v  Show version number                                   [boolean]
+
+Examples:
+  nirikshak init                  Sets up the project using nirikshak.json file
+                                  in the current working directory
+  nirikshak init -c [configFile]  Initialises the project with specified
+                                  configuration file
+"
+`;
+
+exports[`Command output --version 1`] = `
+"[97m  _   _   _          _   _            _               _    [39m
+[97m | \\\\ | | (_)  _ __  (_) | | __  ___  | |__     __ _  | | __[39m
+[97m |  \\\\| | | | | '__| | | | |/ / / __| | '_ \\\\   / _\` | | |/ /[39m
+[97m | |\\\\  | | | | |    | | |   <  \\\\__ \\\\ | | | | | (_| | |   < [39m
+[97m |_| \\\\_| |_| |_|    |_| |_|\\\\_\\\\ |___/ |_| |_|  \\\\__,_| |_|\\\\_\\\\[39m
+[97m                                                           [39m
+[4m[1mTest your REST APIs with ease[22m[24m
+
+
+0.0.0
+"
+`;
+
+exports[`Command output -h 1`] = `
+"[97m  _   _   _          _   _            _               _    [39m
+[97m | \\\\ | | (_)  _ __  (_) | | __  ___  | |__     __ _  | | __[39m
+[97m |  \\\\| | | | | '__| | | | |/ / / __| | '_ \\\\   / _\` | | |/ /[39m
+[97m | |\\\\  | | | | |    | | |   <  \\\\__ \\\\ | | | | | (_| | |   < [39m
+[97m |_| \\\\_| |_| |_|    |_| |_|\\\\_\\\\ |___/ |_| |_|  \\\\__,_| |_|\\\\_\\\\[39m
+[97m                                                           [39m
+[4m[1mTest your REST APIs with ease[22m[24m
+
+
+Usage: index.js [command] [options]
+
+Commands:
+  index.js init  Initialise nirikshak in the project
+
+Options:
+  --config, -c   path to the configuration file      [default: \\"nirikshak.json\\"]
+  --help, -h     Show help                                             [boolean]
+  --version, -v  Show version number                                   [boolean]
+
+Examples:
+  nirikshak init                  Sets up the project using nirikshak.json file
+                                  in the current working directory
+  nirikshak init -c [configFile]  Initialises the project with specified
+                                  configuration file
+"
+`;
+
+exports[`Command output -v 1`] = `
+"[97m  _   _   _          _   _            _               _    [39m
+[97m | \\\\ | | (_)  _ __  (_) | | __  ___  | |__     __ _  | | __[39m
+[97m |  \\\\| | | | | '__| | | | |/ / / __| | '_ \\\\   / _\` | | |/ /[39m
+[97m | |\\\\  | | | | |    | | |   <  \\\\__ \\\\ | | | | | (_| | |   < [39m
+[97m |_| \\\\_| |_| |_|    |_| |_|\\\\_\\\\ |___/ |_| |_|  \\\\__,_| |_|\\\\_\\\\[39m
+[97m                                                           [39m
+[4m[1mTest your REST APIs with ease[22m[24m
+
+
+0.0.0
+"
+`;

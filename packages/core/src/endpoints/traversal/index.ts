@@ -15,74 +15,74 @@ export { extractBodiesFromOutput, bodyValidation } from "./bodyValidation";
 export { TraversalHelpers, TraversalHelperFunctions } from "./traversalHelpers";
 export { Collection, getRandomExistingResource } from "./collection";
 export {
-  extractHeadersFromSemantics,
-  extractStatusFromSemantics,
-  statusValidation,
-  headersValidation,
+    extractHeadersFromSemantics,
+    extractStatusFromSemantics,
+    statusValidation,
+    headersValidation,
 } from "./semanticsValidation";
 export async function makeRequest(
-  url: URLString,
-  method: MethodType,
-  caseValue: Cases,
-  server: Supertest.SuperTest<Supertest.Test>,
-  input: InputSemantics & Partial<InputBodies>,
-  resource: ResourceInstance,
-  helpers: SchemaHelpers,
-  collection: Collection
+    url: URLString,
+    method: MethodType,
+    caseValue: Cases,
+    server: Supertest.SuperTest<Supertest.Test>,
+    input: InputSemantics & Partial<InputBodies>,
+    resource: ResourceInstance,
+    helpers: SchemaHelpers,
+    collection: Collection
 ): Promise<{
-  status: number;
-  headers?: HeadersInstance;
-  body?: any;
+    status: number;
+    headers?: HeadersInstance;
+    body?: any;
 }> {
-  switch (method) {
-    case "GET":
-      return makeGetRequest(
-        caseValue as keyof Outputs["GET"],
-        server,
-        url,
-        input,
-        resource,
-        helpers
-      );
-    case "DELETE":
-      return makeDeleteRequest(
-        caseValue as keyof Outputs["DELETE"],
-        server,
-        url,
-        input,
-        resource,
-        helpers,
-        collection
-      );
-    case "PATCH":
-      return makePatchRequest(
-        caseValue,
-        server,
-        url,
-        input as Inputs["PATCH"],
-        resource,
-        helpers,
-        collection
-      );
-    case "POST":
-      return makePostRequest(
-        caseValue,
-        server,
-        url,
-        input as Inputs["PATCH"],
-        resource,
-        helpers,
-        collection
-      );
-    case "PUT":
-      return makePutRequest(
-        caseValue as keyof Outputs["PUT"],
-        server,
-        url,
-        input as Inputs["PUT"],
-        resource,
-        helpers,
-        collection
-      );
-  }
+    switch (method) {
+        case "GET":
+            return makeGetRequest(
+                caseValue as keyof Outputs["GET"],
+                server,
+                url,
+                input,
+                resource,
+                helpers
+            );
+        case "DELETE":
+            return makeDeleteRequest(
+                caseValue as keyof Outputs["DELETE"],
+                server,
+                url,
+                input,
+                resource,
+                helpers,
+                collection
+            );
+        case "PATCH":
+            return makePatchRequest(
+                caseValue,
+                server,
+                url,
+                input as Inputs["PATCH"],
+                resource,
+                helpers,
+                collection
+            );
+        case "POST":
+            return makePostRequest(
+                caseValue,
+                server,
+                url,
+                input as Inputs["PATCH"],
+                resource,
+                helpers,
+                collection
+            );
+        case "PUT":
+            return makePutRequest(
+                caseValue as keyof Outputs["PUT"],
+                server,
+                url,
+                input as Inputs["PUT"],
+                resource,
+                helpers,
+                collection
+            );
+    }
 }

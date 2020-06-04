@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "jest",
+        "coverage-badge": "npm run test && jest-coverage-badges output ./badges",
         "test:cli": "jest --projects packages/cli",
         "test:core": "jest --projects packages/core",
         "test:update": "jest -u",
@@ -60,6 +61,7 @@
         "eslint-plugin-import": "^2.20.2",
         "husky": "^4.2.5",
         "jest": "^25.4.0",
+        "jest-coverage-badges": "^1.1.2",
         "lerna": "^3.20.2",
         "prettier": "^2.0.5",
         "typescript": "^3.8.3"

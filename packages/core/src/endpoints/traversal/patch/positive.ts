@@ -9,32 +9,32 @@ import { generatePatchInput } from "./input";
 import { Collection } from "../collection";
 
 export async function makePositivePatchRequest(
-  server: Supertest.SuperTest<Supertest.Test>,
-  url: URLString,
-  input: Inputs["PATCH"],
-  helpers: SchemaHelpers,
-  resourceInstance: ResourceInstance,
-  collection: Collection
+    server: Supertest.SuperTest<Supertest.Test>,
+    url: URLString,
+    input: Inputs["PATCH"],
+    helpers: SchemaHelpers,
+    resourceInstance: ResourceInstance,
+    collection: Collection
 ): Promise<{
-  status: number;
-  headers: HeadersInstance;
-  body: any;
+    status: number;
+    headers: HeadersInstance;
+    body: any;
 }> {
-  const { semantics, body: b } = await generatePatchInput(
-    "POSITIVE",
-    input,
-    resourceInstance,
-    helpers
-  );
-  const urlValue = await generateURL(url, resourceInstance, helpers);
+    const { semantics, body: b } = await generatePatchInput(
+        "POSITIVE",
+        input,
+        resourceInstance,
+        helpers
+    );
+    const urlValue = await generateURL(url, resourceInstance, helpers);
 
-  const { status, header, body } = await server
-    .patch(urlValue)
-    .query(semantics.query ?? {})
-    .set(semantics.headers ?? {})
-    .send(b);
-  if (!collection.has(resourceInstance.id))
-    throw new Error(`Cannot update non existing resource in collection`);
+    const { status, header, body } = await server
+        .patch(urlValue)
+        .query(semantics.query ?? {})
+        .set(semantics.headers ?? {})
+        .send(b);
+    if (!collection.has(resourceInstance.id))
+        throw new Error(`Cannot update non existing resource in collection`);
 
-  return { status, headers: header, body };
+    return { status, headers: header, body };
 }

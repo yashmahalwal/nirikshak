@@ -7,27 +7,27 @@ import { generateURL } from "../../generation/urlStringGen";
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
 import { generatePostInput } from "./input";
 export async function makeNegativePostRequest(
-  server: Supertest.SuperTest<Supertest.Test>,
-  url: URLString,
-  input: Inputs["POST"],
-  helpers: SchemaHelpers,
-  resourceInstance: ResourceInstance
+    server: Supertest.SuperTest<Supertest.Test>,
+    url: URLString,
+    input: Inputs["POST"],
+    helpers: SchemaHelpers,
+    resourceInstance: ResourceInstance
 ): Promise<{
-  status: number;
-  headers?: HeadersInstance;
+    status: number;
+    headers?: HeadersInstance;
 }> {
-  const { semantics, body } = await generatePostInput(
-    "NEGATIVE",
-    input,
-    resourceInstance,
-    helpers
-  );
-  const urlValue = await generateURL(url, resourceInstance, helpers);
+    const { semantics, body } = await generatePostInput(
+        "NEGATIVE",
+        input,
+        resourceInstance,
+        helpers
+    );
+    const urlValue = await generateURL(url, resourceInstance, helpers);
 
-  const { status, header } = await server
-    .post(urlValue)
-    .query(semantics.query ?? {})
-    .set(semantics.headers ?? {})
-    .send(body);
-  return { status, headers: header };
+    const { status, header } = await server
+        .post(urlValue)
+        .query(semantics.query ?? {})
+        .set(semantics.headers ?? {})
+        .send(body);
+    return { status, headers: header };
 }

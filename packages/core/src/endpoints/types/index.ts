@@ -1,9 +1,9 @@
 export {
-  MethodType,
-  HeaderMap,
-  Cases,
-  BodyType,
-  BodyInstance,
+    MethodType,
+    HeaderMap,
+    Cases,
+    BodyType,
+    BodyInstance,
 } from "./helpers";
 export { isURLString } from "./urlString";
 export { isResourceString } from "./resourceString";

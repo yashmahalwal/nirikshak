@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Demand atleast one option 1`] = `
+"[97m  _   _   _          _   _            _               _    [39m
+[97m | \\\\ | | (_)  _ __  (_) | | __  ___  | |__     __ _  | | __[39m
+[97m |  \\\\| | | | | '__| | | | |/ / / __| | '_ \\\\   / _\` | | |/ /[39m
+[97m | |\\\\  | | | | |    | | |   <  \\\\__ \\\\ | | | | | (_| | |   < [39m
+[97m |_| \\\\_| |_| |_|    |_| |_|\\\\_\\\\ |___/ |_| |_|  \\\\__,_| |_|\\\\_\\\\[39m
+[97m                                                           [39m
+[4m[1mTest your REST APIs with ease[22m[24m
+
+
+[31m✖ [39m [31m[4mfatal[24m    [39m Not enough non-option arguments: got 0, need at least 1
+"
+`;

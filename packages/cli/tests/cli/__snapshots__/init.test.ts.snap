@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check binding to modules via init command 1`] = `
+"[97m  _   _   _          _   _            _               _    [39m
+[97m | \\\\ | | (_)  _ __  (_) | | __  ___  | |__     __ _  | | __[39m
+[97m |  \\\\| | | | | '__| | | | |/ / / __| | '_ \\\\   / _\` | | |/ /[39m
+[97m | |\\\\  | | | | |    | | |   <  \\\\__ \\\\ | | | | | (_| | |   < [39m
+[97m |_| \\\\_| |_| |_|    |_| |_|\\\\_\\\\ |___/ |_| |_|  \\\\__,_| |_|\\\\_\\\\[39m
+[97m                                                           [39m
+[4m[1mTest your REST APIs with ease[22m[24m
+
+
+[31m✖ [39m [31m[4mfatal[24m    [39m Error: Project already initialised. Delete /home/yash/Desktop/nirikshak/packages/cli/tests/cli/.nirikshak if you want to restart from scratch. [90m[39m
+[90m    at Object.<anonymous> (/home/yash/Desktop/nirikshak/packages/cli/lib/init/ensureDirectories.js:52:27)[39m
+[90m    at step (/home/yash/Desktop/nirikshak/packages/cli/lib/init/ensureDirectories.js:33:23)[39m
+[90m    at Object.next (/home/yash/Desktop/nirikshak/packages/cli/lib/init/ensureDirectories.js:14:53)[39m
+[90m    at fulfilled (/home/yash/Desktop/nirikshak/packages/cli/lib/init/ensureDirectories.js:5:58)[39m
+"
+`;

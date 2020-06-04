@@ -9,31 +9,31 @@ import { Collection } from "../collection";
 import { generatePutInput } from "./input";
 
 export async function makePositivePutRequest(
-  server: Supertest.SuperTest<Supertest.Test>,
-  url: URLString,
-  input: Inputs["PUT"],
-  helpers: SchemaHelpers,
-  resourceInstance: ResourceInstance,
-  collection: Collection
+    server: Supertest.SuperTest<Supertest.Test>,
+    url: URLString,
+    input: Inputs["PUT"],
+    helpers: SchemaHelpers,
+    resourceInstance: ResourceInstance,
+    collection: Collection
 ): Promise<{
-  status: number;
-  headers: HeadersInstance;
-  body: any;
+    status: number;
+    headers: HeadersInstance;
+    body: any;
 }> {
-  const { semantics, body: b } = await generatePutInput(
-    "POSITIVE",
-    input,
-    resourceInstance,
-    helpers
-  );
-  const urlValue = await generateURL(url, resourceInstance, helpers);
+    const { semantics, body: b } = await generatePutInput(
+        "POSITIVE",
+        input,
+        resourceInstance,
+        helpers
+    );
+    const urlValue = await generateURL(url, resourceInstance, helpers);
 
-  const { status, header, body } = await server
-    .put(urlValue)
-    .query(semantics.query ?? {})
-    .set(semantics.headers ?? {})
-    .send(b);
-  collection.set(resourceInstance.id, resourceInstance);
+    const { status, header, body } = await server
+        .put(urlValue)
+        .query(semantics.query ?? {})
+        .set(semantics.headers ?? {})
+        .send(b);
+    collection.set(resourceInstance.id, resourceInstance);
 
-  return { status, headers: header, body };
+    return { status, headers: header, body };
 }
