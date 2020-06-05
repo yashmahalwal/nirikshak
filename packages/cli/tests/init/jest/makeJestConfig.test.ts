@@ -2,6 +2,7 @@ import { Configuration, JestConfig } from "../../../src/utils/types";
 import { makeJestConfiguration } from "../../../src/init/jest";
 import path from "path";
 const config: Configuration = {
+    app: "index.ts",
     dir: "nirikshak",
     resources: ["student", { name: "faculty", dir: "tests/faculty" }],
 };

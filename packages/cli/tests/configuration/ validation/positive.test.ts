@@ -1,17 +1,21 @@
 import { validateConfig } from "../../../src/configuration";
+import { Configuration } from "../../../src/utils/types";
 
-const validConfigs = [
+const validConfigs: Configuration[] = [
     {
         dir: "nirikshak",
         resources: ["student"],
+        app: "app.ts",
     },
     {
         dir: "nirikshak",
         resources: ["student", "faculty"],
+        app: "app.ts",
     },
     {
         dir: "tests",
         resources: [{ name: "student", dir: "st" }, "faculty"],
+        app: "app.ts",
     },
     {
         dir: "tests",
@@ -22,6 +26,7 @@ const validConfigs = [
                 dir: "fc",
             },
         ],
+        app: "app.ts",
     },
     {
         dir: "tests",
@@ -32,6 +37,7 @@ const validConfigs = [
                 dir: "fc",
             },
         ],
+        app: "app.ts",
     },
 ];
 

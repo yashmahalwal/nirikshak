@@ -8,6 +8,7 @@ import path from "path";
 beforeAll(() => process.chdir(__dirname));
 
 const config: Configuration = {
+    app: "index.ts",
     dir: "teacher",
     resources: ["student"],
 };
@@ -23,7 +24,7 @@ test(`Placing jest configuration files`, async () => {
     await fs.pathExists("jest.setup.js");
     const buff1 = await fs.readFile("jest.setup.js");
     const buff2 = await fs.readFile(
-        path.resolve(__dirname, "../../../../src/staticFiles/jest.setup")
+        path.resolve(__dirname, "../../../../src/staticFiles/jest.setup.js")
     );
     expect(buff1.equals(buff2)).toBe(true);
 });

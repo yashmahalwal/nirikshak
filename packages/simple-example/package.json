@@ -19,7 +19,7 @@
     },
     "scripts": {
         "start": "ts-node src/index.ts",
-        "test": "echo \"Error: run tests from root\" && exit 1"
+        "test": "jest --json --outputFile=nirikshak.jest.log.json --color=false --noStackTrace"
     },
     "bugs": {
         "url": "https://github.com/yashmahalwal/nirikshak/issues"

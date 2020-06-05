@@ -27,10 +27,6 @@ import supertest from "supertest";
 import getPort from "get-port";
 import faker from "faker";
 
-// TODO: Move to a previous step in nirikshak preprocessing
-if (!isResource(ResourceJSON)) throw new Error(`Invalid resource schema`);
-if (!isDescription(EndpointsJSON))
-    throw new Error(`Invalid description schema`);
 
 describe(`student`, () => {
     let server: Server | null = null;
@@ -140,7 +136,9 @@ describe(`student`, () => {
                                     schemaHelpers,
                                     traversalHelpers,
                                     entry,
-                                    collection
+                                    collection,
+                                    response.input,
+                                    parsedNode
                                 );
                                 prevPass = prevPass && result;
                                 expect(result).toMatchBody(true);

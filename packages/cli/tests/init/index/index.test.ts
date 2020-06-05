@@ -5,6 +5,7 @@ import { Configuration } from "../../../src/utils/types";
 import fs from "fs-extra";
 
 const config: Configuration = {
+    app: "app.ts",
     dir: "nirikshak",
     resources: ["resource"],
 };
@@ -24,11 +25,18 @@ describe(`Initilisation flow`, () => {
         process.chdir(__dirname);
         await Init.handler({ configuration: config });
         expect(fs.pathExists("nirikshak")).resolves.toBe(true);
+        expect(fs.pathExists(".nirikshak")).resolves.toBe(true);
+        expect(
+            fs.pathExists(path.join(".nirikshak", "resource"))
+        ).resolves.toBe(true);
         expect(fs.pathExists(path.join("nirikshak", "resource"))).resolves.toBe(
             true
         );
         expect(fs.pathExists("jest.config.json")).resolves.toBe(true);
         expect(fs.pathExists("jest.setup.js")).resolves.toBe(true);
+        expect(fs.pathExists(path.join("nirikshak", "app.ts"))).resolves.toBe(
+            true
+        );
     });
 
     afterAll(async () => {
@@ -36,6 +44,7 @@ describe(`Initilisation flow`, () => {
         await fs.remove(path.join("nirikshak", "resource"));
         await fs.remove("jest.config.json");
         await fs.remove("jest.setup.js");
+        await fs.remove(path.join("nirikshak", "app.ts"));
         process.chdir(cwd);
     });
 });

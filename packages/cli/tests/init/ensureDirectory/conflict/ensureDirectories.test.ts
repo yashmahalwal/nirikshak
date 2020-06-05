@@ -2,6 +2,7 @@ import process from "process";
 import { ensureDirectories } from "../../../../src/init/ensureDirectories";
 import { Configuration } from "../../../../src/utils/types";
 const config: Configuration = {
+    app: "index.ts",
     dir: "testDirectory",
     resources: [{ name: "student", dir: "studentDir" }],
 };

@@ -14,7 +14,7 @@ export async function ensureDirectories(
             )} if you want to restart from scratch.`
         );
     else await fs.mkdir(".nirikshak");
-    await fs.ensureDir(configuration.dir);
+    await fs.ensureDir(path.normalize(configuration.dir));
     await Promise.all(
         configuration.resources.map((resource) =>
             fs.ensureDir(getResourceDirectory(resource, configuration.dir))

@@ -30,7 +30,7 @@ export default async function placeJestConfig(
         spaces: 4,
     });
     await fs.copy(
-        path.resolve(__dirname, "../staticFiles/jest.setup"),
+        path.resolve(__dirname, "../staticFiles/jest.setup.js"),
         "jest.setup.js"
     );
 }

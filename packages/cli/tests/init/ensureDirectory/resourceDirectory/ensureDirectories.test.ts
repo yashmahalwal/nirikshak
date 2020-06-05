@@ -4,6 +4,7 @@ import process from "process";
 import { ensureDirectories } from "../../../../src/init/ensureDirectories";
 import fs from "fs-extra";
 const config: Configuration = {
+    app: "index.ts",
     dir: "testDirectory",
     resources: [{ name: "student", dir: "studentDir" }],
 };

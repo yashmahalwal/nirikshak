@@ -14,6 +14,7 @@ Test your REST APIs with ease
 <img alt="Code coverage: functions" src="badges/badge-functions.svg" />
 <img alt="Code coverage: lines" src="badges/badge-lines.svg" />
 <img alt="Code coverage: statements" src="badges/badge-statements.svg" />
+<a href="https://github.com/facebook/jest"><img alt="jest" src="https://jestjs.io/img/jest-badge.svg"/></a>
 </p>
 
 ## Introduction

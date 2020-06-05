@@ -5,7 +5,12 @@
     "description": "Schema for nirikshak configuration",
     "type": "object",
     "properties": {
-        "dir": {
+      "app": {
+            "description": "Path to the API server",
+            "type": "string",
+            "minLength": 1
+        },  
+      "dir": {
             "description": "Directory to be used for keeping tests",
             "type": "string",
             "minLength": 1
@@ -35,5 +40,5 @@
             }
         }
     },
-    "required": ["dir", "resources"]
+    "required": ["dir", "resources", "app"]
 }

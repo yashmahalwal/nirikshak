@@ -18,9 +18,9 @@ describe(`Parse invalid configuration`, () => {
               Object {
                 "dataPath": "",
                 "keyword": "required",
-                "message": "should have required property 'dir'",
+                "message": "should have required property 'app'",
                 "params": Object {
-                  "missingProperty": "dir",
+                  "missingProperty": "app",
                 },
                 "schemaPath": "#/required",
               },

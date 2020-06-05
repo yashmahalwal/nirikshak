@@ -1,13 +1,19 @@
 import { getResourceDirectory } from "../../src/utils/getResourceDir";
 import path from "path";
+import { Configuration } from "../../src/utils/types";
 
-const configurations = [
+const configurations: { input: Configuration; outputs: string[] }[] = [
     {
-        input: { dir: "rootDir", resources: ["student", "faculty"] },
+        input: {
+            app: "app.ts",
+            dir: "rootDir",
+            resources: ["student", "faculty"],
+        },
         outputs: ["rootDir/student", "rootDir/faculty"],
     },
     {
         input: {
+            app: "app.ts",
             dir: "rootDir",
             resources: [{ name: "student", dir: "st" }, "faculty"],
         },
@@ -15,6 +21,7 @@ const configurations = [
     },
     {
         input: {
+            app: "app.ts",
             dir: "rootDir",
             resources: [
                 { name: "student", dir: "st" },
@@ -25,6 +32,7 @@ const configurations = [
     },
     {
         input: {
+            app: "app.ts",
             dir: "rootDir/tests/rootSource",
             resources: ["student", "faculty"],
         },

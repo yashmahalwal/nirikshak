@@ -1,29 +1,395 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Validate invalid config Validate invalid config 0 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 0 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
 
-exports[`Validate invalid config Validate invalid config 1 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 1 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
 
-exports[`Validate invalid config Validate invalid config 2 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 2 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
 
-exports[`Validate invalid config Validate invalid config 3 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 3 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
 
-exports[`Validate invalid config Validate invalid config 4 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 4 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
 
-exports[`Validate invalid config Validate invalid config 5 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 5 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
 
-exports[`Validate invalid config Validate invalid config 6 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 6 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
 
-exports[`Validate invalid config Validate invalid config 7 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 7 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
 
-exports[`Validate invalid config Validate invalid config 8 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 8 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
 
-exports[`Validate invalid config Validate invalid config 9 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 9 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
 
-exports[`Validate invalid config Validate invalid config 10 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 10 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
 
-exports[`Validate invalid config Validate invalid config 11 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 11 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
 
-exports[`Validate invalid config Validate invalid config 12 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 12 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
 
-exports[`Validate invalid config Validate invalid config 13 1`] = `undefined`;
+exports[`Validate invalid config Validate invalid config 13 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'app'",
+    "params": Object {
+      "missingProperty": "app",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 14 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'dir'",
+    "params": Object {
+      "missingProperty": "dir",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 15 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'resources'",
+    "params": Object {
+      "missingProperty": "resources",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 16 1`] = `
+Array [
+  Object {
+    "dataPath": "",
+    "keyword": "required",
+    "message": "should have required property 'dir'",
+    "params": Object {
+      "missingProperty": "dir",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 17 1`] = `
+Array [
+  Object {
+    "dataPath": ".dir",
+    "keyword": "type",
+    "message": "should be string",
+    "params": Object {
+      "type": "string",
+    },
+    "schemaPath": "#/properties/dir/type",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 18 1`] = `
+Array [
+  Object {
+    "dataPath": ".resources",
+    "keyword": "type",
+    "message": "should be array",
+    "params": Object {
+      "type": "array",
+    },
+    "schemaPath": "#/properties/resources/type",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 19 1`] = `
+Array [
+  Object {
+    "dataPath": ".resources",
+    "keyword": "minItems",
+    "message": "should NOT have fewer than 1 items",
+    "params": Object {
+      "limit": 1,
+    },
+    "schemaPath": "#/properties/resources/minItems",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 20 1`] = `
+Array [
+  Object {
+    "dataPath": ".resources[0]",
+    "keyword": "minLength",
+    "message": "should NOT be shorter than 1 characters",
+    "params": Object {
+      "limit": 1,
+    },
+    "schemaPath": "#/properties/resources/items/minLength",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 21 1`] = `
+Array [
+  Object {
+    "dataPath": ".resources[0].name",
+    "keyword": "minLength",
+    "message": "should NOT be shorter than 1 characters",
+    "params": Object {
+      "limit": 1,
+    },
+    "schemaPath": "#/properties/resources/items/properties/name/minLength",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 22 1`] = `
+Array [
+  Object {
+    "dataPath": ".resources[0]",
+    "keyword": "required",
+    "message": "should have required property 'dir'",
+    "params": Object {
+      "missingProperty": "dir",
+    },
+    "schemaPath": "#/properties/resources/items/required",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 23 1`] = `
+Array [
+  Object {
+    "dataPath": ".resources[0].dir",
+    "keyword": "minLength",
+    "message": "should NOT be shorter than 1 characters",
+    "params": Object {
+      "limit": 1,
+    },
+    "schemaPath": "#/properties/resources/items/properties/dir/minLength",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 24 1`] = `
+Array [
+  Object {
+    "dataPath": ".resources[1]",
+    "keyword": "minLength",
+    "message": "should NOT be shorter than 1 characters",
+    "params": Object {
+      "limit": 1,
+    },
+    "schemaPath": "#/properties/resources/items/minLength",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 25 1`] = `
+Array [
+  Object {
+    "dataPath": ".resources[0]",
+    "keyword": "minLength",
+    "message": "should NOT be shorter than 1 characters",
+    "params": Object {
+      "limit": 1,
+    },
+    "schemaPath": "#/properties/resources/items/minLength",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 26 1`] = `
+Array [
+  Object {
+    "dataPath": ".resources[0]",
+    "keyword": "minLength",
+    "message": "should NOT be shorter than 1 characters",
+    "params": Object {
+      "limit": 1,
+    },
+    "schemaPath": "#/properties/resources/items/minLength",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 27 1`] = `
+Array [
+  Object {
+    "dataPath": ".resources[0]",
+    "keyword": "minLength",
+    "message": "should NOT be shorter than 1 characters",
+    "params": Object {
+      "limit": 1,
+    },
+    "schemaPath": "#/properties/resources/items/minLength",
+  },
+]
+`;
+
+exports[`Validate invalid config Validate invalid config 28 1`] = `[Error: Duplicate resource names in configuration]`;
