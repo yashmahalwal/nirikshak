@@ -5,7 +5,7 @@ import { ResourceInstance } from "../../../resource/types/helper";
 import Supertest from "supertest";
 import { generateURL } from "../../generation/urlStringGen";
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
-import { generatePostInput } from "./input";
+import { generatePostInput, PostInput } from "./input";
 
 export async function makeDestructivePostRequest(
     server: Supertest.SuperTest<Supertest.Test>,
@@ -16,19 +16,22 @@ export async function makeDestructivePostRequest(
 ): Promise<{
     status: number;
     headers?: HeadersInstance;
+    input: PostInput;
 }> {
-    const { semantics, body } = await generatePostInput(
+    const i = await generatePostInput(
         "DESTRUCTIVE",
         input,
         resourceInstance,
         helpers
     );
+    const { semantics, body: b } = i;
+
     const urlValue = await generateURL(url, resourceInstance, helpers);
 
     const { status, header } = await server
         .post(urlValue)
         .query(semantics.query ?? {})
         .set(semantics.headers ?? {})
-        .send(body);
-    return { status, headers: header };
+        .send(b);
+    return { status, headers: header, input: i };
 }

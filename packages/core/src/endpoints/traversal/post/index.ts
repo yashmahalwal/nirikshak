@@ -9,6 +9,7 @@ import { ResourceInstance } from "../../../resource";
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
 import { Collection } from "../collection";
 import { makeDestructivePostRequest } from "./destructive";
+import { PostInput } from "./input";
 
 export async function makePostRequest(
     key: keyof Outputs["POST"],
@@ -22,6 +23,7 @@ export async function makePostRequest(
     status: number;
     headers?: HeadersInstance;
     body?: any;
+    input: PostInput;
 }> {
     switch (key) {
         case "POSITIVE":

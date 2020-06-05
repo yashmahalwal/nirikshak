@@ -318,7 +318,9 @@ describe(`Get method`, () => {
                             schemaHelpers,
                             traversalHelpers,
                             entry,
-                            collection
+                            collection,
+                            response.input,
+                            parsedNode
                         )
                     ).toMatchBody(true);
                 }

@@ -6,7 +6,7 @@ import { URLString } from "../../types/urlString";
 import { generateURL } from "../../generation/urlStringGen";
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
 import { Collection } from "../collection";
-import { generatePutInput } from "./input";
+import { generatePutInput, PutInput } from "./input";
 
 export async function makePositivePutRequest(
     server: Supertest.SuperTest<Supertest.Test>,
@@ -19,13 +19,15 @@ export async function makePositivePutRequest(
     status: number;
     headers: HeadersInstance;
     body: any;
+    input: PutInput;
 }> {
-    const { semantics, body: b } = await generatePutInput(
+    const i = await generatePutInput(
         "POSITIVE",
         input,
         resourceInstance,
         helpers
     );
+    const { semantics, body: b } = i;
     const urlValue = await generateURL(url, resourceInstance, helpers);
 
     const { status, header, body } = await server
@@ -35,5 +37,5 @@ export async function makePositivePutRequest(
         .send(b);
     collection.set(resourceInstance.id, resourceInstance);
 
-    return { status, headers: header, body };
+    return { status, headers: header, body, input: i };
 }

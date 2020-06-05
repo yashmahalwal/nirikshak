@@ -5,7 +5,7 @@ import {
 import { Inputs } from "../..";
 import { ResourceInstance, SchemaHelpers } from "../../..";
 
-interface DeleteInput {
+export interface DeleteInput {
     semantics: HeaderAndQueryInstance;
 }
 

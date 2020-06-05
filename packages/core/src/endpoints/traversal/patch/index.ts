@@ -9,6 +9,7 @@ import { ResourceInstance } from "../../../resource";
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
 import { Collection } from "../collection";
 import { makeDestructivePatchRequest } from "./destructive";
+import { PatchInput } from "./input";
 
 export async function makePatchRequest(
     key: keyof Outputs["PATCH"],
@@ -22,6 +23,7 @@ export async function makePatchRequest(
     status: number;
     headers?: HeadersInstance;
     body?: any;
+    input: PatchInput;
 }> {
     switch (key) {
         case "POSITIVE":

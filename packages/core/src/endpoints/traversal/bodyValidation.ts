@@ -26,8 +26,9 @@ import {
     TraversalHelpers,
     validateWithTraversalHelpers,
 } from "./traversalHelpers";
-import { NodeEntry } from "../graph/nodeTypes";
+import { NodeEntry, ParsedNode } from "../graph/nodeTypes";
 import { Collection } from "./collection";
+import { InputInstance } from ".";
 
 export function matchResourceString(
     input: any,
@@ -280,7 +281,9 @@ export async function bodyValidation(
     schemaHelpers: SchemaHelpers,
     traversalHelpers: TraversalHelpers,
     nodeEntry: NodeEntry,
-    collection: Collection
+    collection: Collection,
+    input: InputInstance,
+    parsedNode: ParsedNode
 ): Promise<boolean> {
     return (
         !bodyArr.length ||
@@ -296,7 +299,9 @@ export async function bodyValidation(
                               schemaHelpers,
                               traversalHelpers,
                               nodeEntry,
-                              collection
+                              collection,
+                              input,
+                              parsedNode
                           )
                 )
             )

@@ -1,8 +1,8 @@
 import { URLString, isURLString } from "../types/urlString";
 import { MethodType, Cases } from "..";
-import { isMethodType, isCaseType, BodyType } from "../types/helpers";
-import { HeaderAndStatus } from "../types";
+import { isMethodType, isCaseType,  } from "../types/helpers";
 import { InputSemantics, InputBodies } from "../types/input";
+import { OutputSemantics, OutputBodies } from "../types/output";
 
 export type NodeName = string;
 
@@ -22,10 +22,7 @@ export function isNodeName(str: any): str is NodeName {
 export interface NodeEntry {
     url: URLString;
     input: InputSemantics & Partial<InputBodies>;
-    output: {
-        semantics: HeaderAndStatus;
-        body?: BodyType;
-    }[];
+    output: (OutputSemantics & Partial<OutputBodies>)[];
 }
 
 export interface ParsedNode {

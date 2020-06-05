@@ -6,7 +6,7 @@ import { URLString } from "../../types/urlString";
 import { generateURL } from "../../generation/urlStringGen";
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
 import { Collection } from "../collection";
-import { generateDeleteInput } from "./input";
+import { generateDeleteInput, DeleteInput } from "./input";
 
 export async function makePositiveDeleteRequest(
     server: Supertest.SuperTest<Supertest.Test>,
@@ -19,12 +19,10 @@ export async function makePositiveDeleteRequest(
     status: number;
     headers: HeadersInstance;
     body: any;
+    input: DeleteInput;
 }> {
-    const { semantics } = await generateDeleteInput(
-        input,
-        resourceInstance,
-        helpers
-    );
+    const i = await generateDeleteInput(input, resourceInstance, helpers);
+    const { semantics } = i;
     const urlValue = await generateURL(url, resourceInstance, helpers);
 
     const { status, header, body } = await server
@@ -34,5 +32,5 @@ export async function makePositiveDeleteRequest(
     if (collection.has(resourceInstance.id))
         collection.delete(resourceInstance.id);
     else throw new Error(`Cannot delete non existent resource from collection`);
-    return { status, headers: header, body };
+    return { status, headers: header, body, input: i };
 }

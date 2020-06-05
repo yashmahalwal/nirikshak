@@ -5,8 +5,9 @@ import {
     normalizeCustomFunction,
 } from "../../common/types/custom";
 import _ from "lodash";
-import { NodeEntry } from "../graph/nodeTypes";
+import { NodeEntry, ParsedNode } from "../graph/nodeTypes";
 import { Collection } from "./collection";
+import { InputInstance } from ".";
 export interface TraversalHelperFunctions {
     (
         input: any,
@@ -14,6 +15,8 @@ export interface TraversalHelperFunctions {
         helpers: SchemaHelpers,
         nodeEntry: NodeEntry,
         collection: Collection,
+        inputInstance: InputInstance,
+        parsedNode: ParsedNode,
         ...args: any[]
     ): Promise<boolean>;
 }
@@ -27,7 +30,9 @@ export async function validateWithTraversalHelpers(
     schemaHelpers: SchemaHelpers,
     traversalHelpers: TraversalHelpers,
     nodeEntry: NodeEntry,
-    collection: Collection
+    collection: Collection,
+    inputInstance: InputInstance,
+    parsedNode: ParsedNode
 ): Promise<boolean> {
     const object = normalizeCustomFunction(customFunction);
     const path = object.function.slice(7);
@@ -43,6 +48,8 @@ export async function validateWithTraversalHelpers(
         schemaHelpers,
         nodeEntry,
         collection,
+        inputInstance,
+        parsedNode,
         ...object.args
     );
     if (typeof value !== "boolean")

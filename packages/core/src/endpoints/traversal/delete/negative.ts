@@ -5,7 +5,7 @@ import { ResourceInstance } from "../../../resource/types/helper";
 import Supertest from "supertest";
 import { generateURL } from "../../generation/urlStringGen";
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
-import { generateDeleteInput } from "./input";
+import { generateDeleteInput, DeleteInput } from "./input";
 
 export async function makeNegativeGetRequest(
     server: Supertest.SuperTest<Supertest.Test>,
@@ -16,17 +16,19 @@ export async function makeNegativeGetRequest(
 ): Promise<{
     status: number;
     headers?: HeadersInstance;
+    input: DeleteInput;
 }> {
-    const { semantics } = await generateDeleteInput(
+    const i = await generateDeleteInput(
         input,
         resourceInstance,
         helpers
     );
+    const { semantics } = i;
     const urlValue = await generateURL(url, resourceInstance, helpers);
 
     const { status, header } = await server
         .delete(urlValue)
         .query(semantics.query ?? {})
         .set(semantics.headers ?? {});
-    return { status, headers: header };
+    return { status, headers: header, input: i };
 }

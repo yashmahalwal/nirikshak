@@ -5,7 +5,7 @@ import { ResourceInstance } from "../../../resource/types/helper";
 import Supertest from "supertest";
 import { generateURL } from "../../generation/urlStringGen";
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
-import { generatePutInput } from "./input";
+import { generatePutInput, PutInput } from "./input";
 
 export async function makeDestructivePutRequest(
     server: Supertest.SuperTest<Supertest.Test>,
@@ -16,13 +16,15 @@ export async function makeDestructivePutRequest(
 ): Promise<{
     status: number;
     headers?: HeadersInstance;
+    input: PutInput;
 }> {
-    const { semantics, body } = await generatePutInput(
+    const i = await generatePutInput(
         "DESTRUCTIVE",
         input,
         resourceInstance,
         helpers
     );
+    const { semantics, body } = i;
     const urlValue = await generateURL(url, resourceInstance, helpers);
 
     const { status, header } = await server
@@ -30,5 +32,5 @@ export async function makeDestructivePutRequest(
         .query(semantics.query ?? {})
         .set(semantics.headers ?? {})
         .send(body);
-    return { status, headers: header };
+    return { status, headers: header, input: i };
 }

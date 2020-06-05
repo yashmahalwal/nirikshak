@@ -1,5 +1,5 @@
 import Supertest from "supertest";
-import { MethodType, Inputs, Outputs, Cases } from "../types";
+import { MethodType, Inputs, Outputs, Cases, BodyInstance } from "../types";
 import { URLString } from "../types/urlString";
 import { ResourceInstance } from "../../resource";
 import { SchemaHelpers } from "../../common";
@@ -11,6 +11,11 @@ import { makePatchRequest } from "./patch";
 import { makePostRequest } from "./post";
 import { makePutRequest } from "./put";
 import { InputSemantics, InputBodies } from "../types/input";
+import { HeaderAndQueryInstance } from "../generation/input/headerAndQuery";
+export type InputInstance = {
+    semantics: HeaderAndQueryInstance;
+    body?: BodyInstance;
+};
 export { extractBodiesFromOutput, bodyValidation } from "./bodyValidation";
 export { TraversalHelpers, TraversalHelperFunctions } from "./traversalHelpers";
 export { Collection, getRandomExistingResource } from "./collection";
@@ -33,6 +38,7 @@ export async function makeRequest(
     status: number;
     headers?: HeadersInstance;
     body?: any;
+    input: InputInstance;
 }> {
     switch (method) {
         case "GET":

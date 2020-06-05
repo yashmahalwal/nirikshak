@@ -6,7 +6,7 @@ import { URLString } from "../../types/urlString";
 import { generateURL } from "../../generation/urlStringGen";
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
 import { Collection } from "../collection";
-import { generatePostInput } from "./input";
+import { generatePostInput, PostInput } from "./input";
 
 export async function makePositivePostRequest(
     server: Supertest.SuperTest<Supertest.Test>,
@@ -19,13 +19,15 @@ export async function makePositivePostRequest(
     status: number;
     headers: HeadersInstance;
     body: any;
+    input: PostInput;
 }> {
-    const { semantics, body: b } = await generatePostInput(
+    const i = await generatePostInput(
         "POSITIVE",
         input,
         resourceInstance,
         helpers
     );
+    const { semantics, body: b } = i;
     const urlValue = await generateURL(url, resourceInstance, helpers);
 
     const { status, header, body } = await server
@@ -40,5 +42,5 @@ export async function makePositivePostRequest(
             `Cannot create already existing resource in collection`
         );
 
-    return { status, headers: header, body };
+    return { status, headers: header, body,  input: i };
 }

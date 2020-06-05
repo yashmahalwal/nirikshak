@@ -5,7 +5,7 @@ import {
 import { Inputs } from "../..";
 import { ResourceInstance, SchemaHelpers } from "../../..";
 
-interface GetInput {
+export interface GetInput {
     semantics: HeaderAndQueryInstance;
 }
 

@@ -6,7 +6,7 @@ import { BodyInstance, Inputs, Outputs } from "../../types";
 import { ResourceInstance, SchemaHelpers } from "../../..";
 import { generateBodyType } from "../..";
 
-interface PutInput {
+export interface PutInput {
     semantics: HeaderAndQueryInstance;
     body: BodyInstance;
 }

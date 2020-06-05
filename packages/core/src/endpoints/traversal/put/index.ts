@@ -8,6 +8,7 @@ import { ResourceInstance } from "../../../resource";
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
 import { Collection } from "../collection";
 import { makeDestructivePutRequest } from "./destructive";
+import { PutInput } from "./input";
 
 export async function makePutRequest(
     key: keyof Outputs["PUT"],
@@ -21,6 +22,7 @@ export async function makePutRequest(
     status: number;
     headers?: HeadersInstance;
     body?: any;
+    input: PutInput;
 }> {
     switch (key) {
         case "POSITIVE":

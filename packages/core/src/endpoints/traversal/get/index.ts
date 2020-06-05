@@ -8,6 +8,7 @@ import { makeNegativeGetRequest } from "./negative";
 import { ResourceInstance } from "../../../resource";
 
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
+import { GetInput } from "./input";
 export async function makeGetRequest(
     key: keyof Outputs["GET"],
     server: Supertest.SuperTest<Supertest.Test>,
@@ -19,6 +20,7 @@ export async function makeGetRequest(
     status: number;
     headers?: HeadersInstance;
     body?: any;
+    input: GetInput;
 }> {
     switch (key) {
         case "POSITIVE":

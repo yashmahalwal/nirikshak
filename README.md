@@ -45,7 +45,7 @@ Nirikshak works on APIs that:
 3.  Perform CRUD operations on resources
 4.  Follow REST standards
 
-Nirikshak performs unit functional tests on them. At a glance, this seems very restrictive. But the best part is that the framework is extentsible. We expose the internal APIs that we use to make tests work. You can leverage them to write you own tests.
+Nirikshak performs unit functional tests on them. At a glance, this seems very restrictive. But the best part is that the framework is extentsible. We expose the internal APIs that we use to make tests work. You can leverage them to write your own tests.
 
 ## Contents
 

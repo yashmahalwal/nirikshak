@@ -4,6 +4,9 @@ import {
     BodyType,
     ResourceInstance,
     bodyValidation,
+    NodeEntry,
+    InputInstance,
+    ParsedNode,
 } from "../../../../src";
 import { CustomFunctionType } from "../../../../src/common/types/custom";
 
@@ -128,6 +131,38 @@ const InvalidBodies: {
     },
 ];
 
+const inputInstance: InputInstance = {
+    semantics: {
+        query: {
+            sort: true,
+        },
+    },
+};
+
+const parsedNode: ParsedNode = {
+    caseValue: "POSITIVE",
+    method: "GET",
+    methodIndex: 0,
+    url: "loremIpsumDolorSitAmet",
+};
+
+const nodeEntry: NodeEntry = {
+    url: parsedNode.url,
+    input: {
+        semantics: {
+            query: {
+                sort: true,
+            },
+        },
+    },
+    output: [
+        {
+            semantics: { status: 200 },
+            body: "custom:function",
+        },
+    ],
+};
+
 describe(`Validate body`, () => {
     test(`Empty array`, () => {
         expect(
@@ -137,21 +172,10 @@ describe(`Validate body`, () => {
                 resource,
                 schemaHelpers,
                 traversalHelpers,
-                {
-                    input: {
-                        semantics: {},
-                    },
-                    url: "/sampleURL",
-                    output: [{
-                        semantics: {
-                            status: 202,
-                        },
-                        body: {
-                            lorem: "p",
-                        },
-                    }],
-                },
-                new Map([[resource.id, resource]])
+                nodeEntry,
+                new Map([[resource.id, resource]]),
+                inputInstance,
+                parsedNode
             )
         ).resolves.toBe(true);
     });
@@ -164,22 +188,10 @@ describe(`Validate body`, () => {
                 resource,
                 schemaHelpers,
                 traversalHelpers,
-                {
-                    input: {
-                        semantics: {},
-                        body: entry.input,
-                    },
-                    url: "/sampleURL",
-                    output: [{
-                        semantics: {
-                            status: 202,
-                        },
-                        body: {
-                            lorem: "p",
-                        },
-                    }],
-                },
-                new Map([[resource.id, resource]])
+                nodeEntry,
+                new Map([[resource.id, resource]]),
+                inputInstance,
+                parsedNode
             )
         ).resolves.toBe(entry.output);
     });
@@ -192,22 +204,10 @@ describe(`Validate body`, () => {
                 resource,
                 schemaHelpers,
                 traversalHelpers,
-                {
-                    input: {
-                        semantics: {},
-                        body: entry.input,
-                    },
-                    url: "/sampleURL",
-                    output: [{
-                        semantics: {
-                            status: 202,
-                        },
-                        body: {
-                            lorem: "p",
-                        },
-                    }],
-                },
-                new Map([[resource.id, resource]])
+                nodeEntry,
+                new Map([[resource.id, resource]]),
+                inputInstance,
+                parsedNode
             )
         ).rejects.toMatchSnapshot();
     });

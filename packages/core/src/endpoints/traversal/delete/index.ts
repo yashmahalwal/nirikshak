@@ -8,6 +8,7 @@ import { makeNegativeGetRequest } from "./negative";
 import { ResourceInstance } from "../../../resource";
 import { HeadersInstance } from "../../generation/helpers/headerMapGen";
 import { Collection } from "../collection";
+import { DeleteInput } from "./input";
 
 export async function makeDeleteRequest(
     key: keyof Outputs["DELETE"],
@@ -21,6 +22,7 @@ export async function makeDeleteRequest(
     status: number;
     headers?: HeadersInstance;
     body?: any;
+    input: DeleteInput;
 }> {
     switch (key) {
         case "POSITIVE":
