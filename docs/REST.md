@@ -30,6 +30,7 @@ Resource representation is essentially how the resource is exposed via the API. 
     "major": "Computer Science"
 }
 ```
+
 Resource representation is upto you. We only require the representation to be in JSON. **_In essence, we expect resource representation to be key-value pairs._**
 
 ## Resource identification
@@ -43,9 +44,7 @@ Each request has resource(s) that it aims to manipulate. The HTTP method associa
 1. GET: Retrieve resource
 2. POST: Create resource
 3. DELETE: Delete resource
-4. PUT: upsert resource
-5. PATCH: update resource
+4. PUT: Upsert resource
+5. PATCH: Update resource
 
 If your API uses other verbs not covered here, you can write your own tests to validate them.
-
-This sets up the context of our tool. Now that you know how we understand REST, you can start working with Nirikshak.
