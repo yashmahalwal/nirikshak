@@ -6,7 +6,7 @@ import { Configuration } from "../utils/types";
 
 export const validateConfig = (data: any): void => {
     const ajv = new Ajv();
-    if (!ajv.validate(schema, data)) throw ajv.errors;
+    if (!ajv.validate(schema, data)) throw ajv.errorsText();
 
     const resources = (data as Configuration).resources.map((v) =>
         typeof v === "string" ? v : v.name
@@ -21,9 +21,8 @@ export function parseConfig(
     try {
         const data = fs.readJSONSync(configFile);
         validateConfig(data);
-
         return { configuration: data };
     } catch (e) {
-        return e;
+        return new Error(e);
     }
 }

@@ -6,10 +6,11 @@ export interface Configuration {
 
 export interface CliArgs {
     configuration: Configuration;
+    config: string;
 }
 
 type ProjectConfig = { displayName: string; testMatch: string[] };
 export interface JestConfig {
-    projects?: ProjectConfig[];
+    projects: ProjectConfig[];
     setupFilesAfterEnv: string[];
 }

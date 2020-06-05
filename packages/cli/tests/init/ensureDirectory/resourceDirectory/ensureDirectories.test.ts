@@ -16,11 +16,11 @@ test(`Ensuring non existing resource directories`, async () => {
     expect(fs.pathExists(".nirikshak")).resolves.toBe(true);
     expect(fs.pathExists("testDirectory")).resolves.toBe(true);
     expect(
-        fs.pathExists(path.join("testDirectory", "studentDir"))
+        fs.pathExists(path.resolve("testDirectory", "studentDir"))
     ).resolves.toBe(true);
 });
 
 afterAll(async () => {
-    await fs.remove(path.join("testDirectory", "studentDir"));
+    await fs.remove(path.resolve("testDirectory", "studentDir"));
     await fs.remove(".nirikshak");
 });

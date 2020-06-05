@@ -10,10 +10,11 @@ exports[`Command output --help 1`] = `
 [4m[1mTest your REST APIs with ease[22m[24m
 
 
-Usage: index.js [command] [options]
+Usage: index.js <command> [options]
 
 Commands:
-  index.js init  Initialise nirikshak in the project
+  index.js init              Initialise nirikshak in the project
+  index.js add <name> [dir]  Add a resource to the project
 
 Options:
   --config, -c   path to the configuration file      [default: \\"nirikshak.json\\"]
@@ -21,10 +22,16 @@ Options:
   --version, -v  Show version number                                   [boolean]
 
 Examples:
-  nirikshak init                  Sets up the project using nirikshak.json file
-                                  in the current working directory
-  nirikshak init -c [configFile]  Initialises the project with specified
-                                  configuration file
+  index.js init                        Sets up the project using nirikshak.json
+                                       file in the current working directory
+  index.js init -c [configFile]        Initialises the project with specified
+                                       configuration file
+  index.js add student                 Adds files for a resource names student
+                                       in student directory.
+  index.js add student myDir           Adds files for a resource names student
+                                       in myDir directory.
+  index.js add student -c config.json  Make changes to config.json instead of
+                                       default configuration file.
 "
 `;
 
@@ -52,10 +59,11 @@ exports[`Command output -h 1`] = `
 [4m[1mTest your REST APIs with ease[22m[24m
 
 
-Usage: index.js [command] [options]
+Usage: index.js <command> [options]
 
 Commands:
-  index.js init  Initialise nirikshak in the project
+  index.js init              Initialise nirikshak in the project
+  index.js add <name> [dir]  Add a resource to the project
 
 Options:
   --config, -c   path to the configuration file      [default: \\"nirikshak.json\\"]
@@ -63,10 +71,16 @@ Options:
   --version, -v  Show version number                                   [boolean]
 
 Examples:
-  nirikshak init                  Sets up the project using nirikshak.json file
-                                  in the current working directory
-  nirikshak init -c [configFile]  Initialises the project with specified
-                                  configuration file
+  index.js init                        Sets up the project using nirikshak.json
+                                       file in the current working directory
+  index.js init -c [configFile]        Initialises the project with specified
+                                       configuration file
+  index.js add student                 Adds files for a resource names student
+                                       in student directory.
+  index.js add student myDir           Adds files for a resource names student
+                                       in myDir directory.
+  index.js add student -c config.json  Make changes to config.json instead of
+                                       default configuration file.
 "
 `;
 

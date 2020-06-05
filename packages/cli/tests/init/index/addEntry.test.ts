@@ -27,24 +27,23 @@ describe(`Initilisation flow`, () => {
         expect(fs.pathExists("nirikshak")).resolves.toBe(true);
         expect(fs.pathExists(".nirikshak")).resolves.toBe(true);
         expect(
-            fs.pathExists(path.join(".nirikshak", "resource"))
+            fs.pathExists(path.resolve(".nirikshak", "resource"))
         ).resolves.toBe(true);
-        expect(fs.pathExists(path.join("nirikshak", "resource"))).resolves.toBe(
-            true
-        );
+        expect(
+            fs.pathExists(path.resolve("nirikshak", "resource"))
+        ).resolves.toBe(true);
         expect(fs.pathExists("jest.config.json")).resolves.toBe(true);
         expect(fs.pathExists("jest.setup.js")).resolves.toBe(true);
-        expect(fs.pathExists(path.join("nirikshak", "app.ts"))).resolves.toBe(
-            true
-        );
+        expect(
+            fs.pathExists(path.resolve("nirikshak", "app.ts"))
+        ).resolves.toBe(true);
     });
 
     afterAll(async () => {
         await fs.remove(".nirikshak");
-        await fs.remove(path.join("nirikshak", "resource"));
+        await fs.remove("nirikshak");
         await fs.remove("jest.config.json");
         await fs.remove("jest.setup.js");
-        await fs.remove(path.join("nirikshak", "app.ts"));
         process.chdir(cwd);
     });
 });

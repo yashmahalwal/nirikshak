@@ -10,10 +10,14 @@ exports[`Check binding to modules via init command 1`] = `
 [4m[1mTest your REST APIs with ease[22m[24m
 
 
-[31m✖ [39m [31m[4mfatal[24m    [39m Error: Project already initialised. Delete /home/yash/Desktop/nirikshak/packages/cli/tests/cli/.nirikshak if you want to restart from scratch. [90m[39m
-[90m    at Object.<anonymous> (/home/yash/Desktop/nirikshak/packages/cli/lib/init/ensureDirectories.js:52:27)[39m
-[90m    at step (/home/yash/Desktop/nirikshak/packages/cli/lib/init/ensureDirectories.js:33:23)[39m
-[90m    at Object.next (/home/yash/Desktop/nirikshak/packages/cli/lib/init/ensureDirectories.js:14:53)[39m
-[90m    at fulfilled (/home/yash/Desktop/nirikshak/packages/cli/lib/init/ensureDirectories.js:5:58)[39m
+[31m✖ [39m [31m[4mfatal[24m    [39m YError: data should have required property 'app' [90m[39m
+[90m    at Object.runValidation [as _runValidation] (/home/yash/Desktop/nirikshak/packages/cli/node_modules/yargs/yargs.js:1265:28)[39m
+[90m    at Object.runCommand (/home/yash/Desktop/nirikshak/packages/cli/node_modules/yargs/lib/command.js:226:36)[39m
+[90m    at Object.parseArgs [as _parseArgs] (/home/yash/Desktop/nirikshak/packages/cli/node_modules/yargs/yargs.js:1154:41)[39m
+[90m    at Object.parse (/home/yash/Desktop/nirikshak/packages/cli/node_modules/yargs/yargs.js:599:25)[39m
+[90m    at /home/yash/Desktop/nirikshak/packages/cli/lib/index.js:110:26[39m
+[90m    at step (/home/yash/Desktop/nirikshak/packages/cli/lib/index.js:34:23)[39m
+[90m    at Object.next (/home/yash/Desktop/nirikshak/packages/cli/lib/index.js:15:53)[39m
+[90m    at fulfilled (/home/yash/Desktop/nirikshak/packages/cli/lib/index.js:6:58)[39m
 "
 `;

@@ -14,10 +14,12 @@ export async function ensureDirectories(
             )} if you want to restart from scratch.`
         );
     else await fs.mkdir(".nirikshak");
-    await fs.ensureDir(path.normalize(configuration.dir));
+    await fs.ensureDir(path.resolve(configuration.dir));
     await Promise.all(
         configuration.resources.map((resource) =>
-            fs.ensureDir(getResourceDirectory(resource, configuration.dir))
+            fs.ensureDir(
+                path.resolve(getResourceDirectory(resource, configuration.dir))
+            )
         )
     );
 }

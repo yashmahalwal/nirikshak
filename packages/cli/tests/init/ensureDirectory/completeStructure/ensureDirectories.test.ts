@@ -16,7 +16,7 @@ test(`Ensuring non existing directories`, async () => {
     expect(fs.pathExists("testDirectory")).resolves.toBe(true);
     expect(fs.pathExists(".nirikshak")).resolves.toBe(true);
     expect(
-        fs.pathExists(path.join("testDirectory", "studentDir"))
+        fs.pathExists(path.resolve("testDirectory", "studentDir"))
     ).resolves.toBe(true);
 });
 

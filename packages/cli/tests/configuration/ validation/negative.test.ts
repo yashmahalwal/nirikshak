@@ -1,3 +1,4 @@
+import process from "process";
 import { validateConfig } from "../../../src/configuration";
 const invalidConfigs = [
     {},
@@ -44,6 +45,7 @@ const invalidConfigs = [
 ];
 
 describe("Validate invalid config", () => {
+    beforeAll(() => process.chdir(__dirname));
     test.each(invalidConfigs)("Validate invalid config %#", (invalid) => {
         expect.assertions(1);
         try {

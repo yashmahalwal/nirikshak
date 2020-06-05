@@ -1,3 +1,4 @@
+import process from "process";
 import { validateConfig } from "../../../src/configuration";
 import { Configuration } from "../../../src/utils/types";
 
@@ -42,6 +43,8 @@ const validConfigs: Configuration[] = [
 ];
 
 describe("Validate valid config", () => {
+    beforeAll(() => process.chdir(__dirname));
+
     test.each(validConfigs)("Validate valid config %#", (validConfig) =>
         expect(() => validateConfig(validConfig)).not.toThrow()
     );
