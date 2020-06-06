@@ -23,9 +23,16 @@ export default async function validateDirectoryStructure(
         throw new Error(`Nirikshak directory: ${data.dir} does not exist`);
     const promiseArr: Promise<void>[] = data.resources.map(async (r) => {
         const resource = typeof r === "string" ? r : r.name;
-        if (!(await fs.pathExists(path.resolve(".nirikshak", resource))))
+        const metaPath = path.resolve(".nirikshak", resource);
+        if (!(await fs.pathExists(metaPath)))
             throw new Error(
                 `Resource ${resource} does not exist. Please check project configuration.`
+            );
+        const gotMeta = (await fs.readFile(metaPath)).toString();
+        const expectedMeta = typeof r === "string" ? r : r.dir;
+        if (expectedMeta !== gotMeta)
+            throw new Error(
+                `Resource directory for ${resource} does not match. Expected ${expectedMeta}, got ${gotMeta}.`
             );
         if (
             !(await fs.pathExists(
