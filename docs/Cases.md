@@ -4,7 +4,7 @@ Response of a request depends on how the request was made to the API. In this se
 
 ## Possible cases
 
-A particular request to a REST API is essentially a combination of method, url, body (if any) and headers. Currently, we support generating requests on the basis of these attributes. Future versions of the tool might have advanced features such as supporting cookies. We classify requests into three categories, depending on different types of outcomes:
+We classify requests into three categories, depending on different types of outcomes:
 
 1. Positive: A valid request was made to the API which requested a valid operation. API was used as intended.
 2. Negative: A valid request was made to the API which requested an illegal operation. The request was in violation of the API state.

@@ -52,3 +52,4 @@ Nirikshak performs unit functional tests on them. At a glance, this seems very r
 
 1. [Rest semantics and how we interpret them](docs/REST.md)
 2. [Possible outcomes to a request](docs/Cases.md)
+3. [Request graph and traversal](docs/Graph.md)
