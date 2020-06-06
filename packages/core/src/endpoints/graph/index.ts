@@ -6,6 +6,7 @@ export {
     NodeEntry,
     NodeMap,
     NodeName,
+    isNodeName,
 } from "./nodeTypes";
 export { makeGraph } from "./makeGraph";
 export { generateNodes } from "./generateNodes";

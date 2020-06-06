@@ -27,7 +27,6 @@ import supertest from "supertest";
 import getPort from "get-port";
 import faker from "faker";
 
-
 describe(`student`, () => {
     let server: Server | null = null;
     const nodeMap = generateNodes(EndpointsJSON);
@@ -36,8 +35,8 @@ describe(`student`, () => {
     for (let i = 0; i < Config.iterations; i++)
         describe(`${i + 1}`, () => {
             for (const path of traversal)
-                describe(path.join(";"), () => {
-                    const joined = path.join(";");
+                describe(path.join("--"), () => {
+                    const joined = path.join("--");
                     const collection: Collection = new Map();
                     let instance: ResourceInstance | null = null;
                     let prevPass = true;
@@ -53,8 +52,9 @@ describe(`student`, () => {
                         });
                     });
 
-                    for (const node of path) {
-                        test(node, async () => {
+                    for (let i = 0; i < path.length; i++) {
+                        const node = path[i];
+                        test(`${i}::${node}`, async () => {
                             if (!prevPass) return;
                             const parsedNode = parseNodeName(node);
                             if (!instance) {

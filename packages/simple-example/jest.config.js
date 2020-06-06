@@ -10,4 +10,5 @@ module.exports = {
         },
     ],
     setupFilesAfterEnv: ["./jest.setup.js"],
+    reporters: ["default", "@nirikshak/reporter"],
 };

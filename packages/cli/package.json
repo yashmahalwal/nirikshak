@@ -49,7 +49,6 @@
         "@types/lodash": "^4.14.155",
         "@types/signale": "^1.4.1",
         "@types/yargs": "^15.0.4",
-        "ts-node": "^8.10.2",
         "typescript": "^3.8.3"
     },
     "dependencies": {

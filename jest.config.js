@@ -15,5 +15,9 @@ module.exports = {
             displayName: "Core",
             testMatch: ["<rootDir>/packages/core/tests/**/*.test.ts"],
         },
+        {
+            displayName: "Reporter",
+            testMatch: ["<rootDir>/packages/reporter/tests/**/*.test.ts"],
+        },
     ],
 };
