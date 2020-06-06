@@ -4,6 +4,7 @@ import figlet from "./utils/figletWrapper";
 import chalk from "chalk";
 import yargs from "yargs";
 import * as Init from "./init";
+import * as Update from "./updateApp";
 import { parseConfig } from "./configuration";
 import signale from "signale";
 import * as Add from "./add";
@@ -26,6 +27,8 @@ import * as Add from "./add";
         .command(Init)
         // Add command
         .command(Add)
+        // Update app command
+        .command(Update)
         .usage("Usage: $0 <command> [options]")
         //     // Option: config
         .config("config", parseConfig)
@@ -35,11 +38,11 @@ import * as Add from "./add";
         // // Examples
         .example(
             "$0 init",
-            "Sets up the project using nirikshak.json file in the current working directory"
+            "Initialises the project using configuration in config.json"
         )
         .example(
-            "$0 init -c [configFile]",
-            "Initialises the project with specified configuration file"
+            "$0 init -c config.json",
+            "Initialises the project using configuration in config.json"
         )
         .example(
             "$0 add student",
@@ -50,10 +53,9 @@ import * as Add from "./add";
             "Adds files for a resource names student in myDir directory."
         )
         .example(
-            "$0 add student -c config.json",
-            "Make changes to config.json instead of default configuration file."
+            "$0 update-app server.ts",
+            "Uses server.ts as the server for testing."
         )
-
         // Alias help
         .help()
         .alias("help", "h")

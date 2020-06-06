@@ -6,13 +6,14 @@ import { Configuration } from "../utils/types";
 
 export const validateConfig = (data: any): void => {
     const ajv = new Ajv();
-    if (!ajv.validate(schema, data)) throw ajv.errorsText();
+    if (!ajv.validate(schema, data))
+        throw `Error parsing configuration: ${ajv.errorsText()}`;
 
     const resources = (data as Configuration).resources.map((v) =>
         typeof v === "string" ? v : v.name
     );
     if (_.uniq(resources).length !== resources.length)
-        throw new Error(`Duplicate resource names in configuration`);
+        throw `Duplicate resource names in configuration`;
 };
 
 export function parseConfig(

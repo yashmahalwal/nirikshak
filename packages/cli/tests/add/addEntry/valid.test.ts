@@ -8,10 +8,13 @@ beforeAll(async () => {
 });
 
 test(`Adding new resource`, async () => {
-    await addEntry("faculty");
+    await addEntry("faculty", "fcDir");
     expect(fs.pathExists(path.resolve(".nirikshak", "faculty"))).resolves.toBe(
         true
     );
+    expect(
+        (await fs.readFile(path.resolve(".nirikshak", "faculty"))).toString()
+    ).toBe("fcDir");
 });
 
 afterAll(async () => await fs.remove(path.resolve(".nirikshak", "faculty")));

@@ -17,7 +17,7 @@ describe(`Parse invalid configuration`, () => {
     test(`Invalid file`, () => {
         const err = parseConfig(validPath);
         expect(err).toMatchInlineSnapshot(
-            `[Error: data should have required property 'app']`
+            `[Error: Error parsing configuration: data should have required property 'app']`
         );
     });
 });

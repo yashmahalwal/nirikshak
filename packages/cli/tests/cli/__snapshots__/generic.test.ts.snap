@@ -13,8 +13,10 @@ exports[`Command output --help 1`] = `
 Usage: index.js <command> [options]
 
 Commands:
-  index.js init              Initialise nirikshak in the project
-  index.js add <name> [dir]  Add a resource to the project
+  index.js init                  Initialise nirikshak in the project
+  index.js add <name> [dir]      Add a resource to the project
+  index.js update-app <newPath>  Update the path to server to be used for
+                                 testing
 
 Options:
   --config, -c   path to the configuration file      [default: \\"nirikshak.json\\"]
@@ -22,16 +24,15 @@ Options:
   --version, -v  Show version number                                   [boolean]
 
 Examples:
-  index.js init                        Sets up the project using nirikshak.json
-                                       file in the current working directory
-  index.js init -c [configFile]        Initialises the project with specified
-                                       configuration file
-  index.js add student                 Adds files for a resource names student
-                                       in student directory.
-  index.js add student myDir           Adds files for a resource names student
-                                       in myDir directory.
-  index.js add student -c config.json  Make changes to config.json instead of
-                                       default configuration file.
+  index.js init                  Initialises the project using configuration in
+                                 config.json
+  index.js init -c config.json   Initialises the project using configuration in
+                                 config.json
+  index.js add student           Adds files for a resource names student in
+                                 student directory.
+  index.js add student myDir     Adds files for a resource names student in
+                                 myDir directory.
+  index.js update-app server.ts  Uses server.ts as the server for testing.
 "
 `;
 
@@ -62,8 +63,10 @@ exports[`Command output -h 1`] = `
 Usage: index.js <command> [options]
 
 Commands:
-  index.js init              Initialise nirikshak in the project
-  index.js add <name> [dir]  Add a resource to the project
+  index.js init                  Initialise nirikshak in the project
+  index.js add <name> [dir]      Add a resource to the project
+  index.js update-app <newPath>  Update the path to server to be used for
+                                 testing
 
 Options:
   --config, -c   path to the configuration file      [default: \\"nirikshak.json\\"]
@@ -71,16 +74,15 @@ Options:
   --version, -v  Show version number                                   [boolean]
 
 Examples:
-  index.js init                        Sets up the project using nirikshak.json
-                                       file in the current working directory
-  index.js init -c [configFile]        Initialises the project with specified
-                                       configuration file
-  index.js add student                 Adds files for a resource names student
-                                       in student directory.
-  index.js add student myDir           Adds files for a resource names student
-                                       in myDir directory.
-  index.js add student -c config.json  Make changes to config.json instead of
-                                       default configuration file.
+  index.js init                  Initialises the project using configuration in
+                                 config.json
+  index.js init -c config.json   Initialises the project using configuration in
+                                 config.json
+  index.js add student           Adds files for a resource names student in
+                                 student directory.
+  index.js add student myDir     Adds files for a resource names student in
+                                 myDir directory.
+  index.js update-app server.ts  Uses server.ts as the server for testing.
 "
 `;
 

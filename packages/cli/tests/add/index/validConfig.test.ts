@@ -19,6 +19,9 @@ test(`Valid case`, async () => {
     expect(fs.pathExists(path.resolve(".nirikshak", "faculty"))).resolves.toBe(
         true
     );
+    expect(
+        (await fs.readFile(path.resolve(".nirikshak", "faculty"))).toString()
+    ).toBe("faculty");
     expect(fs.pathExists(path.resolve("test", "faculty"))).resolves.toBe(true);
     expect(
         fs.pathExists(path.resolve("test", "faculty", "config.json"))

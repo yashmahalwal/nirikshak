@@ -10,7 +10,7 @@ router.get("/Student/:id", (req, res) => {
     if (studentMap.has(id)) {
         res.send(studentMap.get(id));
     } else {
-        res.sendStatus(404);
+        res.sendStatus(400);
     }
 });
 

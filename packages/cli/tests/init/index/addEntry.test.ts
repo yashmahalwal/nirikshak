@@ -37,6 +37,17 @@ describe(`Initilisation flow`, () => {
         expect(
             fs.pathExists(path.resolve("nirikshak", "app.ts"))
         ).resolves.toBe(true);
+        expect(
+            (
+                await fs.readFile(path.resolve(".nirikshak", "resource"))
+            ).toString()
+        ).toEqual("resource");
+        expect(fs.pathExists(path.resolve(".nirikshak", "dir"))).resolves.toBe(
+            true
+        );
+        expect(
+            (await fs.readFile(path.resolve(".nirikshak", "dir"))).toString()
+        ).toEqual("nirikshak");
     });
 
     afterAll(async () => {

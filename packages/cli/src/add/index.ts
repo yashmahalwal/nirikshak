@@ -3,7 +3,6 @@ import addEntry from "./addEntry";
 import addToConfig from "./addToConfig";
 import addToJest from "./addToJest";
 import validateDirectoryStructure from "../utils/validateDirectoryStructure";
-import { validateConfig } from "../configuration";
 import addDirectory from "./addDirectory";
 
 interface AddArgs extends CliArgs {
@@ -17,9 +16,8 @@ async function add({
     config,
     configuration,
 }: AddArgs): Promise<void> {
-    validateConfig(configuration);
     await validateDirectoryStructure(configuration);
-    await addEntry(name);
+    await addEntry(name, dir);
     await addDirectory(dir ?? name, configuration.dir);
     await addToConfig(name, config, dir);
     await addToJest(name, configuration.dir, dir);

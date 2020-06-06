@@ -7,9 +7,8 @@ export default async function addToConfig(
     configFile: string,
     dir?: string
 ): Promise<void> {
-    const configData: Configuration = await fs.readJSON(
-        path.resolve(configFile)
-    );
+    const configPath = path.resolve(configFile);
+    const configData: Configuration = await fs.readJSON(configPath);
 
     configData.resources.push(
         dir
@@ -20,7 +19,7 @@ export default async function addToConfig(
             : name
     );
 
-    await fs.writeJSON(configFile, configData, {
+    await fs.writeJSON(configPath, configData, {
         spaces: 4,
     });
 }
