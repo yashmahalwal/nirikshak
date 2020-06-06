@@ -1,5 +1,5 @@
 {
-    "steps": 3,
+    "steps": 5,
     "setupInstances": 10,
-    "iterations": 1
+    "iterations": 2
 }
