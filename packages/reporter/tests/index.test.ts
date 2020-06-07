@@ -1,17 +1,13 @@
-import result from "./nirikshak.jest.log.json";
-import { parseAssertions } from "../src/assertions";
+import log from "./nirikshak.jest.log.json";
 import { AssertionResult } from "@jest/test-result";
-describe("reporter", () => {
-    test("Sample test", () => {
-        let assertions: AssertionResult[] = [];
-        result.testResults.forEach((t) =>
-            assertions.push(...(t.assertionResults as any[]))
-        );
+import { parseAssertions } from "../src/assertions";
 
-        assertions = assertions.filter(
-            (assertion) => assertion.status === "failed"
-        );
-        const results = parseAssertions(assertions);
-        void results;
-    });
+test("Assertion grouping", () => {
+    const assertions: AssertionResult[] = [];
+    log.testResults.forEach((t) =>
+        assertions.push(...(t.assertionResults as AssertionResult[]))
+    );
+
+    const output = parseAssertions(assertions);
+    void output;
 });

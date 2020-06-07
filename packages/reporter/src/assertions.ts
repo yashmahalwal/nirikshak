@@ -9,44 +9,139 @@ import {
 import _ from "lodash";
 import { getGroups } from "./getGroups";
 export interface ParsedAssertions {
-    resource: { [key: string]: number };
-    iteration: { [key: string]: number };
-    stepIndex: { [key: string]: number };
-    method: { [key in MethodType]?: number };
-    caseValue: { [key in Cases]?: number };
-    url: { [key: string]: number };
-    errorMessage: { [key: string]: number };
-    resourceIteration: { [key: string]: { [key: string]: number } };
-    resourceErrorMessage: { [key: string]: { [key: string]: number } };
-    resourceMethod: { [key: string]: { [key in MethodType]: number } };
-    resourceCaseValue: { [key: string]: { [key: string]: number } };
-    resourceUrl: { [key: string]: { [key: string]: number } };
-    methodCaseValue: {
-        [key in MethodType]?: {
-            [key in Cases]?: number;
+    resource: {
+        [key: string]: {
+            count: number;
+            iteration: {
+                [key: string]: number;
+            };
+            method: {
+                [key in MethodType]?: {
+                    [key: string]: number;
+                };
+            };
+            case: {
+                [key in Cases]?: number;
+            };
+            url: {
+                [key: string]: number;
+            };
+            errorMessage: {
+                [key: string]: number;
+            };
         };
     };
-    methodIteration: {
-        [key in MethodType]?: {
-            [key: string]: number;
+    iteration: {
+        [key: string]: {
+            count: number;
+            resource: {
+                [key: string]: number;
+            };
+            method: {
+                [key in MethodType]?: {
+                    [key: string]: number;
+                };
+            };
+            case: {
+                [key in Cases]?: number;
+            };
+            url: {
+                [key: string]: number;
+            };
+            errorMessage: {
+                [key: string]: number;
+            };
         };
     };
-    methodUrl: {
-        [key in MethodType]?: {
-            [key: string]: number;
+    case: {
+        [key in Cases]?: {
+            resource: {
+                [key: string]: number;
+            };
+            method: {
+                [key in MethodType]?: {
+                    [key: string]: number;
+                };
+            };
+            iteration: {
+                [key: string]: number;
+            };
+            url: {
+                [key: string]: number;
+            };
+            errorMessage: {
+                [key: string]: number;
+            };
+        };
+    } & { count: number };
+    url: {
+        [key: string]: {
+            count: number;
+            iteration: {
+                [key: string]: number;
+            };
+            method: {
+                [key in MethodType]?: {
+                    [key: string]: number;
+                };
+            };
+            case: {
+                [key in Cases]?: number;
+            };
+            resource: {
+                [key: string]: number;
+            };
+            errorMessage: {
+                [key: string]: number;
+            };
         };
     };
-    methodErrorMessage: {
-        [key in MethodType]?: {
-            [key: string]: number;
+    errorMessage: {
+        [key: string]: {
+            count: number;
+            iteration: {
+                [key: string]: number;
+            };
+            method: {
+                [key in MethodType]?: {
+                    [key: string]: number;
+                };
+            };
+            case: {
+                [key in Cases]?: number;
+            };
+            resource: {
+                [key: string]: number;
+            };
+            url: {
+                [key: string]: number;
+            };
         };
     };
-    methodMethodIndex: {
-        [key in MethodType]?: {
-            [key: string]: number;
+    method: {
+        [key: string]: {
+            [key: string]: {
+                count: number;
+                iteration: {
+                    [key: string]: number;
+                };
+                resource: {
+                    [key: string]: number;
+                };
+                case: {
+                    [key in Cases]?: number;
+                };
+                url: {
+                    [key: string]: number;
+                };
+                errorMessage: {
+                    [key: string]: number;
+                };
+            } & { count: number };
         };
     };
 }
+
 export interface ParsedAssertion {
     resource: string;
     iteration: number;
@@ -113,7 +208,9 @@ function incrementKey(
     predecessor: string,
     suffixKeys: (string | number)[]
 ): void {
-    const key = `${predecessor}.${suffixKeys.join(".")}`;
+    const key = suffixKeys.length
+        ? `${predecessor}.${suffixKeys.join(".")}`
+        : predecessor;
     _.set(o, key, _.has(o, key) ? _.get(o, key) + 1 : 1);
 }
 
@@ -125,11 +222,6 @@ export function parseAssertions(input: AssertionResult[]): ParsedAssertions {
         getGroups(assertion).forEach(({ predecessor, suffixKey }) =>
             incrementKey(o, predecessor, suffixKey)
         );
-
-        if (assertion.errorMessage.length) {
-            void assertion.errorMessage;
-            incrementKey(o, "errorMessage", [assertion["errorMessage"]]);
-        }
     }
 
     return o as ParsedAssertions;
