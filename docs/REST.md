@@ -1,6 +1,6 @@
 # Rest semantics
 
-This section covers how we interpret and use REST semantics. Our understanding is based on the [Roy Fielding's paper](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) as well as REST best practices in general. You should go through this section before you start writing your API descriptions.
+This section covers how we interpret and use REST semantics. Our understanding is based on [Roy Fielding's paper](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) as well as REST best practices in general. You should go through this section before you start writing your API descriptions.
 
 ## Uniform interface
 
@@ -53,4 +53,4 @@ If your API uses other verbs not covered here, you can write your own tests to v
 
 ## Resource independence
 
-We assume each resource to be independent. That doesn't seem very practical. For example, a student is a resource and faculty is a resource. And a faculty can be related to a student. While this is true, we must remember that a resource is not a mapping to real world entities but instead information exposed by the application. A properly designed application should expose data of a faculty, student and their relationship separately. So we have three resources here: the student, the faculty and the relationship between them. They can be manipulated independently. In short, all your resources should be independent of each other when exposed via the API. They can be related behind the scenes.
+We assume each resource to be independent. That doesn't seem very practical. For example, a student is a resource and faculty is a resource. And a faculty can be related to a student. While this is true, we must remember that a resource is not a mapping to real world entities but instead information exposed by the application. A properly designed application should expose data of a faculty, student and their relationship separately. So we have three resources here: the student, the faculty and the relationship between them. They can be manipulated independently. In short, all your resources should be independent of each other when exposed via the API. They can be related behind the scenes. We test different resource independently.

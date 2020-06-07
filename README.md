@@ -21,7 +21,7 @@ Test your REST APIs with ease
 
 <!-- TODO: add screenshot -->
 
-Nirikshak is a REST API testing framework. It leverages the REST semantics and performs autonomous testing capabilities. That means you get to kick back and relax while we do all the hard work for you.
+Nirikshak is a REST API testing framework. It leverages the REST semantics and provides autonomous testing. That means you get to kick back and relax while we do all the hard work for you.
 
 **_Disclaimer: The project is still in infancy and is limited in scope and capabilities. But you can extend the framework to suit your needs. For more, read on._**
 
@@ -52,4 +52,4 @@ Nirikshak performs unit functional tests on them. At a glance, this seems very r
 
 1. [Rest semantics and how we interpret them](docs/REST.md)
 2. [Possible outcomes to a request](docs/Cases.md)
-3. [Request graph and traversal](docs/Graph.md)
+3. [Request relationship graph](docs/Graph.md)

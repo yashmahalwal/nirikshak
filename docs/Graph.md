@@ -1,13 +1,122 @@
-# Request graph and traversal
+# Requests and relationship between them
 
-The key attributes of a request are its method and the outcome it is supposed to bring. After a request is successful, the semantics help us decide the state of the application. That in turn helps us decide what to expect from subsequent requests. These three statements are the core of this section. Let us understand what they mean with an example.
+We discussed our interpretation of REST semantics. We also discussed different types of requests on the basis of their outcome and what they meant in context of REST semantics. Now we move on to the next step - Relationship between different requests.
 
-Consider a `Get Negative` request to an application that maintains data of all students in a college. This request is meant to fetch(`Get`) a non existing student(`Negative`). If request succeeds, it means that the API provided the expected outcome. In our case, this means that the API sent us an error saying that the resource we want to fetch does not exist. But if the request fails, it means that the API's response was not what we expected it to be. This is a bug and we report this request accordingly.
+Every request has a target resource(s). We discussed that we consider resources to be independent. So while talking of a resource, we only talk about requests that affect it. The idea is to find out the relationship between requests that target the same resource and harness that to make test case flows. Then we can test for any resource as and when needed. From this point on, we consider resource to be same (or constant) for the scope of our discussion. That means we are discussing requests that affect the same resource.
 
-Say the request succeeds. So we know that the student we wanted to fetch does not exist. This means that we can create it. So a `Post Positive` request made using the resource used for last request should succeed now. On the other hand a `Delete Positive` request should fail. By knowing that the current request suceeded, we can know what request to make next - all thanks to semantics of the request.
+## Semantics of a request
 
-For every resource, we essentially maintain a graph of all the possible requests based on your API description. We then traverse that graph to provide complex flows. The further sections describe the nodes and edges of the graph.
+A request is a combination of method, url, body (if any) and headers. Currently, we support generating requests on the basis of these attributes. Future versions of the tool may have more advanced features such as supporting cookies. You describe these attributes to us and we populate your description format using REST semantics and an appropriate resource instance.
+
+The key attributes of a request are its method and the outcome it is supposed to bring. Knowing these helps us know what the request intended to do. We make assertions about the application and use requests to validate them. If the response from the API was as expected, our assertions are successful. Else they fail and so does the test. Consider an example:
+
+You have an API that manages the student database of a college. You make a `Get Negative` request to the API. That means you try to fetch a non existent student. You expect the API to send an error saying that the resource does not exist. If that happens then your assertion succeeds. You took a student that was not supposed to exist and it did not. But if the API does not throw any error, that means it did not behave as expected. Your assertion fails and you discover a bug.
+
+## Assertion result and API state
+
+Assertions based on requests provide you with information about the application state. In our example above, say that the assertion succeeded. Fetching a student that was not supposed to exist caused API to send an error. You now know that the student you tried to fetch doesn't exist. So you know what to expect from any request made using that student at this point. For example:
+
+1. A `Get Positive` request should fail as it asserted that the student exists but it does not. And the API should send an error confirming the same.
+2. A `Delete Negative` request should succeed as it asserted that the student cannot be deleted because it doesn't exist. And the API should send an error conforming the same.
+3. A `Post Positive` request should succeed as it asserted that if you can create this non existent student. And the API should send the affirmation for the same.
+
+For every resource, we essentially maintain a graph of all the possible requests based on your API description. Nodes of that graph are the requests that can be made. Edge from one node to another means that if source node's assertion succeeds, you shoud expect the target node's assertion to succeed too.
 
 ## Nodes
 
-A particular request to a REST API is essentially a combination of method, url, body (if any) and headers. Currently, we support generating requests on the basis of these attributes. Future versions of the tool might have advanced features such as supporting cookies. Based on your description, we collect each possible request scenario. This is simply a combination of request attributes discussed before. Each request is treated as a node of our Graph.
+Based on your description, we collect each possible request scenario. This is simply a combination of request attributes discussed before. Each request is treated as a node of our Graph. So a node is nothing but a combination of:
+
+1. URL
+2. Input data
+3. Expected output data
+
+Two nodes are considered equivalent if they make the same assertion. That means requests with same method and outcome case are equivalent. Say that you have two ways to `Get` a student from the API. In that case, both `Get Positives` will assert that the given student exists. Similarly, both `Get Negatives` will assert that the given student does not exist.
+
+An example of a node is:
+
+```curl
+URL: /Student/{resource:id}
+METHOD: GET
+TYPE: POSITIVE
+INDEX: 0
+```
+
+This refers to the a `Get` request made using the first way at the url `/Student/<student-id>` and expects a positive outcome. That is when this request is made using a student (that we provide), it asserts that the student exists.
+
+## Edges
+
+Now we discuss the edges that can be in the graph. First off, we generalize equivalent nodes. This means that all equivalent nodes have same the targets for outgoing edges and same sources for the incoming edges.
+
+For example, consider `Get Positive: 0` and `Get Positive: 1` from out discussion above. Any request that can be made after `Get Positive: 0` can be made after `Get Positive: 1`. Similarly, any request that can be made before `Get Positive: 0` can be made before `Get Positive: 1`.
+
+An edge between two nodes boils down to the **method** and the **outcome case** of the source and target nodes. We maintain a hardcoded algorithm that takes in two nodes and tells you if an edge is possible between them or not.
+
+## Graph
+
+| Source          | Target            |
+| --------------- | ----------------- |
+| Get Positive    | Get Positive      |
+|                 | Delete Positive   |
+|                 | Put Positive      |
+|                 | Patch Positive    |
+|                 | Post Negative     |
+|                 | Put Destructive   |
+|                 | Patch Positive    |
+| Get Negative    | Get Negative      |
+|                 | Delete Negative   |
+|                 | Put Positive      |
+|                 | Patch Negative    |
+|                 | Post Positive     |
+|                 | Put Destructive   |
+|                 | Post Positive     |
+| Delete Positive | Get Negative      |
+|                 | Delete Negative   |
+|                 | Put Positive      |
+|                 | Patch Negative    |
+|                 | Post Positive     |
+|                 | Put Destructive   |
+|                 | Post Positive     |
+| Delete Negative | Get Negative      |
+|                 | Delete Negative   |
+|                 | Put Positive      |
+|                 | Patch Negative    |
+|                 | Post Positive     |
+|                 | Put Destructive   |
+|                 | Post Positive     |
+| Put Positive    | Get Positive      |
+|                 | Delete Positive   |
+|                 | Put Positive      |
+|                 | Patch Positive    |
+|                 | Post Negative     |
+|                 | Put Destructive   |
+|                 | Patch Destructive |
+| Post Positive   | Get Positive      |
+|                 | Delete Positive   |
+|                 | Put Positive      |
+|                 | Patch Positive    |
+|                 | Post Negative     |
+|                 | Put Destructive   |
+|                 | Patch Destructive |
+| Post Negative   | Get Positive      |
+|                 | Delete Positive   |
+|                 | Put Positive      |
+|                 | Patch Positive    |
+|                 | Post Negative     |
+|                 | Put Destructive   |
+|                 | Patch Destructive |
+| Patch Positive  | Get Positive      |
+|                 | Delete Positive   |
+|                 | Put Positive      |
+|                 | Patch Positive    |
+|                 | Post Negative     |
+|                 | Put Destructive   |
+|                 | Patch Destructive |
+| Patch Negative  | Get Negative      |
+|                 | Delete Negative   |
+|                 | Put Positive      |
+|                 | Patch Negative    |
+|                 | Post Negative     |
+|                 | Put Destructive   |
+|                 | Post Destructive  |
+
+No request can be made after a destructive request.
