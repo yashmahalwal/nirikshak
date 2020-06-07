@@ -1,17 +1,53 @@
 import { AssertionResult } from "@jest/test-result";
-import { isNodeName, ParsedNode, parseNodeName } from "@nirikshak/core";
+import {
+    isNodeName,
+    ParsedNode,
+    parseNodeName,
+    MethodType,
+    Cases,
+} from "@nirikshak/core";
 import _ from "lodash";
+import { getGroups } from "./getGroups";
 export interface ParsedAssertions {
     resource: { [key: string]: number };
-    iteration: { [key: number]: number };
-    stepIndex: { [key: number]: number };
-    method: { [key: string]: number };
-    methodEntry: { [key: string]: number };
-    caseValue: { [key: string]: number };
+    iteration: { [key: string]: number };
+    stepIndex: { [key: string]: number };
+    method: { [key in MethodType]?: number };
+    caseValue: { [key in Cases]?: number };
     url: { [key: string]: number };
     errorMessage: { [key: string]: number };
+    resourceIteration: { [key: string]: { [key: string]: number } };
+    resourceErrorMessage: { [key: string]: { [key: string]: number } };
+    resourceMethod: { [key: string]: { [key in MethodType]: number } };
+    resourceCaseValue: { [key: string]: { [key: string]: number } };
+    resourceUrl: { [key: string]: { [key: string]: number } };
+    methodCaseValue: {
+        [key in MethodType]?: {
+            [key in Cases]?: number;
+        };
+    };
+    methodIteration: {
+        [key in MethodType]?: {
+            [key: string]: number;
+        };
+    };
+    methodUrl: {
+        [key in MethodType]?: {
+            [key: string]: number;
+        };
+    };
+    methodErrorMessage: {
+        [key in MethodType]?: {
+            [key: string]: number;
+        };
+    };
+    methodMethodIndex: {
+        [key in MethodType]?: {
+            [key: string]: number;
+        };
+    };
 }
-interface ParsedAssertion {
+export interface ParsedAssertion {
     resource: string;
     iteration: number;
     pathIndex: number;
@@ -75,58 +111,26 @@ export function parseAssertion({
 function incrementKey(
     o: object,
     predecessor: string,
-    suffixKey: string | number
+    suffixKeys: (string | number)[]
 ): void {
-    const key = `${predecessor}.${suffixKey}`;
+    const key = `${predecessor}.${suffixKeys.join(".")}`;
     _.set(o, key, _.has(o, key) ? _.get(o, key) + 1 : 1);
 }
 
 export function parseAssertions(input: AssertionResult[]): ParsedAssertions {
     const parsedAssertions = input.map((i) => parseAssertion(i));
-    const o: ParsedAssertions = {
-        resource: {},
-        iteration: {},
-        caseValue: {},
-        method: {},
-        methodEntry: {},
-        stepIndex: {},
-        url: {},
-        errorMessage: {},
-    };
+    const o: object = {};
 
     for (const assertion of parsedAssertions) {
-        [
-            { predecessor: "resource", suffixKey: assertion["resource"] },
-            { predecessor: "iteration", suffixKey: assertion["iteration"] },
-            { predecessor: "stepIndex", suffixKey: assertion["pathIndex"] },
-            {
-                predecessor: "method",
-                suffixKey: assertion["parsedNode"]["method"],
-            },
-            {
-                predecessor: "url",
-                suffixKey: assertion["parsedNode"]["url"],
-            },
-            {
-                predecessor: "methodEntry",
-                suffixKey:
-                    assertion["parsedNode"]["method"] +
-                    `-` +
-                    assertion["parsedNode"]["methodIndex"],
-            },
-            {
-                predecessor: "caseValue",
-                suffixKey: assertion["parsedNode"]["caseValue"],
-            },
-        ].forEach(({ predecessor, suffixKey }) =>
+        getGroups(assertion).forEach(({ predecessor, suffixKey }) =>
             incrementKey(o, predecessor, suffixKey)
         );
 
         if (assertion.errorMessage.length) {
             void assertion.errorMessage;
-            incrementKey(o, "errorMessage", assertion["errorMessage"]);
+            incrementKey(o, "errorMessage", [assertion["errorMessage"]]);
         }
     }
 
-    return o;
+    return o as ParsedAssertions;
 }
