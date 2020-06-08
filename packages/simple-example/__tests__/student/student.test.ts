@@ -18,6 +18,7 @@ import {
     statusValidation,
     generateResource,
 } from "@nirikshak/core";
+import "@nirikshak/core/lib/jestMatchers";
 import ResourceJSON from "./resource.json";
 import EndpointsJSON from "./endpoints.json";
 import { setup, cleanup, schemaHelpers, traversalHelpers } from "./helpers";

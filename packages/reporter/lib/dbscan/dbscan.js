@@ -117,7 +117,7 @@ var DBScan = /** @class */ (function () {
             }
             finally { if (e_3) throw e_3.error; }
         }
-        return [this.clusters, this.noise];
+        return { clusters: this.clusters, noise: this.noise };
     };
     return DBScan;
 }());

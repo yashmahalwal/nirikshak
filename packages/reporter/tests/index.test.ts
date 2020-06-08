@@ -1,13 +1,11 @@
+import NirikshakReporter from "../src";
 import log from "./nirikshak.jest.log.json";
-import { AssertionResult } from "@jest/test-result";
-import { parseAssertions } from "../src/assertions";
+import { AggregatedResult } from "@jest/reporters";
 
-test("Assertion grouping", () => {
-    const assertions: AssertionResult[] = [];
-    log.testResults.forEach((t) =>
-        assertions.push(...(t.assertionResults as AssertionResult[]))
-    );
+beforeAll(() => process.chdir(__dirname))
 
-    const output = parseAssertions(assertions);
-    void output;
+test("Custom reporter", () => {
+    const reporter = new NirikshakReporter();
+    reporter.onRunComplete(null as any, log as AggregatedResult);
+    return;
 });

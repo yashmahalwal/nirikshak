@@ -1,3 +1,7 @@
+interface DBScanResult<T> {
+    clusters: T[][];
+    noise: T[];
+}
 export default class DBScan<T> {
     private dataset;
     private epsilon;
@@ -11,5 +15,6 @@ export default class DBScan<T> {
     private regionQuery;
     private addToCluster;
     private expandCluster;
-    run(): [T[][], T[]];
+    run(): DBScanResult<T>;
 }
+export {};

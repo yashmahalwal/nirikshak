@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+        }
+        #donut-svg{
+            overflow: visible;
+        }
+        #main-title, #bar-title{
+            text-align: center;
+            margin-bottom: 0;
+        }
+        html{
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        #summary-donut{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        #donut-label{
+            margin-top: 0;
+            font-weight: bolder;
+            text-align: center;
+        }
+    </style>
+    <body>
+        <h1 id="main-title">Nirikshak test summary</h1>
+        <div id="summary-donut">
+            <p id="donut-label">Total tests: 2</p>
+        </div>
+        <h1 id="bar-title">Error distribution with attributes</h1>
+        
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <script>
+            var data = JSON.parse('{"total":806,"passed":488,"failed":318,"parsedAssertions":{"resource":{"student":{"count":318,"iteration":{"1 ":159,"2 ":159},"method":{"GET":{"1 ":32,"0 ":32},"DELETE":{"0 ":34,"1 ":32},"POST":{"0 ":70,"1 ":38},"PATCH":{"0 ":42},"PUT":{"1 ":38}},"case":{"POSITIVE":164,"NEGATIVE":128,"DESTRUCTIVE":26},"url":{"/Student/{resource:id}/v1":32,"/Student/{resource:id}":184,"/Student":70,"/Student/{resource:id}/v4":32},"errorMessage":{"Status mismatch: Expected 200,500 got 201":32,"Response bodies did not match":102,"Status mismatch: Expected 409,200,201,202,210 got 400":32,"Status mismatch: Expected 400 got 500":26,"Status mismatch: Expected 404 got 400":32,"Status mismatch: Expected 404,409 got 500":32,"Status mismatch: Expected 201 got 200":30,"Status mismatch: Expected 404 got 200":32}}},"iteration":{"1 ":{"count":159,"resource":{"student":159},"method":{"GET":{"1 ":16,"0 ":16},"DELETE":{"0 ":17,"1 ":16},"POST":{"0 ":35,"1 ":19},"PATCH":{"0 ":21},"PUT":{"1 ":19}},"case":{"POSITIVE":82,"NEGATIVE":64,"DESTRUCTIVE":13},"url":{"/Student/{resource:id}/v1":16,"/Student/{resource:id}":92,"/Student":35,"/Student/{resource:id}/v4":16},"errorMessage":{"Status mismatch: Expected 200,500 got 201":16,"Response bodies did not match":51,"Status mismatch: Expected 409,200,201,202,210 got 400":16,"Status mismatch: Expected 400 got 500":13,"Status mismatch: Expected 404 got 400":16,"Status mismatch: Expected 404,409 got 500":16,"Status mismatch: Expected 201 got 200":15,"Status mismatch: Expected 404 got 200":16}},"2 ":{"count":159,"resource":{"student":159},"method":{"GET":{"1 ":16,"0 ":16},"DELETE":{"0 ":17,"1 ":16},"POST":{"0 ":35,"1 ":19},"PATCH":{"0 ":21},"PUT":{"1 ":19}},"case":{"POSITIVE":82,"NEGATIVE":64,"DESTRUCTIVE":13},"url":{"/Student/{resource:id}/v1":16,"/Student/{resource:id}":92,"/Student":35,"/Student/{resource:id}/v4":16},"errorMessage":{"Status mismatch: Expected 200,500 got 201":16,"Response bodies did not match":51,"Status mismatch: Expected 409,200,201,202,210 got 400":16,"Status mismatch: Expected 400 got 500":13,"Status mismatch: Expected 404 got 400":16,"Status mismatch: Expected 404,409 got 500":16,"Status mismatch: Expected 201 got 200":15,"Status mismatch: Expected 404 got 200":16}}},"case":{"POSITIVE":{"count":164,"iteration":{"1 ":82,"2 ":82},"method":{"GET":{"1 ":32},"DELETE":{"0 ":34},"PUT":{"1 ":38},"POST":{"0 ":30,"1 ":30}},"resource":{"student":164},"url":{"/Student/{resource:id}/v1":32,"/Student/{resource:id}":102,"/Student":30},"errorMessage":{"Status mismatch: Expected 200,500 got 201":32,"Response bodies did not match":102,"Status mismatch: Expected 201 got 200":30}},"NEGATIVE":{"count":128,"iteration":{"1 ":64,"2 ":64},"method":{"POST":{"0 ":32},"GET":{"0 ":32},"DELETE":{"1 ":32},"PATCH":{"0 ":32}},"resource":{"student":128},"url":{"/Student":32,"/Student/{resource:id}":64,"/Student/{resource:id}/v4":32},"errorMessage":{"Status mismatch: Expected 409,200,201,202,210 got 400":32,"Status mismatch: Expected 404 got 400":32,"Status mismatch: Expected 404,409 got 500":32,"Status mismatch: Expected 404 got 200":32}},"DESTRUCTIVE":{"count":26,"iteration":{"1 ":13,"2 ":13},"method":{"PATCH":{"0 ":10},"POST":{"0 ":8,"1 ":8}},"resource":{"student":26},"url":{"/Student/{resource:id}":18,"/Student":8},"errorMessage":{"Status mismatch: Expected 400 got 500":26}}},"url":{"/Student/{resource:id}/v1":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"GET":{"1 ":32}},"case":{"POSITIVE":32},"resource":{"student":32},"errorMessage":{"Status mismatch: Expected 200,500 got 201":32}},"/Student/{resource:id}":{"count":184,"iteration":{"1 ":92,"2 ":92},"method":{"DELETE":{"0 ":34},"PATCH":{"0 ":42},"PUT":{"1 ":38},"GET":{"0 ":32},"POST":{"1 ":38}},"case":{"POSITIVE":102,"DESTRUCTIVE":18,"NEGATIVE":64},"resource":{"student":184},"errorMessage":{"Response bodies did not match":72,"Status mismatch: Expected 400 got 500":18,"Status mismatch: Expected 404 got 400":32,"Status mismatch: Expected 201 got 200":30,"Status mismatch: Expected 404 got 200":32}},"/Student":{"count":70,"iteration":{"1 ":35,"2 ":35},"method":{"POST":{"0 ":70}},"case":{"NEGATIVE":32,"POSITIVE":30,"DESTRUCTIVE":8},"resource":{"student":70},"errorMessage":{"Status mismatch: Expected 409,200,201,202,210 got 400":32,"Response bodies did not match":30,"Status mismatch: Expected 400 got 500":8}},"/Student/{resource:id}/v4":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"DELETE":{"1 ":32}},"case":{"NEGATIVE":32},"resource":{"student":32},"errorMessage":{"Status mismatch: Expected 404,409 got 500":32}}},"errorMessage":{"Status mismatch: Expected 200,500 got 201":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"GET":{"1 ":32}},"case":{"POSITIVE":32},"url":{"/Student/{resource:id}/v1":32},"resource":{"student":32}},"Response bodies did not match":{"count":102,"iteration":{"1 ":51,"2 ":51},"method":{"DELETE":{"0 ":34},"PUT":{"1 ":38},"POST":{"0 ":30}},"case":{"POSITIVE":102},"url":{"/Student/{resource:id}":72,"/Student":30},"resource":{"student":102}},"Status mismatch: Expected 409,200,201,202,210 got 400":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"POST":{"0 ":32}},"case":{"NEGATIVE":32},"url":{"/Student":32},"resource":{"student":32}},"Status mismatch: Expected 400 got 500":{"count":26,"iteration":{"1 ":13,"2 ":13},"method":{"PATCH":{"0 ":10},"POST":{"0 ":8,"1 ":8}},"case":{"DESTRUCTIVE":26},"url":{"/Student/{resource:id}":18,"/Student":8},"resource":{"student":26}},"Status mismatch: Expected 404 got 400":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"GET":{"0 ":32}},"case":{"NEGATIVE":32},"url":{"/Student/{resource:id}":32},"resource":{"student":32}},"Status mismatch: Expected 404,409 got 500":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"DELETE":{"1 ":32}},"case":{"NEGATIVE":32},"url":{"/Student/{resource:id}/v4":32},"resource":{"student":32}},"Status mismatch: Expected 201 got 200":{"count":30,"iteration":{"1 ":15,"2 ":15},"method":{"POST":{"1 ":30}},"case":{"POSITIVE":30},"url":{"/Student/{resource:id}":30},"resource":{"student":30}},"Status mismatch: Expected 404 got 200":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"PATCH":{"0 ":32}},"case":{"NEGATIVE":32},"url":{"/Student/{resource:id}":32},"resource":{"student":32}}},"method":{"GET":{"count":64,"1 ":{"iteration":{"1 ":32,"2 ":32},"resource":{"student":32},"case":{"POSITIVE":32},"url":{"/Student/{resource:id}/v1":32},"errorMessage":{"Status mismatch: Expected 200,500 got 201":32}},"0 ":{"iteration":{"1 ":32,"2 ":32},"resource":{"student":32},"case":{"NEGATIVE":32},"url":{"/Student/{resource:id}":32},"errorMessage":{"Status mismatch: Expected 404 got 400":32}}},"DELETE":{"count":66,"0 ":{"iteration":{"1 ":34,"2 ":34},"resource":{"student":34},"case":{"POSITIVE":34},"url":{"/Student/{resource:id}":34},"errorMessage":{"Response bodies did not match":34}},"1 ":{"iteration":{"1 ":32,"2 ":32},"resource":{"student":32},"case":{"NEGATIVE":32},"url":{"/Student/{resource:id}/v4":32},"errorMessage":{"Status mismatch: Expected 404,409 got 500":32}}},"POST":{"count":108,"0 ":{"iteration":{"1 ":70,"2 ":70},"resource":{"student":70},"case":{"NEGATIVE":32,"POSITIVE":30,"DESTRUCTIVE":8},"url":{"/Student":70},"errorMessage":{"Status mismatch: Expected 409,200,201,202,210 got 400":32,"Response bodies did not match":30,"Status mismatch: Expected 400 got 500":8}},"1 ":{"iteration":{"1 ":38,"2 ":38},"resource":{"student":38},"case":{"POSITIVE":30,"DESTRUCTIVE":8},"url":{"/Student/{resource:id}":38},"errorMessage":{"Status mismatch: Expected 201 got 200":30,"Status mismatch: Expected 400 got 500":8}}},"PATCH":{"count":42,"0 ":{"iteration":{"1 ":42,"2 ":42},"resource":{"student":42},"case":{"DESTRUCTIVE":10,"NEGATIVE":32},"url":{"/Student/{resource:id}":42},"errorMessage":{"Status mismatch: Expected 400 got 500":10,"Status mismatch: Expected 404 got 200":32}}},"PUT":{"count":38,"1 ":{"iteration":{"1 ":38,"2 ":38},"resource":{"student":38},"case":{"POSITIVE":38},"url":{"/Student/{resource:id}":38},"errorMessage":{"Response bodies did not match":38}}}}}}')
+        </script>
+        <!-- Donut at the top -->
+        <script>
+                function makePieChart(){
+
+                    // set the dimensions and margins of the graph
+                    var width = 500
+                        height = 500
+                    
+                    // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+                    var radius = Math.min(width, height) / 2
+
+                    // append the svg object to the div called 'summary-donut'
+                    var svg = d3.select("#summary-donut")
+                    .insert("svg", "#donut-label")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .attr("id", "donut-svg")
+                    .append("g")
+                    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                    
+                    // Create dummy data
+                    
+                    var pieData = {Passed: data.passed, Failed: data.failed};
+                    // set the color scale
+                    var color = d3.scaleOrdinal()
+                    .domain(pieData)
+                    .range(["#16a849","#eb0909"])
+                    
+                    
+                    // Compute the position of each group on the pie:
+                    var pie = d3.pie()
+                    .value(function(d) {return d.value; })
+                    var data_ready = pie(d3.entries(pieData))
+
+                    // The arc generator
+                    var arc = d3.arc()
+                    .innerRadius(radius * 0.4)         // This is the size of the donut hole
+                    .outerRadius(radius * 0.8)
+
+                    // Another arc that won't be drawn. Just for labels positioning
+                    var outerArc = d3.arc()
+                    .innerRadius(radius * 0.9)
+                    .outerRadius(radius * 0.9)
+                    
+                    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+                    svg
+                    .selectAll('whatever')
+                    .data(data_ready)
+                    .enter()
+                    .append('path')
+                    .attr('d', arc)
+                    .attr('fill', function(d){ return(color(d.data.key)) })
+                    .attr("stroke", "white")
+                    .style("stroke-width", 5)
+                    .style("opacity", 0.7)
+
+                    // Add the polylines between chart and labels:
+                    svg
+                    .selectAll('allPolylines')
+                    .data(data_ready)
+                    .enter()
+                    .append('polyline')
+                    .attr("stroke", "grey")
+                    .style("fill", "none")
+                    .attr("stroke-width", 2)
+                    .attr('points', function(d) {
+                        var posA = arc.centroid(d) // line insertion in the slice
+                        var posB = outerArc.centroid(d) // line break: we use the other arc generator that has been built only for that
+                        var posC = outerArc.centroid(d); // Label position = almost the same as posB
+                        var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2 // we need the angle to see if the X position will be at the extreme right or extreme left
+                        posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
+                        return [posA, posB, posC]
+                    })
+
+                    // // Add the polylines between chart and labels:
+                    svg
+                    .selectAll('allLabels')
+                    .data(data_ready)
+                    .enter()
+                    .append('text')
+                    .text( function(d) {  return d.data.key + ": " + d.data.value} )
+                    .attr('transform', function(d) {
+                        var pos = outerArc.centroid(d);
+                        var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+                        pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
+                        return 'translate(' + pos + ')';
+                    })
+                    .style('text-anchor', function(d) {
+                        var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+                        return (midangle < Math.PI ? 'start' : 'end')
+                    })
+
+                    d3.select("#donut-label").html("Total tests: " + data.total)
+
+                }
+
+                makePieChart()
+        </script>
+        <!-- Heirarchial bar graph -->
+        <script>
+        </script>
+
+    </body>
+</html>

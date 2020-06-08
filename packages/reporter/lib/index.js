@@ -35,20 +35,44 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var CustomReporter = /** @class */ (function () {
-    function CustomReporter() {
+var path_1 = __importDefault(require("path"));
+var fs_extra_1 = __importDefault(require("fs-extra"));
+var open_1 = __importDefault(require("open"));
+var assertions_1 = require("./assertions");
+var NirikshakReporter = /** @class */ (function () {
+    function NirikshakReporter() {
     }
-    CustomReporter.prototype.onRunComplete = function (contextSet, results) {
+    NirikshakReporter.prototype.onRunComplete = function (contextSet, results) {
         return __awaiter(this, void 0, void 0, function () {
+            var assertions, parsedAssertions, htmlFile, dest;
             return __generator(this, function (_a) {
-                console.log("Total tests: ", results.numTotalTests);
-                console.log("Failed tests: ", results.numFailedTests);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        assertions = [];
+                        results.testResults.forEach(function (t) {
+                            return t.testResults.forEach(function (res) { return res.status === "failed" && assertions.push(res); });
+                        });
+                        parsedAssertions = assertions_1.parseAssertions(assertions);
+                        console.log(JSON.stringify(parsedAssertions));
+                        return [4 /*yield*/, fs_extra_1.default.readFile(path_1.default.resolve(__dirname, "../static/index.html"))];
+                    case 1:
+                        htmlFile = (_a.sent()).toString();
+                        htmlFile = htmlFile.replace("{{testResult}}", "'" + JSON.stringify(parsedAssertions) + "'");
+                        dest = path_1.default.resolve(process.cwd(), "test-report.html");
+                        return [4 /*yield*/, fs_extra_1.default.writeFile(path_1.default.resolve(process.cwd(), "test-report.html"), htmlFile)];
+                    case 2:
+                        _a.sent();
+                        open_1.default(dest);
+                        return [2 /*return*/];
+                }
             });
         });
     };
-    return CustomReporter;
+    return NirikshakReporter;
 }());
-exports.default = CustomReporter;
+exports.default = NirikshakReporter;
 //# sourceMappingURL=index.js.map

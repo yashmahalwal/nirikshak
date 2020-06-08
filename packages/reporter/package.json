@@ -41,12 +41,14 @@
     "devDependencies": {
         "@jest/reporters": "^26.0.1",
         "@jest/test-result": "^26.0.1",
+        "@types/fs-extra": "^9.0.1",
         "@types/lodash": "^4.14.155",
         "ts-node": "^8.10.2",
         "typescript": "^3.9.5"
     },
     "dependencies": {
         "@nirikshak/core": "^0.0.0",
+        "fs-extra": "^9.0.1",
         "lodash": "^4.17.15",
         "open": "^7.0.4"
     }
