@@ -2,13 +2,28 @@
     "projects": [
         {
             "displayName": "student",
-            "testMatch": ["<rootDir>/__tests__/student/**/*.test.ts"]
+            "testMatch": [
+                "<rootDir>/__tests__/student/**/*.test.ts"
+            ]
         },
         {
             "displayName": "others",
-            "testMatch": ["<rootDir>/__tests__/others/**/*.test.ts"]
+            "testMatch": [
+                "<rootDir>/__tests__/others/**/*.test.ts"
+            ]
+        },
+        {
+            "displayName": "st",
+            "testMatch": [
+                "<rootDir>/__tests__/st/**/*.test.ts"
+            ]
         }
     ],
-    "setupFilesAfterEnv": ["./jest.setup.js"],
-    "reporters": ["default", "@nirikshak/reporter"]
+    "setupFilesAfterEnv": [
+        "./jest.setup.js"
+    ],
+    "reporters": [
+        "default",
+        "@nirikshak/reporter"
+    ]
 }

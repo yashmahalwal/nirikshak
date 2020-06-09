@@ -4,15 +4,11 @@ import childProcess from "child_process";
 import validateDirectoryStructure from "../utils/validateDirectoryStructure";
 import { getResourceDirectory } from "../utils/getResourceDir";
 interface RunArgs extends CliArgs {
-    name: string[];
+    name?: string[];
 }
 
-async function run({
-    name = [],
-    configuration,
-    ...args
-}: RunArgs): Promise<void> {
-    validateDirectoryStructure(configuration);
+async function run({ name = [], configuration }: RunArgs): Promise<void> {
+    await validateDirectoryStructure(configuration);
 
     let mapping: Configuration["resources"] = [];
 
@@ -23,13 +19,15 @@ async function run({
         if (!val) throw new Error(`Cannot find resource: ${n}`);
         mapping.push(val);
     });
-
     if (!mapping.length) mapping = configuration.resources;
     const commandString: string[] = configuration.jestArgs ?? [];
     // Override user
     commandString.push("--color=false", "--noStackTrace");
     commandString.push(
-        ...mapping.map((m) => getResourceDirectory(m, configuration.dir))
+        ...mapping.map((m) => {
+            const v = getResourceDirectory(m, configuration.dir);
+            return v[v.length - 1] === "/" ? v : v + "/";
+        })
     );
 
     try {
