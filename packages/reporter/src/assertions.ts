@@ -9,6 +9,7 @@ import {
 import _ from "lodash";
 import { getGroups } from "./getGroups";
 export interface ParsedAssertions {
+    
     resource: {
         [key: string]: {
             count: number;
