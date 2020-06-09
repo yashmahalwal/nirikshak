@@ -5,6 +5,10 @@ Test your REST APIs with ease
 </p>
 
 <p align="center">
+<img src="docs/cli.png"/> 
+</p>
+
+<p align="center">
 <a href="http://commitizen.github.io/cz-cli/"><img alt="Commitizen friendly" src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg"/></a>
 <a href="https://github.com/ellerbrock/typescript-badges/"><img alt="Typescript" src="https://badges.frapsoft.com/typescript/code/typescript.svg?v=101"/></a>
 <a href="https://github.com/prettier/prettier"><img alt="code style: prettier" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square"/></a>
@@ -27,7 +31,7 @@ Nirikshak is a REST API testing framework. It leverages the REST semantics and p
 
 ## What exactly does it do?
 
-![Nirikshak flow](docs/Nirikshak-intro.png)
+![Nirikshak flow](docs/Nirikshak-basic.png)
 
 Nirikshak generates test cases, runs them and analyses them for you. The flow can be summarised as below:
 
@@ -48,8 +52,15 @@ Nirikshak works on APIs that:
 
 Nirikshak performs unit functional tests on them. At a glance, this seems very restrictive. But the best part is that the framework is extentsible. We expose the internal APIs that we use to make tests work. You can leverage them to write your own tests.
 
-## Contents
+## Concepts
 
 1. [Rest semantics and how we interpret them](docs/REST.md)
 2. [Possible outcomes to a request](docs/Cases.md)
 3. [Request relationship graph](docs/Graph.md)
+4. [Flow of testing](docs/TestFlow.md)
+
+## API Reference
+
+1. [@nirikshak/cli](packages/cli/README.md): CLI tool that manages tests for your project
+2. [@nirikshak/core](packages/core/README.md): Core logic that makes tests work
+3. [@nirikshak/reporter](packages/reporter/README.md): Jest reporter that generates reports for you

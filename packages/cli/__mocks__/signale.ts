@@ -1,10 +1,4 @@
-import originalSignale from "signale";
-
 const signale: any = jest.genMockFromModule("signale");
-signale.fatal = jest
-    .fn()
-    .mockImplementation((...args: Parameters<typeof originalSignale.fatal>) => {
-        void args;
-    });
+signale.fatal = jest.fn();
 
 export default signale;
