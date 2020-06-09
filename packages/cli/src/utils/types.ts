@@ -2,6 +2,7 @@ export interface Configuration {
     dir: string;
     resources: Array<string | { name: string; dir: string }>;
     app: string;
+    jestArgs?: string[];
 }
 
 export interface CliArgs {

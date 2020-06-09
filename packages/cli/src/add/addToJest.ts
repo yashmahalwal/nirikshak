@@ -18,5 +18,7 @@ export default async function addToJest(
         ],
     });
 
-    await fs.writeJSON("jest.config.json", configData);
+    await fs.writeJSON("jest.config.json", configData, {
+        spaces: 4,
+    });
 }

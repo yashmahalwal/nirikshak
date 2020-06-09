@@ -35,9 +35,9 @@ afterAll(async () => {
         displayName: "student",
         testMatch: ["<rootDir>/student"],
     });
-    await fs.writeJSON("jest.config.json", data);
+    await fs.writeJSON("jest.config.json", data, {spaces: 4});
     const configData: Configuration = await fs.readJSON("config.json");
     configData.resources.push("student");
-    await fs.writeJSON("config.json", configData);
+    await fs.writeJSON("config.json", configData, { spaces: 4 });
     await fs.ensureDir(path.resolve("test", "student"));
 });

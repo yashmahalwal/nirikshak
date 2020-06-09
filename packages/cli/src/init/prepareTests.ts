@@ -12,7 +12,7 @@ export default async function prepareTestFiles(
                 configuration.dir
             );
             return fs.copy(
-                path.resolve(__dirname, "../staticFiles/config.json"),
+                path.resolve(__dirname, "../../staticFiles/config.json"),
                 path.resolve(destination, "config.json")
             );
         }

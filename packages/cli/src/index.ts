@@ -4,10 +4,11 @@ import figlet from "./utils/figletWrapper";
 import chalk from "chalk";
 import yargs from "yargs";
 import * as Init from "./init";
-import * as Update from "./updateApp";
 import { parseConfig } from "./configuration";
 import signale from "signale";
+import * as Remove from "./remove";
 import * as Add from "./add";
+import * as Run from "./run";
 /* Main file to route the commands to appropriate functions */
 
 (async function (): Promise<void> {
@@ -27,15 +28,18 @@ import * as Add from "./add";
         .command(Init)
         // Add command
         .command(Add)
+        // Remove command
+        .command(Remove)
+        // Run command
+        .command(Run)
         // Update app command
-        .command(Update)
         .usage("Usage: $0 <command> [options]")
-        //     // Option: config
+        // Option: config
         .config("config", parseConfig)
         .alias("config", "c")
         .default("config", "nirikshak.json")
         .describe("config", "path to the configuration file")
-        // // Examples
+        // Examples
         .example(
             "$0 init",
             "Initialises the project using configuration in config.json"
@@ -46,16 +50,13 @@ import * as Add from "./add";
         )
         .example(
             "$0 add student",
-            "Adds files for a resource names student in student directory."
+            "Adds files for a resource named student in student directory."
         )
         .example(
             "$0 add student myDir",
-            "Adds files for a resource names student in myDir directory."
+            "Adds files for a resource named student in myDir directory."
         )
-        .example(
-            "$0 update-app server.ts",
-            "Uses server.ts as the server for testing."
-        )
+        .example("$0 remove student", "Remove the resource named student.")
         // Alias help
         .help()
         .alias("help", "h")

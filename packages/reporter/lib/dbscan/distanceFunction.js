@@ -57,16 +57,16 @@ function hamming(s1, s2) {
 function methodDistance(a, b) {
     var distance = 0;
     // Method has 80% weightage
-    a.parsedNode.method !== b.parsedNode.method && (distance += 0.8);
+    a.method !== b.method && (distance += 0.8);
     // Exact entry has 20% weightage
-    a.parsedNode.methodIndex !== b.parsedNode.methodIndex && (distance += 0.2);
+    a.methodIndex !== b.methodIndex && (distance += 0.2);
     return distance;
 }
 function resourceDistance(a, b) {
     return a.resource !== b.resource ? 1 : 0;
 }
 function caseDistance(a, b) {
-    return a.parsedNode.caseValue !== b.parsedNode.caseValue ? 1 : 0;
+    return a.caseValue !== b.caseValue ? 1 : 0;
 }
 function errorDistance(_a, _b) {
     var _c;
@@ -138,7 +138,7 @@ function distance(a, b) {
     var distance = 0;
     distance += methodDistance(a, b) * 2;
     distance += resourceDistance(a, b);
-    distance += hamming(a.parsedNode.url, b.parsedNode.url);
+    distance += hamming(a.url, b.url);
     distance += caseDistance(a, b) * 2;
     distance += errorDistance(a, b) * 2;
     return distance / 8;

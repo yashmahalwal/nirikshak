@@ -40,6 +40,30 @@ const validConfigs: Configuration[] = [
         ],
         app: "app.ts",
     },
+    {
+        dir: "tests",
+        resources: [
+            "student",
+            {
+                name: "faculty",
+                dir: "fc",
+            },
+        ],
+        app: "app.ts",
+        jestArgs: ["str", "str2"],
+    },
+    {
+        dir: "tests",
+        resources: [
+            "student",
+            {
+                name: "faculty",
+                dir: "fc",
+            },
+        ],
+        app: "app.ts",
+        jestArgs: [],
+    },
 ];
 
 describe("Validate valid config", () => {

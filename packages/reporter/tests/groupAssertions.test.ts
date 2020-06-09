@@ -1,6 +1,6 @@
 import log from "./nirikshak.jest.log.json";
 import { AssertionResult } from "@jest/test-result";
-import { parseAssertions } from "../src/assertions";
+import { parseAssertions, } from "../src/assertions";
 test("Assertion grouping", async () => {
     let assertions: AssertionResult[] = [];
     log.testResults.forEach((t) =>

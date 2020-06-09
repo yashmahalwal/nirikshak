@@ -8,7 +8,7 @@ export default async function placeApp(
     const appPath = path.resolve(configuration.app);
 
     const appContent = (
-        await fs.readFile(path.resolve(__dirname, "../staticFiles/app"))
+        await fs.readFile(path.resolve(__dirname, "../../staticFiles/app"))
     ).toString();
 
     await fs.writeFile(

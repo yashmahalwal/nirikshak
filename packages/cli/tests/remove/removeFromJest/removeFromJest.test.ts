@@ -20,5 +20,5 @@ afterAll(async () => {
         displayName: "student",
         testMatch: ["<rootDir>/student"],
     });
-    await fs.writeJSON(configPath, data);
+    await fs.writeJSON(configPath, data, { spaces: 4 });
 });

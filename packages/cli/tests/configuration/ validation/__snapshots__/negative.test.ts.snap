@@ -57,3 +57,5 @@ exports[`Validate invalid config Validate invalid config 26 1`] = `"Error parsin
 exports[`Validate invalid config Validate invalid config 27 1`] = `"Error parsing configuration: data.resources[0] should NOT be shorter than 1 characters"`;
 
 exports[`Validate invalid config Validate invalid config 28 1`] = `"Duplicate resource names in configuration"`;
+
+exports[`Validate invalid config Validate invalid config 29 1`] = `"Duplicate resource names in configuration"`;

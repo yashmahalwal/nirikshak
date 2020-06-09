@@ -24,7 +24,7 @@ test(`Placing jest configuration files`, async () => {
     await fs.pathExists("jest.setup.js");
     const buff1 = await fs.readFile("jest.setup.js");
     const buff2 = await fs.readFile(
-        path.resolve(__dirname, "../../../../src/staticFiles/jest.setup.js")
+        path.resolve(__dirname, "../../../../staticFiles/jest.setup.js")
     );
     expect(buff1.equals(buff2)).toBe(true);
 });

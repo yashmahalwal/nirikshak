@@ -21,16 +21,13 @@ class NirikshakReporter implements Pick<Reporter, "onRunComplete"> {
             total: results.numTotalTests,
             passed: results.numPassedTests,
             failed: results.numFailedTests,
-            parsedAssertions
-        }
+            parsedAssertions,
+        };
 
         let htmlFile = (
             await fs.readFile(path.resolve(__dirname, "../static/index.html"))
         ).toString();
-        htmlFile = htmlFile.replace(
-            "{{testResult}}",
-            `'${JSON.stringify(htmlData)}'`
-        );
+        htmlFile = htmlFile.replace("{{testResult}}", JSON.stringify(htmlData));
         const dest = path.resolve(process.cwd(), "test-report.html");
         await fs.writeFile(
             path.resolve(process.cwd(), "test-report.html"),

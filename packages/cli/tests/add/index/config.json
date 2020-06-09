@@ -1,1 +1,7 @@
-{"dir":"test","resources":["student"],"app":"index.ts"}
+{
+    "dir": "test",
+    "resources": [
+        "student"
+    ],
+    "app": "index.ts"
+}

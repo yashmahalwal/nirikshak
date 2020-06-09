@@ -6,42 +6,49 @@
         <title>Document</title>
     </head>
     <style>
-        html,body{
+        html,
+        body {
             margin: 0;
             padding: 0;
         }
-        #donut-svg{
+        #donut-svg,
+        #error-svg {
             overflow: visible;
         }
-        #main-title, #bar-title{
+        #main-title,
+        #bar-title {
             text-align: center;
         }
-        html{
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        html {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+                sans-serif;
         }
-        #summary-donut, #error-bar-chart{
+        #summary-donut,
+        #error-bar-chart {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
-        #donut-label, #error-caption{
+        #donut-label,
+        #error-caption {
             font-weight: bolder;
             text-align: center;
         }
 
         #error-bar-chart rect.background {
-        fill: white;
+            fill: white;
         }
 
-        #error-bar-chart  .axis {
-        shape-rendering: crispEdges;
+        #error-bar-chart .axis {
+            shape-rendering: crispEdges;
         }
 
-        #error-bar-chart  .axis path,
-        #error-bar-chart  .axis line {
-        fill: none;
-        stroke: #000;
+        #error-bar-chart .axis path,
+        #error-bar-chart .axis line {
+            fill: none;
+            stroke: #000;
         }
     </style>
     <body>
@@ -51,312 +58,402 @@
         </div>
         <h1 id="bar-title">Error distribution with attributes</h1>
         <div id="error-bar-chart">
-            <p id="error-caption">Click on blue bar to expand. Click on the background to go back.</p>
+            <p id="error-caption">
+                Click on a blue bar to expand. Click on the background to go
+                back.
+            </p>
         </div>
         <br />
         <script src="https://d3js.org/d3.v5.min.js"></script>
         <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
         <script>
-            var data = JSON.parse('{"total":806,"passed":488,"failed":318,"parsedAssertions":{"resource":{"student":{"count":318,"iteration":{"1 ":159,"2 ":159},"method":{"GET":{"1 ":32,"0 ":32},"DELETE":{"0 ":34,"1 ":32},"POST":{"0 ":70,"1 ":38},"PATCH":{"0 ":42},"PUT":{"1 ":38}},"case":{"POSITIVE":164,"NEGATIVE":128,"DESTRUCTIVE":26},"url":{"/Student/{resource:id}/v1":32,"/Student/{resource:id}":184,"/Student":70,"/Student/{resource:id}/v4":32},"errorMessage":{"Status mismatch: Expected 200,500 got 201":32,"Response bodies did not match":102,"Status mismatch: Expected 409,200,201,202,210 got 400":32,"Status mismatch: Expected 400 got 500":26,"Status mismatch: Expected 404 got 400":32,"Status mismatch: Expected 404,409 got 500":32,"Status mismatch: Expected 201 got 200":30,"Status mismatch: Expected 404 got 200":32}}},"iteration":{"1 ":{"count":159,"resource":{"student":159},"method":{"GET":{"1 ":16,"0 ":16},"DELETE":{"0 ":17,"1 ":16},"POST":{"0 ":35,"1 ":19},"PATCH":{"0 ":21},"PUT":{"1 ":19}},"case":{"POSITIVE":82,"NEGATIVE":64,"DESTRUCTIVE":13},"url":{"/Student/{resource:id}/v1":16,"/Student/{resource:id}":92,"/Student":35,"/Student/{resource:id}/v4":16},"errorMessage":{"Status mismatch: Expected 200,500 got 201":16,"Response bodies did not match":51,"Status mismatch: Expected 409,200,201,202,210 got 400":16,"Status mismatch: Expected 400 got 500":13,"Status mismatch: Expected 404 got 400":16,"Status mismatch: Expected 404,409 got 500":16,"Status mismatch: Expected 201 got 200":15,"Status mismatch: Expected 404 got 200":16}},"2 ":{"count":159,"resource":{"student":159},"method":{"GET":{"1 ":16,"0 ":16},"DELETE":{"0 ":17,"1 ":16},"POST":{"0 ":35,"1 ":19},"PATCH":{"0 ":21},"PUT":{"1 ":19}},"case":{"POSITIVE":82,"NEGATIVE":64,"DESTRUCTIVE":13},"url":{"/Student/{resource:id}/v1":16,"/Student/{resource:id}":92,"/Student":35,"/Student/{resource:id}/v4":16},"errorMessage":{"Status mismatch: Expected 200,500 got 201":16,"Response bodies did not match":51,"Status mismatch: Expected 409,200,201,202,210 got 400":16,"Status mismatch: Expected 400 got 500":13,"Status mismatch: Expected 404 got 400":16,"Status mismatch: Expected 404,409 got 500":16,"Status mismatch: Expected 201 got 200":15,"Status mismatch: Expected 404 got 200":16}}},"case":{"POSITIVE":{"count":164,"iteration":{"1 ":82,"2 ":82},"method":{"GET":{"1 ":32},"DELETE":{"0 ":34},"PUT":{"1 ":38},"POST":{"0 ":30,"1 ":30}},"resource":{"student":164},"url":{"/Student/{resource:id}/v1":32,"/Student/{resource:id}":102,"/Student":30},"errorMessage":{"Status mismatch: Expected 200,500 got 201":32,"Response bodies did not match":102,"Status mismatch: Expected 201 got 200":30}},"NEGATIVE":{"count":128,"iteration":{"1 ":64,"2 ":64},"method":{"POST":{"0 ":32},"GET":{"0 ":32},"DELETE":{"1 ":32},"PATCH":{"0 ":32}},"resource":{"student":128},"url":{"/Student":32,"/Student/{resource:id}":64,"/Student/{resource:id}/v4":32},"errorMessage":{"Status mismatch: Expected 409,200,201,202,210 got 400":32,"Status mismatch: Expected 404 got 400":32,"Status mismatch: Expected 404,409 got 500":32,"Status mismatch: Expected 404 got 200":32}},"DESTRUCTIVE":{"count":26,"iteration":{"1 ":13,"2 ":13},"method":{"PATCH":{"0 ":10},"POST":{"0 ":8,"1 ":8}},"resource":{"student":26},"url":{"/Student/{resource:id}":18,"/Student":8},"errorMessage":{"Status mismatch: Expected 400 got 500":26}}},"url":{"/Student/{resource:id}/v1":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"GET":{"1 ":32}},"case":{"POSITIVE":32},"resource":{"student":32},"errorMessage":{"Status mismatch: Expected 200,500 got 201":32}},"/Student/{resource:id}":{"count":184,"iteration":{"1 ":92,"2 ":92},"method":{"DELETE":{"0 ":34},"PATCH":{"0 ":42},"PUT":{"1 ":38},"GET":{"0 ":32},"POST":{"1 ":38}},"case":{"POSITIVE":102,"DESTRUCTIVE":18,"NEGATIVE":64},"resource":{"student":184},"errorMessage":{"Response bodies did not match":72,"Status mismatch: Expected 400 got 500":18,"Status mismatch: Expected 404 got 400":32,"Status mismatch: Expected 201 got 200":30,"Status mismatch: Expected 404 got 200":32}},"/Student":{"count":70,"iteration":{"1 ":35,"2 ":35},"method":{"POST":{"0 ":70}},"case":{"NEGATIVE":32,"POSITIVE":30,"DESTRUCTIVE":8},"resource":{"student":70},"errorMessage":{"Status mismatch: Expected 409,200,201,202,210 got 400":32,"Response bodies did not match":30,"Status mismatch: Expected 400 got 500":8}},"/Student/{resource:id}/v4":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"DELETE":{"1 ":32}},"case":{"NEGATIVE":32},"resource":{"student":32},"errorMessage":{"Status mismatch: Expected 404,409 got 500":32}}},"errorMessage":{"Status mismatch: Expected 200,500 got 201":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"GET":{"1 ":32}},"case":{"POSITIVE":32},"url":{"/Student/{resource:id}/v1":32},"resource":{"student":32}},"Response bodies did not match":{"count":102,"iteration":{"1 ":51,"2 ":51},"method":{"DELETE":{"0 ":34},"PUT":{"1 ":38},"POST":{"0 ":30}},"case":{"POSITIVE":102},"url":{"/Student/{resource:id}":72,"/Student":30},"resource":{"student":102}},"Status mismatch: Expected 409,200,201,202,210 got 400":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"POST":{"0 ":32}},"case":{"NEGATIVE":32},"url":{"/Student":32},"resource":{"student":32}},"Status mismatch: Expected 400 got 500":{"count":26,"iteration":{"1 ":13,"2 ":13},"method":{"PATCH":{"0 ":10},"POST":{"0 ":8,"1 ":8}},"case":{"DESTRUCTIVE":26},"url":{"/Student/{resource:id}":18,"/Student":8},"resource":{"student":26}},"Status mismatch: Expected 404 got 400":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"GET":{"0 ":32}},"case":{"NEGATIVE":32},"url":{"/Student/{resource:id}":32},"resource":{"student":32}},"Status mismatch: Expected 404,409 got 500":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"DELETE":{"1 ":32}},"case":{"NEGATIVE":32},"url":{"/Student/{resource:id}/v4":32},"resource":{"student":32}},"Status mismatch: Expected 201 got 200":{"count":30,"iteration":{"1 ":15,"2 ":15},"method":{"POST":{"1 ":30}},"case":{"POSITIVE":30},"url":{"/Student/{resource:id}":30},"resource":{"student":30}},"Status mismatch: Expected 404 got 200":{"count":32,"iteration":{"1 ":16,"2 ":16},"method":{"PATCH":{"0 ":32}},"case":{"NEGATIVE":32},"url":{"/Student/{resource:id}":32},"resource":{"student":32}}},"method":{"GET":{"count":64,"1 ":{"iteration":{"1 ":32,"2 ":32},"resource":{"student":32},"case":{"POSITIVE":32},"url":{"/Student/{resource:id}/v1":32},"errorMessage":{"Status mismatch: Expected 200,500 got 201":32}},"0 ":{"iteration":{"1 ":32,"2 ":32},"resource":{"student":32},"case":{"NEGATIVE":32},"url":{"/Student/{resource:id}":32},"errorMessage":{"Status mismatch: Expected 404 got 400":32}}},"DELETE":{"count":66,"0 ":{"iteration":{"1 ":34,"2 ":34},"resource":{"student":34},"case":{"POSITIVE":34},"url":{"/Student/{resource:id}":34},"errorMessage":{"Response bodies did not match":34}},"1 ":{"iteration":{"1 ":32,"2 ":32},"resource":{"student":32},"case":{"NEGATIVE":32},"url":{"/Student/{resource:id}/v4":32},"errorMessage":{"Status mismatch: Expected 404,409 got 500":32}}},"POST":{"count":108,"0 ":{"iteration":{"1 ":70,"2 ":70},"resource":{"student":70},"case":{"NEGATIVE":32,"POSITIVE":30,"DESTRUCTIVE":8},"url":{"/Student":70},"errorMessage":{"Status mismatch: Expected 409,200,201,202,210 got 400":32,"Response bodies did not match":30,"Status mismatch: Expected 400 got 500":8}},"1 ":{"iteration":{"1 ":38,"2 ":38},"resource":{"student":38},"case":{"POSITIVE":30,"DESTRUCTIVE":8},"url":{"/Student/{resource:id}":38},"errorMessage":{"Status mismatch: Expected 201 got 200":30,"Status mismatch: Expected 400 got 500":8}}},"PATCH":{"count":42,"0 ":{"iteration":{"1 ":42,"2 ":42},"resource":{"student":42},"case":{"DESTRUCTIVE":10,"NEGATIVE":32},"url":{"/Student/{resource:id}":42},"errorMessage":{"Status mismatch: Expected 400 got 500":10,"Status mismatch: Expected 404 got 200":32}}},"PUT":{"count":38,"1 ":{"iteration":{"1 ":38,"2 ":38},"resource":{"student":38},"case":{"POSITIVE":38},"url":{"/Student/{resource:id}":38},"errorMessage":{"Response bodies did not match":38}}}}}}')
+            var data = JSON.parse(`{"total":806,"passed":488,"failed":318,"parsedAssertions":[{"name":"resource","children":[{"name":"student","children":[{"name":"iteration","children":[{"name":"1 ","value":159},{"name":"2 ","value":159}]},{"name":"case","children":[{"name":"POSITIVE","value":164},{"name":"NEGATIVE","value":128},{"name":"DESTRUCTIVE","value":26}]},{"name":"url","children":[{"name":"/Student/{resource:id}/v1","value":32},{"name":"/Student/{resource:id}","value":184},{"name":"/Student","value":70},{"name":"/Student/{resource:id}/v4","value":32}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 200,500 got 201","value":32},{"name":"Response bodies did not match","value":102},{"name":"Status mismatch: Expected 409,200,201,202,210 got 400","value":32},{"name":"Status mismatch: Expected 400 got 500","value":26},{"name":"Status mismatch: Expected 404 got 400","value":32},{"name":"Status mismatch: Expected 404,409 got 500","value":32},{"name":"Status mismatch: Expected 201 got 200","value":30},{"name":"Status mismatch: Expected 404 got 200","value":32}]},{"name":"method","children":[{"name":"GET-1","value":32},{"name":"DELETE-0","value":34},{"name":"POST-0","value":70},{"name":"PATCH-0","value":42},{"name":"PUT-1","value":38},{"name":"GET-0","value":32},{"name":"DELETE-1","value":32},{"name":"POST-1","value":38}]}]}]},{"name":"iteration","children":[{"name":"1 ","children":[{"name":"resource","children":[{"name":"student","value":159}]},{"name":"case","children":[{"name":"POSITIVE","value":82},{"name":"NEGATIVE","value":64},{"name":"DESTRUCTIVE","value":13}]},{"name":"url","children":[{"name":"/Student/{resource:id}/v1","value":16},{"name":"/Student/{resource:id}","value":92},{"name":"/Student","value":35},{"name":"/Student/{resource:id}/v4","value":16}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 200,500 got 201","value":16},{"name":"Response bodies did not match","value":51},{"name":"Status mismatch: Expected 409,200,201,202,210 got 400","value":16},{"name":"Status mismatch: Expected 400 got 500","value":13},{"name":"Status mismatch: Expected 404 got 400","value":16},{"name":"Status mismatch: Expected 404,409 got 500","value":16},{"name":"Status mismatch: Expected 201 got 200","value":15},{"name":"Status mismatch: Expected 404 got 200","value":16}]},{"name":"method","children":[{"name":"GET-1","value":16},{"name":"DELETE-0","value":17},{"name":"POST-0","value":35},{"name":"PATCH-0","value":21},{"name":"PUT-1","value":19},{"name":"GET-0","value":16},{"name":"DELETE-1","value":16},{"name":"POST-1","value":19}]}]},{"name":"2 ","children":[{"name":"resource","children":[{"name":"student","value":159}]},{"name":"case","children":[{"name":"POSITIVE","value":82},{"name":"NEGATIVE","value":64},{"name":"DESTRUCTIVE","value":13}]},{"name":"url","children":[{"name":"/Student/{resource:id}/v1","value":16},{"name":"/Student/{resource:id}","value":92},{"name":"/Student","value":35},{"name":"/Student/{resource:id}/v4","value":16}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 200,500 got 201","value":16},{"name":"Response bodies did not match","value":51},{"name":"Status mismatch: Expected 409,200,201,202,210 got 400","value":16},{"name":"Status mismatch: Expected 400 got 500","value":13},{"name":"Status mismatch: Expected 404 got 400","value":16},{"name":"Status mismatch: Expected 404,409 got 500","value":16},{"name":"Status mismatch: Expected 201 got 200","value":15},{"name":"Status mismatch: Expected 404 got 200","value":16}]},{"name":"method","children":[{"name":"GET-1","value":16},{"name":"DELETE-0","value":17},{"name":"POST-0","value":35},{"name":"PATCH-0","value":21},{"name":"PUT-1","value":19},{"name":"GET-0","value":16},{"name":"DELETE-1","value":16},{"name":"POST-1","value":19}]}]}]},{"name":"case","children":[{"name":"POSITIVE","children":[{"name":"resource","children":[{"name":"student","value":164}]},{"name":"iteration","children":[{"name":"1 ","value":82},{"name":"2 ","value":82}]},{"name":"url","children":[{"name":"/Student/{resource:id}/v1","value":32},{"name":"/Student/{resource:id}","value":102},{"name":"/Student","value":30}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 200,500 got 201","value":32},{"name":"Response bodies did not match","value":102},{"name":"Status mismatch: Expected 201 got 200","value":30}]},{"name":"method","children":[{"name":"GET-1","value":32},{"name":"DELETE-0","value":34},{"name":"PUT-1","value":38},{"name":"POST-0","value":30},{"name":"POST-1","value":30}]}]},{"name":"NEGATIVE","children":[{"name":"resource","children":[{"name":"student","value":128}]},{"name":"iteration","children":[{"name":"1 ","value":64},{"name":"2 ","value":64}]},{"name":"url","children":[{"name":"/Student","value":32},{"name":"/Student/{resource:id}","value":64},{"name":"/Student/{resource:id}/v4","value":32}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 409,200,201,202,210 got 400","value":32},{"name":"Status mismatch: Expected 404 got 400","value":32},{"name":"Status mismatch: Expected 404,409 got 500","value":32},{"name":"Status mismatch: Expected 404 got 200","value":32}]},{"name":"method","children":[{"name":"POST-0","value":32},{"name":"GET-0","value":32},{"name":"DELETE-1","value":32},{"name":"PATCH-0","value":32}]}]},{"name":"DESTRUCTIVE","children":[{"name":"resource","children":[{"name":"student","value":26}]},{"name":"iteration","children":[{"name":"1 ","value":13},{"name":"2 ","value":13}]},{"name":"url","children":[{"name":"/Student/{resource:id}","value":18},{"name":"/Student","value":8}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 400 got 500","value":26}]},{"name":"method","children":[{"name":"PATCH-0","value":10},{"name":"POST-0","value":8},{"name":"POST-1","value":8}]}]}]},{"name":"url","children":[{"name":"/Student/{resource:id}/v1","children":[{"name":"resource","children":[{"name":"student","value":32}]},{"name":"iteration","children":[{"name":"1 ","value":16},{"name":"2 ","value":16}]},{"name":"case","children":[{"name":"POSITIVE","value":32}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 200,500 got 201","value":32}]},{"name":"method","children":[{"name":"GET-1","value":32}]}]},{"name":"/Student/{resource:id}","children":[{"name":"resource","children":[{"name":"student","value":184}]},{"name":"iteration","children":[{"name":"1 ","value":92},{"name":"2 ","value":92}]},{"name":"case","children":[{"name":"POSITIVE","value":102},{"name":"DESTRUCTIVE","value":18},{"name":"NEGATIVE","value":64}]},{"name":"error-message","children":[{"name":"Response bodies did not match","value":72},{"name":"Status mismatch: Expected 400 got 500","value":18},{"name":"Status mismatch: Expected 404 got 400","value":32},{"name":"Status mismatch: Expected 201 got 200","value":30},{"name":"Status mismatch: Expected 404 got 200","value":32}]},{"name":"method","children":[{"name":"DELETE-0","value":34},{"name":"PATCH-0","value":42},{"name":"PUT-1","value":38},{"name":"GET-0","value":32},{"name":"POST-1","value":38}]}]},{"name":"/Student","children":[{"name":"resource","children":[{"name":"student","value":70}]},{"name":"iteration","children":[{"name":"1 ","value":35},{"name":"2 ","value":35}]},{"name":"case","children":[{"name":"NEGATIVE","value":32},{"name":"POSITIVE","value":30},{"name":"DESTRUCTIVE","value":8}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 409,200,201,202,210 got 400","value":32},{"name":"Response bodies did not match","value":30},{"name":"Status mismatch: Expected 400 got 500","value":8}]},{"name":"method","children":[{"name":"POST-0","value":70}]}]},{"name":"/Student/{resource:id}/v4","children":[{"name":"resource","children":[{"name":"student","value":32}]},{"name":"iteration","children":[{"name":"1 ","value":16},{"name":"2 ","value":16}]},{"name":"case","children":[{"name":"NEGATIVE","value":32}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 404,409 got 500","value":32}]},{"name":"method","children":[{"name":"DELETE-1","value":32}]}]}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 200,500 got 201","children":[{"name":"resource","children":[{"name":"student","value":32}]},{"name":"iteration","children":[{"name":"1 ","value":16},{"name":"2 ","value":16}]},{"name":"case","children":[{"name":"POSITIVE","value":32}]},{"name":"url","children":[{"name":"/Student/{resource:id}/v1","value":32}]},{"name":"method","children":[{"name":"GET-1","value":32}]}]},{"name":"Response bodies did not match","children":[{"name":"resource","children":[{"name":"student","value":102}]},{"name":"iteration","children":[{"name":"1 ","value":51},{"name":"2 ","value":51}]},{"name":"case","children":[{"name":"POSITIVE","value":102}]},{"name":"url","children":[{"name":"/Student/{resource:id}","value":72},{"name":"/Student","value":30}]},{"name":"method","children":[{"name":"DELETE-0","value":34},{"name":"PUT-1","value":38},{"name":"POST-0","value":30}]}]},{"name":"Status mismatch: Expected 409,200,201,202,210 got 400","children":[{"name":"resource","children":[{"name":"student","value":32}]},{"name":"iteration","children":[{"name":"1 ","value":16},{"name":"2 ","value":16}]},{"name":"case","children":[{"name":"NEGATIVE","value":32}]},{"name":"url","children":[{"name":"/Student","value":32}]},{"name":"method","children":[{"name":"POST-0","value":32}]}]},{"name":"Status mismatch: Expected 400 got 500","children":[{"name":"resource","children":[{"name":"student","value":26}]},{"name":"iteration","children":[{"name":"1 ","value":13},{"name":"2 ","value":13}]},{"name":"case","children":[{"name":"DESTRUCTIVE","value":26}]},{"name":"url","children":[{"name":"/Student/{resource:id}","value":18},{"name":"/Student","value":8}]},{"name":"method","children":[{"name":"PATCH-0","value":10},{"name":"POST-0","value":8},{"name":"POST-1","value":8}]}]},{"name":"Status mismatch: Expected 404 got 400","children":[{"name":"resource","children":[{"name":"student","value":32}]},{"name":"iteration","children":[{"name":"1 ","value":16},{"name":"2 ","value":16}]},{"name":"case","children":[{"name":"NEGATIVE","value":32}]},{"name":"url","children":[{"name":"/Student/{resource:id}","value":32}]},{"name":"method","children":[{"name":"GET-0","value":32}]}]},{"name":"Status mismatch: Expected 404,409 got 500","children":[{"name":"resource","children":[{"name":"student","value":32}]},{"name":"iteration","children":[{"name":"1 ","value":16},{"name":"2 ","value":16}]},{"name":"case","children":[{"name":"NEGATIVE","value":32}]},{"name":"url","children":[{"name":"/Student/{resource:id}/v4","value":32}]},{"name":"method","children":[{"name":"DELETE-1","value":32}]}]},{"name":"Status mismatch: Expected 201 got 200","children":[{"name":"resource","children":[{"name":"student","value":30}]},{"name":"iteration","children":[{"name":"1 ","value":15},{"name":"2 ","value":15}]},{"name":"case","children":[{"name":"POSITIVE","value":30}]},{"name":"url","children":[{"name":"/Student/{resource:id}","value":30}]},{"name":"method","children":[{"name":"POST-1","value":30}]}]},{"name":"Status mismatch: Expected 404 got 200","children":[{"name":"resource","children":[{"name":"student","value":32}]},{"name":"iteration","children":[{"name":"1 ","value":16},{"name":"2 ","value":16}]},{"name":"case","children":[{"name":"NEGATIVE","value":32}]},{"name":"url","children":[{"name":"/Student/{resource:id}","value":32}]},{"name":"method","children":[{"name":"PATCH-0","value":32}]}]}]},{"name":"method","children":[{"name":"GET-1","children":[{"name":"resource","children":[{"name":"student","value":32}]},{"name":"iteration","children":[{"name":"1 ","value":16},{"name":"2 ","value":16}]},{"name":"case","children":[{"name":"POSITIVE","value":32}]},{"name":"url","children":[{"name":"/Student/{resource:id}/v1","value":32}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 200,500 got 201","value":32}]}]},{"name":"DELETE-0","children":[{"name":"resource","children":[{"name":"student","value":34}]},{"name":"iteration","children":[{"name":"1 ","value":17},{"name":"2 ","value":17}]},{"name":"case","children":[{"name":"POSITIVE","value":34}]},{"name":"url","children":[{"name":"/Student/{resource:id}","value":34}]},{"name":"error-message","children":[{"name":"Response bodies did not match","value":34}]}]},{"name":"POST-0","children":[{"name":"resource","children":[{"name":"student","value":70}]},{"name":"iteration","children":[{"name":"1 ","value":35},{"name":"2 ","value":35}]},{"name":"case","children":[{"name":"NEGATIVE","value":32},{"name":"POSITIVE","value":30},{"name":"DESTRUCTIVE","value":8}]},{"name":"url","children":[{"name":"/Student","value":70}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 409,200,201,202,210 got 400","value":32},{"name":"Response bodies did not match","value":30},{"name":"Status mismatch: Expected 400 got 500","value":8}]}]},{"name":"PATCH-0","children":[{"name":"resource","children":[{"name":"student","value":42}]},{"name":"iteration","children":[{"name":"1 ","value":21},{"name":"2 ","value":21}]},{"name":"case","children":[{"name":"DESTRUCTIVE","value":10},{"name":"NEGATIVE","value":32}]},{"name":"url","children":[{"name":"/Student/{resource:id}","value":42}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 400 got 500","value":10},{"name":"Status mismatch: Expected 404 got 200","value":32}]}]},{"name":"PUT-1","children":[{"name":"resource","children":[{"name":"student","value":38}]},{"name":"iteration","children":[{"name":"1 ","value":19},{"name":"2 ","value":19}]},{"name":"case","children":[{"name":"POSITIVE","value":38}]},{"name":"url","children":[{"name":"/Student/{resource:id}","value":38}]},{"name":"error-message","children":[{"name":"Response bodies did not match","value":38}]}]},{"name":"GET-0","children":[{"name":"resource","children":[{"name":"student","value":32}]},{"name":"iteration","children":[{"name":"1 ","value":16},{"name":"2 ","value":16}]},{"name":"case","children":[{"name":"NEGATIVE","value":32}]},{"name":"url","children":[{"name":"/Student/{resource:id}","value":32}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 404 got 400","value":32}]}]},{"name":"DELETE-1","children":[{"name":"resource","children":[{"name":"student","value":32}]},{"name":"iteration","children":[{"name":"1 ","value":16},{"name":"2 ","value":16}]},{"name":"case","children":[{"name":"NEGATIVE","value":32}]},{"name":"url","children":[{"name":"/Student/{resource:id}/v4","value":32}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 404,409 got 500","value":32}]}]},{"name":"POST-1","children":[{"name":"resource","children":[{"name":"student","value":38}]},{"name":"iteration","children":[{"name":"1 ","value":19},{"name":"2 ","value":19}]},{"name":"case","children":[{"name":"POSITIVE","value":30},{"name":"DESTRUCTIVE","value":8}]},{"name":"url","children":[{"name":"/Student/{resource:id}","value":38}]},{"name":"error-message","children":[{"name":"Status mismatch: Expected 201 got 200","value":30},{"name":"Status mismatch: Expected 400 got 500","value":8}]}]}]}]}`);
         </script>
         <!-- Donut at the top -->
         <script>
-                function makePieChart(){
+            function makePieChart() {
+                // set the dimensions and margins of the graph
+                var width = 300;
+                height = 300;
 
-                    // set the dimensions and margins of the graph
-                    var width = 500
-                        height = 500
-                    
-                    // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-                    var radius = Math.min(width, height) / 2
+                // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+                var radius = Math.min(width, height) / 2;
 
-                    // append the svg object to the div called 'summary-donut'
-                    var svg = d3.select("#summary-donut")
+                // append the svg object to the div called 'summary-donut'
+                var svg = d3
+                    .select("#summary-donut")
                     .insert("svg", "#donut-label")
                     .attr("width", width)
                     .attr("height", height)
                     .attr("id", "donut-svg")
                     .append("g")
-                    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-                    
-                    // Create dummy data
-                    
-                    var pieData = {Passed: data.passed, Failed: data.failed};
-                    // set the color scale
-                    var color = d3.scaleOrdinal()
+                    .attr(
+                        "transform",
+                        "translate(" + width / 2 + "," + height / 2 + ")"
+                    );
+
+                // Create dummy data
+
+                var pieData = { Passed: data.passed, Failed: data.failed };
+                // set the color scale
+                var color = d3
+                    .scaleOrdinal()
                     .domain(pieData)
-                    .range(["#16a849","#eb0909"])
-                    
-                    
-                    // Compute the position of each group on the pie:
-                    var pie = d3.pie()
-                    .value(function(d) {return d.value; })
-                    var data_ready = pie(d3.entries(pieData))
+                    .range(["#16a849", "#eb0909"]);
 
-                    // The arc generator
-                    var arc = d3.arc()
-                    .innerRadius(radius * 0.4)         // This is the size of the donut hole
-                    .outerRadius(radius * 0.8)
+                // Compute the position of each group on the pie:
+                var pie = d3.pie().value(function (d) {
+                    return d.value;
+                });
+                var data_ready = pie(d3.entries(pieData));
 
-                    // Another arc that won't be drawn. Just for labels positioning
-                    var outerArc = d3.arc()
+                // The arc generator
+                var arc = d3
+                    .arc()
+                    .innerRadius(radius * 0.4) // This is the size of the donut hole
+                    .outerRadius(radius * 0.8);
+
+                // Another arc that won't be drawn. Just for labels positioning
+                var outerArc = d3
+                    .arc()
                     .innerRadius(radius * 0.9)
-                    .outerRadius(radius * 0.9)
-                    
-                    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-                    svg
-                    .selectAll('whatever')
+                    .outerRadius(radius * 0.9);
+
+                // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+                svg.selectAll("whatever")
                     .data(data_ready)
                     .enter()
-                    .append('path')
-                    .attr('d', arc)
-                    .attr('fill', function(d){ return(color(d.data.key)) })
+                    .append("path")
+                    .attr("d", arc)
+                    .attr("fill", function (d) {
+                        return color(d.data.key);
+                    })
                     .attr("stroke", "white")
                     .style("stroke-width", 5)
-                    .style("opacity", 0.7)
+                    .style("opacity", 0.7);
 
-                    // Add the polylines between chart and labels:
-                    svg
-                    .selectAll('allPolylines')
+                // Add the polylines between chart and labels:
+                svg.selectAll("allPolylines")
                     .data(data_ready)
                     .enter()
-                    .append('polyline')
+                    .append("polyline")
                     .attr("stroke", "grey")
                     .style("fill", "none")
                     .attr("stroke-width", 2)
-                    .attr('points', function(d) {
-                        var posA = arc.centroid(d) // line insertion in the slice
-                        var posB = outerArc.centroid(d) // line break: we use the other arc generator that has been built only for that
+                    .attr("points", function (d) {
+                        var posA = arc.centroid(d); // line insertion in the slice
+                        var posB = outerArc.centroid(d); // line break: we use the other arc generator that has been built only for that
                         var posC = outerArc.centroid(d); // Label position = almost the same as posB
-                        var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2 // we need the angle to see if the X position will be at the extreme right or extreme left
+                        var midangle =
+                            d.startAngle + (d.endAngle - d.startAngle) / 2; // we need the angle to see if the X position will be at the extreme right or extreme left
                         posC[0] = radius * 0.95 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
-                        return [posA, posB, posC]
-                    })
+                        return [posA, posB, posC];
+                    });
 
-                    // // Add the polylines between chart and labels:
-                    svg
-                    .selectAll('allLabels')
+                // // Add the polylines between chart and labels:
+                svg.selectAll("allLabels")
                     .data(data_ready)
                     .enter()
-                    .append('text')
-                    .text( function(d) {  return d.data.key + ": " + d.data.value} )
-                    .attr('transform', function(d) {
+                    .append("text")
+                    .text(function (d) {
+                        return d.data.key + ": " + d.data.value;
+                    })
+                    .attr("transform", function (d) {
                         var pos = outerArc.centroid(d);
-                        var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
+                        var midangle =
+                            d.startAngle + (d.endAngle - d.startAngle) / 2;
                         pos[0] = radius * 0.99 * (midangle < Math.PI ? 1 : -1);
-                        return 'translate(' + pos + ')';
+                        return "translate(" + pos + ")";
                     })
-                    .style('text-anchor', function(d) {
-                        var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2
-                        return (midangle < Math.PI ? 'start' : 'end')
-                    })
+                    .style("text-anchor", function (d) {
+                        var midangle =
+                            d.startAngle + (d.endAngle - d.startAngle) / 2;
+                        return midangle < Math.PI ? "start" : "end";
+                    });
 
-                    d3.select("#donut-label").html("Total tests: " + data.total)
-
-                }
-                makePieChart()
+                d3.select("#donut-label").html("Total tests: " + data.total);
+            }
+            makePieChart();
         </script>
         <!-- Heirarchial bar graph -->
         <script>
-            
-           function makeBarGraph(){d3.json("readme.json").then((data) => {
-                var margin = {top: 30, right: 120, bottom: 0, left: 120},
-                height = 600 - margin.top - margin.bottom,
-                width = 960 - margin.left - margin.right,
-                barStep = 27,
-                barPadding = 3 / barStep,
-                duration = 700
-    
-                color = d3.scaleOrdinal([true, false], ["steelblue", "#aaa"])
-                x = d3.scaleLinear().range([margin.left, width - margin.right])
-                yAxis = g => g
-                .attr("class", "y-axis")
-                .attr("transform", `translate(${margin.left + 0.5},0)`)
-                .call(g => g.append("line")
-                    .attr("stroke", "currentColor")
-                    .attr("y1", margin.top)
-                    .attr("y2", height - margin.bottom))
-            
-                    xAxis = g => g
-                .attr("class", "x-axis")
-                .attr("transform", `translate(0,${margin.top})`)
-                .call(d3.axisTop(x).ticks(width / 80, "s"))
-                .call(g => (g.selection ? g.selection() : g).select(".domain").remove())
-            
-            
-            function stagger() {
-      let value = 0;
-      return (d, i) => {
-        const t = `translate(${x(value) - x(0)},${barStep * i})`;
-        value += d.value;
-        return t;
-      };
-    }
-    
-            function stack(i) {
-            let value = 0;
-            return d => {
-                const t = `translate(${x(value) - x(0)},${barStep * i})`;
-                value += d.value;
-                return t;
-            };
-            }
-            
-            function up(svg, d) {
-            if (!d.parent || !svg.selectAll(".exit").empty()) return;
-            
-            // Rebind the current node to the background.
-            svg.select(".background").datum(d.parent);
-            
-            // Define two sequenced transitions.
-            const transition1 = svg.transition().duration(duration);
-            const transition2 = transition1.transition();
-            
-            // Mark any currently-displayed bars as exiting.
-            const exit = svg.selectAll(".enter")
-                .attr("class", "exit");
-            
-            // Update the x-scale domain.
-            x.domain([0, d3.max(d.parent.children, d => d.value)]);
-            
-            // Update the x-axis.
-            svg.selectAll(".x-axis").transition(transition1)
-                .call(xAxis);
-            
-            // Transition exiting bars to the new x-scale.
-            exit.selectAll("g").transition(transition1)
-                .attr("transform", stagger());
-            
-            // Transition exiting bars to the parent’s position.
-            exit.selectAll("g").transition(transition2)
-                .attr("transform", stack(d.index));
-            
-            // Transition exiting rects to the new scale and fade to parent color.
-            exit.selectAll("rect").transition(transition1)
-                .attr("width", d => x(d.value) - x(0))
-                .attr("fill", color(true));
-            
-            // Transition exiting text to fade out.
-            // Remove exiting nodes.
-            exit.transition(transition2)
-                .attr("fill-opacity", 0)
-                .remove();
-            
-            // Enter the new bars for the clicked-on data's parent.
-            const enter = bar(svg, down, d.parent, ".exit")
-                .attr("fill-opacity", 0);
-            
-            enter.selectAll("g")
-                .attr("transform", (d, i) => `translate(0,${barStep * i})`);
-            
-            // Transition entering bars to fade in over the full duration.
-            enter.transition(transition2)
-                .attr("fill-opacity", 1);
-            
-            // Color the bars as appropriate.
-            // Exiting nodes will obscure the parent bar, so hide it.
-            // Transition entering rects to the new x-scale.
-            // When the entering parent rect is done, make it visible!
-            enter.selectAll("rect")
-                .attr("fill", d => color(!!d.children))
-                .attr("fill-opacity", p => p === d ? 0 : null)
-                .transition(transition2)
-                .attr("width", d => x(d.value) - x(0))
-                .on("end", function(p) { d3.select(this).attr("fill-opacity", 1); });
-            }
-            
-            function down(svg, d) {
-            if (!d.children || d3.active(svg.node())) return;
-            
-            // Rebind the current node to the background.
-            svg.select(".background").datum(d);
-            
-            // Define two sequenced transitions.
-            const transition1 = svg.transition().duration(duration);
-            const transition2 = transition1.transition();
-            
-            // Mark any currently-displayed bars as exiting.
-            const exit = svg.selectAll(".enter")
-                .attr("class", "exit");
-            
-            // Entering nodes immediately obscure the clicked-on bar, so hide it.
-            exit.selectAll("rect")
-                .attr("fill-opacity", p => p === d ? 0 : null);
-            
-            // Transition exiting bars to fade out.
-            exit.transition(transition1)
-                .attr("fill-opacity", 0)
-                .remove();
-            
-            // Enter the new bars for the clicked-on data.
-            // Per above, entering bars are immediately visible.
-            const enter = bar(svg, down, d, ".y-axis")
-                .attr("fill-opacity", 0);
-            
-            // Have the text fade-in, even though the bars are visible.
-            enter.transition(transition1)
-                .attr("fill-opacity", 1);
-            
-            // Transition entering bars to their new y-position.
-            enter.selectAll("g")
-                .attr("transform", stack(d.index))
-                .transition(transition1)
-                .attr("transform", stagger());
-            
-            // Update the x-scale domain.
-            x.domain([0, d3.max(d.children, d => d.value)]);
-            
-            // Update the x-axis.
-            svg.selectAll(".x-axis").transition(transition2)
-                .call(xAxis);
-            
-            // Transition entering bars to the new x-scale.
-            enter.selectAll("g").transition(transition2)
-                .attr("transform", (d, i) => `translate(0,${barStep * i})`);
-            
-            // Color the bars as parents; they will fade to children if appropriate.
-            enter.selectAll("rect")
-                .attr("fill", color(true))
-                .attr("fill-opacity", 1)
-                .transition(transition2)
-                .attr("fill", d => color(!!d.children))
-                .attr("width", d => x(d.value) - x(0));
-            }
-            
-            // Creates a set of bars for the given data node, at the specified index.
-            function bar(svg, down, d, selector) {
-            const g = svg.insert("g", selector)
-                .attr("class", "enter")
-                .attr("transform", `translate(0,${margin.top + barStep * barPadding})`)
-                .attr("text-anchor", "end")
-                .style("font", "10px sans-serif");
-            
-            const bar = g.selectAll("g")
-                .data(d.children)
-                .join("g")
-                .attr("cursor", d => !d.children ? null : "pointer")
-                .on("click", d => down(svg, d));
-            
-            bar.append("text")
-                .attr("x", margin.left - 6)
-                .attr("y", barStep * (1 - barPadding) / 2)
-                .attr("dy", ".35em")
-                .text(d => d.data.name);
-            
-            bar.append("rect")
-                .attr("x", x(0))
-                .attr("width", d => x(d.value) - x(0))
-                .attr("height", barStep * (1 - barPadding));
-            
-            return g;
-            }
-            
-            var root =  d3.hierarchy(data)
-                .sum(d => d.value)
-                .sort((a, b) => b.value - a.value)
-                .eachAfter(d => d.index = d.parent ? d.parent.index = d.parent.index + 1 || 0 : 0)
-                        
-                const svg = d3.select("#error-bar-chart").insert("svg", "#error-caption")
+            function makeBarGraph() {
+                var barData = {
+                    name: "parsed-results",
+                    children: data.parsedAssertions,
+                };
+                var root = d3
+                    .hierarchy(barData)
+                    .sort(function (a, b) {
+                        return b.value - a.value;
+                    })
+                    .eachAfter(function (d) {
+                        d.index = d.parent
+                            ? (d.parent.index = d.parent.index + 1 || 0)
+                            : 0;
+                        if (d.data.value) d.value = d.data.value;
+                        else if (d.height === 1) {
+                            d.value = d.children.reduce(function (prev, child) {
+                                return prev + child.value;
+                            }, 0);
+                        } else if (d.height === 2)
+                            d.value = d.children[0] ? d.children[0].value : 0;
+                        else if (d.height === 3)
+                            d.value = d.children.reduce(function (prev, child) {
+                                return prev + child.value;
+                            }, 0);
+                        else d.value = data.failed;
+                    });
+
+                var margin = { top: 30, right: 0, bottom: 0, left: 0 },
+                    width = 700 - margin.left - margin.right,
+                    barStep = 27,
+                    barPadding = 3 / barStep,
+                    duration = 300;
+
+                var max = 1;
+                root.each(
+                    (d) =>
+                        d.children && (max = Math.max(max, d.children.length))
+                );
+                var height = max * barStep + margin.top + margin.bottom;
+
+                color = d3.scaleOrdinal([true, false], ["#78a8e3", "#aaa"]);
+                x = d3
+                    .scaleLinear()
+                    .domain(0, data.totalFailed)
+                    .range([margin.left, width - margin.right]);
+                yAxis = function (g) {
+                    return g
+                        .attr("class", "y-axis")
+                        .attr("transform", `translate(${margin.left + 0.5},0)`)
+                        .call((g) =>
+                            g
+                                .append("line")
+                                .attr("stroke", "currentColor")
+                                .attr("y1", margin.top)
+                                .attr("y2", height - margin.bottom)
+                        );
+                };
+
+                xAxis = function (g) {
+                    g.attr("class", "x-axis")
+                        .attr("transform", `translate(0,${margin.top})`)
+                        .call(d3.axisTop(x))
+                        .call((g) =>
+                            (g.selection ? g.selection() : g)
+                                .select(".domain")
+                                .remove()
+                        );
+                };
+
+                function stagger() {
+                    let value = 0;
+                    return (d, i) => {
+                        const t = `translate(${x(value) - x(0)},${
+                            barStep * i
+                        })`;
+                        value += d.value;
+                        return t;
+                    };
+                }
+
+                function stack(i) {
+                    let value = 0;
+                    return (d) => {
+                        const t = `translate(${x(value) - x(0)},${
+                            barStep * i
+                        })`;
+                        value += d.value;
+                        return t;
+                    };
+                }
+
+                function up(svg, d) {
+                    if (!d.parent || !svg.selectAll(".exit").empty()) return;
+
+                    // Rebind the current node to the background.
+                    svg.select(".background").datum(d.parent);
+
+                    // Define two sequenced transitions.
+                    const transition1 = svg.transition().duration(duration);
+                    const transition2 = transition1.transition();
+
+                    // Mark any currently-displayed bars as exiting.
+                    const exit = svg.selectAll(".enter").attr("class", "exit");
+
+                    // Update the x-scale domain.
+                    x.domain([0, d3.max(d.parent.children, (d) => d.value)]);
+
+                    // Update the x-axis.
+                    svg.selectAll(".x-axis")
+                        .transition(transition1)
+                        .call(xAxis);
+
+                    // Transition exiting bars to the new x-scale.
+                    exit.selectAll("g")
+                        .transition(transition1)
+                        .attr("transform", stagger());
+
+                    // Transition exiting bars to the parent’s position.
+                    exit.selectAll("g")
+                        .transition(transition2)
+                        .attr("transform", stack(d.index));
+
+                    // Transition exiting rects to the new scale and fade to parent color.
+                    exit.selectAll("rect")
+                        .transition(transition1)
+                        .attr("width", (d) => x(d.value) - x(0))
+                        .attr("fill", color(true));
+
+                    // Transition exiting text to fade out.
+                    // Remove exiting nodes.
+                    exit.transition(transition2)
+                        .attr("fill-opacity", 0)
+                        .remove();
+
+                    // Enter the new bars for the clicked-on data's parent.
+                    const enter = bar(svg, down, d.parent, ".exit").attr(
+                        "fill-opacity",
+                        0
+                    );
+
+                    enter
+                        .selectAll("g")
+                        .attr(
+                            "transform",
+                            (d, i) => `translate(0,${barStep * i})`
+                        );
+
+                    // Transition entering bars to fade in over the full duration.
+                    enter.transition(transition2).attr("fill-opacity", 1);
+
+                    // Color the bars as appropriate.
+                    // Exiting nodes will obscure the parent bar, so hide it.
+                    // Transition entering rects to the new x-scale.
+                    // When the entering parent rect is done, make it visible!
+                    enter
+                        .selectAll("rect")
+                        .attr("fill", (d) => color(!!d.children))
+                        .attr("fill-opacity", (p) => (p === d ? 0 : null))
+                        .transition(transition2)
+                        .attr("width", (d) => x(d.value) - x(0))
+                        .on("end", function (p) {
+                            d3.select(this).attr("fill-opacity", 1);
+                        });
+                }
+
+                function down(svg, d) {
+                    if (!d.children || d3.active(svg.node())) return;
+
+                    // Rebind the current node to the background.
+                    svg.select(".background").datum(d);
+
+                    // Define two sequenced transitions.
+                    const transition1 = svg.transition().duration(duration);
+                    const transition2 = transition1.transition();
+
+                    // Mark any currently-displayed bars as exiting.
+                    const exit = svg.selectAll(".enter").attr("class", "exit");
+
+                    // Entering nodes immediately obscure the clicked-on bar, so hide it.
+                    exit.selectAll("rect").attr("fill-opacity", (p) =>
+                        p === d ? 0 : null
+                    );
+
+                    // Transition exiting bars to fade out.
+                    exit.transition(transition1)
+                        .attr("fill-opacity", 0)
+                        .remove();
+
+                    // Enter the new bars for the clicked-on data.
+                    // Per above, entering bars are immediately visible.
+                    const enter = bar(svg, down, d, ".y-axis").attr(
+                        "fill-opacity",
+                        0
+                    );
+
+                    // Have the text fade-in, even though the bars are visible.
+                    enter.transition(transition1).attr("fill-opacity", 1);
+
+                    // Transition entering bars to their new y-position.
+                    enter
+                        .selectAll("g")
+                        .attr("transform", stack(d.index))
+                        .transition(transition1)
+                        .attr("transform", stagger());
+
+                    // Update the x-scale domain.
+                    x.domain([0, d3.max(d.children, (d) => d.value)]);
+
+                    // Update the x-axis.
+                    svg.selectAll(".x-axis")
+                        .transition(transition2)
+                        .call(xAxis);
+
+                    // Transition entering bars to the new x-scale.
+                    enter
+                        .selectAll("g")
+                        .transition(transition2)
+                        .attr(
+                            "transform",
+                            (d, i) => `translate(0,${barStep * i})`
+                        );
+
+                    // Color the bars as parents; they will fade to children if appropriate.
+                    enter
+                        .selectAll("rect")
+                        .attr("fill", color(true))
+                        .attr("fill-opacity", 1)
+                        .transition(transition2)
+                        .attr("fill", (d) => color(!!d.children))
+                        .attr("width", (d) => x(d.value) - x(0));
+                }
+
+                // Creates a set of bars for the given data node, at the specified index.
+                function bar(svg, down, d, selector) {
+                    const g = svg
+                        .insert("g", selector)
+                        .attr("class", "enter")
+                        .attr(
+                            "transform",
+                            `translate(0,${margin.top + barStep * barPadding})`
+                        )
+                        .attr("text-anchor", "end")
+                        .style("font", "10px sans-serif");
+
+                    const bar = g
+                        .selectAll("g")
+                        .data(d.children)
+                        .join("g")
+                        .attr("cursor", (d) => (!d.children ? null : "pointer"))
+                        .on("click", (d) => down(svg, d));
+
+                    bar.append("text")
+                        .attr("x", margin.left - 6)
+                        .attr("y", (barStep * (1 - barPadding)) / 2)
+                        .attr("dy", ".35em")
+                        .text((d) => d.data.name);
+
+                    bar.append("rect")
+                        .attr("x", x(0))
+                        .attr("width", (d) => x(d.value) - x(0))
+                        .attr("height", barStep * (1 - barPadding));
+
+                    bar.append("text")
+                        .attr("x", (d) => x(d.value) - x(0))
+                        .attr("y", (barStep * (1 - barPadding)) / 2)
+                        .attr("dy", ".35em")
+                        .attr("id", "error-bar-label")
+                        .text((d) => d.value);
+
+                    return g;
+                }
+
+                const svg = d3
+                    .select("#error-bar-chart")
+                    .insert("svg", "#error-caption")
+                    .attr("id", "error-svg")
                     .attr("width", width)
                     .attr("height", height);
 
@@ -369,23 +466,17 @@
                     .attr("width", width)
                     .attr("height", height)
                     .attr("cursor", "pointer")
-                    .on("click", d => up(svg, d));
+                    .on("click", (d) => up(svg, d));
 
-                svg.append("g")
-                    .call(xAxis);
+                svg.append("g").call(xAxis);
 
-                svg.append("g")
-                    .call(yAxis);
+                svg.append("g").call(yAxis);
 
                 down(svg, root);
 
                 svg.node();
-
-             })
-}
+            }
             makeBarGraph();
-
         </script>
-
     </body>
 </html>

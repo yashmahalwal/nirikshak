@@ -24,5 +24,5 @@ afterAll(async () => {
         name: "student",
         dir: "st",
     });
-    await fs.writeJSON(configPath, data);
+    await fs.writeJSON(configPath, data,{spaces: 4});
 });

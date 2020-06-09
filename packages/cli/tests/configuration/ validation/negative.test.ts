@@ -42,6 +42,12 @@ const invalidConfigs = [
         dir: "testDir",
         resources: ["name", { name: "name", dir: "files" }],
     },
+    {
+        app: "app.ts",
+        dir: "testDir",
+        resources: ["name", { name: "name", dir: "files" }],
+        jestArgs: [1, 2, 3, 4, false],
+    },
 ];
 
 describe("Validate invalid config", () => {

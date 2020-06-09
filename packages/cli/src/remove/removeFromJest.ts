@@ -11,5 +11,7 @@ export default async function removeFromJest(name: string): Promise<void> {
         (entry) => entry.displayName !== name
     );
 
-    await fs.writeJSON("jest.config.json", configData);
+    await fs.writeJSON("jest.config.json", configData, {
+        spaces: 4,
+    });
 }

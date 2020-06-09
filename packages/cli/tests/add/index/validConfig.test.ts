@@ -39,10 +39,14 @@ test(`Valid case`, async () => {
 
 afterAll(async () => {
     configData.resources = configData.resources.filter((e) => e !== "faculty");
-    await fs.writeJSON("config.json", configData);
-    await fs.writeJSON("jest.config.json", {
-        projects: [],
-    });
+    await fs.writeJSON("config.json", configData, { spaces: 4 });
+    await fs.writeJSON(
+        "jest.config.json",
+        {
+            projects: [],
+        },
+        { spaces: 4 }
+    );
     await fs.remove(path.resolve(".nirikshak", "faculty"));
     await fs.remove(path.resolve("test", "faculty"));
 });

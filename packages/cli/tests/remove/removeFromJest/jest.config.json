@@ -1,1 +1,10 @@
-{"projects":[{"displayName":"student","testMatch":["<rootDir>/student"]}]}
+{
+    "projects": [
+        {
+            "displayName": "student",
+            "testMatch": [
+                "<rootDir>/student"
+            ]
+        }
+    ]
+}

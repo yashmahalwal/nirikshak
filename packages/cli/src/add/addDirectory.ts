@@ -10,7 +10,7 @@ export default async function addDirectory(
     await fs.ensureDir(resultant);
 
     await fs.copy(
-        path.resolve(__dirname, "../staticFiles/config.json"),
+        path.resolve(__dirname, "../../staticFiles/config.json"),
         path.resolve(resultant, "config.json")
     );
 }

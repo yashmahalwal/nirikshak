@@ -48,7 +48,7 @@ var NirikshakReporter = /** @class */ (function () {
     }
     NirikshakReporter.prototype.onRunComplete = function (contextSet, results) {
         return __awaiter(this, void 0, void 0, function () {
-            var assertions, parsedAssertions, htmlFile, dest;
+            var assertions, parsedAssertions, htmlData, htmlFile, dest;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -57,11 +57,16 @@ var NirikshakReporter = /** @class */ (function () {
                             return t.testResults.forEach(function (res) { return res.status === "failed" && assertions.push(res); });
                         });
                         parsedAssertions = assertions_1.parseAssertions(assertions);
-                        console.log(JSON.stringify(parsedAssertions));
+                        htmlData = {
+                            total: results.numTotalTests,
+                            passed: results.numPassedTests,
+                            failed: results.numFailedTests,
+                            parsedAssertions: parsedAssertions,
+                        };
                         return [4 /*yield*/, fs_extra_1.default.readFile(path_1.default.resolve(__dirname, "../static/index.html"))];
                     case 1:
                         htmlFile = (_a.sent()).toString();
-                        htmlFile = htmlFile.replace("{{testResult}}", "'" + JSON.stringify(parsedAssertions) + "'");
+                        htmlFile = htmlFile.replace("{{testResult}}", JSON.stringify(htmlData));
                         dest = path_1.default.resolve(process.cwd(), "test-report.html");
                         return [4 /*yield*/, fs_extra_1.default.writeFile(path_1.default.resolve(process.cwd(), "test-report.html"), htmlFile)];
                     case 2:
