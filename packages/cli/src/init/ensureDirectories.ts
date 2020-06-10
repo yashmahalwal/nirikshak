@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import { CliArgs } from "../utils/types";
-import { getResourceDirectory } from "../utils/getResourceDir";
 import path from "path";
+import addDirectory from "../add/addDirectory";
 
 export async function ensureDirectories(
     configuration: CliArgs["configuration"]
@@ -17,8 +17,11 @@ export async function ensureDirectories(
     await fs.ensureDir(path.resolve(configuration.dir));
     await Promise.all(
         configuration.resources.map((resource) =>
-            fs.ensureDir(
-                path.resolve(getResourceDirectory(resource, configuration.dir))
+            addDirectory(
+                typeof resource === "string" ? resource : resource.dir,
+                configuration.dir,
+                typeof resource === "string" ? resource : resource.name,
+                configuration.app
             )
         )
     );

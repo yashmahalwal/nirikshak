@@ -31,9 +31,11 @@ async function run({ name = [], configuration }: RunArgs): Promise<void> {
     );
 
     try {
+        signale.info(`Invoking jest.`);
         childProcess.execSync(`npx jest ${commandString.join(" ")}`, {
             stdio: ["inherit", "inherit", "inherit"],
         });
+        signale.success(`Jest completed successfully.`);
     } catch (e) {
         signale.fatal("Jest sent an error");
         throw e;

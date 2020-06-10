@@ -22,7 +22,7 @@ import "@nirikshak/core/lib/jestMatchers";
 import ResourceJSON from "./resource.json";
 import EndpointsJSON from "./endpoints.json";
 import { setup, cleanup, schemaHelpers, traversalHelpers } from "./helpers";
-import app from "./app";
+import app from "{{appPath}}";
 import { Server } from "http";
 import supertest from "supertest";
 import getPort from "get-port";
@@ -32,7 +32,7 @@ if (!isResource(ResourceJSON)) throw new Error(`Invalid resource schema`);
 if (!isDescription(EndpointsJSON))
     throw new Error(`Invalid endpoint description`);
 
-describe(`student`, () => {
+describe("{{resource}}", () => {
     let server: Server | null = null;
     const nodeMap = generateNodes(EndpointsJSON);
     const graph = makeGraph(nodeMap);
@@ -41,7 +41,6 @@ describe(`student`, () => {
         describe(`${i + 1}`, () => {
             for (const path of traversal)
                 describe(path.join("--"), () => {
-                    const joined = path.join("--");
                     const collection: Collection = new Map();
                     let instance: ResourceInstance | null = null;
                     let prevPass = true;
@@ -85,11 +84,6 @@ describe(`student`, () => {
                                     );
                             }
 
-                            if (
-                                joined ===
-                                "PATCH;;0;;/Student/{resource:id};;POSITIVE;GET;;0;;/Student/{resource:id};;POSITIVE"
-                            )
-                                console.log(node);
                             const entry = nodeMap.get(node);
 
                             if (!entry)

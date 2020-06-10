@@ -3,6 +3,7 @@ import process from "process";
 import * as Init from "../../../src/init";
 import { Configuration } from "../../../src/utils/types";
 import fs from "fs-extra";
+import signale from "signale";
 
 const config: Configuration = {
     app: "app.ts",
@@ -12,6 +13,11 @@ const config: Configuration = {
 
 const cwd = process.cwd();
 
+beforeEach(() => {
+    signale.info = jest.fn();
+    signale.error = jest.fn();
+    signale.success = jest.fn();
+});
 describe(`Initialisation module metadata`, () => {
     test(`Command`, () => expect(Init.command).toEqual("init"));
     test(`Description`, () =>
@@ -22,7 +28,6 @@ describe(`Initilisation flow`, () => {
     beforeAll(() => process.chdir(__dirname));
 
     test(`File structure generation`, async () => {
-        process.chdir(__dirname);
         await Init.handler({ configuration: config });
         expect(fs.pathExists("nirikshak")).resolves.toBe(true);
         expect(fs.pathExists(".nirikshak")).resolves.toBe(true);
@@ -30,8 +35,17 @@ describe(`Initilisation flow`, () => {
             fs.pathExists(path.resolve(".nirikshak", "resource"))
         ).resolves.toBe(true);
         expect(
-            fs.pathExists(path.resolve("nirikshak", "resource"))
+            fs.pathExists(
+                path.resolve("nirikshak", "resource/resource.test.ts")
+            )
         ).resolves.toBe(true);
+        expect(
+            fs.pathExists(path.resolve("nirikshak", "resource/config.json"))
+        ).resolves.toBe(true);
+        expect(
+            fs.pathExists(path.resolve("nirikshak", "resource/helpers.ts"))
+        ).resolves.toBe(true);
+
         expect(fs.pathExists("jest.config.json")).resolves.toBe(true);
         expect(fs.pathExists("jest.setup.js")).resolves.toBe(true);
         expect(
@@ -48,6 +62,9 @@ describe(`Initilisation flow`, () => {
         expect(
             (await fs.readFile(path.resolve(".nirikshak", "dir"))).toString()
         ).toEqual("nirikshak");
+
+        expect(signale.info).toHaveBeenCalledWith("Initialising nirikshak");
+        expect(signale.success).toHaveBeenCalledWith("Done");
     });
 
     afterAll(async () => {

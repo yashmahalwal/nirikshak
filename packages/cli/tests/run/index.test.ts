@@ -17,13 +17,17 @@ const validConfig: Configuration = {
 };
 
 beforeAll(() => process.chdir(__dirname));
-
+beforeEach(() => {
+    signale.info = jest.fn();
+    signale.error = jest.fn();
+    signale.success = jest.fn();
+});
 test(`Command`, () => expect(Run.command).toEqual("run [name..]"));
 test(`Description`, () =>
     expect(Run.describe).toEqual("Run tests for specified resources."));
 
 test(`Invalid config`, async () => {
-    expect.hasAssertions();
+    expect.assertions(3);
     try {
         await Run.handler({
             configuration: invalidConfig,
@@ -34,6 +38,8 @@ test(`Invalid config`, async () => {
             `[Error: Resource stu does not exist. Please check project configuration.]`
         );
     }
+    expect(signale.info).not.toHaveBeenCalled();
+    expect(signale.success).not.toHaveBeenCalled();
 });
 
 const validJest: {
@@ -76,7 +82,7 @@ const validJest: {
 
 describe(`Valid config`, () => {
     test(`Invalid resource names`, async () => {
-        expect.hasAssertions();
+        expect.assertions(3);
         try {
             await Run.handler({
                 configuration: validConfig,
@@ -88,6 +94,8 @@ describe(`Valid config`, () => {
                 `[Error: Cannot find resource: true]`
             );
         }
+        expect(signale.info).not.toHaveBeenCalled();
+        expect(signale.success).not.toHaveBeenCalled();
     });
 
     test.each(validJest)(
@@ -98,11 +106,15 @@ describe(`Valid config`, () => {
             expect(childProcess.execSync).toHaveBeenCalledWith(command, {
                 stdio: ["inherit", "inherit", "inherit"],
             });
+            expect(signale.info).toHaveBeenCalledWith(`Invoking jest.`);
+            expect(signale.success).toHaveBeenCalledWith(
+                `Jest completed successfully.`
+            );
         }
     );
 
     test(`Jest throws error`, async () => {
-        expect.assertions(2);
+        expect.assertions(4);
         childProcess.execSync = jest.fn().mockImplementation(() => {
             throw new Error(`Mocking error`);
         });
@@ -116,5 +128,7 @@ describe(`Valid config`, () => {
             expect(e).toBeTruthy();
             expect(signale.fatal).toHaveBeenCalledWith(`Jest sent an error`);
         }
+        expect(signale.info).toHaveBeenCalledWith(`Invoking jest.`);
+        expect(signale.success).not.toHaveBeenCalled();
     });
 });

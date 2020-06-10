@@ -52,6 +52,8 @@ var NirikshakReporter = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        if (!results.numTotalTests)
+                            return [2 /*return*/];
                         assertions = [];
                         results.testResults.forEach(function (t) {
                             return t.testResults.forEach(function (res) { return res.status === "failed" && assertions.push(res); });

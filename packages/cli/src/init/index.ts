@@ -4,17 +4,20 @@ import placeJestConfig from "./jest";
 import placeApp from "./app";
 import prepareTestFiles from "./prepareTests";
 import addResourceEntries from "./addResourceEntries";
+import signale from "signale";
 
 async function init({
     configuration,
 }: {
     configuration: Configuration;
 }): Promise<void> {
+    signale.info("Initialising nirikshak");
     await ensureDirectories(configuration);
     await placeJestConfig(configuration);
     await placeApp(configuration);
     await prepareTestFiles(configuration);
     await addResourceEntries(configuration);
+    signale.success("Done");
 }
 
 export const command = "init";

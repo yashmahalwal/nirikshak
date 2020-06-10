@@ -1,3 +1,10 @@
 {
-    "projects": []
+    "projects": [
+        {
+            "displayName": "student",
+            "testMatch": [
+                "student"
+            ]
+        }
+    ]
 }

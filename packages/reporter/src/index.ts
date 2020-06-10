@@ -9,6 +9,8 @@ class NirikshakReporter implements Pick<Reporter, "onRunComplete"> {
         contextSet: Set<Context>,
         results: AggregatedResult
     ): Promise<void> {
+        if (!results.numTotalTests) return;
+
         const assertions: AssertionResult[] = [];
         results.testResults.forEach((t) =>
             t.testResults.forEach(

@@ -1,6 +1,6 @@
 import process from "process";
 import * as Add from "../../../src/add";
-
+import signale from "signale";
 const config: Record<string, any> = {
     app: "index.ts",
     resources: ["student", "college"],
@@ -8,9 +8,14 @@ const config: Record<string, any> = {
 };
 
 beforeAll(() => process.chdir(__dirname));
+beforeEach(() => {
+    signale.info = jest.fn();
+    signale.error = jest.fn();
+    signale.success = jest.fn();
+});
 
 test(`Invalid directory structure`, async () => {
-    expect.hasAssertions();
+    expect.assertions(3);
     try {
         await Add.handler({
             name: "faculty",
@@ -23,4 +28,6 @@ test(`Invalid directory structure`, async () => {
             `[Error: Resource college does not exist. Please check project configuration.]`
         );
     }
+    expect(signale.info).toHaveBeenCalledWith(`Adding resource faculty`);
+    expect(signale.success).not.toHaveBeenCalled();
 });

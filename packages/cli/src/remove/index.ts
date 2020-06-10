@@ -4,6 +4,7 @@ import removeDirectory from "./removeDirectory";
 import removeEntry from "./removeEntry";
 import removeFromConfig from "./removeFromConfig";
 import removeFromJest from "./removeFromJest";
+import signale from "signale";
 
 interface RemoveArgs extends CliArgs {
     name: string;
@@ -14,6 +15,7 @@ async function remove({
     config,
     configuration,
 }: RemoveArgs): Promise<void> {
+    signale.info(`Removing resource ${name}`);
     await validateDirectoryStructure(configuration);
     if (
         !configuration.resources.some((e) =>
@@ -25,6 +27,7 @@ async function remove({
     await removeEntry(name);
     await removeFromConfig(name, config);
     await removeFromJest(name);
+    signale.success(`Done`);
 }
 
 export const command = "remove <name>";

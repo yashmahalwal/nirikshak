@@ -18,6 +18,19 @@ test(`Ensuring non existing directories`, async () => {
     expect(
         fs.pathExists(path.resolve("testDirectory", "studentDir"))
     ).resolves.toBe(true);
+    expect(
+        fs.pathExists(
+            path.resolve("testDirectory", "studentDir", "config.json")
+        )
+    ).resolves.toBe(true);
+    expect(
+        fs.pathExists(path.resolve("testDirectory", "studentDir", "helpers.ts"))
+    ).resolves.toBe(true);
+    expect(
+        fs.pathExists(
+            path.resolve("testDirectory", "studentDir", "student.test.ts")
+        )
+    ).resolves.toBe(true);
 });
 
 afterAll(async () => {
