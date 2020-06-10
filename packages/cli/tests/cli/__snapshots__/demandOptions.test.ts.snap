@@ -13,8 +13,9 @@ exports[`Demand atleast one option 1`] = `
 [31m✖ [39m [31m[4mfatal[24m    [39m YError: Error parsing configuration: data should have required property 'app' [90m[39m
 [90m    at Object.parseArgs [as _parseArgs] (/home/yash/Desktop/nirikshak/packages/cli/node_modules/yargs/yargs.js:1232:33)[39m
 [90m    at Object.parse (/home/yash/Desktop/nirikshak/packages/cli/node_modules/yargs/yargs.js:599:25)[39m
-[90m    at /home/yash/Desktop/nirikshak/packages/cli/lib/index.js:82:14[39m
-[90m    at Generator.next (<anonymous>)[39m
+[90m    at /home/yash/Desktop/nirikshak/packages/cli/lib/index.js:117:26[39m
+[90m    at step (/home/yash/Desktop/nirikshak/packages/cli/lib/index.js:34:23)[39m
+[90m    at Object.next (/home/yash/Desktop/nirikshak/packages/cli/lib/index.js:15:53)[39m
 [90m    at fulfilled (/home/yash/Desktop/nirikshak/packages/cli/lib/index.js:6:58)[39m
 "
 `;
