@@ -54,4 +54,16 @@ When we have a map of node name (encoded node identifier) and corresponding data
 
 ## Graph traversal
 
-This is the core of our test generation.
+This is the core of our test generation. We have a parameter called steps that is available from `config.json`. We take the graph generated and traverse it in the following way: 
+1. Generate all walks of `steps` vertices from every node
+2. That is available as an array of array of strings. Inner array of strings are the nodes on a walk. Outer array is the collection of those walks.
+3. We iterate over each walk. From every walk, we visit a node one by one. When we visit a node, we perform the appropriate testing actions.
+
+# Before every walk
+
+The first thing we do is create a server instance with supertest. It takes a randomly available port and starts the server on it. We also perform the setup over here. We also pick an instance 
+
+# Traversing each node
+
+We extract the information for the node from the map using the node name. We generate the API input and then hit the API with it. We also update our collection accordingly.
+

@@ -36,6 +36,12 @@ test(`Valid case`, async () => {
         fs.pathExists(path.resolve("test", "faculty", "helpers.ts"))
     ).resolves.toBe(true);
     expect(
+        fs.pathExists(path.resolve("test", "faculty", "resource.json"))
+    ).resolves.toBe(true);
+    expect(
+        fs.pathExists(path.resolve("test", "faculty", "endpoints.json"))
+    ).resolves.toBe(true);
+    expect(
         fs.pathExists(path.resolve("test", "faculty", "faculty.test.ts"))
     ).resolves.toBe(true);
     const newConfig: Configuration = await fs.readJSON("config.json");

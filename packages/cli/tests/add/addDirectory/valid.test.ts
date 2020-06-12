@@ -14,6 +14,12 @@ test(`Adding new directory`, async () => {
     expect(fs.pathExists(path.resolve(resultant, "helpers.ts"))).resolves.toBe(
         true
     );
+    expect(
+        fs.pathExists(path.resolve(resultant, "resource.json"))
+    ).resolves.toBe(true);
+    expect(
+        fs.pathExists(path.resolve(resultant, "endpoints.json"))
+    ).resolves.toBe(true);
     const testPath = path.resolve(resultant, "student.test.ts");
     expect(fs.pathExists(testPath)).resolves.toBe(true);
     const data = (await fs.readFile(testPath)).toString();

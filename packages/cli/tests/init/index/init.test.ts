@@ -43,6 +43,12 @@ describe(`Initilisation flow`, () => {
             fs.pathExists(path.resolve("nirikshak", "resource/config.json"))
         ).resolves.toBe(true);
         expect(
+            fs.pathExists(path.resolve("nirikshak", "resource/resource.json"))
+        ).resolves.toBe(true);
+        expect(
+            fs.pathExists(path.resolve("nirikshak", "resource/endpoints.json"))
+        ).resolves.toBe(true);
+        expect(
             fs.pathExists(path.resolve("nirikshak", "resource/helpers.ts"))
         ).resolves.toBe(true);
 
