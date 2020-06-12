@@ -27,57 +27,60 @@ var __values = (this && this.__values) || function(o) {
     throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.distance = void 0;
+exports.distance = exports.errorDistance = exports.caseDistance = exports.resourceDistance = exports.methodDistance = exports.hamming = void 0;
 // All distance b/w: 0-1
 var HammingMap = new Map();
-function insertToMap(s1, s2, value) {
-    HammingMap.has(s1)
-        ? HammingMap.get(s1).set(s2, value)
-        : HammingMap.set(s1, new Map([[s2, value]]));
-    HammingMap.has(s2)
-        ? HammingMap.get(s2).set(s1, value)
-        : HammingMap.set(s2, new Map([[s1, value]]));
+function insertToMap(map, s1, s2, value) {
+    map.has(s1)
+        ? map.get(s1).set(s2, value)
+        : map.set(s1, new Map([[s2, value]]));
+    map.has(s2)
+        ? map.get(s2).set(s1, value)
+        : map.set(s2, new Map([[s1, value]]));
 }
 function hamming(s1, s2) {
     var _a;
-    var mapEntry = (_a = HammingMap.get(s1)) === null || _a === void 0 ? void 0 : _a.get(s2);
-    if (mapEntry)
-        return mapEntry;
     var max = Math.max(s1.length, s2.length);
     s1 = s1.padEnd(max);
     s2 = s2.padEnd(max);
+    var mapEntry = (_a = HammingMap.get(s1)) === null || _a === void 0 ? void 0 : _a.get(s2);
+    if (mapEntry !== undefined)
+        return mapEntry;
     var res = 0;
     for (var i = 0; i < max; i++)
         if (s1[i] !== s2[i])
             res++;
     var value = res / max;
-    insertToMap(s1, s2, value);
+    insertToMap(HammingMap, s1, s2, value);
     return value;
 }
-function methodDistance(a, b) {
+exports.hamming = hamming;
+function methodDistance(aMethod, aIndex, bMethod, bIndex) {
     var distance = 0;
     // Method has 80% weightage
-    a.method !== b.method && (distance += 0.8);
+    aMethod !== bMethod && (distance += 0.8);
     // Exact entry has 20% weightage
-    a.methodIndex !== b.methodIndex && (distance += 0.2);
+    aIndex !== bIndex && (distance += 0.2);
     return distance;
 }
+exports.methodDistance = methodDistance;
 function resourceDistance(a, b) {
-    return a.resource !== b.resource ? 1 : 0;
+    return a !== b ? 1 : 0;
 }
+exports.resourceDistance = resourceDistance;
 function caseDistance(a, b) {
-    return a.caseValue !== b.caseValue ? 1 : 0;
+    return a !== b ? 1 : 0;
 }
-function errorDistance(_a, _b) {
-    var _c;
-    var errorA = _a.errorMessage;
-    var errorB = _b.errorMessage;
-    var value = (_c = HammingMap.get(errorA)) === null || _c === void 0 ? void 0 : _c.get(errorB);
-    if (value)
-        return value;
+exports.caseDistance = caseDistance;
+var statusErrorMap = new Map();
+function errorDistance(errorA, errorB) {
+    var _a;
     if (!errorA.startsWith("Status mismatch") ||
         !errorB.startsWith("Status mismatch"))
         return hamming(errorA, errorB);
+    var value = (_a = statusErrorMap.get(errorA)) === null || _a === void 0 ? void 0 : _a.get(errorB);
+    if (value !== undefined)
+        return value;
     function statusDistance(statusA, statusB) {
         return statusA !== statusB ? (statusA[0] === statusB[0] ? 0.5 : 1) : 0;
     }
@@ -101,6 +104,8 @@ function errorDistance(_a, _b) {
                     for (var large_1 = (e_2 = void 0, __values(large)), large_1_1 = large_1.next(); !large_1_1.done; large_1_1 = large_1.next()) {
                         var entry2 = large_1_1.value;
                         min = Math.min(min, statusDistance(entry1, entry2));
+                        if (min === 0)
+                            break;
                     }
                 }
                 catch (e_2_1) { e_2 = { error: e_2_1 }; }
@@ -120,27 +125,25 @@ function errorDistance(_a, _b) {
             }
             finally { if (e_1) throw e_1.error; }
         }
-        return small.length
-            ? distance / small.length
-            : small.length === large.length
-                ? 1
-                : 0;
+        return distance / small.length;
     }
     var distance = 0;
-    var _d = extractRecieved(errorA), expectedA = _d.expected, gotA = _d.got;
-    var _e = extractRecieved(errorB), expectedB = _e.expected, gotB = _e.got;
+    var _b = extractRecieved(errorA), expectedA = _b.expected, gotA = _b.got;
+    var _c = extractRecieved(errorB), expectedB = _c.expected, gotB = _c.got;
     distance += statusDistance(gotA, gotB) / 2;
     distance += compareExpected(expectedA, expectedB) / 2;
-    insertToMap(errorA, errorB, distance);
+    insertToMap(statusErrorMap, errorA, errorB, distance);
     return distance;
 }
+exports.errorDistance = errorDistance;
 function distance(a, b) {
     var distance = 0;
-    distance += methodDistance(a, b) * 2;
-    distance += resourceDistance(a, b);
-    distance += hamming(a.url, b.url);
-    distance += caseDistance(a, b) * 2;
-    distance += errorDistance(a, b) * 2;
+    distance +=
+        methodDistance(a.method, a.methodIndex, b.method, b.methodIndex) * 2;
+    distance += resourceDistance(a.resource, b.resource);
+    distance += hamming(a.url.slice(1), b.url.slice(1));
+    distance += caseDistance(a.caseValue, b.caseValue) * 2;
+    distance += errorDistance(a.errorMessage, b.errorMessage) * 2;
     return distance / 8;
 }
 exports.distance = distance;

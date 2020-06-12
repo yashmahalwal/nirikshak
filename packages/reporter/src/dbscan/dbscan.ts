@@ -36,10 +36,8 @@ export default class DBScan<T> {
                 this.visited.set(neighbour, true);
                 const neighboursOfNeighbour = this.regionQuery(neighbour);
                 if (neighboursOfNeighbour.size >= this.minPts)
-                    neighbours = new Set([
-                        ...neighbours,
-                        ...neighboursOfNeighbour,
-                    ]);
+                    for (const entry of neighboursOfNeighbour)
+                        neighbours.add(entry);
             }
 
             if (!this.assigned.get(neighbour))

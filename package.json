@@ -4,7 +4,7 @@
     "description": "Test your REST APIs",
     "main": "index.js",
     "scripts": {
-        "test": "jest",
+        "test": "jest --projects packages/core packages/cli packages/reporter",
         "coverage-badge": "npm run test && jest-coverage-badges output ./badges",
         "test:reporter": "jest --projects packages/reporter",
         "test:cli": "jest --projects packages/cli",

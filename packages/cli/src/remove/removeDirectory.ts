@@ -1,14 +1,17 @@
 import path from "path";
 import fs from "fs-extra";
 import { Configuration } from "../utils/types";
+import { getResourceName } from "../utils/resourceData";
+import { getResourceDirectory } from "../utils/getResourceDir";
 export default async function removeDirectory(
     configuration: Configuration,
     name: string
 ): Promise<void> {
     const entry = configuration.resources.find(
-        (r) => r === name || (typeof r === "object" && r.name === name)
+        (r) => getResourceName(r) === name
     )!;
 
-    const dir = typeof entry === "string" ? entry : entry.dir;
-    return fs.remove(path.resolve(configuration.dir, dir));
+    return fs.remove(
+        path.resolve(getResourceDirectory(entry, configuration.dir))
+    );
 }

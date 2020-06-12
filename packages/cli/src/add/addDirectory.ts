@@ -22,6 +22,16 @@ export default async function addDirectory(
         path.resolve(resultant, "helpers.ts")
     );
 
+    await fs.copy(
+        path.resolve(__dirname, "../../staticFiles/resource.json"),
+        path.resolve(resultant, "resource.json")
+    );
+
+    await fs.copy(
+        path.resolve(__dirname, "../../staticFiles/endpoints.json"),
+        path.resolve(resultant, "endpoints.json")
+    );
+
     const app = path.resolve(appPath);
     const test = (
         await fs.readFile(path.resolve(__dirname, "../../staticFiles/test"))

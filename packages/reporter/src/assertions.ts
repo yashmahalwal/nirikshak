@@ -99,12 +99,9 @@ export function parseAssertion({
         );
 
     const parsedNode = parseNodeName(node);
-    let errorMessage = "";
 
-    if (typeof failureMessages[0] === "string") {
-        const [err] = failureMessages[0].split("\n    at Object");
-        errorMessage = err.replace("Error:", "").trim();
-    }
+    const [err] = failureMessages[0]?.split("\n    at Object") ?? [""];
+    const errorMessage = err.replace("Error:", "").trim();
 
     return {
         ...parsedNode,

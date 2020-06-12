@@ -10,26 +10,6 @@ var __values = (this && this.__values) || function(o) {
     };
     throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spread = (this && this.__spread) || function () {
-    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
-    return ar;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 var DBScan = /** @class */ (function () {
     function DBScan(dataset, epsilon, minPts, distance) {
@@ -68,7 +48,7 @@ var DBScan = /** @class */ (function () {
         this.assigned.set(id, true);
     };
     DBScan.prototype.expandCluster = function (cluster, neighbours) {
-        var e_2, _a;
+        var e_2, _a, e_3, _b;
         try {
             for (var neighbours_1 = __values(neighbours), neighbours_1_1 = neighbours_1.next(); !neighbours_1_1.done; neighbours_1_1 = neighbours_1.next()) {
                 var neighbour = neighbours_1_1.value;
@@ -76,7 +56,19 @@ var DBScan = /** @class */ (function () {
                     this.visited.set(neighbour, true);
                     var neighboursOfNeighbour = this.regionQuery(neighbour);
                     if (neighboursOfNeighbour.size >= this.minPts)
-                        neighbours = new Set(__spread(neighbours, neighboursOfNeighbour));
+                        try {
+                            for (var neighboursOfNeighbour_1 = (e_3 = void 0, __values(neighboursOfNeighbour)), neighboursOfNeighbour_1_1 = neighboursOfNeighbour_1.next(); !neighboursOfNeighbour_1_1.done; neighboursOfNeighbour_1_1 = neighboursOfNeighbour_1.next()) {
+                                var entry = neighboursOfNeighbour_1_1.value;
+                                neighbours.add(entry);
+                            }
+                        }
+                        catch (e_3_1) { e_3 = { error: e_3_1 }; }
+                        finally {
+                            try {
+                                if (neighboursOfNeighbour_1_1 && !neighboursOfNeighbour_1_1.done && (_b = neighboursOfNeighbour_1.return)) _b.call(neighboursOfNeighbour_1);
+                            }
+                            finally { if (e_3) throw e_3.error; }
+                        }
                 }
                 if (!this.assigned.get(neighbour))
                     this.addToCluster(neighbour, cluster);
@@ -91,7 +83,7 @@ var DBScan = /** @class */ (function () {
         }
     };
     DBScan.prototype.run = function () {
-        var e_3, _a;
+        var e_4, _a;
         try {
             for (var _b = __values(this.dataset), _c = _b.next(); !_c.done; _c = _b.next()) {
                 var point = _c.value;
@@ -110,12 +102,12 @@ var DBScan = /** @class */ (function () {
                 }
             }
         }
-        catch (e_3_1) { e_3 = { error: e_3_1 }; }
+        catch (e_4_1) { e_4 = { error: e_4_1 }; }
         finally {
             try {
                 if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
             }
-            finally { if (e_3) throw e_3.error; }
+            finally { if (e_4) throw e_4.error; }
         }
         return { clusters: this.clusters, noise: this.noise };
     };

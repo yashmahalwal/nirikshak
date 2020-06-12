@@ -3,6 +3,7 @@ import { CliArgs, Configuration } from "../utils/types";
 import childProcess from "child_process";
 import validateDirectoryStructure from "../utils/validateDirectoryStructure";
 import { getResourceDirectory } from "../utils/getResourceDir";
+import { getResourceName } from "../utils/resourceData";
 interface RunArgs extends CliArgs {
     name?: string[];
 }
@@ -13,8 +14,8 @@ async function run({ name = [], configuration }: RunArgs): Promise<void> {
     let mapping: Configuration["resources"] = [];
 
     name.forEach((n) => {
-        const val = configuration.resources.find((resource) =>
-            typeof resource === "string" ? resource === n : resource.name === n
+        const val = configuration.resources.find(
+            (resource) => getResourceName(resource) === n
         );
         if (!val) throw new Error(`Cannot find resource: ${n}`);
         mapping.push(val);

@@ -2,6 +2,7 @@ import fs from "fs-extra";
 import { CliArgs } from "../utils/types";
 import path from "path";
 import addDirectory from "../add/addDirectory";
+import { getResourceDirEntry, getResourceName } from "../utils/resourceData";
 
 export async function ensureDirectories(
     configuration: CliArgs["configuration"]
@@ -18,9 +19,9 @@ export async function ensureDirectories(
     await Promise.all(
         configuration.resources.map((resource) =>
             addDirectory(
-                typeof resource === "string" ? resource : resource.dir,
+                getResourceDirEntry(resource),
                 configuration.dir,
-                typeof resource === "string" ? resource : resource.name,
+                getResourceName(resource),
                 configuration.app
             )
         )

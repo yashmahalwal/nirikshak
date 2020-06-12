@@ -45,23 +45,21 @@ exports.parseAssertions = exports.insertIntoAssertion = exports.parseAssertion =
 var lodash_1 = __importDefault(require("lodash"));
 var core_1 = require("@nirikshak/core");
 function parseAssertion(_a) {
+    var _b, _c;
     var ancestorTitles = _a.ancestorTitles, title = _a.title, failureMessages = _a.failureMessages;
     if (ancestorTitles.length !== 3)
         throw new Error("Invalid test result format: More than 3 ancestor titles. This might happen if a non-nirikshak generated test case is run. Please skip those tests or disable this reporter");
-    var _b = __read(ancestorTitles, 2), resource = _b[0], index = _b[1];
+    var _d = __read(ancestorTitles, 2), resource = _d[0], index = _d[1];
     if (Number.isNaN(parseFloat(index)))
         throw new Error("Invalid test result format: Method entry index is not a number. This might happen if a non-nirikshak generated test case is run. Please skip those tests or disable this reporter");
-    var _c = __read(title.split("::"), 2), indexString = _c[0], node = _c[1];
+    var _e = __read(title.split("::"), 2), indexString = _e[0], node = _e[1];
     if (Number.isNaN(parseInt(indexString)))
         throw new Error("Invalid test result format: Entry index in path is not a number. This might happen if a non-nirikshak generated test case is run. Please skip those tests or disable this reporter");
     if (!core_1.isNodeName(node))
         throw new Error("Invalid test result format: Title does not contain a valid graph node. This might happen if a non-nirikshak generated test case is run. Please skip those tests or disable this reporter");
     var parsedNode = core_1.parseNodeName(node);
-    var errorMessage = "";
-    if (typeof failureMessages[0] === "string") {
-        var _d = __read(failureMessages[0].split("\n    at Object"), 1), err = _d[0];
-        errorMessage = err.replace("Error:", "").trim();
-    }
+    var _f = __read((_c = (_b = failureMessages[0]) === null || _b === void 0 ? void 0 : _b.split("\n    at Object")) !== null && _c !== void 0 ? _c : [""], 1), err = _f[0];
+    var errorMessage = err.replace("Error:", "").trim();
     return __assign(__assign({}, parsedNode), { pathIndex: parseInt(indexString), iteration: parseInt(index), resource: resource,
         errorMessage: errorMessage });
 }

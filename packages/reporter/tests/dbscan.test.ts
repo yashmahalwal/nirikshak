@@ -5,6 +5,7 @@ test("DB Scan", () => {
         [1, 1],
         [0, 1],
         [1, 0],
+        [0, 5.9],
         [10, 10],
         [10, 13],
         [13, 13],
@@ -16,7 +17,7 @@ test("DB Scan", () => {
     const dbscan = new DBScan(
         dataset,
         5,
-        2,
+        3,
         (a: [number, number], b: [number, number]) => {
             return Math.sqrt(
                 (a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1])
@@ -25,11 +26,12 @@ test("DB Scan", () => {
     );
 
     const { clusters, noise } = dbscan.run();
-    expect(noise.length).toBe(1);
-    expect(noise[0]).toBe(dataset[8]);
-    expect(clusters.length).toBe(3);
-    expect(clusters.some((e) => e.includes(dataset[8]))).toBe(false);
-    expect(clusters[0]).toEqual([dataset[0], dataset[1], dataset[2]]);
-    expect(clusters[1]).toEqual([dataset[3], dataset[4], dataset[5]]);
-    expect(clusters[2]).toEqual([dataset[6], dataset[7], dataset[9]]);
+    expect(clusters).toEqual(
+        [
+            [0, 1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 10],
+        ].map((entry) => entry.map((index) => dataset[index]))
+    );
+    expect(noise).toEqual([[89, 89]]);
 });

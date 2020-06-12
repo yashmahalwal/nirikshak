@@ -2,7 +2,6 @@ import { Configuration } from "../utils/types";
 import { ensureDirectories } from "./ensureDirectories";
 import placeJestConfig from "./jest";
 import placeApp from "./app";
-import prepareTestFiles from "./prepareTests";
 import addResourceEntries from "./addResourceEntries";
 import signale from "signale";
 
@@ -15,7 +14,6 @@ async function init({
     await ensureDirectories(configuration);
     await placeJestConfig(configuration);
     await placeApp(configuration);
-    await prepareTestFiles(configuration);
     await addResourceEntries(configuration);
     signale.success("Done");
 }

@@ -5,6 +5,7 @@ import removeEntry from "./removeEntry";
 import removeFromConfig from "./removeFromConfig";
 import removeFromJest from "./removeFromJest";
 import signale from "signale";
+import { getResourceName } from "../utils/resourceData";
 
 interface RemoveArgs extends CliArgs {
     name: string;
@@ -17,11 +18,7 @@ async function remove({
 }: RemoveArgs): Promise<void> {
     signale.info(`Removing resource ${name}`);
     await validateDirectoryStructure(configuration);
-    if (
-        !configuration.resources.some((e) =>
-            typeof e === "string" ? e === name : e.name === name
-        )
-    )
+    if (!configuration.resources.some((e) => getResourceName(e) === name))
         throw new Error(`Cannot remove non existing resource: ${name}`);
     await removeDirectory(configuration, name);
     await removeEntry(name);

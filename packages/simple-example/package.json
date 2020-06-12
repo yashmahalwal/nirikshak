@@ -19,7 +19,7 @@
     },
     "scripts": {
         "start": "ts-node src/index.ts",
-        "test": "jest  --outputFile=nirikshak.jest.log.json --color=false --noStackTrace"
+        "test": "jest --json --outputFile=nirikshak.jest.log.json --color=false --noStackTrace"
     },
     "bugs": {
         "url": "https://github.com/yashmahalwal/nirikshak/issues"
