@@ -64,14 +64,14 @@ describe(`student`, () => {
                             const parsedNode = parseNodeName(node);
                             if (!instance) {
                                 if (
-                                    (parsedNode.method === "GET" &&
-                                        parsedNode.caseValue === "NEGATIVE") ||
-                                    (parsedNode.method === "DELETE" &&
-                                        parsedNode.caseValue === "NEGATIVE") ||
-                                    (parsedNode.method === "PATCH" &&
-                                        parsedNode.caseValue === "NEGATIVE") ||
-                                    (parsedNode.method === "POST" &&
-                                        parsedNode.caseValue === "POSITIVE") ||
+                                        (parsedNode.method === "GET" &&
+                                            parsedNode.caseValue === "NEGATIVE") ||
+                                        (parsedNode.method === "DELETE" &&
+                                            parsedNode.caseValue === "NEGATIVE") ||
+                                        (parsedNode.method === "PATCH" &&
+                                            parsedNode.caseValue === "NEGATIVE") ||
+                                        (parsedNode.method === "POST" &&
+                                            parsedNode.caseValue === "POSITIVE") ||
                                     (parsedNode.method === "PUT" &&
                                         faker.random.boolean())
                                 )

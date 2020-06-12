@@ -48,22 +48,59 @@ We break your API description into distinct points which act as nodes of our req
 
 To identify a node, we need the method, method index, the case. If we know all this, we can identify a node from your description. We encode this data in a string that is used as an identifier for the node. We use this identifier to index a hash map that stores that data described above.
 
-## Graph generation
+### Graph generation
 
 When we have a map of node name (encoded node identifier) and corresponding data, we move on to making a graph. We use node names to label the nodes. We then go on to add egdes to the graph. Edges are hardcoded into our graph generation algorithm.
 
-## Graph traversal
+### Graph traversal
 
-This is the core of our test generation. We have a parameter called steps that is available from `config.json`. We take the graph generated and traverse it in the following way: 
+This is the core of our test generation. We have a parameter called steps that is available from `config.json`. We take the graph generated and traverse it in the following way:
+
 1. Generate all walks of `steps` vertices from every node
 2. That is available as an array of array of strings. Inner array of strings are the nodes on a walk. Outer array is the collection of those walks.
 3. We iterate over each walk. From every walk, we visit a node one by one. When we visit a node, we perform the appropriate testing actions.
 
-# Before every walk
+### Before every walk
 
-The first thing we do is create a server instance with supertest. It takes a randomly available port and starts the server on it. We also perform the setup over here. We also pick an instance 
+The first thing we do is create a server instance with supertest. It takes a randomly available port and starts the server on it. We also perform the setup over here. We also pick an instance that we will use throughout the walk.
 
-# Traversing each node
+### Traversing each node
 
-We extract the information for the node from the map using the node name. We generate the API input and then hit the API with it. We also update our collection accordingly.
+We extract the information for the node from the map using the node name. We generate the API input and then hit the API with it. We also update our collection accordingly. We use the updated resource instance for the next node.
 
+### After every walk
+
+We close the server and perform the cleanup actions.
+
+## Trivial Details
+
+This section covers implementation details necessary to work with the above steps. We cover how we select the resource instance for a walk and how we update our collection.
+
+### Select the instance for the walk
+
+Selecting the instance is based on the first node of the walk. We pick the appropriate instance and then stick with it throughout the walk. For the following nodes, we always generate a new resource instance:
+
+1. `Get Negative`
+2. `Delete Negative`
+3. `Post Positive`
+4. `Patch Negative`
+
+For Put methods, we randomly choose between existing and new resource instance. For rest of the cases, we select an existing resource instance from the collection.
+
+### Mutating the collection
+
+We mutate the resource based on the semantics of the request. The following mutations are performed:
+
+1. `Delete Positive`: We delete the given resource instance from our collection
+2. `Post Positive`: We insert the given resource instance into the collection
+3. `Put Positive`: We overwrite the given resource instance. If it doesn't exist, it is inserted into the collection.
+
+We do not mutate the collection anywhere else. Of course there is the matter of `Patch Positive` case. But we treat it separately. We will discuss that later in this discussion.
+
+## Performing your own mutations and validations
+
+Sometimes you want control over the way we mutate the collection. In that case, you can add your steps to a custom body validator in the `endpoints.json` and the `helpers.ts` files. They take place after our mutations. We provide you access to the resource instance and the collection and you can fill in the rest. We also rely on the fact that you **mutate** the resource instance and/or the collection whenever you make the changes.
+
+## Performing patches
+
+Patch request are intricate. So we do nothing here. You need to provide mutation manually via custom body validators.
