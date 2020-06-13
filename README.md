@@ -58,6 +58,7 @@ Nirikshak performs unit functional tests on them. At a glance, this seems very r
 2. [Possible outcomes to a request](docs/Cases.md)
 3. [Request relationship graph](docs/Graph.md)
 4. [Flow of testing](docs/TestFlow.md)
+5. [Data analysis](docs/DataAnalysis.md)
 
 ## API Reference
 

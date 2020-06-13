@@ -60,7 +60,7 @@ This is the core of our test generation. We have a parameter called steps that i
 2. That is available as an array of array of strings. Inner array of strings are the nodes on a walk. Outer array is the collection of those walks.
 3. We iterate over each walk. From every walk, we visit a node one by one. When we visit a node, we perform the appropriate testing actions.
 
-**Note: Your config affects the number of tests generated. Test cases grow exponentially with number of steps and linearly with iterations.**
+**Note: Your configuration affects the number of tests generated. Test cases grow exponentially with number of steps and linearly with iterations. We recommend an upper bound of 3 steps and 5 iterations**
 
 ### Before every walk
 

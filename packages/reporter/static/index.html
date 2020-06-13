@@ -107,7 +107,8 @@
             <div id="plot"></div>
             <p id="plot-caption">
                 The plot might seem to have only a few points because a lot of
-                points in the cluster have same <em>x</em> and <em>y</em> values
+                points in the cluster have same <em>x</em> and
+                <em>y</em> values.<br />Total points: <span id="points">0</span>
             </p>
         </section>
         <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -671,6 +672,8 @@
                         x: xOption.getValue(point),
                         y: yOption.getValue(point),
                     }));
+
+                    d3.select("#plot-caption #points").html(plotData.length);
 
                     svg.append("g")
                         .selectAll("dot")
