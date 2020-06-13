@@ -81,4 +81,4 @@ export interface ParsedAssertion extends ParsedNode {
 }
 export declare function parseAssertion({ ancestorTitles, title, failureMessages, }: AssertionResult): ParsedAssertion;
 export declare function insertIntoAssertion(o: ParsedAssertions, assertion: ParsedAssertion): void;
-export declare function parseAssertions(assertions: AssertionResult[]): ParsedAssertions;
+export declare function parseAssertions(parsedAssertionArray: ParsedAssertion[]): ParsedAssertions;

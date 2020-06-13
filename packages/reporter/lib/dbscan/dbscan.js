@@ -1,18 +1,7 @@
 "use strict";
-var __values = (this && this.__values) || function(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-    if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var DBScan = /** @class */ (function () {
-    function DBScan(dataset, epsilon, minPts, distance) {
+class DBScan {
+    constructor(dataset, epsilon, minPts, distance) {
         this.dataset = dataset;
         this.epsilon = epsilon;
         this.minPts = minPts;
@@ -23,95 +12,49 @@ var DBScan = /** @class */ (function () {
         this.clusters = [];
         return;
     }
-    DBScan.prototype.regionQuery = function (id) {
-        var e_1, _a;
-        var neighbours = new Set();
-        try {
-            for (var _b = __values(this.dataset), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var point = _c.value;
-                var distance = this.distance(point, id);
-                if (distance < this.epsilon)
-                    neighbours.add(point);
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_1) throw e_1.error; }
+    regionQuery(id) {
+        const neighbours = new Set();
+        for (const point of this.dataset) {
+            const distance = this.distance(point, id);
+            if (distance < this.epsilon)
+                neighbours.add(point);
         }
         return neighbours;
-    };
-    DBScan.prototype.addToCluster = function (id, cluster) {
+    }
+    addToCluster(id, cluster) {
         cluster.push(id);
         this.assigned.set(id, true);
-    };
-    DBScan.prototype.expandCluster = function (cluster, neighbours) {
-        var e_2, _a, e_3, _b;
-        try {
-            for (var neighbours_1 = __values(neighbours), neighbours_1_1 = neighbours_1.next(); !neighbours_1_1.done; neighbours_1_1 = neighbours_1.next()) {
-                var neighbour = neighbours_1_1.value;
-                if (!this.visited.get(neighbour)) {
-                    this.visited.set(neighbour, true);
-                    var neighboursOfNeighbour = this.regionQuery(neighbour);
-                    if (neighboursOfNeighbour.size >= this.minPts)
-                        try {
-                            for (var neighboursOfNeighbour_1 = (e_3 = void 0, __values(neighboursOfNeighbour)), neighboursOfNeighbour_1_1 = neighboursOfNeighbour_1.next(); !neighboursOfNeighbour_1_1.done; neighboursOfNeighbour_1_1 = neighboursOfNeighbour_1.next()) {
-                                var entry = neighboursOfNeighbour_1_1.value;
-                                neighbours.add(entry);
-                            }
-                        }
-                        catch (e_3_1) { e_3 = { error: e_3_1 }; }
-                        finally {
-                            try {
-                                if (neighboursOfNeighbour_1_1 && !neighboursOfNeighbour_1_1.done && (_b = neighboursOfNeighbour_1.return)) _b.call(neighboursOfNeighbour_1);
-                            }
-                            finally { if (e_3) throw e_3.error; }
-                        }
-                }
-                if (!this.assigned.get(neighbour))
-                    this.addToCluster(neighbour, cluster);
+    }
+    expandCluster(cluster, neighbours) {
+        for (const neighbour of neighbours) {
+            if (!this.visited.get(neighbour)) {
+                this.visited.set(neighbour, true);
+                const neighboursOfNeighbour = this.regionQuery(neighbour);
+                if (neighboursOfNeighbour.size >= this.minPts)
+                    for (const entry of neighboursOfNeighbour)
+                        neighbours.add(entry);
             }
+            if (!this.assigned.get(neighbour))
+                this.addToCluster(neighbour, cluster);
         }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
-        finally {
-            try {
-                if (neighbours_1_1 && !neighbours_1_1.done && (_a = neighbours_1.return)) _a.call(neighbours_1);
-            }
-            finally { if (e_2) throw e_2.error; }
-        }
-    };
-    DBScan.prototype.run = function () {
-        var e_4, _a;
-        try {
-            for (var _b = __values(this.dataset), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var point = _c.value;
-                if (!this.visited.get(point)) {
-                    // Visit the point if not visited
-                    this.visited.set(point, true);
-                    var neighbours = this.regionQuery(point);
-                    if (neighbours.size < this.minPts)
-                        this.noise.push(point);
-                    else {
-                        var cluster = [];
-                        this.clusters.push(cluster);
-                        this.addToCluster(point, cluster);
-                        this.expandCluster(cluster, neighbours);
-                    }
+    }
+    run() {
+        for (const point of this.dataset)
+            if (!this.visited.get(point)) {
+                // Visit the point if not visited
+                this.visited.set(point, true);
+                const neighbours = this.regionQuery(point);
+                if (neighbours.size < this.minPts)
+                    this.noise.push(point);
+                else {
+                    const cluster = [];
+                    this.clusters.push(cluster);
+                    this.addToCluster(point, cluster);
+                    this.expandCluster(cluster, neighbours);
                 }
             }
-        }
-        catch (e_4_1) { e_4 = { error: e_4_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_4) throw e_4.error; }
-        }
         return { clusters: this.clusters, noise: this.noise };
-    };
-    return DBScan;
-}());
+    }
+}
 exports.default = DBScan;
 //# sourceMappingURL=dbscan.js.map

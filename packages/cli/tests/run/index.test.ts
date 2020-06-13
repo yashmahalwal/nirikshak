@@ -106,7 +106,9 @@ describe(`Valid config`, () => {
             expect(childProcess.execSync).toHaveBeenCalledWith(command, {
                 stdio: ["inherit", "inherit", "inherit"],
             });
-            expect(signale.info).toHaveBeenCalledWith(`Invoking jest.`);
+            expect(signale.info).toHaveBeenCalledWith(
+                `Invoking jest. This might take a while if there are a large number of tests.`
+            );
             expect(signale.success).toHaveBeenCalledWith(
                 `Jest completed successfully.`
             );
@@ -128,7 +130,9 @@ describe(`Valid config`, () => {
             expect(e).toBeTruthy();
             expect(signale.fatal).toHaveBeenCalledWith(`Jest sent an error`);
         }
-        expect(signale.info).toHaveBeenCalledWith(`Invoking jest.`);
+        expect(signale.info).toHaveBeenCalledWith(
+            `Invoking jest. This might take a while if there are a large number of tests.`
+        );
         expect(signale.success).not.toHaveBeenCalled();
     });
 });

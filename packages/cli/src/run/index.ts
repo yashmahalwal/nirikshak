@@ -32,7 +32,9 @@ async function run({ name = [], configuration }: RunArgs): Promise<void> {
     );
 
     try {
-        signale.info(`Invoking jest.`);
+        signale.info(
+            `Invoking jest. This might take a while if there are a large number of tests.`
+        );
         childProcess.execSync(`npx jest ${commandString.join(" ")}`, {
             stdio: ["inherit", "inherit", "inherit"],
         });

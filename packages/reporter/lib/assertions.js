@@ -1,71 +1,32 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __values = (this && this.__values) || function(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-    if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseAssertions = exports.insertIntoAssertion = exports.parseAssertion = void 0;
-var lodash_1 = __importDefault(require("lodash"));
-var core_1 = require("@nirikshak/core");
-function parseAssertion(_a) {
-    var _b, _c;
-    var ancestorTitles = _a.ancestorTitles, title = _a.title, failureMessages = _a.failureMessages;
+const lodash_1 = __importDefault(require("lodash"));
+const core_1 = require("@nirikshak/core");
+function parseAssertion({ ancestorTitles, title, failureMessages, }) {
+    var _a, _b;
     if (ancestorTitles.length !== 3)
-        throw new Error("Invalid test result format: More than 3 ancestor titles. This might happen if a non-nirikshak generated test case is run. Please skip those tests or disable this reporter");
-    var _d = __read(ancestorTitles, 2), resource = _d[0], index = _d[1];
+        throw new Error(`Invalid test result format: More than 3 ancestor titles. This might happen if a non-nirikshak generated test case is run. Please skip those tests or disable this reporter`);
+    const [resource, index] = ancestorTitles;
     if (Number.isNaN(parseFloat(index)))
-        throw new Error("Invalid test result format: Method entry index is not a number. This might happen if a non-nirikshak generated test case is run. Please skip those tests or disable this reporter");
-    var _e = __read(title.split("::"), 2), indexString = _e[0], node = _e[1];
+        throw new Error(`Invalid test result format: Method entry index is not a number. This might happen if a non-nirikshak generated test case is run. Please skip those tests or disable this reporter`);
+    const [indexString, node] = title.split("::");
     if (Number.isNaN(parseInt(indexString)))
-        throw new Error("Invalid test result format: Entry index in path is not a number. This might happen if a non-nirikshak generated test case is run. Please skip those tests or disable this reporter");
+        throw new Error(`Invalid test result format: Entry index in path is not a number. This might happen if a non-nirikshak generated test case is run. Please skip those tests or disable this reporter`);
     if (!core_1.isNodeName(node))
-        throw new Error("Invalid test result format: Title does not contain a valid graph node. This might happen if a non-nirikshak generated test case is run. Please skip those tests or disable this reporter");
-    var parsedNode = core_1.parseNodeName(node);
-    var _f = __read((_c = (_b = failureMessages[0]) === null || _b === void 0 ? void 0 : _b.split("\n    at Object")) !== null && _c !== void 0 ? _c : [""], 1), err = _f[0];
-    var errorMessage = err.replace("Error:", "").trim();
-    return __assign(__assign({}, parsedNode), { pathIndex: parseInt(indexString), iteration: parseInt(index), resource: resource,
-        errorMessage: errorMessage });
+        throw new Error(`Invalid test result format: Title does not contain a valid graph node. This might happen if a non-nirikshak generated test case is run. Please skip those tests or disable this reporter`);
+    const parsedNode = core_1.parseNodeName(node);
+    const [err] = (_b = (_a = failureMessages[0]) === null || _a === void 0 ? void 0 : _a.split("\n    at Object")) !== null && _b !== void 0 ? _b : [""];
+    const errorMessage = err.replace("Error:", "").trim();
+    return Object.assign(Object.assign({}, parsedNode), { pathIndex: parseInt(indexString), iteration: parseInt(index), resource,
+        errorMessage });
 }
 exports.parseAssertion = parseAssertion;
 function insertIntoAssertion(o, assertion) {
-    var entries = [
+    const entries = [
         { title: "resource", value: lodash_1.default.get(assertion, "resource") },
         { title: "iteration", value: lodash_1.default.get(assertion, "iteration") + " " },
         { title: "case", value: lodash_1.default.get(assertion, "caseValue") },
@@ -78,10 +39,9 @@ function insertIntoAssertion(o, assertion) {
                 lodash_1.default.get(assertion, "methodIndex"),
         },
     ];
-    var _loop_1 = function (entryIndex) {
-        var e_1, _a;
-        var assertionEntry = o[entryIndex];
-        var childrenIndex = assertionEntry.children.findIndex(function (c) { return c.name === entries[entryIndex].value; });
+    for (let entryIndex = 0; entryIndex < entries.length; entryIndex++) {
+        const assertionEntry = o[entryIndex];
+        let childrenIndex = assertionEntry.children.findIndex((c) => c.name === entries[entryIndex].value);
         if (childrenIndex === -1) {
             childrenIndex = assertionEntry.children.length;
             assertionEntry.children.push({
@@ -89,10 +49,11 @@ function insertIntoAssertion(o, assertion) {
                 children: [],
             });
         }
-        var _loop_2 = function (target) {
+        // assertionEntry.children[childrenIndex]
+        for (const target of entries) {
             if (target.title === entries[entryIndex].title)
-                return "continue";
-            var innerIndex = assertionEntry.children[childrenIndex].children.findIndex(function (x) { return x.name === target.title; });
+                continue;
+            let innerIndex = assertionEntry.children[childrenIndex].children.findIndex((x) => x.name === target.title);
             if (innerIndex === -1) {
                 innerIndex =
                     assertionEntry.children[childrenIndex].children.length;
@@ -101,7 +62,7 @@ function insertIntoAssertion(o, assertion) {
                     children: [],
                 });
             }
-            var finalIndex = assertionEntry.children[childrenIndex].children[innerIndex].children.findIndex(function (y) { return y.name === target.value; });
+            let finalIndex = assertionEntry.children[childrenIndex].children[innerIndex].children.findIndex((y) => y.name === target.value);
             if (finalIndex === -1) {
                 finalIndex =
                     assertionEntry.children[childrenIndex].children[innerIndex]
@@ -113,31 +74,12 @@ function insertIntoAssertion(o, assertion) {
             }
             assertionEntry.children[childrenIndex].children[innerIndex]
                 .children[finalIndex].value++;
-        };
-        try {
-            // assertionEntry.children[childrenIndex]
-            for (var entries_1 = (e_1 = void 0, __values(entries)), entries_1_1 = entries_1.next(); !entries_1_1.done; entries_1_1 = entries_1.next()) {
-                var target = entries_1_1.value;
-                _loop_2(target);
-            }
         }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (entries_1_1 && !entries_1_1.done && (_a = entries_1.return)) _a.call(entries_1);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-    };
-    for (var entryIndex = 0; entryIndex < entries.length; entryIndex++) {
-        _loop_1(entryIndex);
     }
 }
 exports.insertIntoAssertion = insertIntoAssertion;
-function parseAssertions(assertions) {
-    var e_2, _a;
-    var parsedAssertionArray = assertions.map(function (a) { return parseAssertion(a); });
-    var o = [
+function parseAssertions(parsedAssertionArray) {
+    const o = [
         { name: "resource", children: [] },
         { name: "iteration", children: [] },
         { name: "case", children: [] },
@@ -145,19 +87,8 @@ function parseAssertions(assertions) {
         { name: "error-message", children: [] },
         { name: "method", children: [] },
     ];
-    try {
-        for (var parsedAssertionArray_1 = __values(parsedAssertionArray), parsedAssertionArray_1_1 = parsedAssertionArray_1.next(); !parsedAssertionArray_1_1.done; parsedAssertionArray_1_1 = parsedAssertionArray_1.next()) {
-            var assertion = parsedAssertionArray_1_1.value;
-            insertIntoAssertion(o, assertion);
-        }
-    }
-    catch (e_2_1) { e_2 = { error: e_2_1 }; }
-    finally {
-        try {
-            if (parsedAssertionArray_1_1 && !parsedAssertionArray_1_1.done && (_a = parsedAssertionArray_1.return)) _a.call(parsedAssertionArray_1);
-        }
-        finally { if (e_2) throw e_2.error; }
-    }
+    for (const assertion of parsedAssertionArray)
+        insertIntoAssertion(o, assertion);
     return o;
 }
 exports.parseAssertions = parseAssertions;

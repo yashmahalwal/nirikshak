@@ -180,10 +180,8 @@ export function insertIntoAssertion(
 }
 
 export function parseAssertions(
-    assertions: AssertionResult[]
+    parsedAssertionArray: ParsedAssertion[]
 ): ParsedAssertions {
-    const parsedAssertionArray = assertions.map((a) => parseAssertion(a));
-
     const o: ParsedAssertions = [
         { name: "resource", children: [] },
         { name: "iteration", children: [] },

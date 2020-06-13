@@ -6,23 +6,32 @@
         <title>Document</title>
     </head>
     <style>
+        html {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+                sans-serif;
+        }
         html,
         body {
             margin: 0;
             padding: 0;
         }
+        body > section {
+            margin-top: 50px;
+        }
+        body > section:last-of-type {
+            margin-bottom: 70px;
+        }
         #donut-svg,
-        #error-svg {
+        #error-svg,
+        #plot-svg {
             overflow: visible;
         }
-        #main-title,
-        #bar-title {
+        .center {
             text-align: center;
         }
-        html {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-                sans-serif;
+        .hidden {
+            display: none;
         }
         #summary-donut,
         #error-bar-chart {
@@ -32,7 +41,8 @@
             justify-content: center;
         }
         #donut-label,
-        #error-caption {
+        #error-caption,
+        #plot-caption {
             font-weight: bolder;
             text-align: center;
         }
@@ -50,20 +60,56 @@
             fill: none;
             stroke: #000;
         }
+        #scatterplot #plot {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #scatter-options {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        #scatter-options label {
+            margin-right: 10px;
+        }
     </style>
     <body>
-        <h1 id="main-title">Nirikshak test summary</h1>
-        <div id="summary-donut">
-            <p id="donut-label"></p>
-        </div>
-        <h1 id="bar-title">Error distribution with attributes</h1>
-        <div id="error-bar-chart">
-            <p id="error-caption">
-                Click on a blue bar to expand. Click on the background to go
-                back.
+        <h1 id="main-title" class="center">Nirikshak test report</h1>
+        <p class="center">
+            This report summarises the test results from jest.<br />We perform
+            grouping on your data if there are failed tests.<br />We also
+            perform clustering if there are more than 100 failed tests.
+        </p>
+        <section id="pie-chart">
+            <h2 id="pie-title" class="center">
+                Test case distribution
+            </h2>
+            <div id="summary-donut">
+                <p id="donut-label"></p>
+            </div>
+        </section>
+        <section id="bar-graph">
+            <h2 id="bar-title" class="center">
+                Error distribution with attributes
+            </h2>
+            <div id="error-bar-chart">
+                <p id="error-caption">
+                    Click on a blue bar to expand. Click on the background to go
+                    back.
+                </p>
+            </div>
+        </section>
+        <section id="scatterplot">
+            <h2 id="scattertitle" class="center">Test result clusters</h2>
+            <article id="scatter-options"></article>
+            <div id="plot"></div>
+            <p id="plot-caption">
+                The plot might seem to have only a few points because a lot of
+                points in the cluster have same <em>x</em> and <em>y</em> values
             </p>
-        </div>
-        <br />
+        </section>
         <script src="https://d3js.org/d3.v5.min.js"></script>
         <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
         <script>
@@ -178,6 +224,11 @@
         <!-- Heirarchial bar graph -->
         <script>
             function makeBarGraph() {
+                if (!data.parsedAssertions || !data.parsedAssertions.length) {
+                    d3.select("#bar-graph").classed("hidden", true);
+                    return;
+                }
+
                 var barData = {
                     name: "parsed-results",
                     children: data.parsedAssertions,
@@ -477,6 +528,171 @@
                 svg.node();
             }
             makeBarGraph();
+        </script>
+        <!-- Scatter plot -->
+        <script>
+            (function () {
+                if (!data.clustering) {
+                    d3.select("#scatterplot").classed("hidden", true);
+                    return;
+                }
+
+                var width = 500;
+                var height = 500;
+                var margin = { top: 50, right: 50, bottom: 50, left: 50 };
+
+                var options = [
+                    {
+                        label: "method",
+                        getValue: (assertion) =>
+                            assertion.method + "-" + assertion.methodIndex,
+                    },
+                    {
+                        label: "case",
+                        getValue: (assertion) => assertion.caseValue,
+                    },
+                    {
+                        label: "resource",
+                        getValue: (assertion) => assertion.resource,
+                    },
+                    {
+                        label: "error message",
+                        getValue: (assertion) => assertion.errorMessage,
+                    },
+                    { label: "url", getValue: (assertion) => assertion.url },
+                ];
+
+                var xOption = options[0];
+                var yOption = options[0];
+                var cluster = data.clustering.clusters[0];
+                function prepareOptions() {
+                    var parent = d3.select("#scatter-options");
+                    var xAxis = parent.append("div");
+                    var yAxis = parent.append("div");
+
+                    function makeAxisOptions(axis, name) {
+                        axis.append("label").attr("for", name).html(name);
+                        var select = axis
+                            .append("select")
+                            .attr("id", name)
+                            .on("change", () => {
+                                if (name === "x-axis") {
+                                    xOption = options[d3.event.target.value];
+                                    drawCluster();
+                                } else if (name === "y-axis") {
+                                    yOption = options[d3.event.target.value];
+                                    drawCluster();
+                                }
+                            });
+
+                        options.forEach(function (option, index) {
+                            select
+                                .append("option")
+                                .attr("value", index)
+                                .html(option.label);
+                        });
+                    }
+
+                    makeAxisOptions(xAxis, "x-axis");
+                    makeAxisOptions(yAxis, "y-axis");
+
+                    var clusters = parent.append("div");
+                    clusters
+                        .append("label")
+                        .attr("for", "clusters")
+                        .html("clusters");
+                    var select = clusters
+                        .append("select")
+                        .attr("id", "clusters");
+
+                    for (var i = 0; i < data.clustering.clusters.length; i++)
+                        select.append("option").attr("value", i).html(i);
+
+                    if (data.clustering.noise.length)
+                        select.append("option").attr("value", -1).html("noise");
+
+                    select.on("change", () => {
+                        const index = parseInt(d3.event.target.value);
+                        if (index === -1) cluster = data.clustering.noise;
+                        else cluster = data.clustering.clusters[index];
+                        drawCluster();
+                    });
+                }
+
+                //Add The SVG Element
+                var svg = d3
+                    .select("#scatterplot #plot")
+                    .append("svg")
+                    .attr("id", "plot-svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .attr("class", "svg")
+                    .append("g")
+                    .attr(
+                        "transform",
+                        "translate(" + margin.left + "," + margin.top + ")"
+                    );
+
+                function drawCluster() {
+                    svg.selectAll("*").remove();
+
+                    var yCategories = {};
+                    var xCategories = {};
+
+                    cluster.forEach((point) => {
+                        xCategories[xOption.getValue(point)] = true;
+                        yCategories[yOption.getValue(point)] = true;
+                    });
+
+                    var x = d3
+                        .scalePoint()
+                        .domain(["", ...Object.keys(xCategories)])
+                        .range([0, width]);
+                    var y = d3
+                        .scalePoint()
+                        .domain(["", ...Object.keys(yCategories)])
+                        .range([height, 0]);
+
+                    // Draw the axis
+                    var xAxis = d3.axisBottom().scale(x);
+                    var yAxis = d3.axisLeft().scale(y).ticks(10);
+                    //Adding Y-Axis
+                    svg.append("g").attr("class", "y axis").call(yAxis);
+
+                    //Adding X-Axis (Added to the end of the code so the label show over bottom bars)
+                    svg.append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(xAxis)
+                        .selectAll("text")
+                        .attr("transform", "rotate(10)");
+
+                    const plotData = cluster.map((point) => ({
+                        x: xOption.getValue(point),
+                        y: yOption.getValue(point),
+                    }));
+
+                    svg.append("g")
+                        .selectAll("dot")
+                        .data(plotData)
+                        .enter()
+                        .append("circle")
+                        .attr("cx", function (d) {
+                            return x(d.x);
+                        })
+                        .attr("cy", function (d) {
+                            return y(d.y);
+                        })
+                        .attr("r", 2);
+                }
+
+                prepareOptions();
+                drawCluster(
+                    options[0],
+                    options[0],
+                    data.clustering.clusters[0]
+                );
+            })();
         </script>
     </body>
 </html>

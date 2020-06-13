@@ -68,10 +68,7 @@
         "prettier": "^2.0.5",
         "typescript": "^3.8.3"
     },
-    "dependencies": {
-        "signale": "^1.4.0",
-        "uninstall": "0.0.0"
-    },
+    "dependencies": {},
     "config": {
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
