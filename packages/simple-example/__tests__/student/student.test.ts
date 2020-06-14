@@ -22,7 +22,7 @@ import "@nirikshak/core/lib/jestMatchers";
 import ResourceJSON from "./resource.json";
 import EndpointsJSON from "./endpoints.json";
 import { setup, cleanup, schemaHelpers, traversalHelpers } from "./helpers";
-import app from "./app";
+import app from "/home/yash/Desktop/nirikshak/packages/simple-example/src/app.ts";
 import { Server } from "http";
 import supertest from "supertest";
 import getPort from "get-port";
@@ -32,7 +32,7 @@ if (!isResource(ResourceJSON)) throw new Error(`Invalid resource schema`);
 if (!isDescription(EndpointsJSON))
     throw new Error(`Invalid endpoint description`);
 
-describe(`student`, () => {
+describe("student", () => {
     let server: Server | null = null;
     const nodeMap = generateNodes(EndpointsJSON);
     const graph = makeGraph(nodeMap);
@@ -41,7 +41,6 @@ describe(`student`, () => {
         describe(`${i + 1}`, () => {
             for (const path of traversal)
                 describe(path.join("--"), () => {
-                    const joined = path.join("--");
                     const collection: Collection = new Map();
                     let instance: ResourceInstance | null = null;
                     let prevPass = true;
@@ -64,14 +63,14 @@ describe(`student`, () => {
                             const parsedNode = parseNodeName(node);
                             if (!instance) {
                                 if (
-                                        (parsedNode.method === "GET" &&
-                                            parsedNode.caseValue === "NEGATIVE") ||
-                                        (parsedNode.method === "DELETE" &&
-                                            parsedNode.caseValue === "NEGATIVE") ||
-                                        (parsedNode.method === "PATCH" &&
-                                            parsedNode.caseValue === "NEGATIVE") ||
-                                        (parsedNode.method === "POST" &&
-                                            parsedNode.caseValue === "POSITIVE") ||
+                                    (parsedNode.method === "GET" &&
+                                        parsedNode.caseValue === "NEGATIVE") ||
+                                    (parsedNode.method === "DELETE" &&
+                                        parsedNode.caseValue === "NEGATIVE") ||
+                                    (parsedNode.method === "PATCH" &&
+                                        parsedNode.caseValue === "NEGATIVE") ||
+                                    (parsedNode.method === "POST" &&
+                                        parsedNode.caseValue === "POSITIVE") ||
                                     (parsedNode.method === "PUT" &&
                                         faker.random.boolean())
                                 )
@@ -85,11 +84,6 @@ describe(`student`, () => {
                                     );
                             }
 
-                            if (
-                                joined ===
-                                "PATCH;;0;;/Student/{resource:id};;POSITIVE;GET;;0;;/Student/{resource:id};;POSITIVE"
-                            )
-                                console.log(node);
                             const entry = nodeMap.get(node);
 
                             if (!entry)

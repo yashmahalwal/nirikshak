@@ -28,7 +28,11 @@ import supertest from "supertest";
 import getPort from "get-port";
 import faker from "faker";
 
-describe(`st`, () => {
+if (!isResource(ResourceJSON)) throw new Error(`Invalid resource schema`);
+if (!isDescription(EndpointsJSON))
+    throw new Error(`Invalid endpoint description`);
+
+describe(`student`, () => {
     let server: Server | null = null;
     const nodeMap = generateNodes(EndpointsJSON);
     const graph = makeGraph(nodeMap);
@@ -60,14 +64,14 @@ describe(`st`, () => {
                             const parsedNode = parseNodeName(node);
                             if (!instance) {
                                 if (
-                                    (parsedNode.method === "GET" &&
-                                        parsedNode.caseValue === "NEGATIVE") ||
-                                    (parsedNode.method === "DELETE" &&
-                                        parsedNode.caseValue === "NEGATIVE") ||
-                                    (parsedNode.method === "PATCH" &&
-                                        parsedNode.caseValue === "NEGATIVE") ||
-                                    (parsedNode.method === "POST" &&
-                                        parsedNode.caseValue === "POSITIVE") ||
+                                        (parsedNode.method === "GET" &&
+                                            parsedNode.caseValue === "NEGATIVE") ||
+                                        (parsedNode.method === "DELETE" &&
+                                            parsedNode.caseValue === "NEGATIVE") ||
+                                        (parsedNode.method === "PATCH" &&
+                                            parsedNode.caseValue === "NEGATIVE") ||
+                                        (parsedNode.method === "POST" &&
+                                            parsedNode.caseValue === "POSITIVE") ||
                                     (parsedNode.method === "PUT" &&
                                         faker.random.boolean())
                                 )
@@ -149,7 +153,7 @@ describe(`st`, () => {
 
                     afterAll(async (done) => {
                         server?.close((err) =>
-                            err ? done(err) : cleanup(done)
+                            err ? done(err) : cleanup(collection, done)
                         );
                     });
                 });

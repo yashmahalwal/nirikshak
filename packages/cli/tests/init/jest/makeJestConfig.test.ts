@@ -28,6 +28,7 @@ const jestConfig: JestConfig = {
             ],
         },
     ],
+    reporters: ["default", "@nirikshak/reporter"],
 };
 
 test(`Making jest configuration`, () => {

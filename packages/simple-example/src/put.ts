@@ -26,7 +26,7 @@ router.put("/Student/:id", express.json(), (req, res) => {
     if (studentMap.has(body.id)) res.status(200);
     else res.status(201);
     studentMap.set(body.id, body);
-    res.send({ body });
+    res.send(body);
 });
 
 export default router;

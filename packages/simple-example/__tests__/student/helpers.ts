@@ -24,7 +24,6 @@ export const traversalHelpers: TraversalHelpers = {
         return true;
     },
 };
-
 export async function setup(
     server: SuperTest.SuperTest<SuperTest.Test>,
     collection: Collection,
@@ -33,9 +32,13 @@ export async function setup(
 ): Promise<void> {
     try {
         for (let i = 0; i < Config.setupInstances; i++) {
-            const student = await generateResource(resourceJSON, schemaHelpers);
-            await server.post("/Student").send(student);
-            collection.set(student.id, student);
+            const resource = await generateResource(
+                resourceJSON,
+                schemaHelpers
+            );
+            await server.post("/student").send(resource);
+            // Add resource to application here
+            collection.set(resource.id, resource);
         }
     } catch (e) {
         done(e);
@@ -48,5 +51,6 @@ export async function cleanup(
     collection: Collection,
     done: () => void
 ): Promise<void> {
+    // Remove resource from application here
     done();
 }

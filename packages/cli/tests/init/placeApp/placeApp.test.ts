@@ -4,7 +4,7 @@ import { Configuration } from "../../../src/utils/types";
 import fs from "fs-extra";
 import placeApp from "../../../src/init/app";
 const configuration: Configuration = {
-    app: "app.ts",
+    app: "index.ts",
     dir: "nirikshak",
     resources: ["student"],
 };
@@ -18,7 +18,7 @@ test(`Places app correctly`, async () => {
     expect(fs.pathExists(appPath)).resolves.toBe(true);
     const content = (await fs.readFile(appPath)).toString();
     expect(content).toEqual(
-        `export {default} from "${path.resolve(__dirname, "app.ts")}";`
+        `export {default} from "${path.resolve(__dirname, "index")}";`
     );
 });
 

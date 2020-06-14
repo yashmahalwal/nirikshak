@@ -13,6 +13,8 @@ export default async function placeApp(
 
     await fs.writeFile(
         path.resolve(configuration.dir, "app.ts"),
-        appContent.replace("${appPath}", `"${appPath}"`)
+        appContent
+            .replace("${appPath}", `"${appPath}"`)
+            .replace(/.ts(?=";$)/, "")
     );
 }

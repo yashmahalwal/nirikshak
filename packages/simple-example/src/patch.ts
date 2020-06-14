@@ -8,14 +8,14 @@ router.patch("/Student/:id", express.json(), (req, res) => {
     } = req;
 
     if (!studentMap.has(id)) {
-        res.sendStatus(200);
+        res.sendStatus(404);
         return;
     }
 
     const student = studentMap.get(id)!;
     for (const key in body) {
         if (!(key in student)) {
-            res.sendStatus(500);
+            res.sendStatus(400);
             return;
         }
 

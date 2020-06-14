@@ -14,4 +14,5 @@ type ProjectConfig = { displayName: string; testMatch: string[] };
 export interface JestConfig {
     projects: ProjectConfig[];
     setupFilesAfterEnv: string[];
+    reporters: string[];
 }

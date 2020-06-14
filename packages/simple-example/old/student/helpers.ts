@@ -44,6 +44,9 @@ export async function setup(
     done();
 }
 
-export async function cleanup(done: () => void): Promise<void> {
+export async function cleanup(
+    collection: Collection,
+    done: () => void
+): Promise<void> {
     done();
 }

@@ -1,8 +1,5 @@
 {
     "app": "src/app.ts",
     "dir": "__tests__",
-    "resources": [
-        "student",
-        "st"
-    ]
+    "resources": ["student"]
 }

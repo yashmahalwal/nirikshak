@@ -14,5 +14,5 @@
         "strictNullChecks": true,
         "strictFunctionTypes": true
     },
-    "include": ["src/*", "__tests__/*", "__tests__/student/app.ts"]
+    "include": ["src/*", "old/*", "__tests__/*"]
 }

@@ -18,6 +18,7 @@ export function makeJestConfiguration(
             ],
         })),
         setupFilesAfterEnv: ["./jest.setup.js"],
+        reporters: ["default", "@nirikshak/reporter"],
     };
 }
 

@@ -9,7 +9,7 @@ router.delete("/Student/:id", (req, res) => {
     if (studentMap.has(id)) {
         const s = studentMap.get(id);
         studentMap.delete(id);
-        res.send({ student: s });
+        res.send(s);
     } else {
         res.sendStatus(404);
     }
@@ -25,7 +25,7 @@ router.delete("/Student/:id/v4", (req, res) => {
         studentMap.delete(id);
         res.send(s);
     } else {
-        res.sendStatus(500);
+        res.sendStatus(409);
     }
 });
 
