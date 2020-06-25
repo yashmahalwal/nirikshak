@@ -60,6 +60,10 @@ Nirikshak performs unit functional tests on them. At a glance, this seems very r
 4. [Flow of testing](docs/TestFlow.md)
 5. [Data analysis](docs/DataAnalysis.md)
 
+## Usage
+
+1. [Preparing your project](docs/SettingUp.md)
+
 ## API Reference
 
 1. [@nirikshak/cli](packages/cli/README.md): CLI tool that manages tests for your project
