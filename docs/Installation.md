@@ -31,7 +31,7 @@ Other than jest, we have 3 peer dependencies:
 3. [get-port](https://github.com/sindresorhus/get-port#readme) : A simple package to get an available port randomly
 
 ```shell
-npm i faker supertest get-port
+npm i -D faker supertest get-port
 ```
 
 You will also need typings for supertest. You can run tests without them if you use babel jest. But for better typescript support, we suggest that you add the typings
@@ -39,3 +39,13 @@ You will also need typings for supertest. You can run tests without them if you 
 ```shell
 npm i -D @types/supertest
 ```
+
+# Step 3: Installing Nirikshak packages
+
+We ship 3 packages. They can be installed using below command
+
+```shell
+npm i @nirikshak/core @nirikshak/reporter @nirikshak/cli
+```
+
+That is it. Now we are ready to get started.
