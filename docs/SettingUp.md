@@ -50,4 +50,4 @@ Place this file next to your server implementation. So directory structure is so
 2. `app.d.ts`
 3. `index.ts`
 
-**_Note_**: Make sure that the server implementation is the default export of the module. If you use commonjs, use `allowSyntheticDefaultImports` and `esModuleInterop` options.
+**_Note_**: Make sure that the server implementation is the default export of the module. If you use commonjs, use `allowSyntheticDefaultImports` and `esModuleInterop` options for typescript compiler.
