@@ -34,7 +34,7 @@ app.listen(3000);
 
 ## What if my API is not written in typescript?
 
-We are mainly concerned with the server implementation. You can make your own type definitions for that. Split your code as shown above. Afterwards, add a declaration file
+You will need to install typescript to run our tests. But you don't need to convert your code to typescript. We are mainly concerned with the server implementation. You can make your own type definitions for that. Split your code as shown above. Afterwards, add a declaration file
 
 ```typescript
 // app.d.ts
@@ -49,3 +49,5 @@ Place this file next to your server implementation. So directory structure is so
 1. `app.js`
 2. `app.d.ts`
 3. `index.ts`
+
+**_Note_**: Make sure that the server implementation is the default export of the module. If you use commonjs, use `allowSyntheticDefaultImports` and `esModuleInterop` options.
