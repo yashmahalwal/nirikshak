@@ -8,7 +8,7 @@ router.get("/Student/:id", (req, res) => {
     } = req;
 
     if (studentMap.has(id)) {
-        res.send(studentMap.get(id));
+        res.send({ body: studentMap.get(id) });
     } else {
         res.sendStatus(404);
     }
@@ -20,9 +20,9 @@ router.get("/Student/:id/v1", (req, res) => {
     } = req;
 
     if (studentMap.has(id)) {
-        res.status(200).send(studentMap.get(id));
+        res.status(302).send(studentMap.get(id));
     } else {
-        res.sendStatus(404);
+        res.sendStatus(400);
     }
 });
 

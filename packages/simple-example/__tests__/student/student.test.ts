@@ -22,7 +22,7 @@ import "@nirikshak/core/lib/jestMatchers";
 import ResourceJSON from "./resource.json";
 import EndpointsJSON from "./endpoints.json";
 import { setup, cleanup, schemaHelpers, traversalHelpers } from "./helpers";
-import app from "/home/yash/Desktop/nirikshak/packages/simple-example/src/app.ts";
+import app from "/home/yash/Desktop/nirikshak/packages/simple-example/src/app";
 import { Server } from "http";
 import supertest from "supertest";
 import getPort from "get-port";

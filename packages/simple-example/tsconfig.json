@@ -14,5 +14,5 @@
         "strictNullChecks": true,
         "strictFunctionTypes": true
     },
-    "include": ["src/*", "old/*", "__tests__/*"]
+    "include": ["src/*", "old/*", "__tests__"]
 }

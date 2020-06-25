@@ -25,7 +25,7 @@ test(`Adding new directory`, async () => {
     const data = (await fs.readFile(testPath)).toString();
     expect(data.includes("{{resource}}")).toBe(false);
     expect(data.includes("{{appPath}}")).toBe(false);
-    expect(data.includes(`import app from "${path.resolve("app.ts")}";`)).toBe(
+    expect(data.includes(`import app from "${path.resolve("app")}";`)).toBe(
         true
     );
     expect(data.includes(`describe("student"`)).toBe(true);

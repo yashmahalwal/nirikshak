@@ -15,6 +15,6 @@ export default async function placeApp(
         path.resolve(configuration.dir, "app.ts"),
         appContent
             .replace("${appPath}", `"${appPath}"`)
-            .replace(/.ts(?=";$)/, "")
+            .replace(/.(ts|js)(?=";$)/, "")
     );
 }

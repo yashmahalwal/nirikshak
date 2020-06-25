@@ -9,17 +9,20 @@ const configuration: Configuration = {
     resources: ["student"],
 };
 
+const apps = ["index.js", "index.ts", "index"];
+
 const appPath = path.resolve(__dirname, "nirikshak/app.ts");
 
 beforeAll(() => process.chdir(__dirname));
 
-test(`Places app correctly`, async () => {
-    await placeApp(configuration);
-    expect(fs.pathExists(appPath)).resolves.toBe(true);
-    const content = (await fs.readFile(appPath)).toString();
-    expect(content).toEqual(
-        `export {default} from "${path.resolve(__dirname, "index")}";`
-    );
+apps.forEach((app) => {
+    test(`Places app correctly: ${app}`, async () => {
+        await placeApp(configuration);
+        expect(fs.pathExists(appPath)).resolves.toBe(true);
+        const content = (await fs.readFile(appPath)).toString();
+        expect(content).toEqual(
+            `export {default} from "${path.resolve(__dirname, "index")}";`
+        );
+    });
 });
-
-afterAll(async () => await fs.remove(appPath));
+afterEach(async () => await fs.remove(appPath));

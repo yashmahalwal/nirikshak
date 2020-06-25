@@ -32,7 +32,7 @@ export default async function addDirectory(
         path.resolve(resultant, "endpoints.json")
     );
 
-    const app = path.resolve(appPath);
+    const app = path.resolve(appPath).replace(/.(ts|js)$/, "");
     const test = (
         await fs.readFile(path.resolve(__dirname, "../../staticFiles/test"))
     )

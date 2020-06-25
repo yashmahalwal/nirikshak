@@ -5,7 +5,7 @@ router.post("/Student", express.json(), (req, res) => {
     const { body } = req;
 
     if (!isValidStudent(body)) {
-        res.sendStatus(400);
+        res.sendStatus(200);
         return;
     }
 
@@ -15,7 +15,7 @@ router.post("/Student", express.json(), (req, res) => {
     }
 
     studentMap.set(body.id, body);
-    res.status(201).send(body);
+    res.status(201).send({ body });
 });
 
 router.post("/Student/:id", express.json(), (req, res) => {
@@ -27,12 +27,12 @@ router.post("/Student/:id", express.json(), (req, res) => {
     }
 
     if (!isValidNewStudent(body)) {
-        res.sendStatus(409);
+        res.sendStatus(209);
         return;
     }
 
     studentMap.set(body.id, body);
-    res.status(201).send(body);
+    res.status(200).send(body);
 });
 
 export default router;
