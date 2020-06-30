@@ -27,6 +27,7 @@ export function parseConfig(
         validateConfig(data);
         return { configuration: data };
     } catch (e) {
+        // Yargs requires an error object to be returned
         return new Error(e);
     }
 }
