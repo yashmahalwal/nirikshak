@@ -64,6 +64,7 @@ Nirikshak performs unit functional tests on them. At a glance, this seems very r
 
 1. [Preparing your project](docs/SettingUp.md)
 2. [Installation](docs/Installation.md)
+3. [Initialisation](docs/Init.md)
 
 ## API Reference
 

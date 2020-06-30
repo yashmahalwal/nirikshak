@@ -36,13 +36,14 @@ import * as Run from "./run";
         .usage("Usage: $0 <command> [options]")
         // Option: config
         .config("config", parseConfig)
+        // Configuration file options
         .alias("config", "c")
         .default("config", "nirikshak.json")
         .describe("config", "path to the configuration file")
         // Examples
         .example(
             "$0 init",
-            "Initialises the project using configuration in config.json"
+            "Initialises the project using configuration in nirikshak.json"
         )
         .example(
             "$0 init -c config.json",

@@ -69,6 +69,7 @@ const validConfigs: Configuration[] = [
 describe("Validate valid config", () => {
     beforeAll(() => process.chdir(__dirname));
 
+    // Validation throws error on invalid configuration
     test.each(validConfigs)("Validate valid config %#", (validConfig) =>
         expect(() => validateConfig(validConfig)).not.toThrow()
     );

@@ -5,12 +5,12 @@
     "description": "Schema for nirikshak configuration",
     "type": "object",
     "properties": {
-      "app": {
+        "app": {
             "description": "Path to the API server",
             "type": "string",
             "minLength": 1
-        },  
-      "dir": {
+        },
+        "dir": {
             "description": "Directory to be used for keeping tests",
             "type": "string",
             "minLength": 1
@@ -37,6 +37,13 @@
                     }
                 },
                 "required": ["name", "dir"]
+            }
+        },
+        "jestArgs": {
+            "description": "Arguments to be passed to jest at runtime",
+            "type": "array",
+            "items": {
+                "type": "string"
             }
         }
     },
