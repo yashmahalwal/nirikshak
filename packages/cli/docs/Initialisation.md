@@ -2,7 +2,7 @@
 
 Before starting with Nirikshak, you need a certain folder structure. `init` command helps you set up your project. We call that initialising the project. Now we cover all the steps that are taken during initialisation.
 
-## Step 1: Make a basic directory structure
+## Step 1: Making a basic directory structure
 
 We create a few directories to set up your tests. Following steps are taken:
 
@@ -13,7 +13,7 @@ We create a few directories to set up your tests. Following steps are taken:
 
 **Note**: This step fails if `.nirikshak already exists`.
 
-## Step 2: Place the jest configuration
+## Step 2: Placing the jest configuration
 
 We add a jest configuration to your project. Following files are added to your project:
 
