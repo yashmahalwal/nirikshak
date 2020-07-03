@@ -29,8 +29,5 @@ npx nirikshak init
 ```
 
 <p align=center>
-    <Figure>
     <img alt="Initialisation command" height=400 src="nirikshakInit.gif" />
-    <FigCaption align=center><br/>If all goes well, you should see a success message.</FigCaption>
-    </Figure>
 </p>
