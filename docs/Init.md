@@ -29,7 +29,7 @@ npx nirikshak init
 ```
 
 <p align=center>
-    <img alt="Initialisation command" height=400 src="nirikshakInit.gif" />
+    <img alt="Initialisation command" height=400 src="../packages/cli/docs/nirikshakInit.gif" />
 </p>
 
 ## 3. Getting rid of everything

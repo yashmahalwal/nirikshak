@@ -2,7 +2,6 @@ import { Configuration } from "../../../../src/utils/types";
 import process from "process";
 import { ensureDirectories } from "../../../../src/init/ensureDirectories";
 import fs from "fs-extra";
-import path from "path";
 const config: Configuration = {
     app: "index.ts",
     dir: "testDirectory",

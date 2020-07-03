@@ -1,11 +1,7 @@
-# `@nirikshak/cli`
+# @nirikshak/cli
 
-> TODO: description
+We have a simple CLI tool to manage and run your test cases. The CLI is your primary way to interact with Nirikshak.
 
-## Usage
+## Reference
 
-```
-const cli = require('@nirikshak/cli');
-
-// TODO: DEMONSTRATE API
-```
+1. [Initialisation](docs/Initialisation.md)

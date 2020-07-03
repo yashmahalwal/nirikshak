@@ -5,7 +5,7 @@ Test your REST APIs with ease
 </p>
 
 <p align="center">
-<img src="docs/cli.png"/> 
+<img src="packages/cli/docs/cli.png"/> 
 </p>
 
 <p align="center">
