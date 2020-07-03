@@ -18,11 +18,11 @@ A Nirikshak configuration file is used to keep track of your directory structure
 2. **resources** is an array of all the resources in your application.
 3. **app** is the path to your server implementation.
 
-You should save this file in the project root (or wherever the working directory is) under the name of `nirikshak.json`. To know more about configuration, read the [API reference](../packages/cli/docs/Configuration.md)
+You should save this file in the project root (or wherever the working directory is) under the name of `nirikshak.json`. To know more about configuration, read the [configuration reference](../packages/cli/docs/Configuration.md)
 
 ## 2. Run initialisation command
 
-Run the initialisation command. That will create the directory structure necessary for Nirikshak. To know what files are created, read the API reference.
+Run the initialisation command. That will create the directory structure necessary for Nirikshak. To know what files are created, read the [initialisation reference](../packages/cli/docs/Initialisation.md).
 
 ```shell
 npx nirikshak init
@@ -31,3 +31,9 @@ npx nirikshak init
 <p align=center>
     <img alt="Initialisation command" height=400 src="nirikshakInit.gif" />
 </p>
+
+## 3. Getting rid of everything
+
+In case you decide to remove Nirikshak from your project, uninstalling packages won't be enough. You need to delete `.nirikshak` folder, jest configuration files and the test folder from your project. That might come in handy if you want to start over.
+
+**Note**: After initialising, you get a jest configuration file. We expect that file to be present before running the tests. You are supposed to change with the projects field manually.

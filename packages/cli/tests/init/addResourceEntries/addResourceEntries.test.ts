@@ -20,7 +20,10 @@ const config: Configuration = {
 };
 
 beforeAll(() => process.chdir(__dirname));
+
 const dirPath = path.resolve(__dirname, ".nirikshak", "dir");
+const appPath = path.resolve(__dirname, ".nirikshak", "app");
+
 test("Adding resource entries", async () => {
     await addResourceEntries(config);
     // Validate all resource entries
@@ -39,7 +42,10 @@ test("Adding resource entries", async () => {
     expect(result.every((v) => v)).toBe(true);
     // Validate dir entry
     expect(fs.pathExists(dirPath)).resolves.toBe(true);
-    expect((await fs.readFile(dirPath)).toString()).toBe("nirikshak");
+    expect((await fs.readFile(dirPath)).toString()).toBe(config.dir);
+    // Validate app entry
+    expect(fs.pathExists(appPath)).resolves.toBe(true);
+    expect((await fs.readFile(appPath)).toString()).toBe(config.app);
 });
 
 afterAll(async () => {
@@ -49,4 +55,5 @@ afterAll(async () => {
         )
     );
     await fs.remove(dirPath);
+    await fs.remove(appPath);
 });

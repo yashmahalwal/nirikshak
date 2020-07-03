@@ -55,9 +55,6 @@ describe(`Initilisation flow`, () => {
         expect(fs.pathExists("jest.config.json")).resolves.toBe(true);
         expect(fs.pathExists("jest.setup.js")).resolves.toBe(true);
         expect(
-            fs.pathExists(path.resolve("nirikshak", "app.ts"))
-        ).resolves.toBe(true);
-        expect(
             (
                 await fs.readFile(path.resolve(".nirikshak", "resource"))
             ).toString()

@@ -8,6 +8,8 @@ export default async function addResourceEntries(
 ): Promise<void> {
     // Add the testing directory entry
     await fs.writeFile(path.resolve(".nirikshak", "dir"), configuration.dir);
+    // Add the testing directory entry
+    await fs.writeFile(path.resolve(".nirikshak", "app"), configuration.app);
 
     // Add resource entries
     const res = await Promise.all(

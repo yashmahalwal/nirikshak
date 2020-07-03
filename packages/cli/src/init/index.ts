@@ -1,7 +1,6 @@
 import { Configuration } from "../utils/types";
 import { ensureDirectories } from "./ensureDirectories";
 import placeJestConfig from "./jest";
-import placeApp from "./app";
 import addResourceEntries from "./addResourceEntries";
 import signale from "signale";
 
@@ -15,8 +14,6 @@ async function init({
     await ensureDirectories(configuration);
     // Prepare jest files
     await placeJestConfig(configuration);
-    // Placing the app
-    await placeApp(configuration);
     // Adding entries for the resources in .nirikshak
     await addResourceEntries(configuration);
     signale.success("Done");

@@ -12,7 +12,7 @@ This is a required non empty string. The directory to use for testing. Nirikshak
 
 ## 2. `app`
 
-This is a required non empty string. The server implementation to use for testing. Nirikshak tunnels this app in the testing directory. In case you provide type definitions for your application, enter the path to the js file. The path must point to an existent file. **Once written, you must not change this field manually.**
+This is a required non empty string. The server implementation to use for testing. In case you provide type definitions for your application, enter the path to the js file. The path must point to an existent file. **Once written, you must not change this field manually.**
 
 ## 3. `resources`
 
@@ -22,6 +22,8 @@ This is a required field. It is basically a list of resources in your applicatio
 -   An object of shape `{name: string, dir: string}` where `name` and `dir` are non empty. We will use `name` to identify the resource. We store all the tests for it in `{dir}/{resource dir}`.
 
 The array must be non empty. No two resources should have the same name. **Once written, you must not change this field manually.**
+
+**Note**: You cannot use "app" and "dir" as resource names. They are reserved for internal use.
 
 ## 4. `jestArgs`
 

@@ -25,7 +25,7 @@ Options:
 
 Examples:
   index.js init                 Initialises the project using configuration in
-                                config.json
+                                nirikshak.json
   index.js init -c config.json  Initialises the project using configuration in
                                 config.json
   index.js add student          Adds files for a resource named student in
@@ -75,7 +75,7 @@ Options:
 
 Examples:
   index.js init                 Initialises the project using configuration in
-                                config.json
+                                nirikshak.json
   index.js init -c config.json  Initialises the project using configuration in
                                 config.json
   index.js add student          Adds files for a resource named student in
