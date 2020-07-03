@@ -19,3 +19,18 @@ A Nirikshak configuration file is used to keep track of your directory structure
 3. **app** is the path to your server implementation.
 
 You should save this file in the project root (or wherever the working directory is) under the name of `nirikshak.json`. To know more about configuration, read the [API reference](../packages/cli/docs/Configuration.md)
+
+## 2. Run initialisation command
+
+Run the initialisation command. That will create the directory structure necessary for Nirikshak. To know what files are created, read the API reference.
+
+```shell
+npx nirikshak init
+```
+
+<p align=center>
+    <Figure>
+    <img alt="Initialisation command" height=400 src="nirikshakInit.gif" />
+    <FigCaption align=center><br/>If all goes well, you should see a success message.</FigCaption>
+    </Figure>
+</p>

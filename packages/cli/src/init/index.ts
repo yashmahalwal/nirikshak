@@ -11,9 +11,13 @@ async function init({
     configuration: Configuration;
 }): Promise<void> {
     signale.info("Initialising nirikshak");
+    // Prepare the folder structure needed
     await ensureDirectories(configuration);
+    // Prepare jest files
     await placeJestConfig(configuration);
+    // Placing the app
     await placeApp(configuration);
+    // Adding entries for the resources in .nirikshak
     await addResourceEntries(configuration);
     signale.success("Done");
 }

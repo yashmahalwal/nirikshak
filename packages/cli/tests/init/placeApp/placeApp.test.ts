@@ -9,20 +9,18 @@ const configuration: Configuration = {
     resources: ["student"],
 };
 
-const apps = ["index.js", "index.ts", "index"];
-
 const appPath = path.resolve(__dirname, "nirikshak/app.ts");
 
 beforeAll(() => process.chdir(__dirname));
 
-apps.forEach((app) => {
-    test(`Places app correctly: ${app}`, async () => {
-        await placeApp(configuration);
-        expect(fs.pathExists(appPath)).resolves.toBe(true);
-        const content = (await fs.readFile(appPath)).toString();
-        expect(content).toEqual(
-            `export {default} from "${path.resolve(__dirname, "index")}";`
-        );
-    });
+test(`Places app correctly`, async () => {
+    await placeApp(configuration);
+    // Check existance of the tunnel
+    expect(await fs.pathExists(appPath)).toBe(true);
+    const content = (await fs.readFile(appPath)).toString();
+    // Check the validity of the tunnel
+    expect(content).toEqual(
+        `export {default} from "${path.resolve(__dirname, "index")}";`
+    );
 });
 afterEach(async () => await fs.remove(appPath));

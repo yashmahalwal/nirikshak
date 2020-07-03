@@ -4,7 +4,6 @@ import placeJestConfig, {
     makeJestConfiguration,
 } from "../../../../src/init/jest";
 import { Configuration } from "../../../../src/utils/types";
-import path from "path";
 beforeAll(() => process.chdir(__dirname));
 
 const config: Configuration = {
@@ -15,21 +14,18 @@ const config: Configuration = {
 
 test(`Placing jest configuration files`, async () => {
     await placeJestConfig(config);
-    await fs.pathExists("jest.config.js");
+    expect(await fs.pathExists("jest.config.json")).toBe(true);
+    // Import the configuration file
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     // eslint-disable-next-line import/no-unresolved
     const { default: mod } = await import("./jest.config.json");
     expect(mod).toEqual(makeJestConfiguration(config));
-    await fs.pathExists("jest.setup.js");
-    const buff1 = await fs.readFile("jest.setup.js");
-    const buff2 = await fs.readFile(
-        path.resolve(__dirname, "../../../../staticFiles/jest.setup.js")
-    );
-    expect(buff1.equals(buff2)).toBe(true);
+    expect(await fs.pathExists("jest.setup.js")).toBe(true);
 });
 
 afterAll(async () => {
+    // Remove the files
     await fs.remove("jest.config.json");
     await fs.remove("jest.setup.js");
 });

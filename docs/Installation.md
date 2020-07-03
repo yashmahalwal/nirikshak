@@ -45,7 +45,7 @@ npm i -D @types/supertest
 We ship 3 packages. They can be installed using below command
 
 ```shell
-npm i @nirikshak/core @nirikshak/reporter @nirikshak/cli
+npm i -D @nirikshak/core @nirikshak/reporter @nirikshak/cli
 ```
 
 That is it. Now we are ready to get started.

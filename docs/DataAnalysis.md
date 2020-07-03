@@ -41,8 +41,8 @@ We create a heirarchical distribution over the attributes. For example: Case ("P
 ## Clustering
 
 We perform clustering on 5 attributes (we do not consider iteration). To know about the clustering algorithm, see API docs and usage.
+<br/>
 
 <p align="center">
 <img src="clustering.gif" height=400 alt="Heirarchial bar chart animation"/>
-
 </p>

@@ -7,7 +7,9 @@ import { getResourceDirEntry, getResourceName } from "../utils/resourceData";
 export async function ensureDirectories(
     configuration: CliArgs["configuration"]
 ): Promise<void> {
-    // Create the directory
+    // .nirikshak directory exists = project initialised
+
+    // If the project has already been initialised
     if (await fs.pathExists(".nirikshak"))
         throw new Error(
             `Project already initialised. Delete ${path.resolve(
@@ -15,7 +17,11 @@ export async function ensureDirectories(
             )} if you want to restart from scratch.`
         );
     else await fs.mkdir(".nirikshak");
+
+    // Create the test folder
     await fs.ensureDir(path.resolve(configuration.dir));
+
+    // Create and prepare directories for the resource
     await Promise.all(
         configuration.resources.map((resource) =>
             addDirectory(

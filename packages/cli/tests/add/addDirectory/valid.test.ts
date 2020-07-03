@@ -23,6 +23,7 @@ test(`Adding new directory`, async () => {
     const testPath = path.resolve(resultant, "student.test.ts");
     expect(fs.pathExists(testPath)).resolves.toBe(true);
     const data = (await fs.readFile(testPath)).toString();
+    // Check that the templated were replaced by the correct values
     expect(data.includes("{{resource}}")).toBe(false);
     expect(data.includes("{{appPath}}")).toBe(false);
     expect(data.includes(`import app from "${path.resolve("app")}";`)).toBe(
