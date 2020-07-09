@@ -17,7 +17,7 @@ We create a few directories to set up your tests. Following steps are taken:
 
 We add a jest configuration to your project. Following files are added to your project:
 
-1. `jest.config.json` : We expect this file to be present before running tests. **You are not to change the projects field manually**.
+1. `jest.config.json` : We expect this file to be present before running tests. **You must not change the projects field manually**.
 
 2. `jest.setup.js` : This is used to increase the jest timeout as a safe measure. We increase it from 5s to 30s. That is to make sure that the test does not timeout before your API can complete processing. You can change it to a value that suites you.
 

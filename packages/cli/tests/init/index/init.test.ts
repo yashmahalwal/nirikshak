@@ -32,9 +32,6 @@ describe(`Initilisation flow`, () => {
         expect(fs.pathExists("nirikshak")).resolves.toBe(true);
         expect(fs.pathExists(".nirikshak")).resolves.toBe(true);
         expect(
-            fs.pathExists(path.resolve(".nirikshak", "resource"))
-        ).resolves.toBe(true);
-        expect(
             fs.pathExists(
                 path.resolve("nirikshak", "resource/resource.test.ts")
             )
@@ -54,17 +51,6 @@ describe(`Initilisation flow`, () => {
 
         expect(fs.pathExists("jest.config.json")).resolves.toBe(true);
         expect(fs.pathExists("jest.setup.js")).resolves.toBe(true);
-        expect(
-            (
-                await fs.readFile(path.resolve(".nirikshak", "resource"))
-            ).toString()
-        ).toEqual("resource");
-        expect(fs.pathExists(path.resolve(".nirikshak", "dir"))).resolves.toBe(
-            true
-        );
-        expect(
-            (await fs.readFile(path.resolve(".nirikshak", "dir"))).toString()
-        ).toEqual("nirikshak");
 
         expect(signale.info).toHaveBeenCalledWith("Initialising nirikshak");
         expect(signale.success).toHaveBeenCalledWith("Done");

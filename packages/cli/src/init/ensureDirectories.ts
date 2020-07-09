@@ -16,6 +16,8 @@ export async function ensureDirectories(
                 ".nirikshak"
             )} if you want to restart from scratch.`
         );
+    // Mark the project initialised
+    // To be used for storing metadata in future
     else await fs.mkdir(".nirikshak");
 
     // Create the test folder

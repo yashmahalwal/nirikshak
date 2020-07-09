@@ -2,12 +2,14 @@ import fs from "fs-extra";
 import path from "path";
 import { Configuration } from "./types";
 import { getResourceDirectory } from "./getResourceDir";
-// TODO: Validate app existence
+
 export default async function validateDirectoryStructure(
     data: Configuration
 ): Promise<void> {
+    // Check if the project has been init
     if (!(await fs.pathExists(path.resolve(".nirikshak"))))
         throw new Error(`Project has not been initialized.`);
+    // Validate the testing directory
     const dirFilePath = path.resolve(".nirikshak", "dir");
     if (!(await fs.pathExists(dirFilePath)))
         throw new Error(
