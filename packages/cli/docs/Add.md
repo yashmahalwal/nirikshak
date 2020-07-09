@@ -30,4 +30,4 @@ Now we populate the resource directory. The process is same as the initialisatio
 
 ## Step 3: Updating configuration files
 
-After resource files have been placed, we update the nirikshak configuration file by adding an entry for the resource. We also update the jest configuration by adding a new project corresponding to the resource.
+After resource files have been placed, we update the Nirikshak configuration file by adding an entry for the resource. We also update the jest configuration by adding a new project corresponding to the resource.

@@ -32,8 +32,8 @@ npx nirikshak init
     <img alt="Initialisation command" height=400 src="../packages/cli/docs/nirikshakInit.gif" />
 </p>
 
+**Note**: After initialising, you get a jest configuration file. We expect that file to be present before running the tests. You are not supposed to change the projects field manually.
+
 ## 3. Getting rid of everything
 
 In case you decide to remove Nirikshak from your project, uninstalling packages won't be enough. You need to delete `.nirikshak` folder, jest configuration files and the test folder from your project. That might come in handy if you want to start over.
-
-**Note**: After initialising, you get a jest configuration file. We expect that file to be present before running the tests. You are supposed to change with the projects field manually.
