@@ -45,6 +45,7 @@ describe("students", () => {
                     let instance: ResourceInstance | null = null;
                     let prevPass = true;
                     beforeAll(async (done) => {
+                        // @ts-expect-error
                         server = app.listen(await getPort(), async (err) => {
                             if (err) done(err);
                             await setup(

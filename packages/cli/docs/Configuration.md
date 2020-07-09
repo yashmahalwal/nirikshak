@@ -8,11 +8,11 @@ Now we cover all the fields of that can be in the configuration. We discuss purp
 
 ## 1. `dir`
 
-This is a required non empty string. The directory to use for testing. Nirikshak creates this directory during initialisation. This argument is a path **relative to the working directory**. Nirikshak configures jest to work with this directory. **Once written, you must not change this field manually.**
+This is a required non empty string. The directory to use for testing. Nirikshak creates this directory during initialisation. This argument is a path **relative to the working directory**. Nirikshak configures jest to work with this directory. **Once written, you must not change this field directly.**
 
 ## 2. `app`
 
-This is a required non empty string. The server implementation to use for testing. In case you provide type definitions for your application, enter the path to the js file. The path must point to an existent file. **Once written, you must not change this field manually.**
+This is a required non empty string. The server implementation to use for testing. In case you provide type definitions for your application, enter the path to the js file. The path must point to an existent file. **Once written, you must not change this field directly.**
 
 ## 3. `resources`
 
@@ -21,9 +21,7 @@ This is a required field. It is basically a list of resources in your applicatio
 -   A string depicting resource name. By default, we will store all the tests for the resource in `{dir}/{resource name}` directory. Name must be non empty
 -   An object of shape `{name: string, dir: string}` where `name` and `dir` are non empty. We will use `name` to identify the resource. We store all the tests for it in `{dir}/{resource dir}`.
 
-The array must be non empty. No two resources should have the same name. **Once written, you must not change this field manually.**
-
-**Note**: You cannot use "app" and "dir" as resource names. They are reserved for internal use.
+The array must be non empty. No two resources should have the same name. **Once written, you must not change this field directly.**
 
 ## 4. `jestArgs`
 
@@ -31,8 +29,8 @@ This is an optional field. It is an array of strings which consists of cli args 
 
 # Editing configuration
 
-1. **_dir_** : Cannot be edited once set up
-2. **_app_** : Can be changed anytime. Value is read on runtime.
+1. **_dir_** : Rename the test directory to new name. Then change the key in configuration.
+2. **_app_** : Change the import path for all tests. Then change the key in configuration.
 3. **_resources_** : Entry can be added with `add` command and removed with `remove` command
 4. **_jestArgs_** : Can be changed anytime. Value is read on runtime.
 
