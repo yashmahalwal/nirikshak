@@ -8,8 +8,7 @@ We create a few directories to set up your tests. Following steps are taken:
 
 1. Create `.nirikshak` directory
 2. Create the test folder
-3. Create and populate folders for each resource. This is same as the add resource command.
- <!-- TODO: Reference to add resource -->
+3. Create and populate folders for each resource. Process is same as during <a alt="adding a resource" href="Add.md#step-2-adding-the-resource-directory">adding a resource</a>.
 
 **Note**: This step fails if `.nirikshak already exists`.
 

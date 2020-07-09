@@ -19,7 +19,7 @@ This is a required non empty string. The server implementation to use for testin
 This is a required field. It is basically a list of resources in your application. Each resource should be given an name should that we can identify it internally. The field is of array type. Each entry is of one of either:
 
 -   A string depicting resource name. By default, we will store all the tests for the resource in `{dir}/{resource name}` directory. Name must be non empty
--   An object of shape `{name: string, dir: string}` where `name` and `dir` are non empty. We will use `name` to identify the resource. We store all the tests for it in `{dir}/{resource dir}`.
+-   An object of shape `{name: string, dir: string}` where `name` and `dir` are non empty. We will use `name` to identify the resource. We store all the tests for it in `{dir}/{resource dir}`. So `dir` argument must be relative to the test directory.
 
 The array must be non empty. No two resources should have the same name or directory. **Once written, you must not change this field directly.**
 

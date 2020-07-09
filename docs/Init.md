@@ -1,6 +1,6 @@
 # Initialisation
 
-To work we Nirikshak, you need to initialise your project. In order to do so, you need to take the following steps:
+To work with Nirikshak, you need to initialise your project. In order to do so, you need to take the following steps:
 
 ## 1. Writing a configuration file
 

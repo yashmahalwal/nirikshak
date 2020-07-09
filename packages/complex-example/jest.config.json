@@ -5,6 +5,30 @@
             "testMatch": [
                 "<rootDir>/__tests__/students/**/*.test.ts"
             ]
+        },
+        {
+            "displayName": "name",
+            "testMatch": [
+                "<rootDir>/__tests__/name/**/*.test.ts"
+            ]
+        },
+        {
+            "displayName": "name2",
+            "testMatch": [
+                "<rootDir>/__tests__/nameDirectory/**/*.test.ts"
+            ]
+        },
+        {
+            "displayName": "myResource",
+            "testMatch": [
+                "<rootDir>/__tests__/myDir/**/*.test.ts"
+            ]
+        },
+        {
+            "displayName": "SampleResource",
+            "testMatch": [
+                "<rootDir>/__tests__/SampleDir/**/*.test.ts"
+            ]
         }
     ],
     "setupFilesAfterEnv": [
