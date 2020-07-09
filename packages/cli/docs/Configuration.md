@@ -1,6 +1,6 @@
 # Configuration file
 
-Nirikshak needs a configuration file to run. It keeps track of your directory structure using that file. Nirikshak searches for `nirikshak.json` in the working directory by default. You can change the path to configuration file using `--config` option.
+Nirikshak needs a configuration file to run. It keeps track of your directory structure using that file. Nirikshak searches for `nirikshak.json` in the working directory by default. You can change the path to configuration file using `--config` option. **All paths must be relative to the working directory.**
 
 # Fields
 
@@ -21,7 +21,7 @@ This is a required field. It is basically a list of resources in your applicatio
 -   A string depicting resource name. By default, we will store all the tests for the resource in `{dir}/{resource name}` directory. Name must be non empty
 -   An object of shape `{name: string, dir: string}` where `name` and `dir` are non empty. We will use `name` to identify the resource. We store all the tests for it in `{dir}/{resource dir}`.
 
-The array must be non empty. No two resources should have the same name. **Once written, you must not change this field directly.**
+The array must be non empty. No two resources should have the same name or directory. **Once written, you must not change this field directly.**
 
 ## 4. `jestArgs`
 

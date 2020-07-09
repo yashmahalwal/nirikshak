@@ -71,6 +71,12 @@ const invalidConfigs = [
         dir: "testDir",
         resources: ["name", { name: "name", dir: "files" }],
     },
+    // Duplicate resource directory
+    {
+        app: "app.ts",
+        dir: "testDir",
+        resources: ["name", { name: "namaste", dir: "name" }],
+    },
     // Invalid jest argument
     {
         app: "app.ts",

@@ -14,20 +14,20 @@ beforeEach(() => {
     signale.success = jest.fn();
 });
 
-test(`Invalid directory structure`, async () => {
+test(`Already existing resource`, async () => {
     expect.assertions(3);
     try {
         await Add.handler({
-            name: "faculty",
+            name: "student",
             dir: "fc",
             config: "config.json",
             configuration: config as any,
         });
     } catch (e) {
         expect(e).toMatchInlineSnapshot(
-            `[Error: Resource college does not exist. Please check project configuration.]`
+            `[Error: Resource student already exists.]`
         );
     }
-    expect(signale.info).toHaveBeenCalledWith(`Adding resource faculty`);
+    expect(signale.info).toHaveBeenCalledWith(`Adding resource student`);
     expect(signale.success).not.toHaveBeenCalled();
 });

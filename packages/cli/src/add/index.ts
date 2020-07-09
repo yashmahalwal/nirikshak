@@ -1,10 +1,9 @@
 import { CliArgs } from "../utils/types";
-import addEntry from "./addEntry";
 import addToConfig from "./addToConfig";
 import addToJest from "./addToJest";
-import validateDirectoryStructure from "../utils/validateDirectoryStructure";
 import addDirectory from "./addDirectory";
 import signale from "signale";
+import { checkExistanceValidity } from "./checkExistanceValidity";
 
 interface AddArgs extends CliArgs {
     name: string;
@@ -17,11 +16,16 @@ async function add({
     config,
     configuration,
 }: AddArgs): Promise<void> {
+    // The directory entry for the resource
+    const directory = dir ?? name;
     signale.info(`Adding resource ${name}`);
-    await validateDirectoryStructure(configuration);
-    await addEntry(name, dir);
-    await addDirectory(dir ?? name, configuration.dir, name, configuration.app);
+    // Check for any conflicts
+    await checkExistanceValidity(name, directory, configuration);
+    // Adding the resource directory and files for it
+    await addDirectory(directory, configuration.dir, name, configuration.app);
+    // Adding the entry to nirkshak configuration
     await addToConfig(name, config, dir);
+    // Adding the entry to jest configuration
     await addToJest(name, configuration.dir, dir);
     signale.success("Done");
 }

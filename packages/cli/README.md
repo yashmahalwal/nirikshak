@@ -4,4 +4,5 @@ We have a simple CLI tool to manage and run your test cases. The CLI is your pri
 
 ## Reference
 
-1. [Initialisation](docs/Initialisation.md)
+1. [Configuration](docs/Configuration.md)
+2. [Initialisation](docs/Initialisation.md)

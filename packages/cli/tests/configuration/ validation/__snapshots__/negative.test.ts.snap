@@ -58,6 +58,8 @@ exports[`Validate invalid config Validate invalid config 27 1`] = `"Error parsin
 
 exports[`Validate invalid config Validate invalid config 28 1`] = `"Duplicate resource names in configuration"`;
 
-exports[`Validate invalid config Validate invalid config 29 1`] = `"Error parsing configuration: data.jestArgs[0] should be string"`;
+exports[`Validate invalid config Validate invalid config 29 1`] = `"Duplicate resource directories in configuration"`;
 
-exports[`Validate invalid config Validate invalid config 30 1`] = `"Error parsing configuration: data.jestArgs should be array"`;
+exports[`Validate invalid config Validate invalid config 30 1`] = `"Error parsing configuration: data.jestArgs[0] should be string"`;
+
+exports[`Validate invalid config Validate invalid config 31 1`] = `"Error parsing configuration: data.jestArgs should be array"`;
