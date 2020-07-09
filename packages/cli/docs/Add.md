@@ -18,12 +18,13 @@ Resource names and directories are unique. Addition of a new resource must respe
 
 Now we populate the resource directory. The process is same as the initialisation phase. Following steps are taken:
 
-1. Create `{test directory}/{resource directory}` folder.
  <!-- TODO : Add a reference to run command -->
-2. Add the default resource test configuration.
+ <!-- TODO: Add a link to desc writing -->
+
+1. Create `{test directory}/{resource directory}` folder.
+2. Add `config.json` - the default resource test configuration. You can read more about it in running the tests.
 3. Add `resource.json` - the resource description template.
 4. Add `endpoints.json` - the server implementation description template.
- <!-- TODO: Add a link to desc writing -->
 5. Add `helpers.ts` - the test helpers: file to manage test setup, teardown and your custom functions. You can read about it in writing API description.
 6. Add `[resourcename].test.ts` - the test file to be used by jest. It is created by using a template. The template is populated by path to your app and the name of your resource.
 
