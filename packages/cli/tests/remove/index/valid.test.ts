@@ -9,11 +9,7 @@ const validConfig: Configuration = fs.readJSONSync(
 );
 
 beforeAll(() => process.chdir(__dirname));
-beforeEach(() => {
-    signale.info = jest.fn();
-    signale.error = jest.fn();
-    signale.success = jest.fn();
-});
+
 test(`Removing valid resource`, async () => {
     await Remove.handler({
         config: "config.json",
@@ -21,30 +17,33 @@ test(`Removing valid resource`, async () => {
         configuration: validConfig,
     });
 
+    // Check if the entry was removed from the configuration
     const data: Configuration = await fs.readJSON("config.json");
     expect(data.resources.some((e) => e === "student")).toBe(false);
+    // Check for jest config
     const jestData: JestConfig = await fs.readJSON("jest.config.json");
     expect(jestData.projects.some((e) => e.displayName === "student")).toBe(
         false
     );
-    expect(fs.pathExists(path.resolve(".nirikshak", "student"))).resolves.toBe(
-        false
-    );
+    // Check the directory existance
     expect(fs.pathExists(path.resolve("test", "student"))).resolves.toBe(false);
+    // Log message
     expect(signale.info).toHaveBeenCalledWith("Removing resource student");
     expect(signale.success).toHaveBeenCalledWith("Done");
 });
 
 afterAll(async () => {
-    await fs.writeFile(path.resolve(".nirikshak", "student"), "student");
+    // Reset jest config
     const data: JestConfig = await fs.readJSON("jest.config.json");
     data.projects.push({
         displayName: "student",
         testMatch: ["<rootDir>/student"],
     });
     await fs.writeJSON("jest.config.json", data, { spaces: 4 });
+    // Reset config
     const configData: Configuration = await fs.readJSON("config.json");
     configData.resources.push("student");
     await fs.writeJSON("config.json", configData, { spaces: 4 });
+    // Reset directory structure
     await fs.ensureDir(path.resolve("test", "student"));
 });

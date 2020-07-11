@@ -1,20 +1,7 @@
 {
     "dir": "__tests__",
     "resources": [
-        "students",
-        "name",
-        {
-            "dir": "nameDirectory",
-            "name": "name2"
-        },
-        {
-            "dir": "myDir",
-            "name": "myResource"
-        },
-        {
-            "dir": "SampleDir",
-            "name": "SampleResource"
-        }
+        "students"
     ],
     "app": "src/app.ts"
 }

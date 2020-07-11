@@ -37,6 +37,7 @@
         "typescript": "^3.9.5"
     },
     "dependencies": {
-        "@nirikshak/core": "^0.0.0"
+        "@nirikshak/core": "^0.0.0",
+        "@nirikshak/reporter": "^0.0.0"
     }
 }

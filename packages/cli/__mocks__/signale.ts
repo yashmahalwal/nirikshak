@@ -1,5 +1,5 @@
 const signale: any = jest.genMockFromModule("signale");
-signale.fatal = jest.fn();
+signale.info = jest.fn();
+signale.error = jest.fn();
 signale.success = jest.fn();
-
 export default signale;

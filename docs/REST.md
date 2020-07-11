@@ -2,6 +2,8 @@
 
 This section covers how we interpret and use REST semantics. Our understanding is based on [Roy Fielding's paper](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) as well as REST best practices in general. You should go through this section before you start writing your API descriptions.
 
+<!-- TODO: add link to api description -->
+
 ## Uniform interface
 
 All REST APIs expose a uniform interface. As per Roy Fielding's dissertation, REST is bound by 4 key constraints that allow it to provide a uniform interface. They are listed below:

@@ -1,7 +1,5 @@
 import { CliArgs } from "../utils/types";
-import validateDirectoryStructure from "../utils/validateDirectoryStructure";
 import removeDirectory from "./removeDirectory";
-import removeEntry from "./removeEntry";
 import removeFromConfig from "./removeFromConfig";
 import removeFromJest from "./removeFromJest";
 import signale from "signale";
@@ -17,12 +15,16 @@ async function remove({
     configuration,
 }: RemoveArgs): Promise<void> {
     signale.info(`Removing resource ${name}`);
-    await validateDirectoryStructure(configuration);
+    // Check if the resource exists in the configuration
     if (!configuration.resources.some((e) => getResourceName(e) === name))
         throw new Error(`Cannot remove non existing resource: ${name}`);
+
+    // Resource existance guaranteed
+    // Remove the directory for it
     await removeDirectory(configuration, name);
-    await removeEntry(name);
+    // Remove from nirikshak config
     await removeFromConfig(name, config);
+    // Remove from jest config
     await removeFromJest(name);
     signale.success(`Done`);
 }
