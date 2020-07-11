@@ -16,32 +16,32 @@ You have an API that manages the student database of a college. You make a `Get 
 
 Assertions based on requests provide you with information about the application state. In our example above, say that the assertion succeeded. Fetching a student that was not supposed to exist caused API to send an error. You now know that the student you tried to fetch doesn't exist. So you know what to expect from any request made using that student at this point. For example:
 
-1. A `Get Positive` request should fail as it asserted that the student exists but it does not. And the API should send an error confirming the same.
-2. A `Delete Negative` request should succeed as it asserted that the student cannot be deleted because it doesn't exist. And the API should send an error conforming the same.
-3. A `Post Positive` request should succeed as it asserted that if you can create this non existent student. And the API should send the affirmation for the same.
+1. A `Get Positive` request should fail as it asserts that the student exists but it does not. And the API should send an error confirming the same.
+2. A `Delete Negative` request should succeed as it asserts that the student cannot be deleted because it doesn't exist. And the API should send an error conforming the same.
+3. A `Post Positive` request should succeed as it asserts that if you can create this non existent student. And the API should send the affirmation for the same.
 
-If we know that a given request succeeded (i.e., the corresponding assertion was validated), we can decide which requests will succeed from this point onwards. For every resource, we essentially maintain a graph of all the possible requests based on your API description. Nodes of that graph are the requests that can be made. Edge from one node to another means that if source node's assertion succeeds, you shoud expect the target node's assertion to succeed too.
+If we know that a given request succeeded (i.e., the corresponding assertion was validated), we can decide which requests should succeed from this point onwards. For every resource, we essentially maintain a graph of all the possible request sequences. Nodes of that graph are the requests that can be made (which are deduced from your API description). Edge from one node to another means that if source node's assertion succeeds, you shoud expect the target node's assertion to succeed too.
 
 ## Nodes
 
 Based on your description, we collect each possible request scenario. This is simply a combination of request attributes discussed before. Each request is treated as a node of our Graph. So a node is nothing but a combination of:
 
 1. URL
-2. Input data
-3. Expected output data
+2. Input data - Status, query parameters and body if present.
+3. Expected output data - Status, headers and body if present.
 
 Two nodes are considered equivalent if they make the same assertion. That means requests with same method and outcome case are equivalent. Say that you have two ways to `Get` a student from the API. In that case, both `Get Positives` will assert that the given student exists. Similarly, both `Get Negatives` will assert that the given student does not exist.
 
 An example of a node is:
 
-```curl
+```yaml
 URL: /Student/{resource:id}
 METHOD: GET
 TYPE: POSITIVE
-INDEX: 0
+INDEX: 0 # Used to identify a node amongst equivalent nodes
 ```
 
-This refers to the a `Get` request made using the first way [0th index] at the url `/Student/<student-id>` and expects a positive outcome. That is when this request is made using a student (that we provide), it asserts that the student exists.
+This refers to a `Get` request made at the url `/Student/<student-id>` expecting a `Positive` outcome. This request is of `0` index which means that it is the first one of all equivalent `Get Positive` requests. If there is only one way to make `Get Positive` request for the resource, only `0th` index node exists. The data for this request is supposed to be populated using an existing student and the request expects the API to respond by indicating that the student exists. 
 
 ## Edges
 

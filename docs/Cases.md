@@ -6,7 +6,7 @@ Response to a request depends on how the request was made to the API. In this se
 
 ## Possible cases
 
-We classify requests into three categories, depending on different types of outcomes:
+We classify requests into three categories, depending on different types of **_expected_** outcomes:
 
 1. Positive: A valid request was made to the API which requested a valid operation. API was used as intended.
 2. Negative: A valid request was made to the API which requested an illegal operation. The request was in violation of the API state.
@@ -50,6 +50,20 @@ These definitions might seem a bit vague. That is because we do not have a conte
 1. **Positive**: Trying to correctly update a resource instance that exists in the application.
 2. **Negative**: Trying to correctly update a resource instance that does not exist in the application.
 3. **Destructive**: Trying to incorrectly update a resource instance. That usually means that either non existent fields are asked to be updated (invalid fields) or the fields are asked to be updated with invalid data (invalid values).
+
+## API responses: Inferring actual outcome
+
+API responds to requests in a standard format. That is because REST imposes **self-descriptive messages** constraints. There is a universal way for REST APIs to let the user know about the outcome of the request. APIs respond with appropriate [status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status). For example: 
+
+1. `404`: Resource not found
+2. `500`: Internal server error
+3. `200`: All Okay
+4. `201`: Resource created successfully
+
+Response status code helps us understand how API processed our request. A `Get Negative` request asks for a non existing resource. Therefore, API should respond with a `404` status code. If that happens, API is working correctly for our `Get Positive` request.  Similarly, a `Post Positive` request should expect a `201` status code from the API. 
+If that does not happen, the API is not working correctly for this case.
+
+To sum it up, we make a request and then read the response status. If the expected outcome matches the inferred outcome (from the status code), API is working correctly.
 
 ## Making a request corresponding to a case
 
