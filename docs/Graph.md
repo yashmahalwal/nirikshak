@@ -20,7 +20,7 @@ Assertions based on requests provide you with information about the application 
 2. A `Delete Negative` request should succeed as it asserted that the student cannot be deleted because it doesn't exist. And the API should send an error conforming the same.
 3. A `Post Positive` request should succeed as it asserted that if you can create this non existent student. And the API should send the affirmation for the same.
 
-For every resource, we essentially maintain a graph of all the possible requests based on your API description. Nodes of that graph are the requests that can be made. Edge from one node to another means that if source node's assertion succeeds, you shoud expect the target node's assertion to succeed too.
+If we know that a given request succeeded (i.e., the corresponding assertion was validated), we can decide which requests will succeed from this point onwards. For every resource, we essentially maintain a graph of all the possible requests based on your API description. Nodes of that graph are the requests that can be made. Edge from one node to another means that if source node's assertion succeeds, you shoud expect the target node's assertion to succeed too.
 
 ## Nodes
 
@@ -41,15 +41,15 @@ TYPE: POSITIVE
 INDEX: 0
 ```
 
-This refers to the a `Get` request made using the first way at the url `/Student/<student-id>` and expects a positive outcome. That is when this request is made using a student (that we provide), it asserts that the student exists.
+This refers to the a `Get` request made using the first way [0th index] at the url `/Student/<student-id>` and expects a positive outcome. That is when this request is made using a student (that we provide), it asserts that the student exists.
 
 ## Edges
 
 Now we discuss the edges that can be in the graph. First off, we generalize equivalent nodes. This means that all equivalent nodes have same the targets for outgoing edges and same sources for the incoming edges.
 
-For example, consider `Get Positive: 0` and `Get Positive: 1` from out discussion above. Any request that can be made after `Get Positive: 0` can be made after `Get Positive: 1`. Similarly, any request that can be made before `Get Positive: 0` can be made before `Get Positive: 1`.
+For example, consider `Get Positive: 0` and `Get Positive: 1` from our discussion above. Any request that can be made after `Get Positive: 0` can be made after `Get Positive: 1`. Similarly, any request that can be made before `Get Positive: 0` can be made before `Get Positive: 1`.
 
-An edge between two nodes boils down to the **method** and the **outcome case** of the source and target nodes. We maintain a hardcoded algorithm that takes in two nodes and tells you if an edge is possible between them or not.
+An edge between two nodes boils down to the **method** and the **outcome case** of the source and target nodes. We maintain a hardcoded algorithm that takes in two nodes and tells you if an edge is possible between them.
 
 ## Graph
 
