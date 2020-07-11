@@ -26,7 +26,7 @@
         "@babel/core": "^7.10.3",
         "@babel/preset-env": "^7.10.3",
         "@babel/preset-typescript": "^7.10.1",
-        "@nirikshak/cli": "^0.0.0",
+        "@nirikshak/core": "^0.0.0",
         "@nirikshak/reporter": "^0.0.0",
         "@types/supertest": "^2.0.9",
         "babel-jest": "^26.1.0",
@@ -37,7 +37,6 @@
         "typescript": "^3.9.5"
     },
     "dependencies": {
-        "@nirikshak/core": "^0.0.0",
-        "@nirikshak/reporter": "^0.0.0"
+        "@nirikshak/cli": "^0.0.0"
     }
 }

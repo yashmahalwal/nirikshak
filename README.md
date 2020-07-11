@@ -63,7 +63,8 @@ Nirikshak performs unit functional tests on them. At a glance, this seems very r
 1. [Preparing your project](docs/SettingUp.md)
 2. [Installation](docs/Installation.md)
 3. [Initialisation](docs/Init.md)
-4. [Adding a new resource](docs/Add.md)
+4. [Adding resources](docs/Add.md)
+4. [Removing resources](docs/Remove.md)
 
 ## API Reference
 
