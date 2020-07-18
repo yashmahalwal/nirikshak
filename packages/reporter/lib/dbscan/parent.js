@@ -9,8 +9,8 @@ const path_1 = __importDefault(require("path"));
 const program = path_1.default.resolve(__dirname, "../../lib/dbscan", "child.js");
 function runDBScanParallel(input) {
     return new Promise((resolve) => {
-        const child = child_process_1.default.spawn("node", [program], {
-            stdio: ["ipc", "inherit", "inherit"],
+        const child = child_process_1.default.fork(program, [], {
+            stdio: ["inherit", "inherit", "inherit", "ipc"],
         });
         child.on("message", (message) => {
             if (message === "Ready")

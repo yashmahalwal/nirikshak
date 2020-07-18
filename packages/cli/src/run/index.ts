@@ -1,7 +1,6 @@
 import signale from "signale";
 import { CliArgs, Configuration } from "../utils/types";
 import childProcess from "child_process";
-import validateDirectoryStructure from "../utils/validateDirectoryStructure";
 import { getResourceDirectory } from "../utils/getResourceDir";
 import { getResourceName } from "../utils/resourceData";
 interface RunArgs extends CliArgs {
@@ -9,8 +8,6 @@ interface RunArgs extends CliArgs {
 }
 
 async function run({ name = [], configuration }: RunArgs): Promise<void> {
-    await validateDirectoryStructure(configuration);
-
     let mapping: Configuration["resources"] = [];
 
     name.forEach((n) => {

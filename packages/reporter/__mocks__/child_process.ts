@@ -13,6 +13,6 @@ const child = {
     send,
     on,
 };
-childProcess.spawn = jest.fn().mockReturnValue(child);
+childProcess.fork = jest.fn().mockReturnValue(child);
 
 export default childProcess;

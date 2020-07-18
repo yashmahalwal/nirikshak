@@ -6,7 +6,6 @@ import signale from "signale";
 
 beforeAll(() => process.chdir(__dirname));
 beforeEach(() => {
-    // 
     signale.info = jest.fn();
     signale.error = jest.fn();
     signale.success = jest.fn();

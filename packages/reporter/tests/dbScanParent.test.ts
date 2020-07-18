@@ -11,17 +11,17 @@ test(`Parallel DBSCAN: Parent`, async () => {
         minPoints: 4,
     };
     const message = await runDBScanParallel(input);
-    const child = childProcess.spawn("");
+    const child = childProcess.fork("");
     expect(child.send).toHaveBeenCalledWith(input);
     expect(message).toEqual({
         clusters: [],
         noise: [],
     });
-    expect(childProcess.spawn).toHaveBeenCalledWith(
-        "node",
-        ["/home/yash/Desktop/nirikshak/packages/reporter/lib/dbscan/child.js"],
+    expect(childProcess.fork).toHaveBeenCalledWith(
+        "/home/yash/Desktop/nirikshak/packages/reporter/lib/dbscan/child.js",
+        [],
         {
-            stdio: ["ipc", "inherit", "inherit"],
+            stdio: ["inherit", "inherit", "inherit", "ipc"],
         }
     );
 });

@@ -4,12 +4,6 @@ import childProcess from "child_process";
 import signale from "signale";
 jest.mock("child_process");
 
-const invalidConfig: Configuration = {
-    dir: "tests",
-    app: "index.ts",
-    resources: ["stu"],
-};
-
 const validConfig: Configuration = {
     dir: "tests",
     app: "index.ts",
@@ -25,22 +19,6 @@ beforeEach(() => {
 test(`Command`, () => expect(Run.command).toEqual("run [name..]"));
 test(`Description`, () =>
     expect(Run.describe).toEqual("Run tests for specified resources."));
-
-test(`Invalid config`, async () => {
-    expect.assertions(3);
-    try {
-        await Run.handler({
-            configuration: invalidConfig,
-            config: "config.json",
-        });
-    } catch (e) {
-        expect(e).toMatchInlineSnapshot(
-            `[Error: Resource stu does not exist. Please check project configuration.]`
-        );
-    }
-    expect(signale.info).not.toHaveBeenCalled();
-    expect(signale.success).not.toHaveBeenCalled();
-});
 
 const validJest: {
     input: Parameters<typeof Run.handler>[0];
@@ -70,6 +48,16 @@ const validJest: {
     {
         input: {
             name: [],
+            configuration: {
+                ...validConfig,
+                jestArgs: ["--no-cache", "--runInBand"],
+            },
+            config: "config.json",
+        },
+        command: `npx jest --no-cache --runInBand --color=false --noStackTrace tests/student/ tests/personDir/`,
+    },
+    {
+        input: {
             configuration: {
                 ...validConfig,
                 jestArgs: ["--no-cache", "--runInBand"],

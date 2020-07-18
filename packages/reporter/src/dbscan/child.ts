@@ -16,7 +16,6 @@ process.on("message", (message: ChildProcessInput<ParsedAssertion>) => {
         message.minPoints,
         distance
     );
-
     const response: ChildProcessOutput<ParsedAssertion> = dbscan.run();
 
     process.send && process.send(response);

@@ -1,5 +1,5 @@
 {
-    "app": "src/app.ts",
-    "dir": "__tests__",
-    "resources": ["student"]
+    "dir": "tests",
+    "resources": ["student"],
+    "app": "src/app.js"
 }

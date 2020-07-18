@@ -1,1 +1,0 @@
-export {default} from "/home/yash/Desktop/nirikshak/packages/simple-example/src/app";
