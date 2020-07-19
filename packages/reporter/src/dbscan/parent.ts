@@ -1,9 +1,6 @@
 import childProcess from "child_process";
 import path from "path";
 import { ChildProcessOutput } from "./child";
-import DBScan from "./dbscan";
-import { distance } from "./distanceFunction";
-import { ParsedAssertion } from "../assertions";
 
 export interface ChildProcessInput<T> {
     dataset: T[];
