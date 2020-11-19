@@ -21,6 +21,8 @@ Test your REST APIs with ease
 <a href="https://github.com/facebook/jest"><img alt="jest" src="https://jestjs.io/img/jest-badge.svg"/></a>
 </p>
 
+# Documentation under progress ;)
+
 ## Introduction
 
 Nirikshak is a REST API testing framework. It leverages the REST semantics and provides autonomous testing. That means you get to kick back and relax while we do all the hard work for you.
