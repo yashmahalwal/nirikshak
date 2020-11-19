@@ -1,3 +1,4 @@
+import faker from "faker";
 import SuperTest from "supertest";
 import {
     SchemaHelpers,
@@ -5,16 +6,24 @@ import {
     Collection,
     Resource,
     generateResource,
+    ResourceInstance,
 } from "@nirikshak/core";
 import Config from "./config.json";
-import faker from "faker";
+import { isValidStudent } from "../../src/student";
 export const schemaHelpers: SchemaHelpers = {
     async grade() {
         return faker.random.arrayElement(["A", "B", "C"]);
     },
 };
 
-export const traversalHelpers: TraversalHelpers = {};
+export const traversalHelpers: TraversalHelpers = {
+    patchMatcher: async (input: any, resourceInstance: ResourceInstance) => {
+        if (!isValidStudent(input)) return false;
+
+        for (const key in input) resourceInstance[key] = input[key];
+        return true;
+    },
+};
 
 export async function setup(
     server: SuperTest.SuperTest<SuperTest.Test>,
@@ -24,13 +33,9 @@ export async function setup(
 ): Promise<void> {
     try {
         for (let i = 0; i < Config.setupInstances; i++) {
-            const resource = await generateResource(
-                resourceJSON,
-                schemaHelpers
-            );
-            // Add resource to application here
-            await server.post("/Student").send(resource);
-            collection.set(resource.id, resource);
+            const student = await generateResource(resourceJSON, schemaHelpers);
+            await server.post("/Student").send(student);
+            collection.set(student.id, student);
         }
     } catch (e) {
         done(e);
@@ -43,6 +48,5 @@ export async function cleanup(
     collection: Collection,
     done: () => void
 ): Promise<void> {
-    // Remove resource from application here
     done();
 }
