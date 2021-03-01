@@ -46,6 +46,8 @@
     },
     "devDependencies": {
         "@babel/core": "^7.9.0",
+        "@babel/plugin-proposal-class-properties": "^7.13.0",
+        "@babel/plugin-proposal-decorators": "^7.13.5",
         "@babel/plugin-proposal-export-namespace-from": "^7.10.1",
         "@babel/preset-env": "^7.9.5",
         "@babel/preset-typescript": "^7.9.0",
@@ -68,10 +70,12 @@
         "prettier": "^2.0.5",
         "typescript": "^3.8.3"
     },
-    "dependencies": {},
     "config": {
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
         }
+    },
+    "dependencies": {
+        "babel-plugin-transform-typescript-metadata": "^0.3.1"
     }
 }
